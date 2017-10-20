@@ -18,17 +18,9 @@ class PlaylistView: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        accessToken = appDelegate.accessToken
-        
-        
-        getVideosFromPlaylist(accessToken: accessToken!, playlistID: playlistID!)
     }
     
-    
-    
-    
+
     
     //MARK: TableView DataSource Methods
     
@@ -81,7 +73,9 @@ class PlaylistView: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        videoID = videosArray[indexPath.row]["id"]
         
+        NotificationCenter.default.post(name: NSNotification.Name("Cell Selected"), object: nil, userInfo: ["id" : videoID])
     }
     
     
@@ -110,6 +104,8 @@ class PlaylistView: UITableViewController {
         return action
         
     }
+    
+    
     
     
     func getVideosFromPlaylist(accessToken: String?, playlistID: String) {

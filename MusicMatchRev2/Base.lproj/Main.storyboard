@@ -138,18 +138,18 @@
         <scene sceneID="ZFn-hf-lr4">
             <objects>
                 <tableViewController id="HD3-Uc-sWb" customClass="PlaylistsViewController" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="100" sectionHeaderHeight="30" sectionFooterHeight="28" id="Xfv-yv-mc6">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="100" sectionHeaderHeight="30" sectionFooterHeight="1" contentViewInsetsToSafeArea="NO" id="Xfv-yv-mc6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="329"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="playlistCell" rowHeight="110" id="HGC-mp-7hB" customClass="PlaylistCell" customModule="MusicMatchRev2">
-                                <rect key="frame" x="0.0" y="30" width="375" height="110"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" indentationWidth="10" reuseIdentifier="playlistCell" rowHeight="100" id="HGC-mp-7hB" customClass="PlaylistCell" customModule="MusicMatchRev2">
+                                <rect key="frame" x="0.0" y="30" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HGC-mp-7hB" id="kvW-c3-Ian">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="109.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </tableViewCellContentView>
@@ -163,27 +163,27 @@
                     <tabBarItem key="tabBarItem" title="Playlists" id="laW-bw-m31"/>
                     <navigationItem key="navigationItem" id="Uzv-af-7XF"/>
                     <connections>
-                        <segue destination="Klr-7h-Awd" kind="push" identifier="showPlaylistForID" id="2yM-Sd-vnD"/>
+                        <segue destination="gAy-d0-OrI" kind="push" identifier="showPlaylistForID" id="Vfr-dZ-qtO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdR-fc-L1D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-563" y="1111"/>
+            <point key="canvasLocation" x="-783" y="1378"/>
         </scene>
         <!--Playlist View-->
         <scene sceneID="wzj-kZ-A95">
             <objects>
                 <tableViewController id="Klr-7h-Awd" customClass="PlaylistView" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9dP-je-Q73">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="329"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" id="9dP-je-Q73">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="387"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="videoCell" id="K65-J7-66L">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="videoCell" rowHeight="100" id="K65-J7-66L">
+                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K65-J7-66L" id="h1W-Ye-xCk">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -197,7 +197,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QZ2-2p-fkx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7" y="1315"/>
+            <point key="canvasLocation" x="190" y="2184"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gzV-b3-buf">
@@ -244,11 +244,11 @@
             <objects>
                 <viewController id="sXk-8v-Kif" customClass="YouTubePlayerViewController" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iFg-wU-GHI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="278"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q4B-5u-HXO" customClass="YTPlayerView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="278"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -267,10 +267,54 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u21-rF-pEe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1015.5" y="-473"/>
+            <point key="canvasLocation" x="1080" y="-193"/>
+        </scene>
+        <!--Playlist Container View-->
+        <scene sceneID="Fl3-cK-LFq">
+            <objects>
+                <viewController id="gAy-d0-OrI" customClass="PlaylistContainerView" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Owr-Bw-JOK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SMK-8c-REh">
+                                <rect key="frame" x="0.0" y="280" width="375" height="387"/>
+                                <connections>
+                                    <segue destination="Klr-7h-Awd" kind="embed" id="apa-pJ-WwU"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ho-t7-KCd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="278"/>
+                                <connections>
+                                    <segue destination="sXk-8v-Kif" kind="embed" id="N1S-te-qr6"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="SMK-8c-REh" firstAttribute="top" secondItem="PdF-aS-rMh" secondAttribute="top" constant="260" id="Omf-Gi-1zY"/>
+                            <constraint firstItem="3ho-t7-KCd" firstAttribute="leading" secondItem="PdF-aS-rMh" secondAttribute="leading" id="OnJ-gA-NVd"/>
+                            <constraint firstItem="3ho-t7-KCd" firstAttribute="trailing" secondItem="PdF-aS-rMh" secondAttribute="trailing" id="RNw-PW-nYB"/>
+                            <constraint firstItem="SMK-8c-REh" firstAttribute="bottom" secondItem="PdF-aS-rMh" secondAttribute="bottom" id="WCP-2s-k5H"/>
+                            <constraint firstItem="SMK-8c-REh" firstAttribute="trailing" secondItem="PdF-aS-rMh" secondAttribute="trailing" id="c0w-JY-Gt6"/>
+                            <constraint firstItem="SMK-8c-REh" firstAttribute="bottom" secondItem="PdF-aS-rMh" secondAttribute="bottom" id="jDH-FY-JlZ"/>
+                            <constraint firstItem="SMK-8c-REh" firstAttribute="top" secondItem="3ho-t7-KCd" secondAttribute="bottom" constant="2" id="or6-m6-Ocl"/>
+                            <constraint firstItem="3ho-t7-KCd" firstAttribute="top" secondItem="Owr-Bw-JOK" secondAttribute="top" id="pxO-Rz-veJ"/>
+                            <constraint firstItem="SMK-8c-REh" firstAttribute="leading" secondItem="PdF-aS-rMh" secondAttribute="leading" id="suX-38-ehy"/>
+                            <constraint firstItem="SMK-8c-REh" firstAttribute="top" secondItem="3ho-t7-KCd" secondAttribute="bottom" constant="2" id="taf-PD-CDV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PdF-aS-rMh"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qOW-br-2ZB"/>
+                    <size key="freeformSize" width="375" height="667"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5h-rG-hUf" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="189.5" y="1286"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="N1S-te-qr6"/>
         <segue reference="odn-ex-7qP"/>
     </inferredMetricsTieBreakers>
 </document>

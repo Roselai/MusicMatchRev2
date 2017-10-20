@@ -106,6 +106,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                             
                             cell.textLabel?.numberOfLines = 3
                             cell.textLabel?.lineBreakMode = .byWordWrapping
+                            cell.textLabel?.textColor = .black
                             
                             cell.update(with: image, title: title)
                         }
@@ -131,8 +132,9 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showPlaylistForID" {
-            let destinationViewController = segue.destination as! PlaylistView
+            let destinationViewController = segue.destination as! PlaylistContainerView
             destinationViewController.playlistID = self.playlistID
+            destinationViewController.accessToken = self.accessToken
         }
     }
     
