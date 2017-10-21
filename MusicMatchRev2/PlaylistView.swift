@@ -14,18 +14,9 @@ class PlaylistView: UITableViewController {
     var videoID: String!
     var accessToken: String!
     var videosArray: [[String:String]] = []
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
 
     
     //MARK: TableView DataSource Methods
-    
-    
-    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -33,9 +24,6 @@ class PlaylistView: UITableViewController {
         
         
     }
-    
-    
-    
     
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -73,9 +61,8 @@ class PlaylistView: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        videoID = videosArray[indexPath.row]["id"]
-        
-        NotificationCenter.default.post(name: NSNotification.Name("Cell Selected"), object: nil, userInfo: ["id" : videoID])
+        videoID = videosArray[indexPath.row]["videoID"]
+        NotificationCenter.default.post(name: NSNotification.Name("Playlist Item Selected"), object: nil, userInfo: ["videoID" : videoID])
     }
     
     
@@ -84,8 +71,8 @@ class PlaylistView: UITableViewController {
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
         
-        let addAction = self.contextualSegueAction(forRowAtIndexPath: indexPath)
-        let swipeConfig = UISwipeActionsConfiguration(actions: [addAction])
+        let deleteAction = self.contextualSegueAction(forRowAtIndexPath: indexPath)
+        let swipeConfig = UISwipeActionsConfiguration(actions: [deleteAction])
         return swipeConfig
         
     }
@@ -93,13 +80,20 @@ class PlaylistView: UITableViewController {
     func contextualSegueAction(forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
         
         
-        let action = UIContextualAction(style: .normal, title: "Add") { (contextAction, sourceView, completionHandler) in
+        let action = UIContextualAction(style: .destructive, title: "Delete") { (contextAction, sourceView, completionHandler) in
             
+            let playlistItemID = self.videosArray[indexPath.row]["playlistItemID"]
+           
+            self.deleteVideoFromYTPlaylist(playlistItemID: playlistItemID!, accessToken: self.accessToken!)
+            self.videosArray.remove(at: indexPath.row)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
             completionHandler(true)
             
         }
         
-        action.image = UIImage(named: "addIcon")
+        //action.image = UIImage(named: "addIcon")
         action.backgroundColor = UIColor.black
         return action
         
@@ -112,11 +106,12 @@ class PlaylistView: UITableViewController {
         
         let method = Constants.YouTubeMethod.PlaylistItemsMethod
         let parameters = [Constants.YouTubeParameterKeys.APIKey: Constants.YoutubeParameterValues.APIKey,
+                          Constants.YouTubeParameterKeys.Part : Constants.YoutubeParameterValues.partValue,
                           Constants.YouTubeParameterKeys.AccessToken: accessToken!,
                           Constants.YouTubeParameterKeys.PlaylistID: playlistID,
                           Constants.YouTubeParameterKeys.MaxResults : "50"]
         
-       YoutubeAPI.sharedInstance().taskForGETMethod(method: method, parameters: parameters as [String : AnyObject]) { (result, error) in
+       _ = YoutubeAPI.sharedInstance().taskForGETMethod(method: method, parameters: parameters as [String : AnyObject]) { (result, error) in
             
             if error == nil {
                 if let result = result {
@@ -127,13 +122,16 @@ class PlaylistView: UITableViewController {
                         let videoDict = videosArray[index] as [String: Any]
                         var videoDetailsDict : [String: Any] = [:]
                         
-                        videoDetailsDict["id"] = videoDict["id"] as! String
                         
                         if let videoSnippetDict = videoDict["snippet"] as? [String:Any] {
-                            
+                            videoDetailsDict["videoID"] = (videoSnippetDict["resourceId"] as! [String:Any])["videoId"] as! String
                             videoDetailsDict["title"] = videoSnippetDict["title"] as! String
                             videoDetailsDict["thumbnail"] = ((videoSnippetDict["thumbnails"] as! [String: Any])["high"] as! [String: Any])["url"] as! String
                         }
+                        
+           
+                            videoDetailsDict["playlistItemID"] = videoDict["id"] as! String
+                        
                         
                         self.videosArray.append(videoDetailsDict as! [String : String])
                         
@@ -146,6 +144,24 @@ class PlaylistView: UITableViewController {
                 }
             } else {
                 print(error?.localizedDescription)
+            }
+            
+        }
+    }
+    
+    
+    
+    func deleteVideoFromYTPlaylist(playlistItemID: String, accessToken: String){
+        let method = Constants.YouTubeMethod.PlaylistItemsMethod
+        let parameters = [Constants.YouTubeParameterKeys.AccessToken: accessToken,
+                          Constants.YouTubeParameterKeys.APIKey: Constants.YoutubeParameterValues.APIKey,
+                          Constants.YouTubeParameterKeys.PlaylistItemID: playlistItemID]
+        
+        _ = YoutubeAPI.sharedInstance().taskForDELETEMethod(method: method, parameters: parameters as [String : AnyObject]) { (success, error) in
+            if error == nil {
+                print("video deleted from playlist")
+            } else {
+                print("video could not be deleted")
             }
             
         }

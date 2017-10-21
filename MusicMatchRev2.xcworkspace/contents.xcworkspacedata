@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:MusicMatchRev2/SearchResultViewController.swift">
+   </FileRef>
+   <FileRef
       location = "group:Model/Playlist+CoreDataClass.swift">
    </FileRef>
    <FileRef

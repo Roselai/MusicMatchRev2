@@ -32,9 +32,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
       
     }
 
-    
-    
-
 
     //MARK: TableView DataSource Methods
     
@@ -174,7 +171,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
         let method = Constants.YouTubeMethod.PlaylistMethod
         
-        let parameters = [Constants.YouTubeParameterKeys.Mine : Constants.YoutubeParameterValues.MineValue,
+        let parameters = [Constants.YouTubeParameterKeys.Part : Constants.YoutubeParameterValues.partValue,
+                          Constants.YouTubeParameterKeys.Mine : Constants.YoutubeParameterValues.MineValue,
                           Constants.YouTubeParameterKeys.AccessToken: accessToken]
         
         

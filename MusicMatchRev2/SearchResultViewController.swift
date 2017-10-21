@@ -15,9 +15,18 @@ import CoreData
 
 class SearchResultViewController: UITableViewController {
     
+    
+   
+    
     var searchQueryString: String = ""
     var videosArray: [[String:String]] = []
     var videoID: String!
+    
+    struct Video: Codable {
+        let title: String
+        let videoId: String
+        let thumbnail: String
+    }
     
     
     override func viewDidLoad() {
@@ -82,7 +91,7 @@ class SearchResultViewController: UITableViewController {
         
         videoID = videosArray[indexPath.row]["videoID"]!
         
-        NotificationCenter.default.post(name: NSNotification.Name("Cell Selected"), object: nil, userInfo: ["id" : videoID])
+        NotificationCenter.default.post(name: NSNotification.Name("Cell Selected"), object: nil, userInfo: ["videoID" : videoID])
     }
     
     
@@ -124,6 +133,7 @@ class SearchResultViewController: UITableViewController {
     func performSearch() {
         let parameters = [Constants.YouTubeParameterKeys.type : Constants.YoutubeParameterValues.typeValue,
                           Constants.YouTubeParameterKeys.Order : Constants.YoutubeParameterValues.orderValue,
+                          Constants.YouTubeParameterKeys.Part : Constants.YoutubeParameterValues.partValue,
                           Constants.YouTubeParameterKeys.MaxResults : "\(Constants.YoutubeParameterValues.ResultLimit)",
             Constants.YouTubeParameterKeys.APIKey : Constants.YoutubeParameterValues.APIKey,
             "q": "\(searchQueryString)"]
@@ -144,6 +154,8 @@ class SearchResultViewController: UITableViewController {
                 
                 for index in 0 ... items.count-1 {
                     
+                    
+                    
                     let item = items[index]
                     let snippetDict = item["snippet"] as! [String: AnyObject]
                     
@@ -154,10 +166,11 @@ class SearchResultViewController: UITableViewController {
                         videoDetailsDict["title"] = snippetDict["title"] as? String
                         videoDetailsDict["thumbnail"] = ((snippetDict["thumbnails"] as! [String: AnyObject])["high"] as! [String: AnyObject])["url"] as! String?
                         videoDetailsDict["videoID"] = (item["id"] as! [String: AnyObject])["videoId"] as! String?
-                        
-                        
-                        
+                       
                         self.videosArray.append(videoDetailsDict)
+                    
+                    
+                        //self.videosArray.append(video)
                         
                     }
                    

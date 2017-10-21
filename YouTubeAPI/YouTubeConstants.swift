@@ -47,7 +47,7 @@ struct Constants {
         static let Mine = "mine"
         static let PlaylistID = "playlistId"
         static let PerPage = "maxResults"
-        
+        static let PlaylistItemID = "id"
     }
     
     // MARK: YouTube Parameter Values

@@ -37,6 +37,7 @@ class PlaylistContainerView: UIViewController {
         
         if playlistID != nil && accessToken != nil {
             playlistController.playlistID = self.playlistID
+            playlistController.accessToken = self.accessToken
             playlistView = playlistController
             playlistController.getVideosFromPlaylist(accessToken: accessToken, playlistID: playlistID)
             
