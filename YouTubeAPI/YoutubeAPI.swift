@@ -56,6 +56,7 @@ class YoutubeAPI{
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             self.convertDataWithCompletionHandler(data: data, completionHandlerForConvertData: completionHandlerForGET )
+            
         }
         
         
@@ -68,7 +69,7 @@ class YoutubeAPI{
     
     // MARK: POST
     
-    func taskForPOSTMethod(method: String, bodyParameters: [String: AnyObject]?, jsonBody: String ,completionHandlerForPOST:@escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    func taskForPOSTMethod(method: String, bodyParameters: [String: AnyObject]?, jsonBody: Data? ,completionHandlerForPOST:@escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
     
         
         /* 2/3. Build the URL, Configure the request */
@@ -77,7 +78,8 @@ class YoutubeAPI{
         
         
         request.httpMethod = "POST"
-        request.httpBody = jsonBody.data(using: String.Encoding.utf8)
+        request.httpBody = jsonBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         /* 4. Make the request */
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -95,8 +97,9 @@ class YoutubeAPI{
             }
             
             /* GUARD: Did we get a successful 2XX response? */
+            
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                sendError(error: "Your request returned a status code other than 2xx!")
+                sendError(error: "Your request returned a status code other than 2xx!, \(String(describing: (response as? HTTPURLResponse)?.statusCode)) " )
                 
                 return
             }
@@ -108,7 +111,7 @@ class YoutubeAPI{
             }
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
-            self.convertDataWithCompletionHandler(data: data, completionHandlerForConvertData: completionHandlerForPOST)
+            completionHandlerForPOST(data as AnyObject, nil)
         }
         
         /* 7. Start the request */
@@ -163,9 +166,6 @@ class YoutubeAPI{
     }
     
     
-    
-    
-    
     // given raw JSON, return a usable Foundation object
     private func convertDataWithCompletionHandler(data: Data, completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
         
@@ -179,6 +179,8 @@ class YoutubeAPI{
         
         completionHandlerForConvertData(parsedResult, nil)
     }
+    
+    
     
     
     

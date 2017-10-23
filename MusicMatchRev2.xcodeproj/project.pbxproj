@@ -21,6 +21,7 @@
 		6A2EC9251F8C431500E96D2C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9231F8C431500E96D2C /* CustomButton.swift */; };
 		6A2EC9261F8C431500E96D2C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9231F8C431500E96D2C /* CustomButton.swift */; };
 		6A2EC9341F8D8EB500E96D2C /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */; };
+		6A5AB7E81F9CE48400F491C7 /* SearchListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5AB7E71F9CE48400F491C7 /* SearchListResponse.swift */; };
 		6A83704A1F8BCB45004D5B26 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */; };
 		6A83704B1F8BCB45004D5B26 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */; };
 		6A83704C1F8BCB45004D5B26 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */; };
@@ -103,6 +104,7 @@
 		6A2EC91E1F8BE9D700E96D2C /* MusicMatchRev2-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "MusicMatchRev2-Bridging-Header.h"; path = "MusicMatchRev2/MusicMatchRev2-Bridging-Header.h"; sourceTree = "<group>"; };
 		6A2EC9231F8C431500E96D2C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsViewController.swift; sourceTree = "<group>"; };
+		6A5AB7E71F9CE48400F491C7 /* SearchListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchListResponse.swift; path = MusicMatchRev2/SearchListResponse.swift; sourceTree = "<group>"; };
 		6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6AB7BA641F8BC58C0075113D /* MusicMatchRev2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicMatchRev2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB7BA671F8BC58C0075113D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				6AF9D8931F8BCE4400A4F1B0 /* YouTubeSearchController.swift */,
 				6AEC04331F97E1AD00C319DD /* YouTubePlayerViewController.swift */,
 				6AF9D89A1F8BDB4F00A4F1B0 /* SearchResultViewController.swift */,
+				6A5AB7E71F9CE48400F491C7 /* SearchListResponse.swift */,
 				6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */,
 				6AB7BA661F8BC58C0075113D /* MusicMatchRev2 */,
 				6AB7BA7B1F8BC58C0075113D /* MusicMatchRev2Tests */,
@@ -506,6 +509,7 @@
 				6AEC04991F99307400C319DD /* YouTubeConvenience.swift in Sources */,
 				6AF9D8A41F8BDE2800A4F1B0 /* Model.xcdatamodeld in Sources */,
 				6AEC04971F990D3600C319DD /* SignInViewController.swift in Sources */,
+				6A5AB7E81F9CE48400F491C7 /* SearchListResponse.swift in Sources */,
 				6AEC04341F97E1AD00C319DD /* YouTubePlayerViewController.swift in Sources */,
 				6AEC04941F990C6100C319DD /* PlaylistView.swift in Sources */,
 				6AEC04931F990C5800C319DD /* PlaylistCell.swift in Sources */,

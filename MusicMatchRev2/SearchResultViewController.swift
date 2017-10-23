@@ -10,24 +10,13 @@ import Foundation
 import UIKit
 import CoreData
 
-
-
-
 class SearchResultViewController: UITableViewController {
     
-    
-   
-    
+
     var searchQueryString: String = ""
     var videosArray: [[String:String]] = []
     var videoID: String!
-    
-    struct Video: Codable {
-        let title: String
-        let videoId: String
-        let thumbnail: String
-    }
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,16 +134,11 @@ class SearchResultViewController: UITableViewController {
             
             if error == nil {
                 
-                
                 // Append the desiredPlaylistItemDataDict dictionary to the videos array.
-                
                 
                 let items = result?["items"] as! [[String:AnyObject]]
                 
-                
                 for index in 0 ... items.count-1 {
-                    
-                    
                     
                     let item = items[index]
                     let snippetDict = item["snippet"] as! [String: AnyObject]
@@ -167,18 +151,17 @@ class SearchResultViewController: UITableViewController {
                         videoDetailsDict["thumbnail"] = ((snippetDict["thumbnails"] as! [String: AnyObject])["high"] as! [String: AnyObject])["url"] as! String?
                         videoDetailsDict["videoID"] = (item["id"] as! [String: AnyObject])["videoId"] as! String?
                        
-                        self.videosArray.append(videoDetailsDict)
                     
-                    
-                        //self.videosArray.append(video)
+                    }
+                    self.videosArray.append(videoDetailsDict)
                         
                     }
+
                    
                     DispatchQueue.main.async {
                         
                         self.tableView.reloadData()
                     }
-                }
                 
             }
                 
@@ -189,9 +172,5 @@ class SearchResultViewController: UITableViewController {
             
         }
     }
-    
-    
-    
-    
-    
+
 }

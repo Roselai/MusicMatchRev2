@@ -10,23 +10,50 @@ import Foundation
 
 extension YoutubeAPI {
     
+    struct RequestBody: Codable {
+        let snippet: Snippet
+    }
+    
+    struct Snippet: Codable {
+        let playlistId: String
+        let resourceId: ResourceId
+    }
+    
+    struct ResourceId: Codable {
+        let kind: String
+        let videoId: String
+    }
+    
+    
     func addVideoToPlaylist(accessToken: String!, playlistID: String!, videoID: String!) {
     
         
         let method = Constants.YouTubeMethod.PlaylistItemsMethod
-        let parameters = [Constants.YouTubeParameterKeys.APIKey : Constants.YoutubeParameterValues.APIKey,
+        let parameters = [Constants.YouTubeParameterKeys.Part : Constants.YoutubeParameterValues.partValue,
+                          Constants.YouTubeParameterKeys.APIKey : Constants.YoutubeParameterValues.APIKey,
                           Constants.YouTubeParameterKeys.AccessToken: accessToken]
         
 
         
-        var jsonBody = ""
+        let resourceId = ResourceId(kind: "youtube#video", videoId: videoID)
+        let snippet = Snippet(playlistId: playlistID, resourceId: resourceId)
+       let jsonBody = RequestBody(snippet: snippet)
         
-        YoutubeAPI.sharedInstance().taskForPOSTMethod(method: method, bodyParameters: parameters as [String : AnyObject], jsonBody: jsonBody, completionHandlerForPOST: { (result, error) in
+        
+            let jsonEncoder = JSONEncoder()
+            jsonEncoder.outputFormatting = .prettyPrinted
+             let jsonData = try? jsonEncoder.encode(jsonBody)
+        
+
+
+        
+        YoutubeAPI.sharedInstance().taskForPOSTMethod(method: method, bodyParameters: parameters as [String : AnyObject], jsonBody: jsonData, completionHandlerForPOST: { (result, error) in
             
             if error == nil {
                 print("video posted")
             } else {
                 print(error?.localizedDescription)
+                
             }
         })
         
