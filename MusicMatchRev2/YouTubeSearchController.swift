@@ -8,20 +8,16 @@
 
 import Foundation
 import UIKit
-import youtube_ios_player_helper
 import GoogleSignIn
 
 class YouTubeSearchController: UIViewController {
     
-
-    
-    
-     fileprivate var searchResultsViewController: SearchResultViewController!
+    fileprivate var searchResultsViewController: SearchResultViewController!
     fileprivate var YTPlayerViewController: YouTubePlayerViewController!
     var videoID: String!
     var queryString: String!
     
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +39,7 @@ class YouTubeSearchController: UIViewController {
             
         }
         
-       
+        
         YTPlayerViewController = playerController
         
         

@@ -147,6 +147,7 @@ class PlaylistView: UITableViewController {
             }
             
         }
+ 
     }
     
     

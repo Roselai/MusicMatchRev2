@@ -15,7 +15,6 @@ import GoogleSignIn
 class YouTubePlayerViewController: UIViewController{
     
     
-    
     @IBOutlet weak var playerView: YTPlayerView!
     
    

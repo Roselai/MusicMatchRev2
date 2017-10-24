@@ -55,6 +55,7 @@ class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelega
         
         if GIDSignIn.sharedInstance().hasAuthInKeychain() == true {
             checkMediaAuthorization()
+
         }
     }
     
@@ -110,12 +111,13 @@ func checkMediaAuthorization() {
     func presentMediaPickerController() {
         let mediaPicker: MPMediaPickerController = MPMediaPickerController.self(mediaTypes:MPMediaType.music)
         mediaPicker.allowsPickingMultipleItems = false
-        mediaPicker.view.frame =  CGRect(x: 0, y: 0, width: 1024, height: 200)
+        mediaPicker.view.frame =  self.view.frame
         mediaPicker.delegate = self
         mediapicker1 = mediaPicker
         mediapicker1.showsCloudItems = true
+    
         
-        
+       // self.view.addSubview(mediapicker1.view)
         self.present(mediapicker1, animated: true, completion: nil)
         
         

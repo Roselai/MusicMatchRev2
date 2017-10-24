@@ -47,11 +47,13 @@ struct SearchListResponse: Codable {
             
             struct Thumbnails : Codable {
                 let key : Key
-                struct Key : Codable {
-                    let url : String
-                    let width : UInt
-                    let height : UInt
+                
+                struct Key: Codable {
+                let url : String
+                let width : UInt
+                let height : UInt
                 }
+                
             }
         }
     }

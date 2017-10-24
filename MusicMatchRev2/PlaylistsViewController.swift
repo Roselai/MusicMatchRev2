@@ -14,12 +14,11 @@ class PlaylistsViewController: UITableViewController {
     
   
     var youTubePlaylistsArray: [[String:String]] = []
-    var localPlaylistsArray: [[String:String]] = []
+
     var playlistID: String!
     var videoID: String!
     var accessToken: String!
-    
-    let sections = ["YouTube Playlist(s)", "Local Playlist(s)"]
+    var leftSwipeAction: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,46 +34,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     //MARK: TableView DataSource Methods
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-            let headerView = UIView()
-            headerView.backgroundColor = UIColor.gray
-        
-        let headerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: headerView.bounds.size.height))
-        //headerLabel.font = UIFont(name: "Verdana", size: 20)
-        headerLabel.textColor = UIColor.white
-        headerLabel.text = self.tableView(self.tableView, titleForHeaderInSection: section)
-        headerLabel.textAlignment = .center
-        headerLabel.sizeToFit()
-        headerView.addSubview(headerLabel)
-            return headerView
-        
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
-    }
-    
-    
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        return self.sections[section]
-        
-        
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return self.sections.count
-    }
-    
-    
-    
+
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return youTubePlaylistsArray.count
-        
         
     }
     
@@ -85,7 +49,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "playlistCell",
                                                  for: indexPath) as! PlaylistCell
-        if indexPath.section == 0 {
+       
             
             let  playlist = youTubePlaylistsArray[indexPath.row]
             
@@ -112,12 +76,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     }
                 }
             }
-            
-        } else {
-        //let  playlist = localPlaylistsArray[indexPath.row]
-        cell.textLabel?.text = ""
-        cell.imageView?.image = nil
-        }
         
         return cell
     }
@@ -137,25 +95,26 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func tableView(_ tableView: UITableView,
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
-    {
         
+        
+    {
+        if leftSwipeAction == true {
         let addAction = self.contextualSegueAction(forRowAtIndexPath: indexPath)
         let swipeConfig = UISwipeActionsConfiguration(actions: [addAction])
         return swipeConfig
+        } else {
+            return nil
+    }
         
     }
     
     func contextualSegueAction(forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
         
-        if indexPath.section == 0 {
-            playlistID = youTubePlaylistsArray[indexPath.row]["id"]
-        }
-        
+        playlistID = youTubePlaylistsArray[indexPath.row]["id"]
         let action = UIContextualAction(style: .normal, title: "Add") { (contextAction, sourceView, completionHandler) in
             
-            YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: self.accessToken, playlistID: self.playlistID, videoID: self.videoID)
             
-            //print("Added Video to playlist")
+            YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: self.accessToken, playlistID: self.playlistID, videoID: self.videoID)
             completionHandler(true)
             
         }
@@ -194,6 +153,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                             
                             playlistDetailsDict["title"] = playlistSnippetDict["title"] as! String
                             playlistDetailsDict["thumbnail"] = ((playlistSnippetDict["thumbnails"] as! [String: Any])["high"] as! [String: Any])["url"] as! String
+                            
                         }
                         
                         
@@ -212,7 +172,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 
             }
         })
-        
+      
         
     }
     

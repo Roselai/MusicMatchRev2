@@ -56,6 +56,7 @@ class YoutubeAPI{
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             self.convertDataWithCompletionHandler(data: data, completionHandlerForConvertData: completionHandlerForGET )
+            //completionHandlerForGET(data, nil)
             
         }
         

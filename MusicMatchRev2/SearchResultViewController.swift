@@ -114,12 +114,19 @@ class SearchResultViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationViewController = segue.destination as! PlaylistsViewController
-        destinationViewController.videoID = self.videoID
+       
+        if segue.identifier == "showPlaylists" {
+        
+        let playlistsViewController = segue.destination as! PlaylistsViewController
+        playlistsViewController.videoID = self.videoID
+        playlistsViewController.leftSwipeAction = true
+        }
     }
 
     
     func performSearch() {
+        
+        
         let parameters = [Constants.YouTubeParameterKeys.type : Constants.YoutubeParameterValues.typeValue,
                           Constants.YouTubeParameterKeys.Order : Constants.YoutubeParameterValues.orderValue,
                           Constants.YouTubeParameterKeys.Part : Constants.YoutubeParameterValues.partValue,
@@ -171,6 +178,7 @@ class SearchResultViewController: UITableViewController {
             
             
         }
+ 
     }
 
 }
