@@ -13,28 +13,27 @@ class PlaylistView: UITableViewController {
     var playlistID: String!
     var videoID: String!
     var accessToken: String!
-    var videosArray: [[String:String]] = []
+    let playlistDataSource = YTTableViewDataSource()
 
     
     //MARK: TableView DataSource Methods
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        return videosArray.count
-        
-        
+        self.tableView.dataSource = playlistDataSource
     }
     
-    override func tableView(_ tableView: UITableView,
-                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell",
-                                                 for: indexPath)
-        
-        let video = videosArray[indexPath.row]
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let video = playlistDataSource.items[indexPath.row]
         
         let imageURL = URL(string: video["thumbnail"]!)
         
         _ = YoutubeAPI.sharedInstance().downloadimageData(photoURL: imageURL!) { (data, error) in
+            
+            
+            
             if let error = error {
                 print("Error downloading picture: \(error)")
             } else {
@@ -44,24 +43,24 @@ class PlaylistView: UITableViewController {
                         let image = UIImage(data: imageData)
                         let title = video["title"]
                         
-                        cell.textLabel?.numberOfLines = 3
-                        cell.textLabel?.lineBreakMode = .byWordWrapping
-                        cell.textLabel?.text = title
-                        cell.imageView?.image = image
+                        if let cell = self.tableView.cellForRow(at: indexPath)
+                            as? CustomTableViewCell {
+                            
+                            cell.update(with: image, title: title)
+                        }
                     }
                 } else {
                     print("Couldn't get image: Image is nil")
                 }
             }
         }
-        return cell
     }
     
     
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        videoID = videosArray[indexPath.row]["videoID"]
+        videoID = (playlistDataSource.items[indexPath.row])["id"]
         NotificationCenter.default.post(name: NSNotification.Name("Playlist Item Selected"), object: nil, userInfo: ["videoID" : videoID])
     }
     
@@ -82,10 +81,10 @@ class PlaylistView: UITableViewController {
         
         let action = UIContextualAction(style: .destructive, title: "Delete") { (contextAction, sourceView, completionHandler) in
             
-            let playlistItemID = self.videosArray[indexPath.row]["playlistItemID"]
+            let playlistItemID = (self.playlistDataSource.items[indexPath.row])["playlistItemID"]
            
             self.deleteVideoFromYTPlaylist(playlistItemID: playlistItemID!, accessToken: self.accessToken!)
-            self.videosArray.remove(at: indexPath.row)
+            self.playlistDataSource.items.remove(at: indexPath.row)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -93,61 +92,9 @@ class PlaylistView: UITableViewController {
             
         }
         
-        //action.image = UIImage(named: "addIcon")
         action.backgroundColor = UIColor.black
         return action
         
-    }
-    
-    
-    
-    
-    func getVideosFromPlaylist(accessToken: String?, playlistID: String) {
-        
-        let method = Constants.YouTubeMethod.PlaylistItemsMethod
-        let parameters = [Constants.YouTubeParameterKeys.APIKey: Constants.YoutubeParameterValues.APIKey,
-                          Constants.YouTubeParameterKeys.Part : Constants.YoutubeParameterValues.partValue,
-                          Constants.YouTubeParameterKeys.AccessToken: accessToken!,
-                          Constants.YouTubeParameterKeys.PlaylistID: playlistID,
-                          Constants.YouTubeParameterKeys.MaxResults : "50"]
-        
-       _ = YoutubeAPI.sharedInstance().taskForGETMethod(method: method, parameters: parameters as [String : AnyObject]) { (result, error) in
-            
-            if error == nil {
-                if let result = result {
-                    let videosArray = result["items"] as! [[String:Any]]
-                    
-                    for index in 0 ... videosArray.count-1 {
-                        
-                        let videoDict = videosArray[index] as [String: Any]
-                        var videoDetailsDict : [String: Any] = [:]
-                        
-                        
-                        if let videoSnippetDict = videoDict["snippet"] as? [String:Any] {
-                            videoDetailsDict["videoID"] = (videoSnippetDict["resourceId"] as! [String:Any])["videoId"] as! String
-                            videoDetailsDict["title"] = videoSnippetDict["title"] as! String
-                            videoDetailsDict["thumbnail"] = ((videoSnippetDict["thumbnails"] as! [String: Any])["high"] as! [String: Any])["url"] as! String
-                        }
-                        
-           
-                            videoDetailsDict["playlistItemID"] = videoDict["id"] as! String
-                        
-                        
-                        self.videosArray.append(videoDetailsDict as! [String : String])
-                        
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                    
-                }
-            } else {
-                print(error?.localizedDescription)
-            }
-            
-        }
- 
     }
     
     
@@ -166,6 +113,25 @@ class PlaylistView: UITableViewController {
             }
             
         }
+    }
+    
+    func getVideosFromPlaylist(accessToken: String?, playlistID: String?){
+        
+        YoutubeAPI.sharedInstance().getVideosFromPlaylist(accessToken: accessToken, playlistID: playlistID) { (videos, error) in
+            
+            guard error == nil else {
+                print("Error fetching playlists")
+                self.playlistDataSource.items.removeAll()
+                return
+            }
+            if videos != nil {
+                print("Successfully retrieved \(String(describing: videos?.count)) videos")
+                self.playlistDataSource.items = videos as! [[String : String]]
+            }
+            self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+            
+        }
+        
     }
     
     
