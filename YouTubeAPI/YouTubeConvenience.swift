@@ -59,6 +59,57 @@ extension YoutubeAPI {
         
         
         }
+    
+    func fetchUserPlaylists (accessToken: String!, completion: @escaping (_ result: Array<Any>?, _ error: Error?) -> Void) {
+        
+        
+        let method = Constants.YouTubeMethod.PlaylistMethod
+        
+        let parameters = [Constants.YouTubeParameterKeys.Part : Constants.YoutubeParameterValues.partValue,
+                          Constants.YouTubeParameterKeys.Mine : Constants.YoutubeParameterValues.MineValue,
+                          Constants.YouTubeParameterKeys.AccessToken: accessToken]
+        
+        
+        _ = YoutubeAPI.sharedInstance().taskForGETMethod(method: method, parameters: parameters as [String : AnyObject], completionHandlerForGET: { (result, error) in
+            if error == nil {
+                
+                if let result = result {
+                    let playlistsArray = result["items"] as! [[String:Any]]
+                    var playlists : [[String:String]] = []
+                    
+                    for index in 0 ... playlistsArray.count-1 {
+                        
+                        let playlistDict = playlistsArray[index] as [String: Any]
+                        
+                        var playlistDetailsDict : [String: String] = [:]
+                        
+                        playlistDetailsDict["id"] = playlistDict["id"] as? String
+                        
+                        if let playlistSnippetDict = playlistDict["snippet"] as? [String:Any] {
+                            
+                            playlistDetailsDict["title"] = playlistSnippetDict["title"] as? String
+                            playlistDetailsDict["thumbnail"] = ((playlistSnippetDict["thumbnails"] as! [String: Any])["default"] as! [String: Any])["url"] as? String
+                            
+                        }
+                        
+                        playlists.append(playlistDetailsDict)
+                        
+                    }
+                    OperationQueue.main.addOperation {
+                        
+                    completion(playlists, nil)
+                    }
+                }
+                
+            } else {
+                OperationQueue.main.addOperation {
+                completion(nil, error)
+                }
+                
+            }
+        })
+        
+    }
 
     
     /*
@@ -102,8 +153,11 @@ extension YoutubeAPI {
         }
     }
  */
-    /*
-    func searchForVideo(searchQuery: String, completionHandlerForSearchForVideo: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) {
+    
+    func searchForVideo(searchQuery: String, completion: @escaping (_ result: Array<Any>?, _ error: Error?) -> Void ) {
+        
+        let method = Constants.YouTubeMethod.SearchMethod
+        
         let parameters = [Constants.YouTubeParameterKeys.type : Constants.YoutubeParameterValues.typeValue,
                           Constants.YouTubeParameterKeys.Order : Constants.YoutubeParameterValues.orderValue,
                           Constants.YouTubeParameterKeys.Part : Constants.YoutubeParameterValues.partValue,
@@ -111,50 +165,50 @@ extension YoutubeAPI {
             Constants.YouTubeParameterKeys.APIKey : Constants.YoutubeParameterValues.APIKey,
             "q": "\(searchQuery)"]
         
-        let method = Constants.YouTubeMethod.SearchMethod
         
         
-        _ =  YoutubeAPI.sharedInstance().taskForGETMethod(method: method, parameters: parameters as [String : AnyObject], completionHandlerForGET: { (data, error) in
+        _ =  YoutubeAPI.sharedInstance().taskForGETMethod(method: method, parameters: parameters as [String : AnyObject], completionHandlerForGET: { (result, error) in
+            
             
             if error == nil {
-                
-                let jsonDecoder = JSONDecoder()
-                if let jsonData = data {
-                    do {
-                let searchListResponse = try? jsonDecoder.decode(SearchListResponse.self, from: jsonData)
-                dump(searchListResponse)
-                        completionHandlerForSearchForVideo(result as AnyObject, nil)
-                    }
-                
-                // Append the desiredPlaylistItemDataDict dictionary to the videos array.
-                
-                /*let items = result?["items"] as! [[String:AnyObject]]
-                
-                for index in 0 ... items.count-1 {
+                if let result = result {
                     
-                    let item = items[index]
-                    let snippetDict = item["snippet"] as! [String: AnyObject]
-                    
-                    var videoDetailsDict : [String: String] = [:]
-                    
-                    if snippetDict["title"]?.range(of: self.searchQueryString ) != nil {
-                        
-                        videoDetailsDict["title"] = snippetDict["title"] as? String
-                        videoDetailsDict["thumbnail"] = ((snippetDict["thumbnails"] as! [String: AnyObject])["high"] as! [String: AnyObject])["url"] as! String?
-                        videoDetailsDict["videoID"] = (item["id"] as! [String: AnyObject])["videoId"] as! String?
-                        
-                        
-                    }*/
-                    //self.videosArray.append(videoDetailsDict)
-                    
-                
-            else {
-                completionHandlerForSearchForVideo(nil, error)
-            }
-        })
-        }
+                    var videosArray = result["items"] as! [[String:Any]]
+                    var videos : [[String:String]] = []
             
-    */
+                
+                for index in 0 ... videosArray.count-1 {
+                    let videoDict = videosArray[index] as [String: Any]
+                    var videoDetailsDict : [String: String] = [:]
+                
+                    videoDetailsDict["id"] = (videoDict["id"] as! [String: Any])["videoId"] as! String?
+                    
+                    if let snippetDict = videoDict["snippet"] as? [String: Any] {
+                    
+                        videoDetailsDict["title"] = snippetDict["title"] as? String
+                        videoDetailsDict["thumbnail"] = ((snippetDict["thumbnails"] as! [String: Any])["default"] as! [String: Any])["url"] as! String?
+                        
+                    }
+                    videos.append(videoDetailsDict)
+                    }
+                    
+                    OperationQueue.main.addOperation {
+                        
+                        completion(videos, nil)
+                    }
+                }
+            }
+            else {
+                OperationQueue.main.addOperation {
+                    completion(nil, error)
+                }
+            }
+            
+        
+        })
+    }
+            
+    
 }
     
 

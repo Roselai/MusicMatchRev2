@@ -27,6 +27,8 @@
 		6A83704C1F8BCB45004D5B26 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */; };
 		6AA19E461F96A1A500C560D8 /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */; };
 		6AA19E471F96A1A500C560D8 /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */; };
+		6AA405391FA0E14300407197 /* YTTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA405381FA0E14300407197 /* YTTableViewDataSource.swift */; };
+		6AA4053B1FA0F07100407197 /* PlaylistsEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA4053A1FA0F07000407197 /* PlaylistsEditorViewController.swift */; };
 		6AB7BA681F8BC58C0075113D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB7BA671F8BC58C0075113D /* AppDelegate.swift */; };
 		6AB7BA6A1F8BC58C0075113D /* MediaPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB7BA691F8BC58C0075113D /* MediaPickerViewController.swift */; };
 		6AB7BA6F1F8BC58C0075113D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AB7BA6E1F8BC58C0075113D /* Assets.xcassets */; };
@@ -45,7 +47,7 @@
 		6AEC042B1F97C03000C319DD /* Video+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEC04281F97C03000C319DD /* Video+CoreDataClass.swift */; };
 		6AEC04341F97E1AD00C319DD /* YouTubePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEC04331F97E1AD00C319DD /* YouTubePlayerViewController.swift */; };
 		6AEC04921F990C1C00C319DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEC04901F990C1B00C319DD /* Main.storyboard */; };
-		6AEC04931F990C5800C319DD /* PlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEC045E1F990A1600C319DD /* PlaylistCell.swift */; };
+		6AEC04931F990C5800C319DD /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEC045E1F990A1600C319DD /* CustomTableViewCell.swift */; };
 		6AEC04941F990C6100C319DD /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEC045D1F9909E400C319DD /* PlaylistView.swift */; };
 		6AEC04951F990C7300C319DD /* volume-up-4-xxl.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AEC04641F990A4700C319DD /* volume-up-4-xxl.png */; };
 		6AEC04971F990D3600C319DD /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEC04961F990D3600C319DD /* SignInViewController.swift */; };
@@ -106,6 +108,8 @@
 		6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsViewController.swift; sourceTree = "<group>"; };
 		6A5AB7E71F9CE48400F491C7 /* SearchListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchListResponse.swift; path = MusicMatchRev2/SearchListResponse.swift; sourceTree = "<group>"; };
 		6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6AA405381FA0E14300407197 /* YTTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YTTableViewDataSource.swift; path = MusicMatchRev2/YTTableViewDataSource.swift; sourceTree = "<group>"; };
+		6AA4053A1FA0F07000407197 /* PlaylistsEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistsEditorViewController.swift; sourceTree = "<group>"; };
 		6AB7BA641F8BC58C0075113D /* MusicMatchRev2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicMatchRev2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB7BA671F8BC58C0075113D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AB7BA691F8BC58C0075113D /* MediaPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerViewController.swift; sourceTree = "<group>"; };
@@ -124,7 +128,7 @@
 		6AEC04281F97C03000C319DD /* Video+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Video+CoreDataClass.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Video+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		6AEC04331F97E1AD00C319DD /* YouTubePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = YouTubePlayerViewController.swift; path = MusicMatchRev2/YouTubePlayerViewController.swift; sourceTree = "<group>"; };
 		6AEC045D1F9909E400C319DD /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
-		6AEC045E1F990A1600C319DD /* PlaylistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCell.swift; sourceTree = "<group>"; };
+		6AEC045E1F990A1600C319DD /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		6AEC04641F990A4700C319DD /* volume-up-4-xxl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "volume-up-4-xxl.png"; sourceTree = "<group>"; };
 		6AEC04911F990C1B00C319DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MusicMatchRev2/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6AEC04961F990D3600C319DD /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +215,7 @@
 			children = (
 				6ABACB2A1F9A589C004E4CE5 /* PlayListContainerView.swift */,
 				6AEC04901F990C1B00C319DD /* Main.storyboard */,
+				6AA405381FA0E14300407197 /* YTTableViewDataSource.swift */,
 				6A2EC9231F8C431500E96D2C /* CustomButton.swift */,
 				6A2EC91E1F8BE9D700E96D2C /* MusicMatchRev2-Bridging-Header.h */,
 				6A2EC91C1F8BE67300E96D2C /* YouTubeAPI */,
@@ -247,8 +252,9 @@
 				6AB7BA671F8BC58C0075113D /* AppDelegate.swift */,
 				6AB7BA691F8BC58C0075113D /* MediaPickerViewController.swift */,
 				6AEC045D1F9909E400C319DD /* PlaylistView.swift */,
-				6AEC045E1F990A1600C319DD /* PlaylistCell.swift */,
+				6AEC045E1F990A1600C319DD /* CustomTableViewCell.swift */,
 				6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */,
+				6AA4053A1FA0F07000407197 /* PlaylistsEditorViewController.swift */,
 				6AB7BA6E1F8BC58C0075113D /* Assets.xcassets */,
 				6AB7BA701F8BC58C0075113D /* LaunchScreen.storyboard */,
 				6AB7BA731F8BC58C0075113D /* Info.plist */,
@@ -506,13 +512,15 @@
 				6AEC042A1F97C03000C319DD /* Video+CoreDataClass.swift in Sources */,
 				6AB7BA6A1F8BC58C0075113D /* MediaPickerViewController.swift in Sources */,
 				6AB7BA681F8BC58C0075113D /* AppDelegate.swift in Sources */,
+				6AA4053B1FA0F07100407197 /* PlaylistsEditorViewController.swift in Sources */,
 				6AEC04991F99307400C319DD /* YouTubeConvenience.swift in Sources */,
 				6AF9D8A41F8BDE2800A4F1B0 /* Model.xcdatamodeld in Sources */,
 				6AEC04971F990D3600C319DD /* SignInViewController.swift in Sources */,
 				6A5AB7E81F9CE48400F491C7 /* SearchListResponse.swift in Sources */,
 				6AEC04341F97E1AD00C319DD /* YouTubePlayerViewController.swift in Sources */,
+				6AA405391FA0E14300407197 /* YTTableViewDataSource.swift in Sources */,
 				6AEC04941F990C6100C319DD /* PlaylistView.swift in Sources */,
-				6AEC04931F990C5800C319DD /* PlaylistCell.swift in Sources */,
+				6AEC04931F990C5800C319DD /* CustomTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

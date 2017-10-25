@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class PlaylistCell: UITableViewCell {
+class CustomTableViewCell: UITableViewCell {
     
     
     
@@ -28,14 +28,16 @@ class PlaylistCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.textLabel?.textColor = UIColor.white
+        self.textLabel?.numberOfLines = 3
+        self.textLabel?.lineBreakMode = .byWordWrapping
         update(with: nil, title: nil)
         
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.textLabel?.textColor = UIColor.white
+        self.textLabel?.numberOfLines = 3
+        self.textLabel?.lineBreakMode = .byWordWrapping
         update(with: nil, title: nil)
         
     }

@@ -32,9 +32,8 @@ class YouTubeSearchController: UIViewController {
         }
         
         if queryString != nil {
-            searchController.searchQueryString = queryString!
             searchResultsViewController = searchController
-            searchResultsViewController.performSearch()
+            searchResultsViewController.performSearch(searchQueryString: queryString)
             
             
         }
