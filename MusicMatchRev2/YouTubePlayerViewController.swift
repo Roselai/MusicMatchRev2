@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import youtube_ios_player_helper
-import GoogleSignIn
 
 
 class YouTubePlayerViewController: UIViewController{
@@ -25,6 +24,7 @@ class YouTubePlayerViewController: UIViewController{
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideo), name: Notification.Name("Cell Selected"), object: nil)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideoFromPlaylist), name: Notification.Name("Playlist Item Selected"), object: nil)
     }
     

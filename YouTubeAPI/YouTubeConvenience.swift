@@ -216,6 +216,40 @@ extension YoutubeAPI {
         }
         
     }
+    
+    func createPlaylist(accessToken: String!, title: String!) {
+        
+        
+        let method = Constants.YouTubeMethod.PlaylistMethod
+        let parameters = [Constants.YouTubeParameterKeys.Part : Constants.YoutubeParameterValues.partValue,
+                          Constants.YouTubeParameterKeys.APIKey : Constants.YoutubeParameterValues.APIKey,
+                          Constants.YouTubeParameterKeys.AccessToken: accessToken]
+        
+        
+        
+        let snippetDict = ["snippet" : ["title" :title]]
+        let jsonBody = snippetDict
+        
+        
+        let jsonEncoder = JSONEncoder()
+        jsonEncoder.outputFormatting = .prettyPrinted
+        let jsonData = try? jsonEncoder.encode(jsonBody)
+        
+        
+        
+        
+        _ = YoutubeAPI.sharedInstance().taskForPOSTMethod(method: method, bodyParameters: parameters as [String : AnyObject], jsonBody: jsonData, completionHandlerForPOST: { (result, error) in
+            
+            if error == nil {
+                print("Playlist created")
+            } else {
+                print(error?.localizedDescription)
+                
+            }
+        })
+        
+        
+    }
             
     
 }

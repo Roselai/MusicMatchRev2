@@ -8,20 +8,17 @@
 
 import Foundation
 import UIKit
-import CoreData
 
 class SearchResultViewController: UITableViewController {
     
-
-    var searchQueryString: String = ""
     var videoID: String!
     let searchDataSource = YTTableViewDataSource()
-
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       self.tableView.dataSource = searchDataSource
+        self.tableView.dataSource = searchDataSource
     }
     
     
@@ -69,25 +66,69 @@ class SearchResultViewController: UITableViewController {
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
         
-        //self.performSegue(withIdentifier: "showPlaylists", sender: self)
         let segueAction = self.contextualSegueAction(forRowAtIndexPath: indexPath)
         let swipeConfig = UISwipeActionsConfiguration(actions: [segueAction])
         return swipeConfig
-
+        
     }
     
     func contextualSegueAction(forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
-
+        
         let video = searchDataSource.items[indexPath.row]
-        videoID = video["videoID"]
+        videoID = video["id"]
         
         let action = UIContextualAction(style: .normal, title: "Add") { (contextAction, sourceView, completionHandler) in
             
-            self.performSegue(withIdentifier: "showPlaylists", sender: self)
+            //self.performSegue(withIdentifier: "showPlaylists", sender: self)
+            
+            let title = "Add Video"
+            let message = "Select a playlist to add the video to"
+            
+            let ac = UIAlertController(title: title,
+                                       message: message,
+                                       preferredStyle: .actionSheet)
+            
+            let createPlaylistAction = UIAlertAction(title: "Create new playlist", style: .default, handler: { (action) in
+                
+                //create playlist action
+            })
+            ac.addAction(createPlaylistAction)
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let accessToken = appDelegate.accessToken
+            
+            YoutubeAPI.sharedInstance().fetchUserPlaylists(accessToken: accessToken, completion: { (playlists, error) in
+                if error == nil {
+                    
+                    if let playlists = playlists as? [[String:String]] {
+                        
+                        for playlist in playlists {
+                    
+                            let playlistTitle = playlist["title"]
+                            let playlistID = playlist["id"]
+                            
+                            let addAction = UIAlertAction(title: playlistTitle, style: .default ,
+                                                          handler: { (action) -> Void in
+                                                            
+                                                            YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlistID, videoID: self.videoID)
+                                                            
+                            })
+                            
+                            ac.addAction(addAction)
+                        }
+                        
+                    }
+                }
+            })
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel ,
+                                             handler: nil)
+            ac.addAction(cancelAction)
+            self.present(ac, animated: true, completion: nil)
+            
             completionHandler(true)
             
         }
-       
+        
         action.image = UIImage(named: "addIcon")
         action.backgroundColor = UIColor.black
         return action
@@ -95,14 +136,14 @@ class SearchResultViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
-        if segue.identifier == "showPlaylists" {
         
-        let playlistsEditor = segue.destination as! PlaylistsEditorViewController
-        playlistsEditor.videoID = self.videoID
+        if segue.identifier == "showPlaylists" {
+            
+            let playlistsEditor = segue.destination as! PlaylistsEditorViewController
+            playlistsEditor.videoID = self.videoID
         }
     }
-
+    
     func performSearch(searchQueryString: String) {
         YoutubeAPI.sharedInstance().searchForVideo(searchQuery: searchQueryString) { (videos, error) in
             guard error == nil else {
@@ -117,5 +158,5 @@ class SearchResultViewController: UITableViewController {
             self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
     }
-
+    
 }

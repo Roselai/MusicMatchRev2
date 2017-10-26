@@ -2,21 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:MusicMatchRev2/SearchResultViewController.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Model/Playlist+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Model/Playlist+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Video+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Model/Video+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
       location = "group:MusicMatchRev2.xcodeproj">
    </FileRef>
    <FileRef

@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -308,11 +309,11 @@
             <objects>
                 <viewController id="Gbt-Cc-2br" customClass="PlaylistsEditorViewController" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xyg-gW-9uj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="329"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="285"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1D0-Kv-MOM">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="329"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="285"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" rowHeight="90" id="1KH-dY-7CJ" customClass="CustomTableViewCell" customModule="MusicMatchRev2" customModuleProvider="target">
@@ -335,7 +336,21 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2zH-In-hZs"/>
                     </view>
-                    <navigationItem key="navigationItem" id="zka-Kv-S1U"/>
+                    <navigationItem key="navigationItem" id="zka-Kv-S1U">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="trash" id="fZ7-Qc-JRS">
+                                <connections>
+                                    <action selector="deleteButtonPressed:" destination="Gbt-Cc-2br" id="y2Y-s3-U53"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="eOq-QF-q0q">
+                                <connections>
+                                    <action selector="createANewPlaylist:" destination="Gbt-Cc-2br" id="YVb-7i-6DD"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="tableView" destination="1D0-Kv-MOM" id="xd5-iG-xtN"/>
                     </connections>
