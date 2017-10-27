@@ -84,22 +84,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mEQ-1j-7M9">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mEQ-1j-7M9">
                                 <rect key="frame" x="0.0" y="225" width="375" height="329"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <segue destination="zCE-T3-c0J" kind="embed" id="8Cj-UD-rYW"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19F-1Q-zoT">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="19F-1Q-zoT">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <segue destination="sXk-8v-Kif" kind="embed" id="hrF-Nd-Maz"/>
                                 </connections>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="3oN-IA-jod" firstAttribute="top" secondItem="mEQ-1j-7M9" secondAttribute="bottom" id="ECF-te-ck8"/>
+                            <constraint firstAttribute="trailing" secondItem="19F-1Q-zoT" secondAttribute="trailing" id="MsH-FY-NEp"/>
+                            <constraint firstItem="19F-1Q-zoT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="XP1-ma-Gzr"/>
+                            <constraint firstItem="mEQ-1j-7M9" firstAttribute="top" secondItem="5Lk-jN-r0K" secondAttribute="bottom" constant="225" id="XX2-G9-n6c"/>
+                            <constraint firstItem="19F-1Q-zoT" firstAttribute="top" secondItem="5Lk-jN-r0K" secondAttribute="bottom" id="fMT-Ds-cBw"/>
+                            <constraint firstAttribute="trailing" secondItem="mEQ-1j-7M9" secondAttribute="trailing" id="nV1-52-W24"/>
+                            <constraint firstItem="3oN-IA-jod" firstAttribute="top" secondItem="19F-1Q-zoT" secondAttribute="bottom" constant="328" id="vWS-V9-BKH"/>
+                            <constraint firstItem="mEQ-1j-7M9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xa7-SD-nLa"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Bla-Xh-VqK"/>
                 </viewController>
@@ -143,7 +151,7 @@
             <objects>
                 <tableViewController id="Klr-7h-Awd" customClass="PlaylistView" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" id="9dP-je-Q73">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="294"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="328"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -219,13 +227,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q4B-5u-HXO" customClass="YTPlayerView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q4B-5u-HXO" customClass="YTPlayerView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Q4B-5u-HXO" firstAttribute="leading" secondItem="iFg-wU-GHI" secondAttribute="leading" id="UVn-fg-3Dw"/>
+                            <constraint firstItem="Q4B-5u-HXO" firstAttribute="bottom" secondItem="ndT-iZ-roT" secondAttribute="top" id="cfR-Ax-un7"/>
+                            <constraint firstItem="Q4B-5u-HXO" firstAttribute="top" secondItem="ly4-Ls-uyN" secondAttribute="bottom" id="loQ-qV-UmD"/>
+                            <constraint firstAttribute="trailing" secondItem="Q4B-5u-HXO" secondAttribute="trailing" id="ySr-yc-wG3"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="playerView" destination="Q4B-5u-HXO" id="a1t-AK-LCc"/>
@@ -247,22 +260,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SMK-8c-REh">
-                                <rect key="frame" x="0.0" y="324" width="375" height="294"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SMK-8c-REh">
+                                <rect key="frame" x="0.0" y="290" width="375" height="328"/>
                                 <connections>
                                     <segue destination="Klr-7h-Awd" kind="embed" id="apa-pJ-WwU"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ho-t7-KCd">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="322"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ho-t7-KCd">
+                                <rect key="frame" x="0.0" y="64" width="375" height="226"/>
                                 <connections>
                                     <segue destination="sXk-8v-Kif" kind="embed" id="N1S-te-qr6"/>
                                 </connections>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="3ho-t7-KCd" firstAttribute="top" secondItem="b3c-sg-bs2" secondAttribute="bottom" id="0xk-64-VU7"/>
+                            <constraint firstItem="SMK-8c-REh" firstAttribute="top" secondItem="3ho-t7-KCd" secondAttribute="bottom" id="6Hb-7L-fbl"/>
+                            <constraint firstAttribute="bottom" secondItem="3ho-t7-KCd" secondAttribute="bottom" constant="377" id="6fo-gC-ILb"/>
+                            <constraint firstItem="SMK-8c-REh" firstAttribute="leading" secondItem="3ho-t7-KCd" secondAttribute="leading" id="ERq-A3-HiC"/>
+                            <constraint firstItem="SMK-8c-REh" firstAttribute="trailing" secondItem="3ho-t7-KCd" secondAttribute="trailing" id="KEm-ji-sUR"/>
+                            <constraint firstItem="SMK-8c-REh" firstAttribute="leading" secondItem="Owr-Bw-JOK" secondAttribute="leading" id="TrW-2G-wps"/>
+                            <constraint firstItem="SMK-8c-REh" firstAttribute="bottom" secondItem="cmg-ph-jUW" secondAttribute="top" id="kuo-S5-252"/>
+                            <constraint firstAttribute="trailing" secondItem="SMK-8c-REh" secondAttribute="trailing" id="wG7-Up-heA"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qOW-br-2ZB"/>
                     <size key="freeformSize" width="375" height="667"/>
@@ -380,6 +401,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hrF-Nd-Maz"/>
+        <segue reference="N1S-te-qr6"/>
     </inferredMetricsTieBreakers>
 </document>
