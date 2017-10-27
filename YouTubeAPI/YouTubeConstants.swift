@@ -66,7 +66,27 @@ struct Constants {
     // MARK: YouTube Response Keys
     struct YouTubeResponseKeys {
         static let Items = "items"
+        static let Snippet = "snippet"
+        static let PlaylistID = "id"
+        static let VideoID = "videoId"
+        static let PlaylistItemID = "id"
+        static let Title = "title"
+        static let Thumbnails = "thumbnails"
+        static let Thumbnail = "thumbnail"
+        static let ThumbnailURL = "url"
+        static let ResourceID = "resourceId"
+        
+        struct ThumbnailKeys {
+            static let Default = "default"
+        }
+        
+        
+        
     }
+    
+    
+    
+    
 
     
 }

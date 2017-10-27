@@ -90,7 +90,7 @@ class SearchResultViewController: UITableViewController {
             
             let createPlaylistAction = UIAlertAction(title: "Create new playlist", style: .default, handler: { (action) in
                 
-                //create playlist action
+                self.performSegue(withIdentifier: "createAPlaylist", sender: self)
             })
             ac.addAction(createPlaylistAction)
             
@@ -100,7 +100,7 @@ class SearchResultViewController: UITableViewController {
             YoutubeAPI.sharedInstance().fetchUserPlaylists(accessToken: accessToken, completion: { (playlists, error) in
                 if error == nil {
                     
-                    if let playlists = playlists as? [[String:String]] {
+                    if let playlists = playlists {
                         
                         for playlist in playlists {
                     
@@ -135,14 +135,6 @@ class SearchResultViewController: UITableViewController {
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "showPlaylists" {
-            
-            let playlistsEditor = segue.destination as! PlaylistsEditorViewController
-            playlistsEditor.videoID = self.videoID
-        }
-    }
     
     func performSearch(searchQueryString: String) {
         YoutubeAPI.sharedInstance().searchForVideo(searchQuery: searchQueryString) { (videos, error) in

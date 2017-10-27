@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Playlist" representedClassName="Playlist" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="thumbnail" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbnail" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="thumbnailURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="videos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Video" inverseName="playlists" inverseEntity="Video" syncable="YES"/>
     </entity>
@@ -14,7 +15,7 @@
         <relationship name="playlists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Playlist" inverseName="videos" inverseEntity="Playlist" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Playlist" positionX="-54" positionY="45" width="128" height="120"/>
         <element name="Video" positionX="-54" positionY="18" width="128" height="120"/>
-        <element name="Playlist" positionX="-54" positionY="45" width="128" height="105"/>
     </elements>
 </model>

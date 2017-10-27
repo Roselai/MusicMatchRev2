@@ -2,7 +2,7 @@
 //  Playlist+CoreDataProperties.swift
 //  
 //
-//  Created by Shukti Shaikh on 10/18/17.
+//  Created by Shukti Shaikh on 10/26/17.
 //
 //
 
@@ -16,9 +16,10 @@ extension Playlist {
         return NSFetchRequest<Playlist>(entityName: "Playlist")
     }
 
-    @NSManaged public var id: UUID?
-    @NSManaged public var title: String?
+    @NSManaged public var id: String?
     @NSManaged public var thumbnail: NSData?
+    @NSManaged public var title: String?
+    @NSManaged public var thumbnailURL: String?
     @NSManaged public var videos: NSSet?
 
 }

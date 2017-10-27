@@ -10,7 +10,6 @@ import UIKit
 class CustomTableViewCell: UITableViewCell {
     
     
-    
     func update(with image: UIImage?, title: String?) {
         
         if let imageToDisplay = image {
@@ -30,7 +29,7 @@ class CustomTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.textLabel?.numberOfLines = 3
         self.textLabel?.lineBreakMode = .byWordWrapping
-        update(with: nil, title: nil)
+        self.update(with: nil, title: nil)
         
     }
     
@@ -38,7 +37,7 @@ class CustomTableViewCell: UITableViewCell {
         super.prepareForReuse()
         self.textLabel?.numberOfLines = 3
         self.textLabel?.lineBreakMode = .byWordWrapping
-        update(with: nil, title: nil)
+        self.update(with: nil, title: nil)
         
     }
     
