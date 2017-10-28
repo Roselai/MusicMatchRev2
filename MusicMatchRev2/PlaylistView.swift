@@ -28,7 +28,8 @@ class PlaylistView: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let video = playlistDataSource.items[indexPath.row]
         
-        let imageURL = URL(string: video["thumbnail"]!)
+        let imageURL = URL(string: video["url"]!)
+        if imageURL != nil {
         
         _ = YoutubeAPI.sharedInstance().downloadimageData(photoURL: imageURL!) { (data, error) in
             
@@ -54,13 +55,14 @@ class PlaylistView: UITableViewController {
                 }
             }
         }
+        }
     }
     
     
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        videoID = (playlistDataSource.items[indexPath.row])["id"]
+        videoID = (playlistDataSource.items[indexPath.row])["videoId"]
         NotificationCenter.default.post(name: NSNotification.Name("Playlist Item Selected"), object: nil, userInfo: ["videoID" : videoID])
     }
     
@@ -81,7 +83,7 @@ class PlaylistView: UITableViewController {
         
         let action = UIContextualAction(style: .destructive, title: "Delete") { (contextAction, sourceView, completionHandler) in
             
-            let playlistItemID = (self.playlistDataSource.items[indexPath.row])["playlistItemID"]
+            let playlistItemID = (self.playlistDataSource.items[indexPath.row])["id"]
            
             self.deleteVideoFromYTPlaylist(playlistItemID: playlistItemID!, accessToken: self.accessToken!)
             self.playlistDataSource.items.remove(at: indexPath.row)
@@ -126,7 +128,7 @@ class PlaylistView: UITableViewController {
             }
             if videos != nil {
                 print("Successfully retrieved \(String(describing: videos?.count)) videos")
-                self.playlistDataSource.items = videos as! [[String : String]]
+                self.playlistDataSource.items = videos!
             }
             self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
             

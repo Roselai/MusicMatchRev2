@@ -24,20 +24,20 @@ class YouTubePlayerViewController: UIViewController{
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideo), name: Notification.Name("Cell Selected"), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(loadVideo), name: Notification.Name("Initial Video ID"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideoFromPlaylist), name: Notification.Name("Playlist Item Selected"), object: nil)
     }
     
 
     @objc func loadVideo(_ notification: Notification) {
-        videoID = notification.userInfo?["videoID"] as! String
+        videoID = notification.userInfo?[Constants.YouTubeResponseKeys.VideoID] as! String
         
         let playerVars: [AnyHashable: Any] = ["playsinline" : 1 ]
         self.playerView.load(withVideoId: self.videoID, playerVars: playerVars)
     }
     
     @objc func loadVideoFromPlaylist(_ notification: Notification) {
-        videoID = notification.userInfo?["videoID"] as! String
+        videoID = notification.userInfo?[Constants.YouTubeResponseKeys.VideoID] as! String
         
         let playerVars: [AnyHashable: Any] = ["playsinline" : 1 ]
       self.playerView.load(withVideoId: self.videoID, playerVars: playerVars)

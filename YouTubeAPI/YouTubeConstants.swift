@@ -60,6 +60,7 @@ struct Constants {
         static let ResultLimit = 10
         static let MineValue = "true"
         static let PerPage = 50
+        static let MaxResults = "50"
         
     }
     

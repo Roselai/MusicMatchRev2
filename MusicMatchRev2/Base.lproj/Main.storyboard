@@ -120,7 +120,7 @@
             <objects>
                 <tableViewController id="HD3-Uc-sWb" customClass="PlaylistsViewController" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="100" sectionHeaderHeight="30" sectionFooterHeight="1" contentViewInsetsToSafeArea="NO" id="Xfv-yv-mc6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -257,17 +257,17 @@
                         <viewControllerLayoutGuide type="bottom" id="cmg-ph-jUW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Owr-Bw-JOK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SMK-8c-REh">
-                                <rect key="frame" x="0.0" y="290" width="375" height="328"/>
+                                <rect key="frame" x="0.0" y="226" width="375" height="328"/>
                                 <connections>
                                     <segue destination="Klr-7h-Awd" kind="embed" id="apa-pJ-WwU"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ho-t7-KCd">
-                                <rect key="frame" x="0.0" y="64" width="375" height="226"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
                                 <connections>
                                     <segue destination="sXk-8v-Kif" kind="embed" id="N1S-te-qr6"/>
                                 </connections>
@@ -386,9 +386,10 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DyV-It-194" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Playlists" id="laW-bw-m31"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pC8-V8-8jp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="pC8-V8-8jp">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.80000000000000004" green="0.094117647060000004" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

@@ -8,24 +8,62 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class SearchResultViewController: UITableViewController {
     
     var videoID: String!
     let searchDataSource = YTTableViewDataSource()
-    
+ 
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
+   
+        tableView.dataSource = searchDataSource
         
-        self.tableView.dataSource = searchDataSource
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        configure(cell, for: indexPath)
+        
+    }
+
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+        
+        videoID =  (searchDataSource.items[indexPath.row])[Constants.YouTubeResponseKeys.VideoID]
+        
+        NotificationCenter.default.post(name: NSNotification.Name("Cell Selected"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : videoID])
+        
     }
     
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func performSearch(searchQueryString: String) {
+        YoutubeAPI.sharedInstance().searchForVideo(searchQuery: searchQueryString) { (videos, error) in
+            guard error == nil else {
+                print("Error fetching videos")
+                self.searchDataSource.items.removeAll()
+                return
+            }
+            if videos != nil {
+                print("Successfully retrieved \(String(describing: videos?.count)) videos")
+                self.searchDataSource.items = videos!
+                
+                self.videoID = (videos![0])[Constants.YouTubeResponseKeys.VideoID]
+                //send first result videoID to player for load
+                NotificationCenter.default.post(name: NSNotification.Name("Initial Video ID"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : self.videoID])
+                
+            }
+            self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+        }
+    }
+    
+    func configure(_ cell: UITableViewCell, for indexPath: IndexPath) {
         let video = searchDataSource.items[indexPath.row]
         
-        let imageURL = URL(string: video["thumbnail"]!)
+        let imageURL = URL(string: video[Constants.YouTubeResponseKeys.ThumbnailURL]!)
         
         _ = YoutubeAPI.sharedInstance().downloadimageData(photoURL: imageURL!) { (data, error) in
             
@@ -38,7 +76,7 @@ class SearchResultViewController: UITableViewController {
                 if let imageData = data {
                     DispatchQueue.main.async {
                         let image = UIImage(data: imageData)
-                        let title = video["title"]
+                        let title = video[Constants.YouTubeResponseKeys.Title]
                         
                         if let cell = self.tableView.cellForRow(at: indexPath)
                             as? CustomTableViewCell {
@@ -53,14 +91,8 @@ class SearchResultViewController: UITableViewController {
         }
     }
     
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        videoID =  (searchDataSource.items[indexPath.row])["id"]
-        
-        NotificationCenter.default.post(name: NSNotification.Name("Cell Selected"), object: nil, userInfo: ["videoID" : videoID])
-    }
-    
+
+
     
     override func tableView(_ tableView: UITableView,
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
@@ -75,7 +107,7 @@ class SearchResultViewController: UITableViewController {
     func contextualSegueAction(forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
         
         let video = searchDataSource.items[indexPath.row]
-        videoID = video["id"]
+        videoID = video[Constants.YouTubeResponseKeys.VideoID]
         
         let action = UIContextualAction(style: .normal, title: "Add") { (contextAction, sourceView, completionHandler) in
             
@@ -104,8 +136,8 @@ class SearchResultViewController: UITableViewController {
                         
                         for playlist in playlists {
                     
-                            let playlistTitle = playlist["title"]
-                            let playlistID = playlist["id"]
+                            let playlistTitle = playlist[Constants.YouTubeResponseKeys.Title]
+                            let playlistID = playlist[Constants.YouTubeResponseKeys.PlaylistID]
                             
                             let addAction = UIAlertAction(title: playlistTitle, style: .default ,
                                                           handler: { (action) -> Void in
@@ -135,20 +167,6 @@ class SearchResultViewController: UITableViewController {
         
     }
     
-    
-    func performSearch(searchQueryString: String) {
-        YoutubeAPI.sharedInstance().searchForVideo(searchQuery: searchQueryString) { (videos, error) in
-            guard error == nil else {
-                print("Error fetching videos")
-                self.searchDataSource.items.removeAll()
-                return
-            }
-            if videos != nil {
-                print("Successfully retrieved \(String(describing: videos?.count)) videos")
-                self.searchDataSource.items = videos as! [[String : String]]
-            }
-            self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-        }
-    }
+ 
     
 }
