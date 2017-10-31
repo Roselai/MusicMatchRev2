@@ -11,11 +11,6 @@ import CoreData
 
 extension YoutubeAPI {
     
-    
-    
-  
-    
-    
     func addVideoToPlaylist(accessToken: String!, playlistID: String!, videoID: String!) {
         
         
@@ -199,9 +194,15 @@ extension YoutubeAPI {
                         let playlistItemID = videoDict[Constants.YouTubeResponseKeys.PlaylistItemID] as? String
                         let videoID = (snippetDict![Constants.YouTubeResponseKeys.ResourceID] as! [String:Any])[Constants.YouTubeResponseKeys.VideoID] as? String
                         let videoTitle = snippetDict![Constants.YouTubeResponseKeys.Title] as? String
-                        let videoThumbnailURL = ((snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
                         
                         
+                        guard let thumbnails = snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as? [String: Any] else {return}
+                         let videoThumbnailURL =
+                            //(snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])
+                           ( thumbnails[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
+                        
+                        
+                       
                         let videoDetailsDict = [Constants.YouTubeResponseKeys.PlaylistItemID : playlistItemID,
                                                 Constants.YouTubeResponseKeys.VideoID: videoID,
                                                 Constants.YouTubeResponseKeys.Title: videoTitle,

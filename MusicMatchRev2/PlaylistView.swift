@@ -28,9 +28,10 @@ class PlaylistView: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let video = playlistDataSource.items[indexPath.row]
         
-        let imageURL = URL(string: video["url"]!)
-        if imageURL != nil {
         
+        
+        let imageURL = URL(string: video["url"]!)
+   
         _ = YoutubeAPI.sharedInstance().downloadimageData(photoURL: imageURL!) { (data, error) in
             
             
@@ -55,7 +56,7 @@ class PlaylistView: UITableViewController {
                 }
             }
         }
-        }
+        
     }
     
     
