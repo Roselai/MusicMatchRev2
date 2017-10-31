@@ -2,7 +2,7 @@
 //  Video+CoreDataProperties.swift
 //  
 //
-//  Created by Shukti Shaikh on 10/18/17.
+//  Created by Shukti Shaikh on 10/31/17.
 //
 //
 
@@ -20,6 +20,7 @@ extension Video {
     @NSManaged public var thumbnailURL: String?
     @NSManaged public var title: String?
     @NSManaged public var videoID: String?
+    @NSManaged public var playlistItemID: String?
     @NSManaged public var playlists: NSSet?
 
 }

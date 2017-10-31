@@ -8,6 +8,7 @@
         <relationship name="videos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Video" inverseName="playlists" inverseEntity="Video" syncable="YES"/>
     </entity>
     <entity name="Video" representedClassName="Video" syncable="YES">
+        <attribute name="playlistItemID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="thumbnailURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -16,6 +17,6 @@
     </entity>
     <elements>
         <element name="Playlist" positionX="-54" positionY="45" width="128" height="120"/>
-        <element name="Video" positionX="-54" positionY="18" width="128" height="120"/>
+        <element name="Video" positionX="-54" positionY="18" width="128" height="135"/>
     </elements>
 </model>

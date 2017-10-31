@@ -10,6 +10,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class PlaylistContainerView: UIViewController {
     
@@ -18,7 +19,7 @@ class PlaylistContainerView: UIViewController {
     var videoID: String!
     var playlistID: String!
     var accessToken: String!
-    
+    var playlist: Playlist!
     
     
     override func viewDidLoad() {
@@ -33,15 +34,14 @@ class PlaylistContainerView: UIViewController {
             fatalError("Check storyboard for missing YouTubePlayerViewController")
         }
         
-        if playlistID != nil && accessToken != nil {
-            playlistView = playlistController
-            playlistController.getVideosFromPlaylist(accessToken: accessToken, playlistID: playlistID)
-            
-            
-        }
         
+        guard playlist != nil else {return}
+        playlistController.playlist = self.playlist
         
+        guard playlistID != nil, accessToken != nil else {return}
         
+        playlistController.getVideosFromPlaylist(accessToken: accessToken, playlistID: playlistID)
+        playlistView = playlistController
         YTPlayerViewController = playerController
     }
         
