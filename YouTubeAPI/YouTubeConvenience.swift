@@ -167,14 +167,14 @@ extension YoutubeAPI {
         })
     }
     
-    func getVideosFromPlaylist(accessToken: String?, playlistID: String?, completion: @escaping (_ result: [[String: String]]?, _ error: Error?) -> Void) {
+    func getVideosFromPlaylist(accessToken: String?, playlist: Playlist?, completion: @escaping (_ result: [[String: String]]?, _ error: Error?) -> Void) {
         
         let method = Constants.YouTubeMethod.PlaylistItemsMethod
         
         let parameters = [Constants.YouTubeParameterKeys.APIKey: Constants.YoutubeParameterValues.APIKey,
                           Constants.YouTubeParameterKeys.Part : Constants.YoutubeParameterValues.partValue,
                           Constants.YouTubeParameterKeys.AccessToken: accessToken!,
-                          Constants.YouTubeParameterKeys.PlaylistID: playlistID,
+                          Constants.YouTubeParameterKeys.PlaylistID: playlist?.id,
                           Constants.YouTubeParameterKeys.MaxResults : Constants.YoutubeParameterValues.MaxResults]
         
         _ = YoutubeAPI.sharedInstance().taskForGETMethod(method: method, parameters: parameters as [String : AnyObject]) { (result, error) in
@@ -195,11 +195,9 @@ extension YoutubeAPI {
                         let videoID = (snippetDict![Constants.YouTubeResponseKeys.ResourceID] as! [String:Any])[Constants.YouTubeResponseKeys.VideoID] as? String
                         let videoTitle = snippetDict![Constants.YouTubeResponseKeys.Title] as? String
                         
-                        
-                        guard let thumbnails = snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as? [String: Any] else {return}
-                         let videoThumbnailURL =
-                            //(snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])
-                           ( thumbnails[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
+                        guard videoTitle != "Deleted video" else {return}
+                        let thumbnails = snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as? [String: Any]
+                         let videoThumbnailURL = ( thumbnails![Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
                         
                         
                        

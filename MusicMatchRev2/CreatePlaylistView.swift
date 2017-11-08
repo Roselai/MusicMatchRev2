@@ -25,8 +25,6 @@ class CreatePlaylistView: UIViewController, UITableViewDelegate, UITextFieldDele
        privacyTableView.delegate = self
         nameTextField.delegate = self
         
-   
-        
         popUpView.layer.cornerRadius = 10
         popUpView.layer.masksToBounds = true
         

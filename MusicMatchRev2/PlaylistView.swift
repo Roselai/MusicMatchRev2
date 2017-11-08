@@ -11,10 +11,10 @@ import CoreData
 
 class PlaylistView: CoreDataTableViewController {
     
-    var playlistID: String!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var videoID: String!
+    var playlistID: String!
     var accessToken: String!
-   // let playlistDataSource = YTTableViewDataSource()
     let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores { (description, error) in
@@ -26,24 +26,28 @@ class PlaylistView: CoreDataTableViewController {
     }()
     var managedContext: NSManagedObjectContext!
     var playlist: Playlist!
-    var fetchedVideos = [Video]()
-
+    
     
     //MARK: TableView DataSource Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       // self.tableView.dataSource = playlistDataSource
+        
+            //getVideosFromPlaylist(accessToken: accessToken, playlistID: playlistID)
+            
+    
+    }
+    
+    func loadFetchedResultsController () {
         managedContext = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Video")
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
         
-        
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath) as! CustomTableViewCell
@@ -56,8 +60,9 @@ class PlaylistView: CoreDataTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! CustomTableViewCell
-        videoID = (fetchedVideos[indexPath.row]).videoID
-        NotificationCenter.default.post(name: NSNotification.Name("Playlist Item Selected"), object: nil, userInfo: ["videoID" : videoID])
+        let fetchedVideo = fetchedResultsController?.fetchedObjects![indexPath.row] as! Video
+        
+        NotificationCenter.default.post(name: NSNotification.Name("Playlist Item Selected"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : fetchedVideo.videoID])
         
         configure(cell, for: indexPath)
     }
@@ -171,9 +176,9 @@ class PlaylistView: CoreDataTableViewController {
         }
     }
     
-    func getVideosFromPlaylist(accessToken: String?, playlistID: String?){
+    func getVideosFromPlaylist(accessToken: String, playlist: Playlist){
         
-        YoutubeAPI.sharedInstance().getVideosFromPlaylist(accessToken: accessToken, playlistID: playlistID) { (videos, error) in
+        YoutubeAPI.sharedInstance().getVideosFromPlaylist(accessToken: accessToken, playlist: playlist) { (videos, error) in
             
             guard error == nil else {
                 print("Error fetching playlists")
@@ -182,7 +187,7 @@ class PlaylistView: CoreDataTableViewController {
             if videos != nil {
                 print("Successfully retrieved \(String(describing: videos?.count)) videos")
             }
-            //self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+            
             
             
             DispatchQueue.main.async {
@@ -192,7 +197,7 @@ class PlaylistView: CoreDataTableViewController {
                     for videoDictionary in videosArray {
                         
                         let title = videoDictionary[Constants.YouTubeResponseKeys.Title]
-                        let id = videoDictionary[Constants.YouTubeResponseKeys.PlaylistID]
+                        let id = videoDictionary[Constants.YouTubeResponseKeys.PlaylistItemID]
                         let url = videoDictionary[Constants.YouTubeResponseKeys.ThumbnailURL]
                         let videoID = videoDictionary[Constants.YouTubeResponseKeys.VideoID]
                         
@@ -204,12 +209,12 @@ class PlaylistView: CoreDataTableViewController {
                             video.thumbnailURL = url
                             video.videoID = videoID
                             video.playlistItemID = id
-                            video.addToPlaylists(self.playlist)
+                            video.addToPlaylists(playlist)
                             
                             self.saveContext(context: self.managedContext)
                         }
                     }
-                    //}
+                    
                 }
                 
             }
@@ -228,8 +233,8 @@ class PlaylistView: CoreDataTableViewController {
     }
     
     func someEntityExists(id: String) -> Bool {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Playlist")
-        fetchRequest.predicate = NSPredicate(format: "id = %@", id)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Video")
+        fetchRequest.predicate = NSPredicate(format: "playlistItemID = %@", id)
         fetchRequest.includesSubentities = false
         
         var entitiesCount = 0

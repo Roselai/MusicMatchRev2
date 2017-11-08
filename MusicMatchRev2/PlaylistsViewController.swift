@@ -13,10 +13,8 @@ import CoreData
 
 class PlaylistsViewController: CoreDataTableViewController {
     
-  
-    var youTubePlaylistsArray: [[String:String]] = []
 
-    var playlistID: String!
+    //var playlistID: String!
     var videoID: String!
     var accessToken: String!
     let persistentContainer: NSPersistentContainer = {
@@ -29,6 +27,7 @@ class PlaylistsViewController: CoreDataTableViewController {
         return container
     }()
     var managedContext: NSManagedObjectContext!
+    var playlist: Playlist!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +35,7 @@ class PlaylistsViewController: CoreDataTableViewController {
         
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
         accessToken = appDelegate.accessToken
+        
         
         managedContext = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Playlist")
@@ -60,8 +60,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let playlist = (fetchedResultsController?.fetchedObjects![indexPath.row]) as! Playlist
-
+        self.playlist = (fetchedResultsController?.fetchedObjects![indexPath.row]) as! Playlist
         performSegue(withIdentifier: "showPlaylistForID", sender: self)
     }
     
@@ -125,9 +124,15 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showPlaylistForID" {
+            
             let destinationViewController = segue.destination as! PlaylistContainerView
-            destinationViewController.playlistID = self.playlistID
+            
+            guard playlist != nil else {return}
+            
+            //destinationViewController.playlistID = self.playlistID
             destinationViewController.accessToken = self.accessToken
+            destinationViewController.playlist = self.playlist
+ 
         }
     }
     
