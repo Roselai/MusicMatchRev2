@@ -25,8 +25,8 @@ class PlaylistView: CoreDataTableViewController {
         return container
     }()
     var managedContext: NSManagedObjectContext!
+    var video: Video!
     var playlist: Playlist!
-    
     
     //MARK: TableView DataSource Methods
     
@@ -126,7 +126,7 @@ class PlaylistView: CoreDataTableViewController {
     }
     
     
-    /*
+    
     override func tableView(_ tableView: UITableView,
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
@@ -142,25 +142,37 @@ class PlaylistView: CoreDataTableViewController {
         
         let action = UIContextualAction(style: .destructive, title: "Delete") { (contextAction, sourceView, completionHandler) in
             
-            let playlistItemID = (self.playlistDataSource.items[indexPath.row])["id"]
+            let video = (self.fetchedResultsController?.fetchedObjects![indexPath.row]) as! Video
            
-            self.deleteVideoFromYTPlaylist(playlistItemID: playlistItemID!, accessToken: self.accessToken!)
-            self.playlistDataSource.items.remove(at: indexPath.row)
-            DispatchQueue.main.async {
+            YoutubeAPI.sharedInstance().deleteVideoFromYTPlaylist(playlistItemID: video.playlistItemID!, accessToken: self.appDelegate.accessToken, completion: {_ in
+                if true {
+                   
+                        
+                    DispatchQueue.main.async {
+                        
+                    self.managedContext.delete(video)
+                   // self.saveContext(context: self.managedContext)
+                    }
+                }
+            
+            })
+                
+        
+          /*  DispatchQueue.main.async {
                 self.tableView.reloadData()
-            }
+            }*/
             completionHandler(true)
             
-        }
+            }
         
         action.backgroundColor = UIColor.black
         return action
         
-    }*/
+    }
     
     
     
-    func deleteVideoFromYTPlaylist(playlistItemID: String, accessToken: String){
+    /*func deleteVideoFromYTPlaylist(playlistItemID: String, accessToken: String){
         let method = Constants.YouTubeMethod.PlaylistItemsMethod
         let parameters = [Constants.YouTubeParameterKeys.AccessToken: accessToken,
                           Constants.YouTubeParameterKeys.APIKey: Constants.YoutubeParameterValues.APIKey,
@@ -169,16 +181,27 @@ class PlaylistView: CoreDataTableViewController {
         _ = YoutubeAPI.sharedInstance().taskForDELETEMethod(method: method, parameters: parameters as [String : AnyObject]) { (success, error) in
             if error == nil {
                 print("video deleted from playlist")
+                
+                DispatchQueue.main.async {
+               
+                let playlist = Playlist(context: self.managedContext)
+                playlist.removeFromVideos(self.video)
+                
+                self.saveContext(context: self.managedContext)
+               
+                }
             } else {
                 print("video could not be deleted")
             }
             
         }
-    }
+    }*/
     
     func getVideosFromPlaylist(accessToken: String, playlist: Playlist){
         
+        
         YoutubeAPI.sharedInstance().getVideosFromPlaylist(accessToken: accessToken, playlist: playlist) { (videos, error) in
+            
             
             guard error == nil else {
                 print("Error fetching playlists")

@@ -12,13 +12,10 @@ import MediaPlayer
 import GoogleSignIn
 import GoogleAPIClientForREST
 
-
-
-
 class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelegate, GIDSignInUIDelegate, GIDSignInDelegate {
     
     @IBOutlet weak var signInButton: GIDSignInButton!
-    private let scopes = [kGTLRAuthScopeYouTubeReadonly, kGTLRAuthScopeYouTube]
+    private let scopes = [kGTLRAuthScopeYouTubeReadonly, kGTLRAuthScopeYouTube, kGTLRAuthScopeYouTubeForceSsl, kGTLRAuthScopeYouTubeYoutubepartner, kGTLRAuthScopeYouTubeUpload, kGTLRAuthScopeYouTubeYoutubepartnerChannelAudit]
         
         //var accessToken: String!
     private var mediapicker1: MPMediaPickerController!
@@ -27,10 +24,7 @@ class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelega
     var songTitle: String?
     var songArtist: String?
         
-        
-    
-        
-        
+
         override func viewDidLoad() {
            
             super.viewDidLoad()
@@ -77,10 +71,6 @@ class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelega
         // Perform any operations when the user disconnects from app here.
         // ...
     }
-    
-    
-    
-    
     
     
 

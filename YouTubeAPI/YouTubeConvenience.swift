@@ -195,9 +195,34 @@ extension YoutubeAPI {
                         let videoID = (snippetDict![Constants.YouTubeResponseKeys.ResourceID] as! [String:Any])[Constants.YouTubeResponseKeys.VideoID] as? String
                         let videoTitle = snippetDict![Constants.YouTubeResponseKeys.Title] as? String
                         
-                        guard videoTitle != "Deleted video" else {return}
-                        let thumbnails = snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as? [String: Any]
-                         let videoThumbnailURL = ( thumbnails![Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
+                        guard videoTitle != "Deleted video" else {
+                            print("This video has been deleted from youTube")
+                            //delete video from playlist
+                            //self.deleteVideoFromYTPlaylist(playlistItemID: playlistItemID!, accessToken: accessToken!, completion: nil)
+                            return
+                        }
+                        
+                        guard videoTitle != "Private Video" else {
+                            print("This video is private")
+                            //delete video from playlist
+                            //self.deleteVideoFromYTPlaylist(playlistItemID: playlistItemID!, accessToken: accessToken!, completion: nil)
+                            return
+                        }
+                        
+                        //let thumbnails = snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as? [String: Any]
+                        
+                        //guard thumbnails != nil else {
+                       //     print("Video Thumbnail is unavailable")
+                       //     return
+                       // }
+                        
+                        guard snippetDict![Constants.YouTubeResponseKeys.Thumbnails] != nil else {
+                               print("Video Thumbnail is unavailable")
+                                return
+                             }
+                        
+                        let videoThumbnailURL = ((snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
+                        
                         
                         
                        
@@ -224,6 +249,24 @@ extension YoutubeAPI {
             
         }
         
+    }
+    
+    func deleteVideoFromYTPlaylist(playlistItemID: String, accessToken: String, completion: @escaping (_ success: Bool) -> Void){
+        let method = Constants.YouTubeMethod.PlaylistItemsMethod
+        let parameters = [Constants.YouTubeParameterKeys.AccessToken: accessToken,
+                          Constants.YouTubeParameterKeys.APIKey: Constants.YoutubeParameterValues.APIKey,
+                          Constants.YouTubeParameterKeys.PlaylistItemID: playlistItemID]
+        
+        _ = YoutubeAPI.sharedInstance().taskForDELETEMethod(method: method, parameters: parameters as [String : AnyObject]) { (success, error) in
+            if error == nil {
+                print("video deleted from playlist")
+                completion(true)
+            } else {
+                print("video could not be deleted")
+                completion(false)
+            }
+            
+        }
     }
     
     func createPlaylist(accessToken: String!, title: String!) {
