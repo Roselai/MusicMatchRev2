@@ -14,15 +14,18 @@ import CoreData
 
 class PlaylistContainerView: UIViewController {
     
+    @IBOutlet var notificationLabel: UILabel!
+    
+    
     fileprivate var playlistView: PlaylistView!
     fileprivate var YTPlayerViewController: YouTubePlayerViewController!
-    var videoID: String!
-    var playlistID: String!
+    //var videoID: String!
+    //var playlistID: String!
     var accessToken: String!
     var playlist: Playlist!
     
-    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
-    var managedContext: NSManagedObjectContext!
+    //var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    //var managedContext: NSManagedObjectContext!
     
     
     override func viewDidLoad() {
@@ -45,6 +48,44 @@ class PlaylistContainerView: UIViewController {
         }
         playlistView = playlistController
         YTPlayerViewController = playerController
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(displayMessage), name: Notification.Name("Video Deleted Status"), object: nil)
+    }
+    
+    @objc func displayMessage(_ notification: Notification) {
+        let message = notification.userInfo?["message"] as! String
+        OperationQueue.main.addOperation {
+            
+            
+            self.notificationLabel.text = message
+            self.notificationLabel.isHidden = false
+            
+            
+            
+            UIView.animate(withDuration: 0.5, delay: 2, options: .curveEaseOut, animations: {
+                var labelFrame = self.notificationLabel.frame
+                labelFrame.origin.y += (labelFrame.size.height)
+                self.notificationLabel.frame = labelFrame
+                
+            }, completion: { (success) in
+                if success == true {
+                    self.notificationLabel.isHidden = true
+                    
+                    var labelFrame = self.notificationLabel.frame
+                    labelFrame.origin.y -= (labelFrame.size.height)
+                    self.notificationLabel.frame = labelFrame
+                    
+                }
+            })
+            
+            
+            
+            
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
         
         

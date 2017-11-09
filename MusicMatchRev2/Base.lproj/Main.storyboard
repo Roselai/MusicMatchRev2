@@ -286,6 +286,13 @@
                                     <segue destination="sXk-8v-Kif" kind="embed" id="N1S-te-qr6"/>
                                 </connections>
                             </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kS8-bM-IC6">
+                                <rect key="frame" x="0.0" y="554" width="375" height="49"/>
+                                <color key="backgroundColor" red="0.51664949169999996" green="0.51664949169999996" blue="0.51664949169999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -294,13 +301,20 @@
                             <constraint firstAttribute="bottom" secondItem="3ho-t7-KCd" secondAttribute="bottom" constant="377" id="6fo-gC-ILb"/>
                             <constraint firstItem="SMK-8c-REh" firstAttribute="leading" secondItem="3ho-t7-KCd" secondAttribute="leading" id="ERq-A3-HiC"/>
                             <constraint firstItem="SMK-8c-REh" firstAttribute="trailing" secondItem="3ho-t7-KCd" secondAttribute="trailing" id="KEm-ji-sUR"/>
+                            <constraint firstAttribute="trailing" secondItem="kS8-bM-IC6" secondAttribute="trailing" id="Rr5-Ot-ixE"/>
                             <constraint firstItem="SMK-8c-REh" firstAttribute="leading" secondItem="Owr-Bw-JOK" secondAttribute="leading" id="TrW-2G-wps"/>
+                            <constraint firstItem="kS8-bM-IC6" firstAttribute="top" secondItem="SMK-8c-REh" secondAttribute="bottom" id="Zew-Du-VZj"/>
+                            <constraint firstAttribute="bottom" secondItem="kS8-bM-IC6" secondAttribute="bottom" id="cEF-Rc-IY8"/>
                             <constraint firstItem="SMK-8c-REh" firstAttribute="bottom" secondItem="cmg-ph-jUW" secondAttribute="top" id="kuo-S5-252"/>
+                            <constraint firstItem="kS8-bM-IC6" firstAttribute="leading" secondItem="Owr-Bw-JOK" secondAttribute="leading" id="qv3-FW-B3E"/>
                             <constraint firstAttribute="trailing" secondItem="SMK-8c-REh" secondAttribute="trailing" id="wG7-Up-heA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qOW-br-2ZB"/>
                     <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="notificationLabel" destination="kS8-bM-IC6" id="T8X-hs-Jlq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5h-rG-hUf" sceneMemberID="firstResponder"/>
             </objects>
@@ -416,6 +430,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hrF-Nd-Maz"/>
+        <segue reference="N1S-te-qr6"/>
     </inferredMetricsTieBreakers>
 </document>

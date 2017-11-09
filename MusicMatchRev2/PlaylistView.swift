@@ -147,11 +147,13 @@ class PlaylistView: CoreDataTableViewController {
             YoutubeAPI.sharedInstance().deleteVideoFromYTPlaylist(playlistItemID: video.playlistItemID!, accessToken: self.appDelegate.accessToken, completion: {_ in
                 if true {
                    
+                    NotificationCenter.default.post(name: NSNotification.Name("Video Deleted Status"), object: nil, userInfo: ["message": "Video deleted from playlist"])
                         
                     DispatchQueue.main.async {
-                        
                     self.managedContext.delete(video)
                    // self.saveContext(context: self.managedContext)
+                        
+                        
                     }
                 }
             

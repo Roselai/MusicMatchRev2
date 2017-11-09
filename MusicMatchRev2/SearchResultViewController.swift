@@ -142,7 +142,6 @@ class SearchResultViewController: UITableViewController {
                             let addAction = UIAlertAction(title: playlistTitle, style: .default ,
                                                           handler: { (action) -> Void in
                                                             
-                                                            //YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlistID, videoID: self.videoID)
                                                             
                                                             YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlistID, videoID: self.videoID, completion: { (success, error) in
                                                                 if success == true {

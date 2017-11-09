@@ -63,14 +63,20 @@ class YouTubeSearchController: UIViewController {
             self.notificationLabel.text = message
             self.notificationLabel.isHidden = false
             
+            
+            
             UIView.animate(withDuration: 0.5, delay: 2, options: .curveEaseOut, animations: {
+               
                 var labelFrame = self.notificationLabel.frame
                 labelFrame.origin.y += (labelFrame.size.height)
-                
                 self.notificationLabel.frame = labelFrame
+                
             }, completion: { (success) in
                 if success == true {
                     self.notificationLabel.isHidden = true
+                    var labelFrame = self.notificationLabel.frame
+                    labelFrame.origin.y -= (labelFrame.size.height)
+                    self.notificationLabel.frame = labelFrame
                 }
             })
             
