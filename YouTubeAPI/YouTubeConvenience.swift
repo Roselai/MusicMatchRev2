@@ -11,7 +11,7 @@ import CoreData
 
 extension YoutubeAPI {
     
-    func addVideoToPlaylist(accessToken: String!, playlistID: String!, videoID: String!) {
+    func addVideoToPlaylist(accessToken: String!, playlistID: String!, videoID: String!, completion: @escaping (_ success: Bool?, _ error: Error?) -> Void ) {
         
         
         let method = Constants.YouTubeMethod.PlaylistItemsMethod
@@ -49,8 +49,10 @@ extension YoutubeAPI {
             
             if error == nil {
                 print("video posted")
+                completion(true, nil)
             } else {
                 print(error?.localizedDescription)
+                completion(false, error)
                 
             }
         })

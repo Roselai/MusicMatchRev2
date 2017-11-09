@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="0hq-H3-BEj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="0hq-H3-BEj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -96,11 +96,22 @@
                                     <segue destination="sXk-8v-Kif" kind="embed" id="hrF-Nd-Maz"/>
                                 </connections>
                             </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMw-gN-ynp">
+                                <rect key="frame" x="0.0" y="554" width="375" height="49"/>
+                                <color key="backgroundColor" red="0.51664949174459818" green="0.51664949174459818" blue="0.51664949174459818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="OMw-gN-ynp" secondAttribute="bottom" id="1ry-Cy-JKN"/>
+                            <constraint firstAttribute="trailing" secondItem="OMw-gN-ynp" secondAttribute="trailing" id="8Ee-SP-Mz1"/>
                             <constraint firstItem="3oN-IA-jod" firstAttribute="top" secondItem="mEQ-1j-7M9" secondAttribute="bottom" id="ECF-te-ck8"/>
                             <constraint firstAttribute="trailing" secondItem="19F-1Q-zoT" secondAttribute="trailing" id="MsH-FY-NEp"/>
+                            <constraint firstItem="OMw-gN-ynp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Q6R-HY-JUw"/>
+                            <constraint firstItem="OMw-gN-ynp" firstAttribute="top" secondItem="mEQ-1j-7M9" secondAttribute="bottom" id="Wzh-lu-Nlr"/>
                             <constraint firstItem="19F-1Q-zoT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="XP1-ma-Gzr"/>
                             <constraint firstItem="mEQ-1j-7M9" firstAttribute="top" secondItem="5Lk-jN-r0K" secondAttribute="bottom" constant="225" id="XX2-G9-n6c"/>
                             <constraint firstItem="19F-1Q-zoT" firstAttribute="top" secondItem="5Lk-jN-r0K" secondAttribute="bottom" id="fMT-Ds-cBw"/>
@@ -110,6 +121,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Bla-Xh-VqK"/>
+                    <connections>
+                        <outlet property="notificationLabel" destination="OMw-gN-ynp" id="ZAw-ek-TT4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -402,6 +416,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="N1S-te-qr6"/>
+        <segue reference="hrF-Nd-Maz"/>
     </inferredMetricsTieBreakers>
 </document>

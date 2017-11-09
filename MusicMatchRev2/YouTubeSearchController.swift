@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreGraphics
 
 class YouTubeSearchController: UIViewController {
     
@@ -16,13 +17,22 @@ class YouTubeSearchController: UIViewController {
     var videoID: String!
     var queryString: String!
     
+    @IBOutlet weak var notificationLabel: UILabel!
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        notificationLabel.isHidden = true
+        notificationLabel.text = ""
+        
+        
         guard let searchController = childViewControllers.first as? SearchResultViewController else  {
             fatalError("Check storyboard for missing SearchResultViewController")
+            
         }
         
         
@@ -41,6 +51,37 @@ class YouTubeSearchController: UIViewController {
         YTPlayerViewController = playerController
         
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(displayMessage), name: Notification.Name("Video Added"), object: nil)
+    }
+    
+    @objc func displayMessage(_ notification: Notification) {
+        let message = notification.userInfo?["message"] as! String
+        OperationQueue.main.addOperation {
+            
+            
+            self.notificationLabel.text = message
+            self.notificationLabel.isHidden = false
+            
+            UIView.animate(withDuration: 0.5, delay: 2, options: .curveEaseOut, animations: {
+                var labelFrame = self.notificationLabel.frame
+                labelFrame.origin.y += (labelFrame.size.height)
+                
+                self.notificationLabel.frame = labelFrame
+            }, completion: { (success) in
+                if success == true {
+                    self.notificationLabel.isHidden = true
+                }
+            })
+            
+        
+            
+            
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     
