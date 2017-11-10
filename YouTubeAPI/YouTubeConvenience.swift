@@ -88,8 +88,8 @@ extension YoutubeAPI {
                         let thumbnailURL = ((playlistSnippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
                         
                         let playlistDict = [Constants.YouTubeResponseKeys.PlaylistID : playlistID ,
-                                                   Constants.YouTubeResponseKeys.Title : playlistTitle,
-                                                   Constants.YouTubeResponseKeys.ThumbnailURL :  thumbnailURL]
+                                            Constants.YouTubeResponseKeys.Title : playlistTitle,
+                                            Constants.YouTubeResponseKeys.ThumbnailURL :  thumbnailURL]
                         
                         
                         playlists.append(playlistDict as! [String : String])
@@ -143,12 +143,12 @@ extension YoutubeAPI {
                         let videoTitle = snippetDict![Constants.YouTubeResponseKeys.Title] as? String
                         let videoThumbnailURL = ((snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
                         
-                    
+                        
                         
                         let videoDetailsDict = [Constants.YouTubeResponseKeys.VideoID : videoID!,
                                                 Constants.YouTubeResponseKeys.Title: videoTitle!,
                                                 Constants.YouTubeResponseKeys.ThumbnailURL: videoThumbnailURL!]
-                            
+                        
                         
                         videos.append(videoDetailsDict)
                     }
@@ -169,6 +169,7 @@ extension YoutubeAPI {
         })
     }
     
+    
     func getVideosFromPlaylist(accessToken: String?, playlist: Playlist?, completion: @escaping (_ result: [[String: String]]?, _ error: Error?) -> Void) {
         
         let method = Constants.YouTubeMethod.PlaylistItemsMethod
@@ -183,6 +184,8 @@ extension YoutubeAPI {
             
             if error == nil {
                 if let result = result {
+                    
+                    
                     
                     var videosArray = result[Constants.YouTubeResponseKeys.Items] as! [[String:Any]]
                     var videos : [[String:String]] = []
@@ -214,25 +217,25 @@ extension YoutubeAPI {
                         //let thumbnails = snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as? [String: Any]
                         
                         //guard thumbnails != nil else {
-                       //     print("Video Thumbnail is unavailable")
-                       //     return
-                       // }
+                        //     print("Video Thumbnail is unavailable")
+                        //     return
+                        // }
                         
                         guard snippetDict![Constants.YouTubeResponseKeys.Thumbnails] != nil else {
-                               print("Video Thumbnail is unavailable")
-                                return
-                             }
+                            print("Video Thumbnail is unavailable")
+                            return
+                        }
                         
                         let videoThumbnailURL = ((snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
                         
                         
                         
-                       
+                        
                         let videoDetailsDict = [Constants.YouTubeResponseKeys.PlaylistItemID : playlistItemID,
                                                 Constants.YouTubeResponseKeys.VideoID: videoID,
                                                 Constants.YouTubeResponseKeys.Title: videoTitle,
                                                 Constants.YouTubeResponseKeys.ThumbnailURL: videoThumbnailURL]
-                    
+                        
                         
                         videos.append(videoDetailsDict as! [String : String])
                         
@@ -252,6 +255,10 @@ extension YoutubeAPI {
         }
         
     }
+    
+    
+    
+    
     
     func deleteVideoFromYTPlaylist(playlistItemID: String, accessToken: String, completion: @escaping (_ success: Bool) -> Void){
         let method = Constants.YouTubeMethod.PlaylistItemsMethod

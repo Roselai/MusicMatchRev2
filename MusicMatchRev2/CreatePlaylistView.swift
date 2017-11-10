@@ -9,20 +9,18 @@
 import Foundation
 import UIKit
 
-class CreatePlaylistView: UIViewController, UITableViewDelegate, UITextFieldDelegate, UITableViewDataSource {
+class CreatePlaylistView: UIViewController {
     
     @IBOutlet var popUpView: UIView!
-    @IBOutlet var privacyTableView: UITableView!
     @IBOutlet weak var nameTextField: UITextField!
     
     var playlistTitle: String!
     
-    let playlistPrivacyOptions = ["Public" ,"Unlisted", "Private"]
+    let playlistPrivacyOptions = ["Public", "Unlisted", "Private"]
     
     override func viewDidLoad() {
-       super.viewDidLoad()
+        super.viewDidLoad()
         
-       privacyTableView.delegate = self
         nameTextField.delegate = self
         
         popUpView.layer.cornerRadius = 10
@@ -47,15 +45,35 @@ class CreatePlaylistView: UIViewController, UITableViewDelegate, UITextFieldDele
     }
     
     
+}
+
+extension CreatePlaylistView: UITableViewDelegate {
     
-    
-   func tableView(_ tableView: UITableView,
-                            numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return playlistPrivacyOptions.count
     }
     
+    
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        /*if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .none
+        }*/
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        /*if let cell = tableView.cellForRow(at: indexPath) {
+         cell.accessoryType = .checkmark
+         
+         }*/
+    }
+}
+
+extension CreatePlaylistView: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "privacyCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "privacyCell",
+                                                 for: indexPath)
         
         let text = playlistPrivacyOptions[indexPath.row]
         cell.textLabel?.text = text
@@ -63,7 +81,7 @@ class CreatePlaylistView: UIViewController, UITableViewDelegate, UITextFieldDele
         
         if cell.textLabel?.text == "Public"  {
             
-            cell.accessoryType = .checkmark
+           cell.accessoryType = .checkmark
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.bottom)
             
         } else {
@@ -71,20 +89,10 @@ class CreatePlaylistView: UIViewController, UITableViewDelegate, UITextFieldDele
         }
         return cell
     }
+}
 
-    
-     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.accessoryType = .none
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.accessoryType = .checkmark
-            
-        }
-    }
+
+extension CreatePlaylistView: UITextFieldDelegate {
     
     @IBAction func playlistNameTextFieldEditingChanged(_ sender: UITextField) {
         
@@ -96,7 +104,6 @@ class CreatePlaylistView: UIViewController, UITableViewDelegate, UITextFieldDele
         
     }
     
-    //MARK: Textfield Delegate Methods
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -108,8 +115,8 @@ class CreatePlaylistView: UIViewController, UITableViewDelegate, UITextFieldDele
         textField.text = ""
     }
     
-    
- 
-    
-    
 }
+
+
+
+

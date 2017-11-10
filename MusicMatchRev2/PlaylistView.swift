@@ -29,15 +29,7 @@ class PlaylistView: CoreDataTableViewController {
     var playlist: Playlist!
     
     //MARK: TableView DataSource Methods
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-            //getVideosFromPlaylist(accessToken: accessToken, playlistID: playlistID)
-            
-    
-    }
+
     
     func loadFetchedResultsController () {
         managedContext = persistentContainer.viewContext
@@ -62,7 +54,7 @@ class PlaylistView: CoreDataTableViewController {
         let cell = tableView.cellForRow(at: indexPath) as! CustomTableViewCell
         let fetchedVideo = fetchedResultsController?.fetchedObjects![indexPath.row] as! Video
         
-        NotificationCenter.default.post(name: NSNotification.Name("Playlist Item Selected"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : fetchedVideo.videoID])
+        NotificationCenter.default.post(name: NSNotification.Name("Playlist Item Selected"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : fetchedVideo.videoID!])
         
         configure(cell, for: indexPath)
     }
@@ -174,36 +166,12 @@ class PlaylistView: CoreDataTableViewController {
     
     
     
-    /*func deleteVideoFromYTPlaylist(playlistItemID: String, accessToken: String){
-        let method = Constants.YouTubeMethod.PlaylistItemsMethod
-        let parameters = [Constants.YouTubeParameterKeys.AccessToken: accessToken,
-                          Constants.YouTubeParameterKeys.APIKey: Constants.YoutubeParameterValues.APIKey,
-                          Constants.YouTubeParameterKeys.PlaylistItemID: playlistItemID]
-        
-        _ = YoutubeAPI.sharedInstance().taskForDELETEMethod(method: method, parameters: parameters as [String : AnyObject]) { (success, error) in
-            if error == nil {
-                print("video deleted from playlist")
-                
-                DispatchQueue.main.async {
-               
-                let playlist = Playlist(context: self.managedContext)
-                playlist.removeFromVideos(self.video)
-                
-                self.saveContext(context: self.managedContext)
-               
-                }
-            } else {
-                print("video could not be deleted")
-            }
-            
-        }
-    }*/
+   
     
     func getVideosFromPlaylist(accessToken: String, playlist: Playlist){
         
-        
         YoutubeAPI.sharedInstance().getVideosFromPlaylist(accessToken: accessToken, playlist: playlist) { (videos, error) in
-            
+    
             
             guard error == nil else {
                 print("Error fetching playlists")
