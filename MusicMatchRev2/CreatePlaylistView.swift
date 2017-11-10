@@ -26,6 +26,8 @@ class CreatePlaylistView: UIViewController {
         popUpView.layer.cornerRadius = 10
         popUpView.layer.masksToBounds = true
         
+       
+        
     }
     
     @IBAction func closeView(_ sender: UIBarButtonItem) {
@@ -48,9 +50,14 @@ class CreatePlaylistView: UIViewController {
 }
 
 extension CreatePlaylistView: UITableViewDelegate {
+   
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return playlistPrivacyOptions.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
     
@@ -77,7 +84,8 @@ extension CreatePlaylistView: UITableViewDataSource {
         
         let text = playlistPrivacyOptions[indexPath.row]
         cell.textLabel?.text = text
-        cell.textLabel?.textColor = UIColor.black
+        
+       // cell.textLabel?.textColor = UIColor.black
         
         if cell.textLabel?.text == "Public"  {
             

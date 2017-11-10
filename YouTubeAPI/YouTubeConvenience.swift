@@ -51,7 +51,7 @@ extension YoutubeAPI {
                 print("video posted")
                 completion(true, nil)
             } else {
-                print(error?.localizedDescription)
+                //print(error?.localizedDescription)
                 completion(false, error)
                 
             }

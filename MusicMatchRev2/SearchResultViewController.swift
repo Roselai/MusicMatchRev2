@@ -15,7 +15,16 @@ class SearchResultViewController: UITableViewController {
     var videoID: String!
     let searchDataSource = YTTableViewDataSource()
  
-   
+    let persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Model")
+        container.loadPersistentStores { (description, error) in
+            if let error = error {
+                print("Error setting up Core Data (\(error)).")
+            }
+        }
+        return container
+    }()
+   let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,22 +135,28 @@ class SearchResultViewController: UITableViewController {
             })
             ac.addAction(createPlaylistAction)
             
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let accessToken = appDelegate.accessToken
             
-            YoutubeAPI.sharedInstance().fetchUserPlaylists(accessToken: accessToken, completion: { (playlists, error) in
-                if error == nil {
-                    
-                    if let playlists = playlists {
+            
+            
+            //YoutubeAPI.sharedInstance().fetchUserPlaylists(accessToken: accessToken, completion: { (playlists, error) in
+              //  if error == nil {
+            
+            self.fetchUserPlaylists(completion: { (playlistsArray) in
+                
+                    if let playlists = playlistsArray {
                         
                         for playlist in playlists {
+                            
+                            let playlistID = playlist.id
+                            let playlistTitle = playlist.title
                     
-                            let playlistTitle = playlist[Constants.YouTubeResponseKeys.Title]
-                            let playlistID = playlist[Constants.YouTubeResponseKeys.PlaylistID]
+                            //let playlistTitle = playlist[Constants.YouTubeResponseKeys.Title]
+                            //let playlistID = playlist[Constants.YouTubeResponseKeys.PlaylistID]
                             
                             let addAction = UIAlertAction(title: playlistTitle, style: .default ,
                                                           handler: { (action) -> Void in
                                                             
+                                                            let accessToken = self.appDelegate.accessToken
                                                             
                                                             YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlistID, videoID: self.videoID, completion: { (success, error) in
                                                                 if success == true {
@@ -149,7 +164,7 @@ class SearchResultViewController: UITableViewController {
                                                                     NotificationCenter.default.post(name: NSNotification.Name("Video Added"), object: nil, userInfo: ["message": "Video added to \(playlistTitle!) playlist"])
                                                                     
                                                                 } else {
-                                                                    print(error?.localizedDescription)
+                                                                    //print(error?.localizedDescription)
                                                                 }
                                                             })
                                                             
@@ -158,7 +173,7 @@ class SearchResultViewController: UITableViewController {
                             ac.addAction(addAction)
                         }
                         
-                    }
+                    
                 }
             })
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel ,
@@ -176,6 +191,23 @@ class SearchResultViewController: UITableViewController {
         
     }
     
- 
+    func fetchUserPlaylists(completion: @escaping ([Playlist]?) -> Void) {
+        
+        let fetchRequest: NSFetchRequest<Playlist> = Playlist.fetchRequest()
+        let sortByTitle = NSSortDescriptor(key: #keyPath(Playlist.title),
+                                               ascending: true)
+        fetchRequest.sortDescriptors = [sortByTitle]
+        let viewContext = persistentContainer.viewContext
+        viewContext.perform {
+            do {
+                let allPlaylists = try viewContext.fetch(fetchRequest)
+                completion(allPlaylists)
+            } catch {
+                completion(nil)
+                print("Could not retreive Playlists")
+            }
+        }
+        
+    }
     
 }

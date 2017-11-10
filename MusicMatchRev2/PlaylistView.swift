@@ -235,9 +235,9 @@ class PlaylistView: CoreDataTableViewController {
         do {
             entitiesCount = try! managedContext.count(for: fetchRequest)
         }
-        catch {
+        /*catch {
             print("error executing fetch request: \(error)")
-        }
+        }*/
         
         return entitiesCount > 0
     }
