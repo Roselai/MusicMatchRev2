@@ -2,7 +2,7 @@
 //  Playlist+CoreDataProperties.swift
 //  
 //
-//  Created by Shukti Shaikh on 10/26/17.
+//  Created by Shukti Shaikh on 11/10/17.
 //
 //
 
@@ -18,8 +18,8 @@ extension Playlist {
 
     @NSManaged public var id: String?
     @NSManaged public var thumbnail: NSData?
-    @NSManaged public var title: String?
     @NSManaged public var thumbnailURL: String?
+    @NSManaged public var title: String?
     @NSManaged public var videos: NSSet?
 
 }

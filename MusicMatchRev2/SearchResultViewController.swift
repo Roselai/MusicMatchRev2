@@ -120,7 +120,6 @@ class SearchResultViewController: UITableViewController {
         
         let action = UIContextualAction(style: .normal, title: "Add") { (contextAction, sourceView, completionHandler) in
             
-            //self.performSegue(withIdentifier: "showPlaylists", sender: self)
             
             let title = "Add Video"
             let message = "Select a playlist to add the video to"
@@ -136,44 +135,16 @@ class SearchResultViewController: UITableViewController {
             ac.addAction(createPlaylistAction)
             
             
-            
-            
-            //YoutubeAPI.sharedInstance().fetchUserPlaylists(accessToken: accessToken, completion: { (playlists, error) in
-              //  if error == nil {
-            
             self.fetchUserPlaylists(completion: { (playlistsArray) in
                 
                     if let playlists = playlistsArray {
                         
                         for playlist in playlists {
                             
-                            let playlistID = playlist.id
-                            let playlistTitle = playlist.title
-                    
-                            //let playlistTitle = playlist[Constants.YouTubeResponseKeys.Title]
-                            //let playlistID = playlist[Constants.YouTubeResponseKeys.PlaylistID]
-                            
-                            let addAction = UIAlertAction(title: playlistTitle, style: .default ,
-                                                          handler: { (action) -> Void in
-                                                            
-                                                            let accessToken = self.appDelegate.accessToken
-                                                            
-                                                            YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlistID, videoID: self.videoID, completion: { (success, error) in
-                                                                if success == true {
-                                                              
-                                                                    NotificationCenter.default.post(name: NSNotification.Name("Video Added"), object: nil, userInfo: ["message": "Video added to \(playlistTitle!) playlist"])
-                                                                    
-                                                                } else {
-                                                                    //print(error?.localizedDescription)
-                                                                }
-                                                            })
-                                                            
-                            })
-                            
+                            let addAction = self.alertAddAction(playlist: playlist)
                             ac.addAction(addAction)
                         }
                         
-                    
                 }
             })
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel ,
@@ -208,6 +179,27 @@ class SearchResultViewController: UITableViewController {
             }
         }
         
+    }
+    
+    func alertAddAction (playlist: Playlist) -> UIAlertAction {
+        let addAction = UIAlertAction(title: playlist.title, style: .default ,
+                                      handler: { (action) -> Void in
+                                        
+                                        let accessToken = self.appDelegate.accessToken
+                                        
+                                        YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlist.id, videoID: self.videoID, completion: { (success, error) in
+                                            if success == true {
+                                                
+                                                NotificationCenter.default.post(name: NSNotification.Name("Video Added"), object: nil, userInfo: ["message": "Video added to \(playlist.title!) playlist"])
+                                                
+                                            } else {
+                                                //print(error?.localizedDescription)
+                                            }
+                                        })
+                                        
+        })
+        
+        return addAction
     }
     
 }

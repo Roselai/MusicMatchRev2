@@ -25,7 +25,7 @@ class PlaylistContainerView: UIViewController {
     var playlist: Playlist!
     
     //var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
-    //var managedContext: NSManagedObjectContext!
+    var managedContext: NSManagedObjectContext!
     
     
     override func viewDidLoad() {
@@ -40,12 +40,17 @@ class PlaylistContainerView: UIViewController {
             fatalError("Check storyboard for missing YouTubePlayerViewController")
         }
        
-  
-        playlistController.loadFetchedResultsController()
         
-        if accessToken != nil && self.playlist != nil {
-            playlistController.getVideosFromPlaylist(accessToken: accessToken, playlist: self.playlist)
+       
+        
+       if accessToken != nil && self.playlist != nil {
+        
+        playlistController.loadFetchedResultsController(playlist: playlist, context: self.managedContext)
+            playlistController.getVideosFromPlaylist(accessToken: accessToken, playlist: self.playlist, context: self.managedContext)
         }
+        
+        playlistController.managedContext = self.managedContext
+        
         playlistView = playlistController
         YTPlayerViewController = playerController
         

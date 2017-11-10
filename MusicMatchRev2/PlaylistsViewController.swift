@@ -132,6 +132,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             //destinationViewController.playlistID = self.playlistID
             destinationViewController.accessToken = self.accessToken
             destinationViewController.playlist = self.playlist
+            destinationViewController.managedContext = self.managedContext
  
         }
     }
