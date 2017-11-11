@@ -186,26 +186,13 @@ class SearchResultViewController: UITableViewController {
     func alertAddAction (playlist: Playlist) -> UIAlertAction {
         let addAction = UIAlertAction(title: playlist.title, style: .default ,
                                       handler: { (action) -> Void in
-                                        
-                                       // let videos =  playlist.videos
-                                       /* var id: String!
-                                        var videoIDsArray: [String] = [String]()
-                                        
-                                        for video in videos!{
-                                            id = (video as! Video).videoID
-                                            videoIDsArray.append(id)
-                                            print(id)
-                                        }
-                                        
-                                        if (videoIDsArray.contains(self.videoID)) {
-                                            
-                                            print("this video already exists in playlist")
-                                            return
-                                        } else {*/
+                                   
+                                        let accessToken = self.appDelegate.accessToken
                                        
+                                        
                                         if self.someEntityExists(id: self.videoID, playlist: playlist) == false {
                                         
-                                        let accessToken = self.appDelegate.accessToken
+                                        
                                         
                                         YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlist.id, videoID: self.videoID, completion: { (videoDetails, error) in
                                             if error == nil {
@@ -229,9 +216,50 @@ class SearchResultViewController: UITableViewController {
                                                 //print(error?.localizedDescription)
                                             }
                                         })
-                                       // }
-                                        } else {
+                                        
+                                        }
+                                        else {
+                                            
+                                            let duplicateAlert = UIAlertController(title: "Video Is Already In Playlist",
+                                                                       message: "Add again?",
+                                                                       preferredStyle: .alert)
+                                            
+                                            
+                                            let addVideoAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                                                
+                                                YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlist.id, videoID: self.videoID, completion: { (videoDetails, error) in
+                                                    if error == nil {
+                                                        
+                                                        
+                                                        //Save the context
+                                                        
+                                                        let video = Video(context: self.managedContext)
+                                                        video.title = videoDetails?[Constants.YouTubeResponseKeys.Title]
+                                                        video.videoID = videoDetails?[Constants.YouTubeResponseKeys.VideoID]
+                                                        video.playlistItemID = videoDetails?[Constants.YouTubeResponseKeys.PlaylistItemID]
+                                                        video.thumbnailURL = videoDetails?[Constants.YouTubeResponseKeys.ThumbnailURL]
+                                                        video.playlist = playlist
+                                                        
+                                                        self.saveContext(context: self.managedContext)
+                                                        
+                                                        
+                                                        NotificationCenter.default.post(name: NSNotification.Name("Video Added"), object: nil, userInfo: ["message": "Video added to \(playlist.title!) playlist"])
+                                                        
+                                                    } else {
+                                                        //print(error?.localizedDescription)
+                                                    }
+                                                })
+                                                
+                                            })
+                                            let cancelAddVideoAction = UIAlertAction(title: "No", style: .cancel ,
+                                                                             handler: nil)
+                                            
+                                            
+                                            duplicateAlert.addAction(cancelAddVideoAction)
+                                            duplicateAlert.addAction(addVideoAction)
+                                            self.present(duplicateAlert, animated: true, completion: nil)
                                             print("this video already exists in playlist")
+                                            
                                         }
                                         
         })
