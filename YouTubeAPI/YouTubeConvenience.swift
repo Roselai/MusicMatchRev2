@@ -11,7 +11,7 @@ import CoreData
 
 extension YoutubeAPI {
     
-    func addVideoToPlaylist(accessToken: String!, playlistID: String!, videoID: String!, completion: @escaping (_ success: Bool?, _ error: Error?) -> Void ) {
+    func addVideoToPlaylist(accessToken: String!, playlistID: String!, videoID: String!, completion: @escaping (_ result: [String:String]?, _ error: Error?) -> Void ) {
         
         
         let method = Constants.YouTubeMethod.PlaylistItemsMethod
@@ -49,11 +49,41 @@ extension YoutubeAPI {
             
             if error == nil {
                 print("video posted")
-                completion(true, nil)
-            } else {
-                //print(error?.localizedDescription)
-                completion(false, error)
                 
+                if let result = result {
+                    
+                    
+
+                   // var videosArray = result[Constants.YouTubeResponseKeys.Items] //as! [[String:Any]]
+        
+                        
+                    
+                        let snippetDict = result[Constants.YouTubeResponseKeys.Snippet] as? [String:Any]
+                        
+                        let playlistItemID = result[Constants.YouTubeResponseKeys.PlaylistItemID] as? String
+                    let videoID = (snippetDict![Constants.YouTubeResponseKeys.ResourceID] as! [String:Any])[Constants.YouTubeResponseKeys.VideoID] as? String
+                        let videoTitle = snippetDict![Constants.YouTubeResponseKeys.Title] as? String
+                        let videoThumbnailURL = ((snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
+                        
+                        
+
+                        let videoDetailsDict = [Constants.YouTubeResponseKeys.PlaylistItemID : playlistItemID,
+                                                Constants.YouTubeResponseKeys.VideoID: videoID,
+                                                Constants.YouTubeResponseKeys.Title: videoTitle,
+                                                Constants.YouTubeResponseKeys.ThumbnailURL: videoThumbnailURL] as? [String : String]
+                        
+                        
+                    
+                        
+                
+                
+                    completion(videoDetailsDict, nil)
+                    //}
+                    
+                }
+                
+            } else {
+                completion(nil, error)
             }
         })
         

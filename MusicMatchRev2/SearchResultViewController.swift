@@ -25,11 +25,13 @@ class SearchResultViewController: UITableViewController {
         return container
     }()
    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var managedContext: NSManagedObjectContext!
 
     override func viewDidLoad() {
         super.viewDidLoad()
    
         tableView.dataSource = searchDataSource
+        managedContext = persistentContainer.viewContext
         
     }
     
@@ -185,10 +187,41 @@ class SearchResultViewController: UITableViewController {
         let addAction = UIAlertAction(title: playlist.title, style: .default ,
                                       handler: { (action) -> Void in
                                         
+                                       // let videos =  playlist.videos
+                                       /* var id: String!
+                                        var videoIDsArray: [String] = [String]()
+                                        
+                                        for video in videos!{
+                                            id = (video as! Video).videoID
+                                            videoIDsArray.append(id)
+                                            print(id)
+                                        }
+                                        
+                                        if (videoIDsArray.contains(self.videoID)) {
+                                            
+                                            print("this video already exists in playlist")
+                                            return
+                                        } else {*/
+                                       
+                                        if self.someEntityExists(id: self.videoID, playlist: playlist) == false {
+                                        
                                         let accessToken = self.appDelegate.accessToken
                                         
-                                        YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlist.id, videoID: self.videoID, completion: { (success, error) in
-                                            if success == true {
+                                        YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlist.id, videoID: self.videoID, completion: { (videoDetails, error) in
+                                            if error == nil {
+                                                
+                                             
+                                                //Save the context
+                                                
+                                                let video = Video(context: self.managedContext)
+                                                video.title = videoDetails?[Constants.YouTubeResponseKeys.Title]
+                                                video.videoID = videoDetails?[Constants.YouTubeResponseKeys.VideoID]
+                                                video.playlistItemID = videoDetails?[Constants.YouTubeResponseKeys.PlaylistItemID]
+                                                video.thumbnailURL = videoDetails?[Constants.YouTubeResponseKeys.ThumbnailURL]
+                                                video.playlist = playlist
+                                                
+                                                self.saveContext(context: self.managedContext)
+                                            
                                                 
                                                 NotificationCenter.default.post(name: NSNotification.Name("Video Added"), object: nil, userInfo: ["message": "Video added to \(playlist.title!) playlist"])
                                                 
@@ -196,10 +229,42 @@ class SearchResultViewController: UITableViewController {
                                                 //print(error?.localizedDescription)
                                             }
                                         })
+                                       // }
+                                        } else {
+                                            print("this video already exists in playlist")
+                                        }
                                         
         })
         
         return addAction
+    }
+    
+    func saveContext (context: NSManagedObjectContext){
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not save context \(error), \(error.userInfo)")
+        }
+    }
+    
+    func someEntityExists(id: String, playlist: Playlist) -> Bool {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Video")
+        let videoIdPredicate = NSPredicate(format: "videoID = %@", id)
+        let playlistPredicate = NSPredicate(format: "playlist = %@", playlist)
+        let andPredicate = NSCompoundPredicate(type: .and, subpredicates: [videoIdPredicate, playlistPredicate])
+        fetchRequest.predicate = andPredicate
+        fetchRequest.includesSubentities = false
+        
+        var entitiesCount = 0
+        
+        do {
+            entitiesCount = try! managedContext.count(for: fetchRequest)
+        }
+        /*catch {
+         print("error executing fetch request: \(error)")
+         }*/
+        
+        return entitiesCount > 0
     }
     
 }

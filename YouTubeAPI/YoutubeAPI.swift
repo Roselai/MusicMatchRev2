@@ -112,7 +112,9 @@ class YoutubeAPI{
             }
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
-            completionHandlerForPOST(data as AnyObject, nil)
+            
+            self.convertDataWithCompletionHandler(data: data, completionHandlerForConvertData: completionHandlerForPOST )
+            //completionHandlerForPOST(data as AnyObject, nil)
         }
         
         /* 7. Start the request */
