@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
+import GoogleCast
 
 class SearchResultViewController: UITableViewController {
     
@@ -26,12 +27,15 @@ class SearchResultViewController: UITableViewController {
     }()
    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var managedContext: NSManagedObjectContext!
+    private var castButton: GCKUICastButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
    
         tableView.dataSource = searchDataSource
         managedContext = persistentContainer.viewContext
+        
+
         
     }
     

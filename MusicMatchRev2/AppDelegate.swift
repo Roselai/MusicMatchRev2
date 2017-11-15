@@ -8,11 +8,12 @@
 
 import UIKit
 import GoogleSignIn
+import GoogleCast
 
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
     
     
 
@@ -26,10 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 
         stack.autoSave(60)
-        /*let appID = "050E8E08"
+        
+        let appID = "050E8E08"
         let options = GCKCastOptions(receiverApplicationID: appID)
         GCKCastContext.setSharedInstanceWith(options)
-        GCKLogger.sharedInstance().delegate = self*/
+        GCKLogger.sharedInstance().delegate = self
         
         
         return true
@@ -79,14 +81,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                     annotation: annotation)
     }*/
     
-    /*
+    
     func logMessage(_ message: String, fromFunction function: String) {
         if enableSDKLogging {
             // Send SDK's log messages directly to the console.
             print("\(function)  \(message)")
         }
     }
-    */
+    
 
     
    

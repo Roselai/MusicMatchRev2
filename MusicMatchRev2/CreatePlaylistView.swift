@@ -13,6 +13,7 @@ class CreatePlaylistView: UIViewController {
     
     @IBOutlet var popUpView: UIView!
     @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet var playlistPrivacyOptionTableView: UITableView!
     
     var playlistTitle: String!
     
@@ -25,8 +26,10 @@ class CreatePlaylistView: UIViewController {
         
         popUpView.layer.cornerRadius = 10
         popUpView.layer.masksToBounds = true
+    
+        playlistPrivacyOptionTableView.delegate = self
+        playlistPrivacyOptionTableView.dataSource = self
         
-       
         
     }
     
@@ -42,6 +45,17 @@ class CreatePlaylistView: UIViewController {
             
         } else {
             //create a playlist with name
+            let appdelegate =  UIApplication.shared.delegate as! AppDelegate
+            let accessToken = appdelegate.accessToken!
+                
+            
+            YoutubeAPI.sharedInstance().createPlaylist(accessToken: accessToken ,title: self.playlistTitle, privacyOption: "private", completion: { (result, error) in
+                
+                if error != nil{
+                    print(error?.localizedDescription)
+                }
+                
+            })
         }
         
     }
@@ -56,27 +70,24 @@ extension CreatePlaylistView: UITableViewDelegate {
         return playlistPrivacyOptions.count
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        /*if let cell = tableView.cellForRow(at: indexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
             cell.accessoryType = .none
-        }*/
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*if let cell = tableView.cellForRow(at: indexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
          cell.accessoryType = .checkmark
          
-         }*/
+         }
     }
 }
 
 extension CreatePlaylistView: UITableViewDataSource {
+    
+  
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "privacyCell",
@@ -84,18 +95,17 @@ extension CreatePlaylistView: UITableViewDataSource {
         
         let text = playlistPrivacyOptions[indexPath.row]
         cell.textLabel?.text = text
-        
-       // cell.textLabel?.textColor = UIColor.black
+         cell.textLabel?.textColor = UIColor.black
         
         if cell.textLabel?.text == "Public"  {
             
-           cell.accessoryType = .checkmark
-            tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.bottom)
+            cell.accessoryType = .checkmark
             
-        } else {
-            cell.accessoryType = .none
+            
         }
+        
         return cell
+        
     }
 }
 

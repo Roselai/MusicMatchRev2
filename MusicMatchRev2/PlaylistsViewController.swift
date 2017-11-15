@@ -28,9 +28,11 @@ class PlaylistsViewController: CoreDataTableViewController {
     }()
     var managedContext: NSManagedObjectContext!
     var playlist: Playlist!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
      
         
 let appDelegate = UIApplication.shared.delegate as! AppDelegate

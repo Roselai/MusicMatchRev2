@@ -12,6 +12,7 @@ import MediaPlayer
 import GoogleSignIn
 import GoogleAPIClientForREST
 
+
 class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelegate, GIDSignInUIDelegate, GIDSignInDelegate {
     
     @IBOutlet weak var signInButton: GIDSignInButton!
@@ -28,6 +29,7 @@ class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelega
         override func viewDidLoad() {
            
             super.viewDidLoad()
+        
             
             
             GIDSignIn.sharedInstance().delegate = self
