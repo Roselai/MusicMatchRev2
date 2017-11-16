@@ -16,6 +16,7 @@ class CreatePlaylistView: UIViewController {
     @IBOutlet var playlistPrivacyOptionTableView: UITableView!
     
     var playlistTitle: String!
+    private var privacyOption: String!
     
     let playlistPrivacyOptions = ["Public", "Unlisted", "Private"]
     
@@ -49,8 +50,9 @@ class CreatePlaylistView: UIViewController {
             let accessToken = appdelegate.accessToken!
                 
             
-            YoutubeAPI.sharedInstance().createPlaylist(accessToken: accessToken ,title: self.playlistTitle, privacyOption: "private", completion: { (result, error) in
+            YoutubeAPI.sharedInstance().createPlaylist(accessToken: accessToken ,title: self.playlistTitle, privacyOption: self.privacyOption, completion: { (result, error) in
                 
+                //TODO: Add video to playlist, save context, then dismiss the view, show video added label
                 if error != nil{
                     print(error?.localizedDescription)
                 }
@@ -80,6 +82,7 @@ extension CreatePlaylistView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
          cell.accessoryType = .checkmark
+            self.privacyOption = cell.textLabel?.text
          
          }
     }
@@ -100,8 +103,12 @@ extension CreatePlaylistView: UITableViewDataSource {
         if cell.textLabel?.text == "Public"  {
             
             cell.accessoryType = .checkmark
+            self.privacyOption = cell.textLabel?.text
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
             
             
+        } else {
+            cell.accessoryType = .none
         }
         
         return cell

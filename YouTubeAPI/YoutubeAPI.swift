@@ -80,10 +80,12 @@ class YoutubeAPI{
         
         request.httpMethod = "POST"
         request.httpBody = jsonBody
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         /* 4. Make the request */
         let task = session.dataTask(with: request) { (data, response, error) in
+            
             
             func sendError(error: String) {
                 let userInfo = [NSLocalizedDescriptionKey : error]
@@ -91,16 +93,19 @@ class YoutubeAPI{
             }
             
             /* GUARD: Was there an error? */
-            let errorString = error?.localizedDescription
+            let errorString = error.debugDescription
             guard (error == nil) else {
-                sendError(error: "There was an error with your POST request: \(errorString!)")
+                sendError(error: "There was an error with your POST request: \(errorString)")
                 return
             }
             
             /* GUARD: Did we get a successful 2XX response? */
-            
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                sendError(error: "Your request returned a status code other than 2xx!, \(String(describing: (response as? HTTPURLResponse)?.statusCode)) " )
+            let httpURLResponse = response as! HTTPURLResponse
+            let statusCode = httpURLResponse.statusCode
+            //let dictionary = httpURLResponse.dictionaryWithValues(forKeys: ["reason","message"])
+            let localizedResponse = HTTPURLResponse.localizedString(forStatusCode: statusCode)
+            guard statusCode >= 200 && statusCode <= 299 else {
+                sendError(error: "Your request returned a status code other than 2xx!,\(statusCode) \(localizedResponse) " )
                 
                 return
             }
@@ -114,7 +119,7 @@ class YoutubeAPI{
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             
             self.convertDataWithCompletionHandler(data: data, completionHandlerForConvertData: completionHandlerForPOST )
-            //completionHandlerForPOST(data as AnyObject, nil)
+           
         }
         
         /* 7. Start the request */

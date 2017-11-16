@@ -75,11 +75,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         //TODO: Change placeHolder Image
         var image = #imageLiteral(resourceName: "addIcon")
         var title: String!
-        
-        if playlist.thumbnail != nil, playlist.title != nil {
+        title = playlist.title
+        if playlist.thumbnail != nil{
             
             image = UIImage(data: playlist.thumbnail! as Data)!
-            title = playlist.title
+            
             
         } else {
             
@@ -152,7 +152,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             if playlists != nil {
                 print("Successfully retrieved \(String(describing: playlists?.count)) playlists")
             }
-            //self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+           // self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
             
             
             DispatchQueue.main.async {
@@ -175,6 +175,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                             
                             self.saveContext(context: self.managedContext)
                         }
+                        
+                       
                     }
                     
                 }

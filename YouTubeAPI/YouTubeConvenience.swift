@@ -254,11 +254,12 @@ extension YoutubeAPI {
                             print("Video Thumbnail is unavailable")
                             return
                         }*/
+                        if videoTitle != "Private video" && videoTitle != "Deleted video" {
                         
                         let videoThumbnailURL = ((snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
                         
                         
-                        if videoTitle != "Private video" && videoTitle != "Deleted video" && videoID != nil && videoThumbnailURL != nil && playlistItemID != nil {
+                        
                         
                         let videoDetailsDict = [Constants.YouTubeResponseKeys.PlaylistItemID : playlistItemID,
                                                 Constants.YouTubeResponseKeys.VideoID: videoID,
@@ -311,7 +312,7 @@ extension YoutubeAPI {
         
         
         let method = Constants.YouTubeMethod.PlaylistMethod
-        let parameters = [Constants.YouTubeParameterKeys.Part : Constants.YoutubeParameterValues.partValue,
+        let parameters = [Constants.YouTubeParameterKeys.Part : "snippet,status",
                           Constants.YouTubeParameterKeys.APIKey : Constants.YoutubeParameterValues.APIKey,
                           Constants.YouTubeParameterKeys.AccessToken: accessToken]
         
@@ -329,32 +330,40 @@ extension YoutubeAPI {
             let privacyStatus: String
         }
         
+        
+        
       
-        let snippet = Snippet(title: title)
-        let status = Status(privacyStatus: privacyOption)
-        
-        //let snippetDict = ["snippet" : ["title" :title]]
-       // let statusDict = ["status" : ["privacyStatus" : privacyOption]]
+        let snippet = Snippet(title: title!)
+        let status = Status(privacyStatus: privacyOption!)
+      
         let jsonBody = RequestBody(snippet: snippet, status: status)
-        
+       
         
         let jsonEncoder = JSONEncoder()
         jsonEncoder.outputFormatting = .prettyPrinted
+        do{
         let jsonData = try? jsonEncoder.encode(jsonBody)
-
+            
         
-        _ = YoutubeAPI.sharedInstance().taskForPOSTMethod(method: method, bodyParameters: parameters as [String : AnyObject], jsonBody: jsonData, completionHandlerForPOST: { (result, error) in
+        
+        _ = YoutubeAPI.sharedInstance().taskForPOSTMethod(method: method, bodyParameters: parameters as [String : AnyObject], jsonBody: jsonData!, completionHandlerForPOST: { (result, error) in
             
             if error == nil {
                 print("Playlist created")
+                
                 completion(result, nil)
+                
             } else {
                 //print(error?.localizedDescription)
+                
                 completion(nil, error)
+                
                 
             }
         })
-        
+        } catch {
+            
+        }
         
     }
     

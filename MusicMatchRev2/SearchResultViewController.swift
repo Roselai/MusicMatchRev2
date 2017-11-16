@@ -196,8 +196,7 @@ class SearchResultViewController: UITableViewController {
                                         
                                         if self.someEntityExists(id: self.videoID, playlist: playlist) == false {
                                         
-                                        
-                                        
+                                    
                                         YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlist.id, videoID: self.videoID, completion: { (videoDetails, error) in
                                             if error == nil {
                                                 
