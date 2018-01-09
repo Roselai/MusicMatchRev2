@@ -11,7 +11,6 @@ import Foundation
 
 class YoutubeAPI{
     
-    
     // shared session
     var session = URLSession.shared
     let stack = CoreDataStack()
@@ -80,8 +79,8 @@ class YoutubeAPI{
         
         request.httpMethod = "POST"
         request.httpBody = jsonBody
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        //request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
         
         /* 4. Make the request */
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -102,7 +101,6 @@ class YoutubeAPI{
             /* GUARD: Did we get a successful 2XX response? */
             let httpURLResponse = response as! HTTPURLResponse
             let statusCode = httpURLResponse.statusCode
-            //let dictionary = httpURLResponse.dictionaryWithValues(forKeys: ["reason","message"])
             let localizedResponse = HTTPURLResponse.localizedString(forStatusCode: statusCode)
             guard statusCode >= 200 && statusCode <= 299 else {
                 sendError(error: "Your request returned a status code other than 2xx!,\(statusCode) \(localizedResponse) " )
@@ -118,8 +116,8 @@ class YoutubeAPI{
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             
-            self.convertDataWithCompletionHandler(data: data, completionHandlerForConvertData: completionHandlerForPOST )
-           
+           self.convertDataWithCompletionHandler(data: data, completionHandlerForConvertData: completionHandlerForPOST )
+          // completionHandlerForPOST(data, nil)
         }
         
         /* 7. Start the request */
@@ -177,6 +175,7 @@ class YoutubeAPI{
     // given raw JSON, return a usable Foundation object
     private func convertDataWithCompletionHandler(data: Data, completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
         
+        
         var parsedResult: AnyObject!
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject
@@ -185,6 +184,7 @@ class YoutubeAPI{
             completionHandlerForConvertData(nil, NSError(domain: "convertDataWithCompletionHandler", code: 1, userInfo: userInfo))
         }
         
+       
         completionHandlerForConvertData(parsedResult, nil)
     }
     

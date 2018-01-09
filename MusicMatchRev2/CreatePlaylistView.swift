@@ -8,6 +8,11 @@
 
 import Foundation
 import UIKit
+import CoreData
+
+protocol CreatePlaylistViewDelegate {
+    func finishPassing(playlist: Playlist, videoID: String)
+}
 
 class CreatePlaylistView: UIViewController {
     
@@ -17,8 +22,11 @@ class CreatePlaylistView: UIViewController {
     
     var playlistTitle: String!
     private var privacyOption: String!
-    
+    var delegate: CreatePlaylistViewDelegate?
+    var videoID: String!
     let playlistPrivacyOptions = ["Public", "Unlisted", "Private"]
+    var persistentContainer: NSPersistentContainer!
+    var managedContext: NSManagedObjectContext!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +53,19 @@ class CreatePlaylistView: UIViewController {
             present(alert, animated: true, completion: nil)
             
         } else {
+            
+            if  self.someEntityExists(title: playlistTitle) == true {
+                
+                
+                let alert = UIAlertController(title: "A Playlist with that name already exists",
+                                                       message: "Please pick another name",
+                                                       preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
+            } else {
+            
+            
             //create a playlist with name
             let appdelegate =  UIApplication.shared.delegate as! AppDelegate
             let accessToken = appdelegate.accessToken!
@@ -52,18 +73,71 @@ class CreatePlaylistView: UIViewController {
             
             YoutubeAPI.sharedInstance().createPlaylist(accessToken: accessToken ,title: self.playlistTitle, privacyOption: self.privacyOption, completion: { (result, error) in
                 
-                //TODO: Add video to playlist, save context, then dismiss the view, show video added label
-                if error != nil{
+                guard error == nil else {
                     print(error?.localizedDescription)
+                    return
+                }
+                guard result != nil else {
+                    print("No playlist returned")
+                    return
+                }
+                
+                if let result = result as? [String:String] {
+                
+                    //Save the context
+                    
+                    let playlist = Playlist(context: self.managedContext)
+                    playlist.title = result[Constants.YouTubeResponseKeys.Title]
+                    playlist.id = result[Constants.YouTubeResponseKeys.PlaylistID]
+                    //playlist.thumbnailURL = result[Constants.YouTubeResponseKeys.ThumbnailURL]
+                    
+                    self.saveContext(context: self.managedContext)
+                
+
+               
+                    self.delegate?.finishPassing(playlist: playlist, videoID: self.videoID)
+                
+                DispatchQueue.main.async {
+                    
+                self.dismiss(animated: false, completion: nil)
+                    }
                 }
                 
             })
+            }
         }
         
     }
     
+    func someEntityExists(title: String) -> Bool {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Playlist")
+        fetchRequest.predicate = NSPredicate(format: "title = %@", title)
+        fetchRequest.includesSubentities = false
+        
+        var entitiesCount = 0
+        
+        do {
+            entitiesCount = try! managedContext.count(for: fetchRequest)
+        }
+        /*catch {
+         print("error executing fetch request: \(error)")
+         }*/
+        
+        return entitiesCount > 0
+    }
+    
+    func saveContext (context: NSManagedObjectContext){
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not save context \(error), \(error.userInfo)")
+        }
+    }
+    
     
 }
+
+
 
 extension CreatePlaylistView: UITableViewDelegate {
    
@@ -90,7 +164,6 @@ extension CreatePlaylistView: UITableViewDelegate {
 
 extension CreatePlaylistView: UITableViewDataSource {
     
-  
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "privacyCell",

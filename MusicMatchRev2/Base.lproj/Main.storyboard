@@ -36,7 +36,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i7w-lF-geF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-118.5" y="-343.5"/>
+            <point key="canvasLocation" x="-78" y="188"/>
         </scene>
         <!--Search Result View Controller-->
         <scene sceneID="Paq-mP-iuP">
@@ -70,7 +70,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rfb-ef-U91" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7" y="577"/>
+            <point key="canvasLocation" x="456" y="672"/>
         </scene>
         <!--You Tube Search Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -187,7 +187,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QZ2-2p-fkx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="190" y="2184"/>
+            <point key="canvasLocation" x="586" y="2067"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gzV-b3-buf">
@@ -260,7 +260,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u21-rF-pEe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1080" y="-193"/>
+            <point key="canvasLocation" x="1101" y="-13"/>
         </scene>
         <!--Playlist Container View-->
         <scene sceneID="Fl3-cK-LFq">
@@ -318,7 +318,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5h-rG-hUf" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="311" y="1359"/>
+            <point key="canvasLocation" x="586" y="1352"/>
         </scene>
         <!--Create Playlist View-->
         <scene sceneID="Qmt-7N-77i">
@@ -333,7 +333,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W5A-OD-dDH">
-                                <rect key="frame" x="28" y="55" width="320" height="220"/>
+                                <rect key="frame" x="28" y="54.5" width="320" height="220"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter A Playlist Name" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Lvg-wg-Ryg">
                                         <rect key="frame" x="0.0" y="44" width="320" height="40"/>
@@ -426,7 +426,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VxX-P7-FaX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="970.5" y="1346.5"/>
+            <point key="canvasLocation" x="994" y="672"/>
         </scene>
         <!--Playlists-->
         <scene sceneID="1d1-4g-OcP">
@@ -450,6 +450,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hrF-Nd-Maz"/>
+        <segue reference="N1S-te-qr6"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -20,6 +20,9 @@
 		6A2EC9251F8C431500E96D2C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9231F8C431500E96D2C /* CustomButton.swift */; };
 		6A2EC9261F8C431500E96D2C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9231F8C431500E96D2C /* CustomButton.swift */; };
 		6A2EC9341F8D8EB500E96D2C /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */; };
+		6A3EF71120050C07007FAF12 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3EF71020050C06007FAF12 /* SpotifyAuthentication.framework */; };
+		6A3EF71320050C95007FAF12 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3EF71220050C95007FAF12 /* SpotifyMetadata.framework */; };
+		6A3EF71420050CAF007FAF12 /* GoogleCastResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6AC8D1A11FBA0266003B3EF3 /* GoogleCastResources.bundle */; };
 		6A5AB7E81F9CE48400F491C7 /* SearchListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5AB7E71F9CE48400F491C7 /* SearchListResponse.swift */; };
 		6A83704A1F8BCB45004D5B26 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */; };
 		6A83704B1F8BCB45004D5B26 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */; };
@@ -106,6 +109,8 @@
 		6A2EC91E1F8BE9D700E96D2C /* MusicMatchRev2-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "MusicMatchRev2-Bridging-Header.h"; path = "MusicMatchRev2/MusicMatchRev2-Bridging-Header.h"; sourceTree = "<group>"; };
 		6A2EC9231F8C431500E96D2C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsViewController.swift; sourceTree = "<group>"; };
+		6A3EF71020050C06007FAF12 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
+		6A3EF71220050C95007FAF12 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
 		6A5AB7E71F9CE48400F491C7 /* SearchListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchListResponse.swift; path = MusicMatchRev2/SearchListResponse.swift; sourceTree = "<group>"; };
 		6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A9D2F901FA2590B002D60F2 /* CreatePlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreatePlaylistView.swift; path = MusicMatchRev2/CreatePlaylistView.swift; sourceTree = "<group>"; };
@@ -148,6 +153,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B143FB6BA0942C71F972C8B8 /* Pods_MusicMatchRev2.framework in Frameworks */,
+				6A3EF71320050C95007FAF12 /* SpotifyMetadata.framework in Frameworks */,
+				6A3EF71120050C07007FAF12 /* SpotifyAuthentication.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +178,8 @@
 		3FAD0027F0E16309CA912232 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6A3EF71220050C95007FAF12 /* SpotifyMetadata.framework */,
+				6A3EF71020050C06007FAF12 /* SpotifyAuthentication.framework */,
 				6AC8D1A11FBA0266003B3EF3 /* GoogleCastResources.bundle */,
 				6AC8D19F1FBA01E2003B3EF3 /* GoogleCast.framework */,
 				6A0A72B81F9513C000A6EBA5 /* Accelerate.framework */,
@@ -407,6 +416,7 @@
 				6AB7BA721F8BC58C0075113D /* LaunchScreen.storyboard in Resources */,
 				6AEC04951F990C7300C319DD /* volume-up-4-xxl.png in Resources */,
 				6A83704A1F8BCB45004D5B26 /* GoogleService-Info.plist in Resources */,
+				6A3EF71420050CAF007FAF12 /* GoogleCastResources.bundle in Resources */,
 				6AEC04921F990C1C00C319DD /* Main.storyboard in Resources */,
 				6AC8D1B71FBBA3C5003B3EF3 /* Assets.xcassets in Resources */,
 			);
@@ -478,7 +488,8 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-Public-3.5.6-Release/GoogleCast.framework",
+				"${BUILT_PRODUCTS_DIR}/SpotifyLogin/SpotifyLogin.framework",
+				"${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-ios-4.0.2/GoogleCast.framework",
 				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -487,6 +498,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SpotifyLogin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleCast.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
@@ -727,6 +739,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-Public-3.5.3-Release",
 					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-Public-3.5.6-Release",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MusicMatchRev2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -826,6 +839,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-Public-3.5.3-Release",
 					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-Public-3.5.6-Release",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MusicMatchRev2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

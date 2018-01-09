@@ -11,9 +11,10 @@ import UIKit
 import CoreData
 import GoogleCast
 
-class SearchResultViewController: UITableViewController {
-    
+class SearchResultViewController: UITableViewController, CreatePlaylistViewDelegate {
+  
     var videoID: String!
+    var accessToken: String!
     let searchDataSource = YTTableViewDataSource()
  
     let persistentContainer: NSPersistentContainer = {
@@ -27,10 +28,13 @@ class SearchResultViewController: UITableViewController {
     }()
    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var managedContext: NSManagedObjectContext!
+    
     private var castButton: GCKUICastButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.accessToken = appDelegate.accessToken
    
         tableView.dataSource = searchDataSource
         managedContext = persistentContainer.viewContext
@@ -197,30 +201,10 @@ class SearchResultViewController: UITableViewController {
                                         if self.someEntityExists(id: self.videoID, playlist: playlist) == false {
                                         
                                     
-                                        YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlist.id, videoID: self.videoID, completion: { (videoDetails, error) in
-                                            if error == nil {
-                                                
-                                             
-                                                //Save the context
-                                                
-                                                let video = Video(context: self.managedContext)
-                                                video.title = videoDetails?[Constants.YouTubeResponseKeys.Title]
-                                                video.videoID = videoDetails?[Constants.YouTubeResponseKeys.VideoID]
-                                                video.playlistItemID = videoDetails?[Constants.YouTubeResponseKeys.PlaylistItemID]
-                                                video.thumbnailURL = videoDetails?[Constants.YouTubeResponseKeys.ThumbnailURL]
-                                                video.playlist = playlist
-                                                
-                                                self.saveContext(context: self.managedContext)
-                                            
-                                                
-                                                NotificationCenter.default.post(name: NSNotification.Name("Video Added"), object: nil, userInfo: ["message": "Video added to \(playlist.title!) playlist"])
-                                                
-                                            } else {
-                                                //print(error?.localizedDescription)
-                                            }
-                                        })
-                                        
+                                            self.addVideo(accessToken: accessToken!, playlist: playlist, videoID: self.videoID)
                                         }
+                                        
+                                        
                                         else {
                                             
                                             let duplicateAlert = UIAlertController(title: "Video Is Already In Playlist",
@@ -230,28 +214,7 @@ class SearchResultViewController: UITableViewController {
                                             
                                             let addVideoAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                                                 
-                                                YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlist.id, videoID: self.videoID, completion: { (videoDetails, error) in
-                                                    if error == nil {
-                                                        
-                                                        
-                                                        //Save the context
-                                                        
-                                                        let video = Video(context: self.managedContext)
-                                                        video.title = videoDetails?[Constants.YouTubeResponseKeys.Title]
-                                                        video.videoID = videoDetails?[Constants.YouTubeResponseKeys.VideoID]
-                                                        video.playlistItemID = videoDetails?[Constants.YouTubeResponseKeys.PlaylistItemID]
-                                                        video.thumbnailURL = videoDetails?[Constants.YouTubeResponseKeys.ThumbnailURL]
-                                                        video.playlist = playlist
-                                                        
-                                                        self.saveContext(context: self.managedContext)
-                                                        
-                                                        
-                                                        NotificationCenter.default.post(name: NSNotification.Name("Video Added"), object: nil, userInfo: ["message": "Video added to \(playlist.title!) playlist"])
-                                                        
-                                                    } else {
-                                                        //print(error?.localizedDescription)
-                                                    }
-                                                })
+                                               self.addVideo(accessToken: self.accessToken, playlist: playlist, videoID: self.videoID)
                                                 
                                             })
                                             let cancelAddVideoAction = UIAlertAction(title: "No", style: .cancel ,
@@ -296,6 +259,55 @@ class SearchResultViewController: UITableViewController {
          }*/
         
         return entitiesCount > 0
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? CreatePlaylistView {
+            destination.videoID = self.videoID
+            destination.persistentContainer = self.persistentContainer
+            destination.managedContext = self.managedContext
+        destination.delegate = self
+        }
+    }
+    
+    func finishPassing(playlist: Playlist, videoID: String) {
+        self.addVideo(accessToken: self.accessToken, playlist: playlist, videoID: videoID)
+
+        
+       // self.saveContext(context: self.managedContext)
+        
+        print("Playlist Object Received")
+       // print(playlist.title!, videoID)
+    }
+    
+    func addVideo(accessToken: String, playlist: Playlist, videoID: String){
+        YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlist.id, videoID: videoID, completion: { (videoDetails, error) in
+            
+            guard error == nil else {
+                print(error?.localizedDescription)
+                return
+            }
+            
+            guard videoDetails != nil else {
+                print("Could not retreive any video details.")
+                return
+            }
+            //Save the context
+            
+            let video = Video(context: self.managedContext)
+            video.title = videoDetails?[Constants.YouTubeResponseKeys.Title]
+            video.videoID = videoDetails?[Constants.YouTubeResponseKeys.VideoID]
+            video.playlistItemID = videoDetails?[Constants.YouTubeResponseKeys.PlaylistItemID]
+            video.thumbnailURL = videoDetails?[Constants.YouTubeResponseKeys.ThumbnailURL]
+            video.playlist = playlist
+            
+            self.saveContext(context: self.managedContext)
+            
+            
+            NotificationCenter.default.post(name: NSNotification.Name("Video Added"), object: nil, userInfo: ["message": "Video added to \(playlist.title!) playlist"])
+            
+            
+        })
     }
     
 }

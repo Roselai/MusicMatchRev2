@@ -9,6 +9,7 @@
 import UIKit
 import GoogleSignIn
 import GoogleCast
+import SpotifyLogin
 
 
 
@@ -21,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
     var window: UIWindow?
     var accessToken: String!
     let stack = CoreDataStack()
+    private let spotifyClientID = "997aa0a751f24b429de2382ec370bdc0"
+    private let spotifyClientSecret = "bffa4d1e3a1547f393ece980f2bfaff6"
+    private let spotifyRedirectURL = URL(string: "musicMatch-login://callback")
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -29,9 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
         stack.autoSave(60)
         
         let appID = "050E8E08"
-        let options = GCKCastOptions(receiverApplicationID: appID)
+        let options = GCKCastOptions(discoveryCriteria: GCKDiscoveryCriteria.init(applicationID: appID))
         GCKCastContext.setSharedInstanceWith(options)
         GCKLogger.sharedInstance().delegate = self
+        
+        SpotifyLogin.shared.configure(clientID: spotifyClientID, clientSecret: spotifyClientSecret, redirectURL: spotifyRedirectURL!)
         
         
         return true
@@ -66,8 +72,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
         return GIDSignIn.sharedInstance().handle(url,
                                                  sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
                                                     annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        
+        
     }
     
+   
     
     
     /*
@@ -90,9 +99,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
     }
     
 
+    //MARK: Spotify Login
     
    
-    
     
     
 

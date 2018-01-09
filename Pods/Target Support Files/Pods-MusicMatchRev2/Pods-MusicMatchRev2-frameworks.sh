@@ -106,7 +106,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework"
-  install_framework "${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-Public-3.5.6-Release/GoogleCast.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SpotifyLogin/SpotifyLogin.framework"
+  install_framework "${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-ios-4.0.2/GoogleCast.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -114,7 +115,8 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework"
-  install_framework "${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-Public-3.5.6-Release/GoogleCast.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SpotifyLogin/SpotifyLogin.framework"
+  install_framework "${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-ios-4.0.2/GoogleCast.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

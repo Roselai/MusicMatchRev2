@@ -6,4 +6,6 @@ pod 'GoogleAPIClientForREST/YouTube'
 pod 'Google/SignIn'
 pod 'youtube-ios-player-helper', :git=>'https://github.com/youtube/youtube-ios-player-helper', :commit=>'head'
 pod 'google-cast-sdk'
+source 'https://github.com/CocoaPods/Specs.git'
+pod 'SpotifyLogin', '~> 0.1'
 end

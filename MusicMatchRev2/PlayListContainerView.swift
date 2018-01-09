@@ -39,9 +39,6 @@ class PlaylistContainerView: UIViewController {
         guard let playerController = childViewControllers.last as? YouTubePlayerViewController else  {
             fatalError("Check storyboard for missing YouTubePlayerViewController")
         }
-       
-        
-       
         
        if accessToken != nil && self.playlist != nil {
         
@@ -64,7 +61,6 @@ class PlaylistContainerView: UIViewController {
             
             self.notificationLabel.text = message
             self.notificationLabel.isHidden = false
-            
             
             
             UIView.animate(withDuration: 0.5, delay: 2, options: .curveEaseOut, animations: {

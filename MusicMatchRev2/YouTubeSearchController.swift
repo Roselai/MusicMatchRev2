@@ -27,15 +27,16 @@ class YouTubeSearchController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-       /*// castButton = GCKUICastButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-      // castButton.tintColor = UIColor.white
+        castButton = GCKUICastButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+       castButton.tintColor = UIColor.white
+    
         
-        let widthConstraint = castButton.widthAnchor.constraint(equalToConstant: 24)
-        let heightConstraint = castButton.heightAnchor.constraint(equalToConstant: 24)
-        heightConstraint.isActive = true
-        widthConstraint.isActive = true
+       // let widthConstraint = castButton.widthAnchor.constraint(equalToConstant: 24)
+       // let heightConstraint = castButton.heightAnchor.constraint(equalToConstant: 24)
+       // heightConstraint.isActive = true
+       // widthConstraint.isActive = true
     navigationItem.rightBarButtonItem = UIBarButtonItem(customView: castButton)
-    */
+    
         
         
         notificationLabel.isHidden = true
@@ -66,6 +67,7 @@ class YouTubeSearchController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(displayMessage), name: Notification.Name("Video Added"), object: nil)
     }
+    
     
     @objc func displayMessage(_ notification: Notification) {
         let message = notification.userInfo?["message"] as! String

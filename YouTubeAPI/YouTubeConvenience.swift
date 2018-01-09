@@ -11,6 +11,8 @@ import CoreData
 
 extension YoutubeAPI {
     
+    //MARK: Function for adding a video to a YouTube Playlist
+    
     func addVideoToPlaylist(accessToken: String!, playlistID: String!, videoID: String!, completion: @escaping (_ result: [String:String]?, _ error: Error?) -> Void ) {
         
         
@@ -90,6 +92,8 @@ extension YoutubeAPI {
         
     }
     
+    //MARK: Function for retreiving playlists for the authenticated YouTube account
+ 
     func fetchUserPlaylists (accessToken: String!, completion: @escaping (_ result: [[String:String]]?, _ error: Error?) -> Void) {
         
         
@@ -141,7 +145,7 @@ extension YoutubeAPI {
         
     }
     
-    
+    //MARK: Function for searching YouTube for a video based on a query and result limit
     
     func searchForVideo(searchQuery: String, completion: @escaping (_ result: [[String : String]]?, _ error: Error?) -> Void ) {
         
@@ -199,6 +203,7 @@ extension YoutubeAPI {
         })
     }
     
+    //MARK: Function for retreiving all videos in a certain playlist and automatically delete the videos that are privated or no longer available on YouTube
     
     func getVideosFromPlaylist(accessToken: String?, playlist: Playlist?, completion: @escaping (_ result: [[String: String]]?, _ error: Error?) -> Void) {
         
@@ -268,6 +273,11 @@ extension YoutubeAPI {
                         
                         
                         videos.append(videoDetailsDict as! [String : String])
+                        }
+                        
+                        else {
+                            print("video for \(String(describing: videoID)) is no longer available")
+                        
                         }
                     }
                     OperationQueue.main.addOperation {
@@ -348,24 +358,41 @@ extension YoutubeAPI {
         
         _ = YoutubeAPI.sharedInstance().taskForPOSTMethod(method: method, bodyParameters: parameters as [String : AnyObject], jsonBody: jsonData!, completionHandlerForPOST: { (result, error) in
             
-            if error == nil {
-                print("Playlist created")
-                
-                completion(result, nil)
-                
-            } else {
-                //print(error?.localizedDescription)
-                
-                completion(nil, error)
-                
-                
+            guard error == nil else {
+                 completion(nil, error)
+                return
             }
-        })
-        } catch {
             
+            guard result != nil else {
+                print("No playlist in result")
+                return
+            }
+            
+            if let result = result {
+                //et playlistsArray = result[Constants.YouTubeResponseKeys.Items] as! [[String:Any]]
+               // var playlists : [[String:String]] = []
+               
+                    
+//let playlist = playlistsArray[index] as [String: Any]
+                    let playlistSnippetDict = result[Constants.YouTubeResponseKeys.Snippet] as? [String:Any]
+                    let playlistID = result[Constants.YouTubeResponseKeys.PlaylistID] as? String
+                    let playlistTitle = playlistSnippetDict![Constants.YouTubeResponseKeys.Title] as? String
+                    let thumbnailURL = ((playlistSnippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
+                    
+                    let playlistDict = [Constants.YouTubeResponseKeys.PlaylistID : playlistID ,
+                                        Constants.YouTubeResponseKeys.Title : playlistTitle,
+                                        Constants.YouTubeResponseKeys.ThumbnailURL :  thumbnailURL]
+                    
+                completion(playlistDict as AnyObject, nil)
+                   // playlists.append(playlistDict as! [String : String])
+                    
+                }
+        })
         }
         
     }
+    
+
     
     
 }
