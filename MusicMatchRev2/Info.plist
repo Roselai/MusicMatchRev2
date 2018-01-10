@@ -33,12 +33,12 @@
 			<string>com.ShuktiShaikh.MusicMatchRev2</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>musicMatch-login</string>
+				<string>music-match</string>
 			</array>
+			<key>Item 0</key>
+			<string>spotify-action</string>
 			<key>LSApplicationQueriesSchemes</key>
-			<array>
-				<string>spotify-action</string>
-			</array>
+			<array/>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
@@ -48,8 +48,6 @@
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-		<key>NSAllowsArbitraryLoadsInWebContent</key>
 		<true/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>

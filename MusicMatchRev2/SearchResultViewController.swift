@@ -274,7 +274,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         self.addVideo(accessToken: self.accessToken, playlist: playlist, videoID: videoID)
 
         
-       // self.saveContext(context: self.managedContext)
+        self.saveContext(context: self.managedContext)
         
         print("Playlist Object Received")
        // print(playlist.title!, videoID)

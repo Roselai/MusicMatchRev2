@@ -12,7 +12,6 @@ import GoogleCast
 import SpotifyLogin
 
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
     
@@ -24,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
     let stack = CoreDataStack()
     private let spotifyClientID = "997aa0a751f24b429de2382ec370bdc0"
     private let spotifyClientSecret = "bffa4d1e3a1547f393ece980f2bfaff6"
-    private let spotifyRedirectURL = URL(string: "musicMatch-login://callback")
+    private let spotifyRedirectURLString = "music-match://returnafterlogin"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -37,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
         GCKCastContext.setSharedInstanceWith(options)
         GCKLogger.sharedInstance().delegate = self
         
-        SpotifyLogin.shared.configure(clientID: spotifyClientID, clientSecret: spotifyClientSecret, redirectURL: spotifyRedirectURL!)
+        SpotifyLogin.shared.configure(clientID: spotifyClientID, clientSecret: spotifyClientSecret, redirectURL: URL(string: spotifyRedirectURLString)!)
         
         
         return true
@@ -68,13 +67,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    
+    
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance().handle(url,
-                                                 sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-                                                    annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
+        if(url.scheme!.isEqual("music-match")) {
+        
+            return SpotifyLogin.shared.applicationOpenURL(url, completion: { (error) in
+            })
+        
+        } else {
+            return GIDSignIn.sharedInstance().handle(url,
+                                                     sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                     annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        }
         
     }
+    
     
    
     

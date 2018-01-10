@@ -20,13 +20,11 @@
 		6A2EC9251F8C431500E96D2C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9231F8C431500E96D2C /* CustomButton.swift */; };
 		6A2EC9261F8C431500E96D2C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9231F8C431500E96D2C /* CustomButton.swift */; };
 		6A2EC9341F8D8EB500E96D2C /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */; };
-		6A3EF71120050C07007FAF12 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3EF71020050C06007FAF12 /* SpotifyAuthentication.framework */; };
-		6A3EF71320050C95007FAF12 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3EF71220050C95007FAF12 /* SpotifyMetadata.framework */; };
-		6A3EF71420050CAF007FAF12 /* GoogleCastResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6AC8D1A11FBA0266003B3EF3 /* GoogleCastResources.bundle */; };
 		6A5AB7E81F9CE48400F491C7 /* SearchListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5AB7E71F9CE48400F491C7 /* SearchListResponse.swift */; };
 		6A83704A1F8BCB45004D5B26 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */; };
 		6A83704B1F8BCB45004D5B26 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */; };
 		6A83704C1F8BCB45004D5B26 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */; };
+		6A846A02200590F70010535D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A846A01200590F70010535D /* LoginViewController.swift */; };
 		6A9D2F911FA2590B002D60F2 /* CreatePlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2F901FA2590B002D60F2 /* CreatePlaylistView.swift */; };
 		6A9D2F951FA3866A002D60F2 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2F941FA3866A002D60F2 /* CoreDataTableViewController.swift */; };
 		6AA19E461F96A1A500C560D8 /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */; };
@@ -109,10 +107,9 @@
 		6A2EC91E1F8BE9D700E96D2C /* MusicMatchRev2-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "MusicMatchRev2-Bridging-Header.h"; path = "MusicMatchRev2/MusicMatchRev2-Bridging-Header.h"; sourceTree = "<group>"; };
 		6A2EC9231F8C431500E96D2C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsViewController.swift; sourceTree = "<group>"; };
-		6A3EF71020050C06007FAF12 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
-		6A3EF71220050C95007FAF12 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
 		6A5AB7E71F9CE48400F491C7 /* SearchListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchListResponse.swift; path = MusicMatchRev2/SearchListResponse.swift; sourceTree = "<group>"; };
 		6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A846A01200590F70010535D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = MusicMatchRev2/LoginViewController.swift; sourceTree = "<group>"; };
 		6A9D2F901FA2590B002D60F2 /* CreatePlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreatePlaylistView.swift; path = MusicMatchRev2/CreatePlaylistView.swift; sourceTree = "<group>"; };
 		6A9D2F941FA3866A002D60F2 /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
 		6AB7BA641F8BC58C0075113D /* MusicMatchRev2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicMatchRev2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,8 +127,6 @@
 		6AC8D1951FB5F1F9003B3EF3 /* YTTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YTTableViewDataSource.swift; path = MusicMatchRev2/YTTableViewDataSource.swift; sourceTree = "<group>"; };
 		6AC8D1971FB60BB4003B3EF3 /* Playlist+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Playlist+CoreDataProperties.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Playlist+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		6AC8D1981FB60BB4003B3EF3 /* Video+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Video+CoreDataProperties.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Video+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
-		6AC8D19F1FBA01E2003B3EF3 /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleCast.framework; path = "Pods/google-cast-sdk/GoogleCastSDK-Public-3.5.6-Release/GoogleCast.framework"; sourceTree = "<group>"; };
-		6AC8D1A11FBA0266003B3EF3 /* GoogleCastResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleCastResources.bundle; path = "Pods/google-cast-sdk/GoogleCastSDK-Public-3.5.6-Release/GoogleCast.framework/GoogleCastResources.bundle"; sourceTree = "<group>"; };
 		6AC8D1B61FBBA3C4003B3EF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AEC04171F97BF0500C319DD /* Playlist+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Playlist+CoreDataClass.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Playlist+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		6AEC04281F97C03000C319DD /* Video+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Video+CoreDataClass.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Video+CoreDataClass.swift"; sourceTree = "<absolute>"; };
@@ -153,8 +148,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B143FB6BA0942C71F972C8B8 /* Pods_MusicMatchRev2.framework in Frameworks */,
-				6A3EF71320050C95007FAF12 /* SpotifyMetadata.framework in Frameworks */,
-				6A3EF71120050C07007FAF12 /* SpotifyAuthentication.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,10 +171,6 @@
 		3FAD0027F0E16309CA912232 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6A3EF71220050C95007FAF12 /* SpotifyMetadata.framework */,
-				6A3EF71020050C06007FAF12 /* SpotifyAuthentication.framework */,
-				6AC8D1A11FBA0266003B3EF3 /* GoogleCastResources.bundle */,
-				6AC8D19F1FBA01E2003B3EF3 /* GoogleCast.framework */,
 				6A0A72B81F9513C000A6EBA5 /* Accelerate.framework */,
 				6A0A72B61F9513B900A6EBA5 /* AudioToolbox.framework */,
 				6A0A72B41F9513AF00A6EBA5 /* AVFoundation.framework */,
@@ -227,6 +216,7 @@
 		6AB7BA5B1F8BC58C0075113D = {
 			isa = PBXGroup;
 			children = (
+				6A846A01200590F70010535D /* LoginViewController.swift */,
 				6AC8D1951FB5F1F9003B3EF3 /* YTTableViewDataSource.swift */,
 				6ABACB2A1F9A589C004E4CE5 /* PlayListContainerView.swift */,
 				6AEC04901F990C1B00C319DD /* Main.storyboard */,
@@ -416,7 +406,6 @@
 				6AB7BA721F8BC58C0075113D /* LaunchScreen.storyboard in Resources */,
 				6AEC04951F990C7300C319DD /* volume-up-4-xxl.png in Resources */,
 				6A83704A1F8BCB45004D5B26 /* GoogleService-Info.plist in Resources */,
-				6A3EF71420050CAF007FAF12 /* GoogleCastResources.bundle in Resources */,
 				6AEC04921F990C1C00C319DD /* Main.storyboard in Resources */,
 				6AC8D1B71FBBA3C5003B3EF3 /* Assets.xcassets in Resources */,
 			);
@@ -452,7 +441,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -526,6 +515,7 @@
 				6A2EC9111F8BE4B100E96D2C /* CoreDataStack.swift in Sources */,
 				6A2EC9151F8BE64700E96D2C /* YouTubeConstants.swift in Sources */,
 				6AC8D1961FB5F1F9003B3EF3 /* YTTableViewDataSource.swift in Sources */,
+				6A846A02200590F70010535D /* LoginViewController.swift in Sources */,
 				6AEC042A1F97C03000C319DD /* Video+CoreDataClass.swift in Sources */,
 				6AB7BA6A1F8BC58C0075113D /* MediaPickerViewController.swift in Sources */,
 				6AB7BA681F8BC58C0075113D /* AppDelegate.swift in Sources */,
@@ -935,6 +925,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B2SURB9245;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MusicMatchRev2Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ShuktiShaikh.MusicMatchRev2Tests;
@@ -952,6 +946,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B2SURB9245;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MusicMatchRev2Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ShuktiShaikh.MusicMatchRev2Tests;
