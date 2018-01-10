@@ -29,7 +29,6 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var managedContext: NSManagedObjectContext!
     
-    private var castButton: GCKUICastButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +38,10 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         tableView.dataSource = searchDataSource
         managedContext = persistentContainer.viewContext
         
-
+        let castbuttonFrame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        let castButton = GCKUICastButton(frame: castbuttonFrame)
+            castButton.tintColor = UIColor.white
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: castButton)
         
     }
     
@@ -200,8 +202,9 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                                         
                                         if self.someEntityExists(id: self.videoID, playlist: playlist) == false {
                                         
-                                    
-                                            self.addVideo(accessToken: accessToken!, playlist: playlist, videoID: self.videoID)
+                                            
+                                            self.addVideo(accessToken: accessToken!, playlist: playlist, videoID: self.videoID, completion: { (video, error) in
+                                            })
                                         }
                                         
                                         
@@ -214,7 +217,8 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                                             
                                             let addVideoAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                                                 
-                                               self.addVideo(accessToken: self.accessToken, playlist: playlist, videoID: self.videoID)
+                                                self.addVideo(accessToken: accessToken!, playlist: playlist, videoID: self.videoID, completion: { (video, error) in
+                                                })
                                                 
                                             })
                                             let cancelAddVideoAction = UIAlertAction(title: "No", style: .cancel ,
@@ -271,20 +275,44 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     }
     
     func finishPassing(playlist: Playlist, videoID: String) {
-        self.addVideo(accessToken: self.accessToken, playlist: playlist, videoID: videoID)
+        
+        addVideo(accessToken: accessToken, playlist: playlist, videoID: videoID) { (video, error) in
+            guard error == nil else {
+                print(error?.localizedDescription)
+                return
+            }
+            
+            /*
+            let fetchRequest: NSFetchRequest<Video> = Video.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "videoID = %@", (video?.videoID)!)
+            
+            var fetchedVideos: [Video]?
+            self.managedContext.performAndWait {
+                fetchedVideos = try? fetchRequest.execute()
+            }
+            if let retreivedVideo = fetchedVideos?.first  {*/
+                
+            playlist.thumbnail = video?.thumbnail
+            playlist.thumbnailURL = video?.thumbnailURL
+                self.saveContext(context: self.managedContext)
+            //}
+            
+        }
 
         
-        self.saveContext(context: self.managedContext)
+        
+        
         
         print("Playlist Object Received")
        // print(playlist.title!, videoID)
     }
     
-    func addVideo(accessToken: String, playlist: Playlist, videoID: String){
+    func addVideo(accessToken: String, playlist: Playlist, videoID: String, completion: @escaping (_ video: Video?, _ error: Error?) -> Void) {
         YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlist.id, videoID: videoID, completion: { (videoDetails, error) in
             
             guard error == nil else {
                 print(error?.localizedDescription)
+        completion(nil, error)
                 return
             }
             
@@ -306,6 +334,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
             
             NotificationCenter.default.post(name: NSNotification.Name("Video Added"), object: nil, userInfo: ["message": "Video added to \(playlist.title!) playlist"])
             
+         completion(video, nil)
             
         })
     }

@@ -21,23 +21,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
     var window: UIWindow?
     var accessToken: String!
     let stack = CoreDataStack()
+    private let googleCastAppID = "050E8E08"
     private let spotifyClientID = "997aa0a751f24b429de2382ec370bdc0"
     private let spotifyClientSecret = "bffa4d1e3a1547f393ece980f2bfaff6"
     private let spotifyRedirectURLString = "music-match://returnafterlogin"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-
+    
         stack.autoSave(60)
-        
-        let appID = "050E8E08"
-        let options = GCKCastOptions(discoveryCriteria: GCKDiscoveryCriteria.init(applicationID: appID))
+       
+        let options = GCKCastOptions(discoveryCriteria: GCKDiscoveryCriteria.init(applicationID: googleCastAppID))
         GCKCastContext.setSharedInstanceWith(options)
         GCKLogger.sharedInstance().delegate = self
         
         SpotifyLogin.shared.configure(clientID: spotifyClientID, clientSecret: spotifyClientSecret, redirectURL: URL(string: spotifyRedirectURLString)!)
-        
         
         return true
     }
@@ -104,13 +102,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GCKLoggerDelegate {
     func logMessage(_ message: String, fromFunction function: String) {
         if enableSDKLogging {
             // Send SDK's log messages directly to the console.
-            print("\(function)  \(message)")
+            print("%@ %@", function, message)
         }
     }
     
-
-    //MARK: Spotify Login
-    
+   
    
     
     
