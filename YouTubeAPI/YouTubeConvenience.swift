@@ -55,30 +55,30 @@ extension YoutubeAPI {
                 if let result = result {
                     
                     
-
-                   // var videosArray = result[Constants.YouTubeResponseKeys.Items] //as! [[String:Any]]
-        
-                        
                     
-                        let snippetDict = result[Constants.YouTubeResponseKeys.Snippet] as? [String:Any]
-                        
-                        let playlistItemID = result[Constants.YouTubeResponseKeys.PlaylistItemID] as? String
+                    // var videosArray = result[Constants.YouTubeResponseKeys.Items] //as! [[String:Any]]
+                    
+                    
+                    
+                    let snippetDict = result[Constants.YouTubeResponseKeys.Snippet] as? [String:Any]
+                    
+                    let playlistItemID = result[Constants.YouTubeResponseKeys.PlaylistItemID] as? String
                     let videoID = (snippetDict![Constants.YouTubeResponseKeys.ResourceID] as! [String:Any])[Constants.YouTubeResponseKeys.VideoID] as? String
-                        let videoTitle = snippetDict![Constants.YouTubeResponseKeys.Title] as? String
-                        let videoThumbnailURL = ((snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
-                        
-                        
-
-                        let videoDetailsDict = [Constants.YouTubeResponseKeys.PlaylistItemID : playlistItemID,
-                                                Constants.YouTubeResponseKeys.VideoID: videoID,
-                                                Constants.YouTubeResponseKeys.Title: videoTitle,
-                                                Constants.YouTubeResponseKeys.ThumbnailURL: videoThumbnailURL] as? [String : String]
-                        
-                        
+                    let videoTitle = snippetDict![Constants.YouTubeResponseKeys.Title] as? String
+                    let videoThumbnailURL = ((snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
                     
-                        
-                
-                
+                    
+                    
+                    let videoDetailsDict = [Constants.YouTubeResponseKeys.PlaylistItemID : playlistItemID,
+                                            Constants.YouTubeResponseKeys.VideoID: videoID,
+                                            Constants.YouTubeResponseKeys.Title: videoTitle,
+                                            Constants.YouTubeResponseKeys.ThumbnailURL: videoThumbnailURL] as? [String : String]
+                    
+                    
+                    
+                    
+                    
+                    
                     completion(videoDetailsDict, nil)
                     //}
                     
@@ -93,7 +93,7 @@ extension YoutubeAPI {
     }
     
     //MARK: Function for retreiving playlists for the authenticated YouTube account
- 
+    
     func fetchUserPlaylists (accessToken: String!, completion: @escaping (_ result: [[String:String]]?, _ error: Error?) -> Void) {
         
         
@@ -205,86 +205,68 @@ extension YoutubeAPI {
     
     //MARK: Function for retreiving all videos in a certain playlist and automatically delete the videos that are privated or no longer available on YouTube
     
-    func getVideosFromPlaylist(accessToken: String?, playlist: Playlist?, completion: @escaping (_ result: [[String: String]]?, _ error: Error?) -> Void) {
+    func getVideosFromPlaylist(accessToken: String?, playlist: Playlist?, pageToken: String? = nil, completion: @escaping (_ result: [[String: String]]?, _ error: Error?) -> Void) {
         
         let method = Constants.YouTubeMethod.PlaylistItemsMethod
         
-        let parameters = [Constants.YouTubeParameterKeys.APIKey: Constants.YoutubeParameterValues.APIKey,
-                          Constants.YouTubeParameterKeys.Part : Constants.YoutubeParameterValues.partValue,
+        var parameters = [Constants.YouTubeParameterKeys.APIKey: Constants.YoutubeParameterValues.APIKey,
+                          Constants.YouTubeParameterKeys.Part : "snippet, contentDetails",
                           Constants.YouTubeParameterKeys.AccessToken: accessToken!,
                           Constants.YouTubeParameterKeys.PlaylistID: playlist?.id,
                           Constants.YouTubeParameterKeys.MaxResults : Constants.YoutubeParameterValues.MaxResults]
+        
+        if pageToken != nil {
+            parameters[Constants.YouTubeParameterKeys.PageToken] = pageToken
+        }
+        
+        var videos : [[String:String]] = []
         
         _ = YoutubeAPI.sharedInstance().taskForGETMethod(method: method, parameters: parameters as [String : AnyObject]) { (result, error) in
             
             if error == nil {
                 if let result = result {
                     
-                    
-                    
+                
                     var videosArray = result[Constants.YouTubeResponseKeys.Items] as! [[String:Any]]
-                    var videos : [[String:String]] = []
+                    
                     
                     for index in 0 ... videosArray.count-1 {
                         
                         let videoDict = videosArray[index] as [String: Any]
-                        let snippetDict = videoDict[Constants.YouTubeResponseKeys.Snippet] as? [String:Any]
-                        let playlistItemID = videoDict[Constants.YouTubeResponseKeys.PlaylistItemID] as? String
-                        let videoID = (snippetDict![Constants.YouTubeResponseKeys.ResourceID] as! [String:Any])[Constants.YouTubeResponseKeys.VideoID] as? String
                         
-                        let videoTitle = snippetDict![Constants.YouTubeResponseKeys.Title] as? String
+                        if (videoDict[Constants.YouTubeResponseKeys.ContentDetails] as! [String: Any]).keys.contains("videoPublishedAt")
+                        {
+                        let videoDetailsDict = self.video(fromJSON: videoDict, accessToken: accessToken!)
                         
-                        /*guard videoTitle != "Deleted video" else {
-                            print("This video has been deleted from youTube")
-                            //delete video from playlist
-                            //self.deleteVideoFromYTPlaylist(playlistItemID: playlistItemID!, accessToken: accessToken!, completion: nil)
-                            return
+                        videos.append(videoDetailsDict!)
+                            
                         }
-                        
-                        guard videoTitle != "Private Video" else {
-                            print("This video is private")
-                            //delete video from playlist
-                            //self.deleteVideoFromYTPlaylist(playlistItemID: playlistItemID!, accessToken: accessToken!, completion: nil)
-                            return
-                        }*/
-                        
-                        //let thumbnails = snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as? [String: Any]
-                        
-                        //guard thumbnails != nil else {
-                        //     print("Video Thumbnail is unavailable")
-                        //     return
-                        // }
-                        /*
-                        guard snippetDict![Constants.YouTubeResponseKeys.Thumbnails] != nil else {
-                            print("Video Thumbnail is unavailable")
-                            return
-                        }*/
-                        if videoTitle != "Private video" && videoTitle != "Deleted video" {
-                        
-                        let videoThumbnailURL = ((snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
-                        
-                        
-                        
-                        
-                        let videoDetailsDict = [Constants.YouTubeResponseKeys.PlaylistItemID : playlistItemID,
-                                                Constants.YouTubeResponseKeys.VideoID: videoID,
-                                                Constants.YouTubeResponseKeys.Title: videoTitle,
-                                                Constants.YouTubeResponseKeys.ThumbnailURL: videoThumbnailURL]
-                        
-                        
-                        videos.append(videoDetailsDict as! [String : String])
-                        }
-                        
                         else {
-                            print("video for \(String(describing: videoID)) is no longer available")
-                        
+                            self.deleteVideoFromYTPlaylist(playlistItemID: videoDict[Constants.YouTubeResponseKeys.PlaylistItemID] as! String, accessToken: accessToken!, completion: { (success) in
+                                if success == true {
+                                    print("Video has been deleted from YouTube")
+                                }
+                            })
                         }
-                    }
-                    OperationQueue.main.addOperation {
                         
-                        completion(videos, nil)
+                      
+                       
                     }
                     
+                    completion(videos, nil)
+                    
+                    if let nextPageToken = result[Constants.YouTubeResponseKeys.NextPageToken] as? String {
+                        print(nextPageToken)
+                    self.getVideosFromPlaylist(accessToken: accessToken, playlist: playlist, pageToken: nextPageToken , completion: { (nextPageVideos, error) in
+                        
+                        if error == nil {
+                        completion(nextPageVideos, nil)
+                        } else {
+                            completion(nil,error)
+                        }
+                        
+                    })
+                    }
                 }
             } else {
                 OperationQueue.main.addOperation {
@@ -342,38 +324,38 @@ extension YoutubeAPI {
         
         
         
-      
+        
         let snippet = Snippet(title: title!)
         let status = Status(privacyStatus: privacyOption!)
-      
+        
         let jsonBody = RequestBody(snippet: snippet, status: status)
-       
+        
         
         let jsonEncoder = JSONEncoder()
         jsonEncoder.outputFormatting = .prettyPrinted
         do{
-        let jsonData = try? jsonEncoder.encode(jsonBody)
+            let jsonData = try? jsonEncoder.encode(jsonBody)
             
-        
-        
-        _ = YoutubeAPI.sharedInstance().taskForPOSTMethod(method: method, bodyParameters: parameters as [String : AnyObject], jsonBody: jsonData!, completionHandlerForPOST: { (result, error) in
             
-            guard error == nil else {
-                 completion(nil, error)
-                return
-            }
             
-            guard result != nil else {
-                print("No playlist in result")
-                return
-            }
-            
-            if let result = result {
-                //et playlistsArray = result[Constants.YouTubeResponseKeys.Items] as! [[String:Any]]
-               // var playlists : [[String:String]] = []
-               
+            _ = YoutubeAPI.sharedInstance().taskForPOSTMethod(method: method, bodyParameters: parameters as [String : AnyObject], jsonBody: jsonData!, completionHandlerForPOST: { (result, error) in
+                
+                guard error == nil else {
+                    completion(nil, error)
+                    return
+                }
+                
+                guard result != nil else {
+                    print("No playlist in result")
+                    return
+                }
+                
+                if let result = result {
+                    //et playlistsArray = result[Constants.YouTubeResponseKeys.Items] as! [[String:Any]]
+                    // var playlists : [[String:String]] = []
                     
-//let playlist = playlistsArray[index] as [String: Any]
+                    
+                    //let playlist = playlistsArray[index] as [String: Any]
                     let playlistSnippetDict = result[Constants.YouTubeResponseKeys.Snippet] as? [String:Any]
                     let playlistID = result[Constants.YouTubeResponseKeys.PlaylistID] as? String
                     let playlistTitle = playlistSnippetDict![Constants.YouTubeResponseKeys.Title] as? String
@@ -383,17 +365,43 @@ extension YoutubeAPI {
                                         Constants.YouTubeResponseKeys.Title : playlistTitle,
                                         Constants.YouTubeResponseKeys.ThumbnailURL :  thumbnailURL]
                     
-                completion(playlistDict as AnyObject, nil)
-                   // playlists.append(playlistDict as! [String : String])
+                    completion(playlistDict as AnyObject, nil)
+                    // playlists.append(playlistDict as! [String : String])
                     
                 }
-        })
+            })
         }
         
     }
     
-
     
+    func video(fromJSON videoDict: [String : Any], accessToken: String) -> [String:String]? {
+        
+        
+        let snippetDict = videoDict[Constants.YouTubeResponseKeys.Snippet] as? [String:Any]
+        let playlistItemID = videoDict[Constants.YouTubeResponseKeys.PlaylistItemID] as? String
+        
+        //if (videoDict[Constants.YouTubeResponseKeys.ContentDetails] as! [String: Any]).keys.contains("videoPublishedAt")
+        // {
+        
+        let videoID = (snippetDict![Constants.YouTubeResponseKeys.ResourceID] as! [String:Any])[Constants.YouTubeResponseKeys.VideoID] as? String
+        let videoTitle = snippetDict![Constants.YouTubeResponseKeys.Title] as? String
+        let videoThumbnailURL = ((snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
+        
+        
+        
+        
+        
+        let videoDetailsDict = [Constants.YouTubeResponseKeys.PlaylistItemID : playlistItemID,
+                                Constants.YouTubeResponseKeys.VideoID: videoID,
+                                Constants.YouTubeResponseKeys.Title: videoTitle,
+                                Constants.YouTubeResponseKeys.ThumbnailURL: videoThumbnailURL]
+        return videoDetailsDict as? [String : String]
+        
+    }
+    
+    
+    //}
     
 }
 

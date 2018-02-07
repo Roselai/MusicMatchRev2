@@ -121,8 +121,13 @@
                             <constraint firstItem="mEQ-1j-7M9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xa7-SD-nLa"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Bla-Xh-VqK"/>
+                    <navigationItem key="navigationItem" id="Bla-Xh-VqK">
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="nrY-tK-LyP">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="googleCastButton" destination="nrY-tK-LyP" id="jxu-al-EbB"/>
                         <outlet property="notificationLabel" destination="OMw-gN-ynp" id="ZAw-ek-TT4"/>
                     </connections>
                 </viewController>
@@ -494,6 +499,6 @@
         <image name="spotifyIcon" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="N1S-te-qr6"/>
+        <segue reference="hrF-Nd-Maz"/>
     </inferredMetricsTieBreakers>
 </document>

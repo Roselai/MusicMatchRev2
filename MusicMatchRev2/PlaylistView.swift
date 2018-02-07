@@ -53,8 +53,9 @@ class PlaylistView: CoreDataTableViewController {
         let fetchedVideos = self.fetchedResultsController?.fetchedObjects as! [Video]
         videoID = fetchedVideos.first?.videoID
         //send first result videoID to player for load
+        
        
-        /*NotificationCenter.default.post(name: NSNotification.Name("Initial Video ID"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : self.videoID!])*/
+      //  NotificationCenter.default.post(name: NSNotification.Name("Initial Video ID From Playlist"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : self.videoID!])
         
     }
     

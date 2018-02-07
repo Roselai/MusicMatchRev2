@@ -49,6 +49,7 @@ struct Constants {
         static let PerPage = "maxResults"
         static let PlaylistItemID = "id"
         static let PageToken = "pageToken"
+        static let NextPageToken = "nextPageToken"
     }
     
     // MARK: YouTube Parameter Values
@@ -77,7 +78,9 @@ struct Constants {
         static let Thumbnail = "thumbnail"
         static let ThumbnailURL = "url"
         static let ResourceID = "resourceId"
+        static let ContentDetails = "contentDetails"
         static let NextPageToken = "nextPageToken"
+        static let VideoPublishedAt = "videoPublishedAt"
         
         struct ThumbnailKeys {
             static let Default = "default"

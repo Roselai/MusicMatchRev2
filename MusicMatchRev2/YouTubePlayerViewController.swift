@@ -26,6 +26,7 @@ class YouTubePlayerViewController: UIViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideo), name: Notification.Name("Cell Selected"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideo), name: Notification.Name("Initial Video ID"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideoFromPlaylist), name: Notification.Name("Playlist Item Selected"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(loadVideo), name: Notification.Name("Initial Video ID From Playlist"), object: nil)
     }
     
 

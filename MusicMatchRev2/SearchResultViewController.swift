@@ -281,30 +281,14 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                 print(error?.localizedDescription)
                 return
             }
-            
-            /*
-            let fetchRequest: NSFetchRequest<Video> = Video.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "videoID = %@", (video?.videoID)!)
-            
-            var fetchedVideos: [Video]?
-            self.managedContext.performAndWait {
-                fetchedVideos = try? fetchRequest.execute()
-            }
-            if let retreivedVideo = fetchedVideos?.first  {*/
                 
             playlist.thumbnail = video?.thumbnail
             playlist.thumbnailURL = video?.thumbnailURL
-                self.saveContext(context: self.managedContext)
-            //}
+            self.saveContext(context: self.managedContext)
+            
             
         }
-
-        
-        
-        
-        
         print("Playlist Object Received")
-       // print(playlist.title!, videoID)
     }
     
     func addVideo(accessToken: String, playlist: Playlist, videoID: String, completion: @escaping (_ video: Video?, _ error: Error?) -> Void) {
