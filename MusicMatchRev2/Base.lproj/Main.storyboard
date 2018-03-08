@@ -121,13 +121,8 @@
                             <constraint firstItem="mEQ-1j-7M9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xa7-SD-nLa"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Bla-Xh-VqK">
-                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="nrY-tK-LyP">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Bla-Xh-VqK"/>
                     <connections>
-                        <outlet property="googleCastButton" destination="nrY-tK-LyP" id="jxu-al-EbB"/>
                         <outlet property="notificationLabel" destination="OMw-gN-ynp" id="ZAw-ek-TT4"/>
                     </connections>
                 </viewController>
@@ -261,10 +256,13 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e6Y-y3-hkq" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search Music Library" id="Lqz-Nh-B7j"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="SXh-oT-8ZK">
+                    <navigationBar key="navigationBar" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="SXh-oT-8ZK">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.80000000000000004" green="0.094117647060000004" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -499,6 +497,6 @@
         <image name="spotifyIcon" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hrF-Nd-Maz"/>
+        <segue reference="N1S-te-qr6"/>
     </inferredMetricsTieBreakers>
 </document>

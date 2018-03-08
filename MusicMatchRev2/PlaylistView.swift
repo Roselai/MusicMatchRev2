@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-import GoogleCast
+
 
 class PlaylistView: CoreDataTableViewController {
     
@@ -30,10 +30,6 @@ class PlaylistView: CoreDataTableViewController {
     var video: Video!
  
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    
-    }
     
     //MARK: TableView DataSource Methods
     
@@ -174,11 +170,7 @@ class PlaylistView: CoreDataTableViewController {
                 }
             
             })
-                
-        
-           /* DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }*/
+            
             completionHandler(true)
             
             }
@@ -260,10 +252,6 @@ class PlaylistView: CoreDataTableViewController {
         do {
             entitiesCount = try! context.count(for: fetchRequest)
         }
-        /*catch {
-            print("error executing fetch request: \(error)")
-        }*/
-        
         return entitiesCount > 0
     }
     

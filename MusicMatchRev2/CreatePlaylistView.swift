@@ -39,8 +39,11 @@ class CreatePlaylistView: UIViewController {
         playlistPrivacyOptionTableView.delegate = self
         playlistPrivacyOptionTableView.dataSource = self
         
+        self.hideKeyboard()
         
     }
+    
+   
     
     @IBAction func closeView(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
@@ -213,6 +216,24 @@ extension CreatePlaylistView: UITextFieldDelegate {
         textField.text = ""
     }
     
+}
+
+extension UIViewController
+{
+    func hideKeyboard()
+    {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(UIViewController.dismissKeyboard))
+        
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard()
+    {
+        view.endEditing(true)
+    }
 }
 
 

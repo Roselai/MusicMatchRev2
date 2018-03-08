@@ -229,6 +229,7 @@ extension YoutubeAPI {
                 
                     var videosArray = result[Constants.YouTubeResponseKeys.Items] as! [[String:Any]]
                     
+                    if videosArray.count > 0 {
                     
                     for index in 0 ... videosArray.count-1 {
                         
@@ -238,6 +239,8 @@ extension YoutubeAPI {
                         {
                         let videoDetailsDict = self.video(fromJSON: videoDict, accessToken: accessToken!)
                         
+                            let title = videoDetailsDict![Constants.YouTubeResponseKeys.Title]
+                            print(title!)
                         videos.append(videoDetailsDict!)
                             
                         }
@@ -245,12 +248,13 @@ extension YoutubeAPI {
                             self.deleteVideoFromYTPlaylist(playlistItemID: videoDict[Constants.YouTubeResponseKeys.PlaylistItemID] as! String, accessToken: accessToken!, completion: { (success) in
                                 if success == true {
                                     print("Video has been deleted from YouTube")
+                                } else {
+                                    print("video could not be deleted")
                                 }
                             })
                         }
                         
-                      
-                       
+                    }
                     }
                     
                     completion(videos, nil)
@@ -290,10 +294,8 @@ extension YoutubeAPI {
         
         _ = YoutubeAPI.sharedInstance().taskForDELETEMethod(method: method, parameters: parameters as [String : AnyObject]) { (success, error) in
             if error == nil {
-                print("video deleted from playlist")
                 completion(true)
             } else {
-                print("video could not be deleted")
                 completion(false)
             }
             
@@ -351,11 +353,7 @@ extension YoutubeAPI {
                 }
                 
                 if let result = result {
-                    //et playlistsArray = result[Constants.YouTubeResponseKeys.Items] as! [[String:Any]]
-                    // var playlists : [[String:String]] = []
-                    
-                    
-                    //let playlist = playlistsArray[index] as [String: Any]
+                   
                     let playlistSnippetDict = result[Constants.YouTubeResponseKeys.Snippet] as? [String:Any]
                     let playlistID = result[Constants.YouTubeResponseKeys.PlaylistID] as? String
                     let playlistTitle = playlistSnippetDict![Constants.YouTubeResponseKeys.Title] as? String
@@ -366,7 +364,7 @@ extension YoutubeAPI {
                                         Constants.YouTubeResponseKeys.ThumbnailURL :  thumbnailURL]
                     
                     completion(playlistDict as AnyObject, nil)
-                    // playlists.append(playlistDict as! [String : String])
+                    
                     
                 }
             })
@@ -381,14 +379,11 @@ extension YoutubeAPI {
         let snippetDict = videoDict[Constants.YouTubeResponseKeys.Snippet] as? [String:Any]
         let playlistItemID = videoDict[Constants.YouTubeResponseKeys.PlaylistItemID] as? String
         
-        //if (videoDict[Constants.YouTubeResponseKeys.ContentDetails] as! [String: Any]).keys.contains("videoPublishedAt")
-        // {
+   
         
         let videoID = (snippetDict![Constants.YouTubeResponseKeys.ResourceID] as! [String:Any])[Constants.YouTubeResponseKeys.VideoID] as? String
         let videoTitle = snippetDict![Constants.YouTubeResponseKeys.Title] as? String
         let videoThumbnailURL = ((snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
-        
-        
         
         
         
@@ -399,9 +394,6 @@ extension YoutubeAPI {
         return videoDetailsDict as? [String : String]
         
     }
-    
-    
-    //}
     
 }
 

@@ -35,7 +35,7 @@ class LoginViewController: UIViewController {
         SpotifyLogin.shared.getAccessToken { (accessToken, error) in
             if error != nil {
                 // User is not logged in, show log in flow.
-                print(accessToken)
+                print(accessToken!)
                 
             }
         }

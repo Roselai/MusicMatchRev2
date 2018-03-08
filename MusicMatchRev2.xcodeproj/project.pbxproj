@@ -35,6 +35,7 @@
 		6AB7BA7D1F8BC58C0075113D /* MusicMatchRev2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB7BA7C1F8BC58C0075113D /* MusicMatchRev2Tests.swift */; };
 		6AB7BA881F8BC58C0075113D /* MusicMatchRev2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB7BA871F8BC58C0075113D /* MusicMatchRev2UITests.swift */; };
 		6ABACB2B1F9A589C004E4CE5 /* PlayListContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABACB2A1F9A589C004E4CE5 /* PlayListContainerView.swift */; };
+		6ABF1F2F2031FFB80010DDBD /* Pods_MusicMatchRev2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3816344E9FD062E4B564E5D0 /* Pods_MusicMatchRev2.framework */; };
 		6AC8D1961FB5F1F9003B3EF3 /* YTTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC8D1951FB5F1F9003B3EF3 /* YTTableViewDataSource.swift */; };
 		6AC8D1991FB60BB4003B3EF3 /* Playlist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC8D1971FB60BB4003B3EF3 /* Playlist+CoreDataProperties.swift */; };
 		6AC8D19A1FB60BB4003B3EF3 /* Playlist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC8D1971FB60BB4003B3EF3 /* Playlist+CoreDataProperties.swift */; };
@@ -64,7 +65,6 @@
 		6AF9D8A41F8BDE2800A4F1B0 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9D8A21F8BDE2800A4F1B0 /* Model.xcdatamodeld */; };
 		6AF9D8A51F8BDE2800A4F1B0 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9D8A21F8BDE2800A4F1B0 /* Model.xcdatamodeld */; };
 		6AF9D8A61F8BDE2800A4F1B0 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9D8A21F8BDE2800A4F1B0 /* Model.xcdatamodeld */; };
-		B143FB6BA0942C71F972C8B8 /* Pods_MusicMatchRev2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3816344E9FD062E4B564E5D0 /* Pods_MusicMatchRev2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +124,7 @@
 		6AB7BA871F8BC58C0075113D /* MusicMatchRev2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicMatchRev2UITests.swift; sourceTree = "<group>"; };
 		6AB7BA891F8BC58C0075113D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6ABACB2A1F9A589C004E4CE5 /* PlayListContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayListContainerView.swift; path = MusicMatchRev2/PlayListContainerView.swift; sourceTree = "<group>"; };
+		6ABF1F282031FEFA0010DDBD /* GoogleCastResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleCastResources.bundle; sourceTree = "<group>"; };
 		6AC8D1951FB5F1F9003B3EF3 /* YTTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YTTableViewDataSource.swift; path = MusicMatchRev2/YTTableViewDataSource.swift; sourceTree = "<group>"; };
 		6AC8D1971FB60BB4003B3EF3 /* Playlist+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Playlist+CoreDataProperties.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Playlist+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		6AC8D1981FB60BB4003B3EF3 /* Video+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Video+CoreDataProperties.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Video+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
@@ -147,7 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B143FB6BA0942C71F972C8B8 /* Pods_MusicMatchRev2.framework in Frameworks */,
+				6ABF1F2F2031FFB80010DDBD /* Pods_MusicMatchRev2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +279,7 @@
 		6AB7BA861F8BC58C0075113D /* MusicMatchRev2UITests */ = {
 			isa = PBXGroup;
 			children = (
+				6ABF1F282031FEFA0010DDBD /* GoogleCastResources.bundle */,
 				6AB7BA871F8BC58C0075113D /* MusicMatchRev2UITests.swift */,
 				6AB7BA891F8BC58C0075113D /* Info.plist */,
 			);
@@ -730,11 +732,12 @@
 					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-Public-3.5.3-Release",
 					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-Public-3.5.6-Release",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-ios-4.0.2",
 				);
 				INFOPLIST_FILE = MusicMatchRev2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "\"@executable_path/Frameworks\"";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"sqlite3\"",
@@ -831,11 +834,12 @@
 					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-Public-3.5.3-Release",
 					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-Public-3.5.6-Release",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-ios-4.0.2",
 				);
 				INFOPLIST_FILE = MusicMatchRev2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "\"@executable_path/Frameworks\"";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"sqlite3\"",

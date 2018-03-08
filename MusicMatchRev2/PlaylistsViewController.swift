@@ -28,7 +28,9 @@ class PlaylistsViewController: CoreDataTableViewController {
     }()
     var managedContext: NSManagedObjectContext!
     var playlist: Playlist!
-   
+    var fetchedPlaylists: [Playlist]!
+    var playlistIDArray: [String] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +46,10 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedPlaylists = fetchedResultsController?.fetchedObjects as! [Playlist]
         
         fetchPlaylists()
+        
       
     }
 
@@ -165,6 +169,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                         let id = playlistDictionary[Constants.YouTubeResponseKeys.PlaylistID]
                         let url = playlistDictionary[Constants.YouTubeResponseKeys.ThumbnailURL]
                         
+                       
+                        self.playlistIDArray.append(id!)
                         
                         if self.someEntityExists(id: id!) == false {
                             
@@ -180,8 +186,9 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     }
                     
                 }
-                
+               self.deletePlaylists()
             }
+            
             
             
         }
@@ -214,8 +221,19 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return entitiesCount > 0
     }
     
-   
     
-    
+    func deletePlaylists() {
+        for playlist in fetchedPlaylists {
+            
+            if playlistIDArray.contains(playlist.id!) {
+                
+            } else {
+                
+                managedContext.delete(playlist)
+                saveContext(context: managedContext)
+                
+            }
+        }
+    }
     
 }

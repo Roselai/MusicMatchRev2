@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
-import GoogleCast
+
 
 class SearchResultViewController: UITableViewController, CreatePlaylistViewDelegate {
   
@@ -38,10 +38,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         tableView.dataSource = searchDataSource
         managedContext = persistentContainer.viewContext
         
-        let castbuttonFrame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        let castButton = GCKUICastButton(frame: castbuttonFrame)
-            castButton.tintColor = UIColor.white
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: castButton)
+        
         
     }
     

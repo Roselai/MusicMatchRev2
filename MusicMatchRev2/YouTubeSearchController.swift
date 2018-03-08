@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import CoreGraphics
-import GoogleCast
 
 class YouTubeSearchController: UIViewController {
     
@@ -17,30 +16,14 @@ class YouTubeSearchController: UIViewController {
     fileprivate var YTPlayerViewController: YouTubePlayerViewController!
     var videoID: String!
     var queryString: String!
-     //var castButton: GCKUICastButton!
-    
-    @IBOutlet weak var googleCastButton: UIBarButtonItem!
+ 
+  
     @IBOutlet weak var notificationLabel: UILabel!
   
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-   /* castButton = GCKUICastButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-    castButton.tintColor = UIColor.white
-        
-        googleCastButton = cast*/
     
-        
-       // let widthConstraint = castButton.widthAnchor.constraint(equalToConstant: 24)
-       // let heightConstraint = castButton.heightAnchor.constraint(equalToConstant: 24)
-       // heightConstraint.isActive = true
-       // widthConstraint.isActive = true
-    //navigationItem.rightBarButtonItem = UIBarButtonItem(customView: castButton)
-    
-       
+
         
         notificationLabel.isHidden = true
         notificationLabel.text = ""
