@@ -15,5 +15,6 @@
 #import <GoogleCast/Googlecast.h>
 #import <SpotifyAuthentication/SpotifyAuthentication.h>
 #import <SpotifyAudioPlayback/SpotifyAudioPlayback.h>
+#import <SpotifyMetadata/SpotifyMetadata.h>
 #import <SafariServices/SafariServices.h>
 #endif /* MusicMatchRev2_Bridging_Header_h */

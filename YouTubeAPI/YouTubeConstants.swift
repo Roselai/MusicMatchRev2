@@ -90,9 +90,22 @@ struct Constants {
         
     }
     
+    struct Spotify {
+        static let APIScheme = "https"
+        static let APIHost = "api.spotify.com"
+        static let APIPath = ""
+    }
     
-    
-    
+    struct SpotifyMethod {
+        static let PlaylistMethod = "/v1/me/playlists"
+        static let PlaylistItemsMethod = "/v1/users/{user_id}/playlists/{playlist_id}/tracks"
+        static let CurrentUserProfileMethod = "/v1/me"
+    }
 
+    struct SpotifyParameterKeys {
+        static let UserID = "user_id"
+        static let PlayListID = "playlist_id"
+        
+    }
     
 }

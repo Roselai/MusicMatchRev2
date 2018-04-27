@@ -108,6 +108,7 @@ extension YoutubeAPI {
         _ = YoutubeAPI.sharedInstance().taskForGETMethod(method: method, parameters: parameters as [String : AnyObject], completionHandlerForGET: { (result, error) in
             if error == nil {
                 
+                
                 if let result = result {
                     let playlistsArray = result[Constants.YouTubeResponseKeys.Items] as! [[String:Any]]
                     var playlists : [[String:String]] = []

@@ -11,6 +11,7 @@ import GoogleSignIn
 import SpotifyLogin
 
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -20,9 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var accessToken: String!
     let stack = CoreDataStack()
-    private let spotifyClientID = "997aa0a751f24b429de2382ec370bdc0"
-    private let spotifyClientSecret = "bffa4d1e3a1547f393ece980f2bfaff6"
-    private let spotifyRedirectURLString = "music-match://returnafterlogin"
+     let spotifyClientID = "997aa0a751f24b429de2382ec370bdc0"
+     let spotifyClientSecret = "bffa4d1e3a1547f393ece980f2bfaff6"
+     let spotifyRedirectURLString = "musicmatchrev2://returnafterlogin"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -34,7 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.clipsToBounds = true
         
         
+        
         SpotifyLogin.shared.configure(clientID: spotifyClientID, clientSecret: spotifyClientSecret, redirectURL: URL(string: spotifyRedirectURLString)!)
+        
+        
+       
         
         return true
     }
@@ -69,9 +74,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        if(url.scheme!.isEqual("music-match")) {
+        if(url.scheme?.isEqual("musicmatchrev2"))! {
         
+            
+            
             return SpotifyLogin.shared.applicationOpenURL(url, completion: { (error) in
+                
+                if error == nil {
+                   print ("successfully logged in")
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "spotifyLoginSuccessful"), object: nil)
+                    
+
+                }
+                else {
+                    print("could not login")
+                }
             })
         
         } else {
@@ -81,10 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
     }
-    
-    
-   
-    
+
     
     /*
     //MARK: Deprecated iOS 8.0 and older

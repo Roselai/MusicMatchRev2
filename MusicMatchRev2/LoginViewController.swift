@@ -8,10 +8,13 @@
 
 
 import UIKit
-
 import SpotifyLogin
 
+
 class LoginViewController: UIViewController {
+    
+    var accessToken: String!
+
     
 
     @IBOutlet weak var spotifyLoginButton: UIButton!
@@ -20,12 +23,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
-        spotifyLoginButton = SpotifyLoginButton(viewController: self, scopes: [.streaming, .userLibraryRead])
-       
-        
-        
-       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,7 +32,15 @@ class LoginViewController: UIViewController {
         SpotifyLogin.shared.getAccessToken { (accessToken, error) in
             if error != nil {
                 // User is not logged in, show log in flow.
-                print(accessToken!)
+                
+                self.spotifyLoginButton = SpotifyLoginButton(viewController: self, scopes: [.streaming, .userLibraryRead, .playlistReadPrivate])
+            } else {
+            self.spotifyLoginButton.isHidden = true
+            self.accessToken = accessToken
+                self.performSegue(withIdentifier: "LoggedIntoSpotify", sender: self)
+                
+                
+        
                 
             }
         }
@@ -46,5 +51,10 @@ class LoginViewController: UIViewController {
         SpotifyLoginPresenter.login(from: self, scopes: [.streaming, .userLibraryRead])
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? SpotifyPlaylistsTableViewController {
+            destination.spotifyAccessToken = self.accessToken
+        }
+    }
     
 }
