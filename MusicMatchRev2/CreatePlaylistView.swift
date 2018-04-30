@@ -70,8 +70,9 @@ class CreatePlaylistView: UIViewController {
             
             
             //create a playlist with name
-            let appdelegate =  UIApplication.shared.delegate as! AppDelegate
-            let accessToken = appdelegate.accessToken!
+            let defaults = UserDefaults.standard
+            let accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
+                
                 
             
             YoutubeAPI.sharedInstance().createPlaylist(accessToken: accessToken ,title: self.playlistTitle, privacyOption: self.privacyOption, completion: { (result, error) in

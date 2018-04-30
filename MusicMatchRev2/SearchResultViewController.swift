@@ -33,7 +33,8 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.accessToken = appDelegate.accessToken
+        let defaults = UserDefaults.standard
+        self.accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
    
         tableView.dataSource = searchDataSource
         managedContext = persistentContainer.viewContext
@@ -173,6 +174,8 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     
     func fetchUserPlaylists(completion: @escaping ([Playlist]?) -> Void) {
         
+        
+    
         let fetchRequest: NSFetchRequest<Playlist> = Playlist.fetchRequest()
         let sortByTitle = NSSortDescriptor(key: #keyPath(Playlist.title),
                                                ascending: true)
@@ -194,13 +197,12 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         let addAction = UIAlertAction(title: playlist.title, style: .default ,
                                       handler: { (action) -> Void in
                                    
-                                        let accessToken = self.appDelegate.accessToken
                                        
                                         
                                         if self.someEntityExists(id: self.videoID, playlist: playlist) == false {
                                         
                                             
-                                            self.addVideo(accessToken: accessToken!, playlist: playlist, videoID: self.videoID, completion: { (video, error) in
+                                            self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoID, completion: { (video, error) in
                                             })
                                         }
                                         
@@ -214,7 +216,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                                             
                                             let addVideoAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                                                 
-                                                self.addVideo(accessToken: accessToken!, playlist: playlist, videoID: self.videoID, completion: { (video, error) in
+                                                self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoID, completion: { (video, error) in
                                                 })
                                                 
                                             })

@@ -94,14 +94,14 @@ extension YoutubeAPI {
     
     //MARK: Function for retreiving playlists for the authenticated YouTube account
     
-    func fetchUserPlaylists (accessToken: String!, completion: @escaping (_ result: [[String:String]]?, _ error: Error?) -> Void) {
-        
+    func fetchUserPlaylists (accessToken: String, completion: @escaping (_ result: [[String:String]]?, _ error: Error?) -> Void) {
         
         let method = Constants.YouTubeMethod.PlaylistMethod
         
         let parameters = [Constants.YouTubeParameterKeys.Part : Constants.YoutubeParameterValues.partValue,
                           Constants.YouTubeParameterKeys.Mine : Constants.YoutubeParameterValues.MineValue,
                           Constants.YouTubeParameterKeys.MaxResults: Constants.YoutubeParameterValues.MaxResults,
+                          Constants.YouTubeParameterKeys.APIKey: Constants.YoutubeParameterValues.APIKey,
                           Constants.YouTubeParameterKeys.AccessToken: accessToken]
         
         

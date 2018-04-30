@@ -19,11 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     fileprivate var enableSDKLogging = false
     var window: UIWindow?
-    var accessToken: String!
     let stack = CoreDataStack()
-     let spotifyClientID = "997aa0a751f24b429de2382ec370bdc0"
-     let spotifyClientSecret = "bffa4d1e3a1547f393ece980f2bfaff6"
-     let spotifyRedirectURLString = "musicmatchrev2://returnafterlogin"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -36,7 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        SpotifyLogin.shared.configure(clientID: spotifyClientID, clientSecret: spotifyClientSecret, redirectURL: URL(string: spotifyRedirectURLString)!)
+        SpotifyLogin.shared.configure(
+            clientID: Constants.Spotify.ClientID,
+            clientSecret: Constants.Spotify.ClientSecret,
+            redirectURL: URL(string: Constants.Spotify.RedirectURLString)!)
         
         
        

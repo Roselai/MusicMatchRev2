@@ -35,10 +35,8 @@ class PlaylistsViewController: CoreDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-     
-        
-let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        accessToken = appDelegate.accessToken
+        let defaults = UserDefaults.standard
+        self.accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
         
         
         managedContext = persistentContainer.viewContext
@@ -147,8 +145,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     func fetchPlaylists() {
  
-    
-        YoutubeAPI.sharedInstance().fetchUserPlaylists(accessToken: self.accessToken) { (playlists, error) in
+
+        YoutubeAPI.sharedInstance().fetchUserPlaylists(accessToken: self.accessToken!) { (playlists, error) in
             guard error == nil else {
                 print("Error fetching playlists")
                 return

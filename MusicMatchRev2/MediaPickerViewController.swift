@@ -17,33 +17,33 @@ class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelega
     
     @IBOutlet weak var signInButton: GIDSignInButton!
     private let scopes = [kGTLRAuthScopeYouTubeReadonly, kGTLRAuthScopeYouTube, kGTLRAuthScopeYouTubeForceSsl, kGTLRAuthScopeYouTubeYoutubepartner, kGTLRAuthScopeYouTubeUpload, kGTLRAuthScopeYouTubeYoutubepartnerChannelAudit]
-        
-        //var accessToken: String!
+    
+    //var accessToken: String!
     private var mediapicker1: MPMediaPickerController!
     
     
     var songTitle: String?
     var songArtist: String?
+    
+    
+    override func viewDidLoad() {
         
-
-        override func viewDidLoad() {
-           
-            super.viewDidLoad()
+        super.viewDidLoad()
         
-            
-            
-            GIDSignIn.sharedInstance().delegate = self
-            GIDSignIn.sharedInstance().uiDelegate = self
-            
-            GIDSignIn.sharedInstance().clientID = "335355113348-3tku90o1ltp2hhvlhf0eehin6kpinb28.apps.googleusercontent.com"
-            
-            GIDSignIn.sharedInstance().scopes = scopes
-            GIDSignIn.sharedInstance().signInSilently()
-            
-            signInButton.colorScheme = .dark
-            signInButton.style = .standard
-
-            
+        
+        
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
+        
+        GIDSignIn.sharedInstance().clientID = "335355113348-3tku90o1ltp2hhvlhf0eehin6kpinb28.apps.googleusercontent.com"
+        
+        GIDSignIn.sharedInstance().scopes = scopes
+        GIDSignIn.sharedInstance().signInSilently()
+        
+        signInButton.colorScheme = .dark
+        signInButton.style = .standard
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,16 +51,17 @@ class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelega
         
         if GIDSignIn.sharedInstance().hasAuthInKeychain() == true {
             checkMediaAuthorization()
-
+            
         }
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if (error == nil) {
-             let accessToken = user.authentication.accessToken!
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.accessToken = accessToken
-             checkMediaAuthorization()
+            let accessToken = signIn.currentUser.authentication.accessToken
+            let defaults = UserDefaults.standard
+            defaults.set(accessToken, forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
+            
+            checkMediaAuthorization()
         } else {
             print("\(error.localizedDescription)")
         }
@@ -75,29 +76,29 @@ class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelega
     }
     
     
-
-func checkMediaAuthorization() {
     
-    MPMediaLibrary.requestAuthorization { (status) in
-        if status == .authorized {
-            self.presentMediaPickerController()
-            //self.runMediaLibraryQuery()
-        } else {
-            self.displayMediaLibraryError()
+    func checkMediaAuthorization() {
+        
+        MPMediaLibrary.requestAuthorization { (status) in
+            if status == .authorized {
+                self.presentMediaPickerController()
+                //self.runMediaLibraryQuery()
+            } else {
+                self.displayMediaLibraryError()
+            }
         }
     }
-}
     
     
-        
     
     
-        override func didReceiveMemoryWarning() {
-            super.didReceiveMemoryWarning()
-            // Dispose of any resources that can be recreated.
-        }
-        
-        
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
     
     
     func presentMediaPickerController() {
@@ -107,9 +108,9 @@ func checkMediaAuthorization() {
         mediaPicker.delegate = self
         mediapicker1 = mediaPicker
         mediapicker1.showsCloudItems = true
-    
         
-       // self.view.addSubview(mediapicker1.view)
+        
+        // self.view.addSubview(mediapicker1.view)
         self.present(mediapicker1, animated: true, completion: nil)
         
         
@@ -145,7 +146,7 @@ func checkMediaAuthorization() {
         
         performSegue(withIdentifier: "searchYouTube", sender: self)
         mediaPicker.dismiss(animated: true, completion: nil)
-
+        
         
     }
     
@@ -164,7 +165,7 @@ func checkMediaAuthorization() {
     
     
     
-   
+    
 }
 
 

@@ -152,7 +152,7 @@ class PlaylistView: CoreDataTableViewController {
             
             let video = (self.fetchedResultsController?.fetchedObjects![indexPath.row]) as! Video
             
-            YoutubeAPI.sharedInstance().deleteVideoFromYTPlaylist(playlistItemID: video.playlistItemID!, accessToken: self.appDelegate.accessToken, completion: { (success) in
+            YoutubeAPI.sharedInstance().deleteVideoFromYTPlaylist(playlistItemID: video.playlistItemID!, accessToken: self.accessToken, completion: { (success) in
             
                 if success == true {
                    

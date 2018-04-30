@@ -94,6 +94,9 @@ struct Constants {
         static let APIScheme = "https"
         static let APIHost = "api.spotify.com"
         static let APIPath = ""
+        static let ClientID = "997aa0a751f24b429de2382ec370bdc0"
+        static let ClientSecret = "bffa4d1e3a1547f393ece980f2bfaff6"
+        static let RedirectURLString = "musicmatchrev2://returnafterlogin"
     }
     
     struct SpotifyMethod {
@@ -106,6 +109,10 @@ struct Constants {
         static let UserID = "user_id"
         static let PlayListID = "playlist_id"
         
+    }
+    
+    struct UserDefaultKeys {
+        static let YouTubeAccessToken = "YTAccessToken"
     }
     
 }

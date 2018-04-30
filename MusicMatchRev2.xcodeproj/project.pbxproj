@@ -10,9 +10,9 @@
 		6A2EC9111F8BE4B100E96D2C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9101F8BE4B100E96D2C /* CoreDataStack.swift */; };
 		6A2EC9121F8BE4B100E96D2C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9101F8BE4B100E96D2C /* CoreDataStack.swift */; };
 		6A2EC9131F8BE4B100E96D2C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9101F8BE4B100E96D2C /* CoreDataStack.swift */; };
-		6A2EC9151F8BE64700E96D2C /* YouTubeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9141F8BE64700E96D2C /* YouTubeConstants.swift */; };
-		6A2EC9161F8BE64700E96D2C /* YouTubeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9141F8BE64700E96D2C /* YouTubeConstants.swift */; };
-		6A2EC9171F8BE64700E96D2C /* YouTubeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9141F8BE64700E96D2C /* YouTubeConstants.swift */; };
+		6A2EC9151F8BE64700E96D2C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9141F8BE64700E96D2C /* Constants.swift */; };
+		6A2EC9161F8BE64700E96D2C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9141F8BE64700E96D2C /* Constants.swift */; };
+		6A2EC9171F8BE64700E96D2C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9141F8BE64700E96D2C /* Constants.swift */; };
 		6A2EC9191F8BE65800E96D2C /* YoutubeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9181F8BE65800E96D2C /* YoutubeAPI.swift */; };
 		6A2EC91A1F8BE65800E96D2C /* YoutubeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9181F8BE65800E96D2C /* YoutubeAPI.swift */; };
 		6A2EC91B1F8BE65800E96D2C /* YoutubeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9181F8BE65800E96D2C /* YoutubeAPI.swift */; };
@@ -113,7 +113,7 @@
 		6A0A72B61F9513B900A6EBA5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6A0A72B81F9513C000A6EBA5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		6A2EC9101F8BE4B100E96D2C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		6A2EC9141F8BE64700E96D2C /* YouTubeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeConstants.swift; sourceTree = "<group>"; };
+		6A2EC9141F8BE64700E96D2C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6A2EC9181F8BE65800E96D2C /* YoutubeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeAPI.swift; sourceTree = "<group>"; };
 		6A2EC91E1F8BE9D700E96D2C /* MusicMatchRev2-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "MusicMatchRev2-Bridging-Header.h"; path = "MusicMatchRev2/MusicMatchRev2-Bridging-Header.h"; sourceTree = "<group>"; };
 		6A2EC9231F8C431500E96D2C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -222,7 +222,6 @@
 		6A2EC91C1F8BE67300E96D2C /* YouTubeAPI */ = {
 			isa = PBXGroup;
 			children = (
-				6A2EC9141F8BE64700E96D2C /* YouTubeConstants.swift */,
 				6A2EC9181F8BE65800E96D2C /* YoutubeAPI.swift */,
 				6AEC04981F99307400C319DD /* YouTubeConvenience.swift */,
 			);
@@ -245,6 +244,7 @@
 		6AB7BA5B1F8BC58C0075113D = {
 			isa = PBXGroup;
 			children = (
+				6A2EC9141F8BE64700E96D2C /* Constants.swift */,
 				6ACBBD2920923EAE00008433 /* SpotifyAPI */,
 				6A2EC91C1F8BE67300E96D2C /* YouTubeAPI */,
 				6A846A01200590F70010535D /* LoginViewController.swift */,
@@ -524,7 +524,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/SpotifyLogin/SpotifyLogin.framework",
-				"${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-ios-4.0.2/GoogleCast.framework",
+				"${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-ios-4.2.0/GoogleCast.framework",
 				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -562,7 +562,7 @@
 				6A2EC9341F8D8EB500E96D2C /* PlaylistsViewController.swift in Sources */,
 				6AEC041C1F97BF0600C319DD /* Playlist+CoreDataClass.swift in Sources */,
 				6A2EC9111F8BE4B100E96D2C /* CoreDataStack.swift in Sources */,
-				6A2EC9151F8BE64700E96D2C /* YouTubeConstants.swift in Sources */,
+				6A2EC9151F8BE64700E96D2C /* Constants.swift in Sources */,
 				6AC8D1961FB5F1F9003B3EF3 /* YTTableViewDataSource.swift in Sources */,
 				6A846A02200590F70010535D /* LoginViewController.swift in Sources */,
 				6ACBBD3120937F4700008433 /* SpotifyTrack.swift in Sources */,
@@ -592,7 +592,7 @@
 				6AF9D8951F8BCE4400A4F1B0 /* YouTubeSearchController.swift in Sources */,
 				6AF9D89C1F8BDB4F00A4F1B0 /* SearchResultViewController.swift in Sources */,
 				6AC8D19A1FB60BB4003B3EF3 /* Playlist+CoreDataProperties.swift in Sources */,
-				6A2EC9171F8BE64700E96D2C /* YouTubeConstants.swift in Sources */,
+				6A2EC9171F8BE64700E96D2C /* Constants.swift in Sources */,
 				6AF9D8A51F8BDE2800A4F1B0 /* Model.xcdatamodeld in Sources */,
 				6AB7BA7D1F8BC58C0075113D /* MusicMatchRev2Tests.swift in Sources */,
 				6A2EC91B1F8BE65800E96D2C /* YoutubeAPI.swift in Sources */,
@@ -612,7 +612,7 @@
 				6AF9D8961F8BCE4400A4F1B0 /* YouTubeSearchController.swift in Sources */,
 				6AF9D89D1F8BDB4F00A4F1B0 /* SearchResultViewController.swift in Sources */,
 				6AC8D19B1FB60BB5003B3EF3 /* Playlist+CoreDataProperties.swift in Sources */,
-				6A2EC9161F8BE64700E96D2C /* YouTubeConstants.swift in Sources */,
+				6A2EC9161F8BE64700E96D2C /* Constants.swift in Sources */,
 				6AF9D8A61F8BDE2800A4F1B0 /* Model.xcdatamodeld in Sources */,
 				6AB7BA881F8BC58C0075113D /* MusicMatchRev2UITests.swift in Sources */,
 				6A2EC91A1F8BE65800E96D2C /* YoutubeAPI.swift in Sources */,
