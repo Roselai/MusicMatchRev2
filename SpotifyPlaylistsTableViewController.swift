@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SpotifyLogin
 
 class SpotifyPlaylistsTableViewController: UITableViewController {
     
@@ -22,11 +21,11 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
         
         self.spotifyPlaylistStore.playlists.removeAll()
         SpotifyClient.sharedInstance().fetchPlaylists(accessToken: spotifyAccessToken) { (playlists, error) in
-        
+            
             if error == nil {
                 
                 DispatchQueue.main.async() {
-                self.tableView.reloadData()
+                    self.tableView.reloadData()
                 }
                 
             } else {
@@ -34,10 +33,8 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
             }
         }
         
-        
     }
-    
-    
+  
     
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
@@ -69,14 +66,14 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let playlist = spotifyPlaylistStore.playlists[indexPath.row]
-        self.playlistID = spotifyPlaylistStore.playlists[indexPath.row].id
+        self.playlistID = playlist.id
         
         performSegue(withIdentifier: "getSpotifyPlaylistTracks", sender: self)
         
         
     }
     
-
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -11,10 +11,10 @@ import UIKit
 import CoreData
 
 
-class SearchResultViewController: UITableViewController, CreatePlaylistViewDelegate {
+class SearchResultViewController: UITableViewController, CreatePlaylistViewDelegate, UIGestureRecognizerDelegate {
   
     var videoID: String!
-    var accessToken: String!
+    var accessToken: String! = nil
     let searchDataSource = YTTableViewDataSource()
  
     let persistentContainer: NSPersistentContainer = {
@@ -33,17 +33,30 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let defaults = UserDefaults.standard
-        self.accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
+        let doubleTapRecognizer = UITapGestureRecognizer(target: self,
+                                                         action: #selector(SearchResultViewController.doubleTap(_:)))
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        doubleTapRecognizer.delaysTouchesBegan = true
+        self.tableView.addGestureRecognizer(doubleTapRecognizer)
+        doubleTapRecognizer.delegate = self
    
         tableView.dataSource = searchDataSource
         managedContext = persistentContainer.viewContext
-        
-        
+      
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let defaults = UserDefaults.standard
+        self.accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
+    }
+    
+    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        
+        
         configure(cell, for: indexPath)
         
     }
@@ -80,6 +93,9 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     }
     
     func configure(_ cell: UITableViewCell, for indexPath: IndexPath) {
+        
+        
+        
         let video = searchDataSource.items[indexPath.row]
         
         let imageURL = URL(string: video[Constants.YouTubeResponseKeys.ThumbnailURL]!)
@@ -117,9 +133,31 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
         
-        let segueAction = self.contextualSegueAction(forRowAtIndexPath: indexPath)
-        let swipeConfig = UISwipeActionsConfiguration(actions: [segueAction])
-        return swipeConfig
+        if accessToken != nil {
+            let segueAction = self.contextualSegueAction(forRowAtIndexPath: indexPath)
+            let swipeConfig = UISwipeActionsConfiguration(actions: [segueAction])
+            return swipeConfig
+        } else {
+            let loginAlert = UIAlertController(title: "Login",
+                                                   message: "Login to YouTube is required to add video(s) to playlist(s)",
+                                                   preferredStyle: .alert)
+            
+            let loginAction = UIAlertAction(title: "Login", style: .default, handler: { (action) in
+                
+                self.performSegue(withIdentifier: "LogInToGoogle", sender: self)
+                
+            })
+            let cancelAction = UIAlertAction(title: "No", style: .cancel ,
+                                                     handler: nil)
+            
+            
+            loginAlert.addAction(loginAction)
+            loginAlert.addAction(cancelAction)
+            self.present(loginAlert, animated: true, completion: nil)
+            
+            
+            return nil
+        }
         
     }
     
@@ -322,4 +360,31 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         })
     }
     
+    
+    @IBAction func unwindToVC1(segue:UIStoryboardSegue) { }
+    
+    //Double Tap to like video
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        
+    }
+    
+    @objc func doubleTap(_ gestureRecognizer: UIGestureRecognizer) {
+        
+        
+        if gestureRecognizer.state == UIGestureRecognizerState.ended {
+            let tapLocation = gestureRecognizer.location(in: self.tableView)
+            if let tapIndexPath = self.tableView.indexPathForRow(at: tapLocation) {
+                if let tappedCell = self.tableView.cellForRow(at: tapIndexPath) as? CustomTableViewCell {
+                    
+                    print("Recognized a double tap")
+                    
+                    
+                }
+            }
+        }
+    }
 }
+
+

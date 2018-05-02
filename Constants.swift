@@ -113,6 +113,7 @@ struct Constants {
     
     struct UserDefaultKeys {
         static let YouTubeAccessToken = "YTAccessToken"
+        static let SpotifyAccessToken = "SpotifyAccessToken"
     }
     
 }

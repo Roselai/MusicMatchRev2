@@ -9,14 +9,13 @@
 
 import UIKit
 import MediaPlayer
-import GoogleSignIn
-import GoogleAPIClientForREST
 
 
-class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelegate, GIDSignInUIDelegate, GIDSignInDelegate {
+
+class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelegate {
     
-    @IBOutlet weak var signInButton: GIDSignInButton!
-    private let scopes = [kGTLRAuthScopeYouTubeReadonly, kGTLRAuthScopeYouTube, kGTLRAuthScopeYouTubeForceSsl, kGTLRAuthScopeYouTubeYoutubepartner, kGTLRAuthScopeYouTubeUpload, kGTLRAuthScopeYouTubeYoutubepartnerChannelAudit]
+    
+    
     
     //var accessToken: String!
     private var mediapicker1: MPMediaPickerController!
@@ -26,54 +25,15 @@ class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelega
     var songArtist: String?
     
     
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        
-        
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().uiDelegate = self
-        
-        GIDSignIn.sharedInstance().clientID = "335355113348-3tku90o1ltp2hhvlhf0eehin6kpinb28.apps.googleusercontent.com"
-        
-        GIDSignIn.sharedInstance().scopes = scopes
-        GIDSignIn.sharedInstance().signInSilently()
-        
-        signInButton.colorScheme = .dark
-        signInButton.style = .standard
-        
-        
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if GIDSignIn.sharedInstance().hasAuthInKeychain() == true {
             checkMediaAuthorization()
             
-        }
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if (error == nil) {
-            let accessToken = signIn.currentUser.authentication.accessToken
-            let defaults = UserDefaults.standard
-            defaults.set(accessToken, forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
-            
-            checkMediaAuthorization()
-        } else {
-            print("\(error.localizedDescription)")
-        }
+        
     }
     
     
-    
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!,
-              withError error: Error!) {
-        // Perform any operations when the user disconnects from app here.
-        // ...
-    }
     
     
     
@@ -110,7 +70,6 @@ class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelega
         mediapicker1.showsCloudItems = true
         
         
-        // self.view.addSubview(mediapicker1.view)
         self.present(mediapicker1, animated: true, completion: nil)
         
         

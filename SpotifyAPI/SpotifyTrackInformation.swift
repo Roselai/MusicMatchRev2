@@ -13,12 +13,17 @@ struct SpotifyTrackInformation {
   
     var name: String
     var artists: [AnyObject]
+    var albumName: String
     
     init(json:[String: AnyObject]) {
         
         
+        
         name = json["name"] as! String
-        artists = json["artist"] as! [AnyObject]
+        artists = json["artists"] as! [AnyObject]
+        let album = json["album"] as! [String:AnyObject]
+        albumName = album["name"] as! String
+        
     }
     
     

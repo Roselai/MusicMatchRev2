@@ -37,9 +37,11 @@ class LoginViewController: UIViewController {
             } else {
             self.spotifyLoginButton.isHidden = true
             self.accessToken = accessToken
+                
+               
                 self.performSegue(withIdentifier: "LoggedIntoSpotify", sender: self)
                 
-                
+               
         
                 
             }
@@ -56,5 +58,6 @@ class LoginViewController: UIViewController {
             destination.spotifyAccessToken = self.accessToken
         }
     }
+    
     
 }

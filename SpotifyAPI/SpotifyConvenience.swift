@@ -24,12 +24,12 @@ extension SpotifyClient {
                 }
                 
                 
-               //DispatchQueue.main.async() {
-                    let playlists = SpotifyPlaylist.sharedInstance().playlistFromResults(results: playlistsArray)
-                    completionHandlerForFetchPlaylists(playlists, nil)
-                    
-                    
-                    //self.tableView.reloadData()
+                //DispatchQueue.main.async() {
+                let playlists = SpotifyPlaylist.sharedInstance().playlistFromResults(results: playlistsArray)
+                completionHandlerForFetchPlaylists(playlists, nil)
+                
+                
+                //self.tableView.reloadData()
                 //}
             }
             else {
@@ -67,38 +67,56 @@ extension SpotifyClient {
     
     func getPlaylistTracks(accessToken: String, userID: String, playlistID:String, completionHandlerForGetPlaylistTracks: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) {
         
-            let pathParameters = [Constants.SpotifyParameterKeys.PlayListID : playlistID,
+        let pathParameters = [Constants.SpotifyParameterKeys.PlayListID : playlistID,
                               Constants.SpotifyParameterKeys.UserID: userID]
         
         //Substitute the userID and PlaylistID into method to create a new method String
         var method = Constants.SpotifyMethod.PlaylistItemsMethod
         for (key,value) in pathParameters {
-        
-        let newMethod = subtituteKeyInMethod(method: method, key: key, value: value)
+            
+            let newMethod = subtituteKeyInMethod(method: method, key: key, value: value)
             method = newMethod!
         }
         
         //Use the new method String to retreive playlist tracks
-            SpotifyClient.sharedInstance().taskForGETMethod(method: method, parameters: nil, accessToken: accessToken, completionHandlerForGET: { (result, error) in
-                if error == nil {
+        _ = SpotifyClient.sharedInstance().taskForGETMethod(method: method, parameters: nil, accessToken: accessToken, completionHandlerForGET: { (result, error) in
+            if error == nil {
+                
+                //Parse the JSON result into tracks
+                
+                var tracksArray: [[String:AnyObject]] = []
+                guard
+                    let jsonDictionary = result as? [AnyHashable:Any],
+                    let items = jsonDictionary["items"] as? [[String:Any]]
                     
-                    //Parse the JSON result into tracks
-                    guard
-                        let jsonDictionary = result as? [AnyHashable:Any],
-                        let tracksArray = jsonDictionary["items"] as? [[String:AnyObject]]
+                    
                     else {
+                        return
+                }
+                
+                for index in 0 ... items.count - 1 {
+                    guard
+                        let item = items[index] as? [String: Any],
+                        let track = item["track"] as? [String: AnyObject]
+                       
+                        else {
                             return
                     }
                     
-                    //let tracks = SpotifyTrack.sharedInstance().trackFromResults(results: tracksArray)
+                    tracksArray.append(track)
                     
-                    completionHandlerForGetPlaylistTracks(tracksArray as AnyObject, nil)
-                } else {
-                    completionHandlerForGetPlaylistTracks(nil, error)
                 }
-            })
-        }
-        
+                
+                
+                
+                let songs = SpotifyTrack.sharedInstance().trackFromResults(results: tracksArray)
+                completionHandlerForGetPlaylistTracks(songs as AnyObject, nil)
+            } else {
+                completionHandlerForGetPlaylistTracks(nil, error)
+            }
+        })
+    }
+    
     
     
 }

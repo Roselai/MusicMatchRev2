@@ -21,18 +21,10 @@
                     <view key="view" contentMode="scaleToFill" id="NHI-qi-r3T">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NR8-tT-6CP" customClass="GIDSignInButton">
-                                <rect key="frame" x="87" y="241.5" width="200" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" id="C5o-bh-uf2"/>
                     <connections>
-                        <outlet property="signInButton" destination="NR8-tT-6CP" id="68H-Bv-CSz"/>
                         <segue destination="BYZ-38-t0r" kind="push" identifier="searchYouTube" id="xjp-ol-Hki"/>
                     </connections>
                 </viewController>
@@ -68,11 +60,12 @@
                     <navigationItem key="navigationItem" id="aKy-xs-ZSL"/>
                     <connections>
                         <segue destination="MYr-bS-HS0" kind="modal" identifier="createAPlaylist" id="PsU-iz-viG"/>
+                        <segue destination="Rv0-xB-JyI" kind="push" identifier="LogInToGoogle" id="dxr-BI-VWf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rfb-ef-U91" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042.5" y="671.5"/>
+            <point key="canvasLocation" x="455.5" y="978.5"/>
         </scene>
         <!--You Tube Search Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -83,23 +76,23 @@
                         <viewControllerLayoutGuide type="bottom" id="3oN-IA-jod"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mEQ-1j-7M9">
-                                <rect key="frame" x="0.0" y="225" width="375" height="329"/>
+                                <rect key="frame" x="0.0" y="289" width="375" height="329"/>
                                 <connections>
                                     <segue destination="zCE-T3-c0J" kind="embed" id="8Cj-UD-rYW"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="19F-1Q-zoT">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="226"/>
                                 <connections>
                                     <segue destination="sXk-8v-Kif" kind="embed" id="hrF-Nd-Maz"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMw-gN-ynp">
-                                <rect key="frame" x="0.0" y="554" width="375" height="49"/>
+                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                                 <color key="backgroundColor" red="0.51664949174459818" green="0.51664949174459818" blue="0.51664949174459818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -129,7 +122,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="455.5" y="-40.5"/>
+            <point key="canvasLocation" x="486" y="187"/>
         </scene>
         <!--Playlists View Controller-->
         <scene sceneID="ZFn-hf-lr4">
@@ -160,7 +153,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdR-fc-L1D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="549.5" y="1351.5"/>
+            <point key="canvasLocation" x="605" y="2570"/>
         </scene>
         <!--Playlist View-->
         <scene sceneID="wzj-kZ-A95">
@@ -189,7 +182,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QZ2-2p-fkx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1172.5" y="2067"/>
+            <point key="canvasLocation" x="1457" y="2707"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tCK-pR-zgN">
@@ -226,12 +219,12 @@
                     <navigationItem key="navigationItem" id="KhD-mc-Mc9"/>
                     <connections>
                         <outlet property="spotifyLoginButton" destination="q6G-8P-8JV" id="vEX-Z3-6ct"/>
-                        <segue destination="vl2-FS-NKX" kind="push" identifier="LoggedIntoSpotify" id="hOg-A4-qup"/>
+                        <segue destination="vl2-FS-NKX" kind="push" identifier="LoggedIntoSpotify" id="ZL4-kO-wXH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mb3-78-DSx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1210.5" y="1034.5"/>
+            <point key="canvasLocation" x="-2605" y="1964"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gzV-b3-buf">
@@ -309,7 +302,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u21-rF-pEe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1101" y="-13"/>
+            <point key="canvasLocation" x="1944" y="187"/>
         </scene>
         <!--Playlist Container View-->
         <scene sceneID="Fl3-cK-LFq">
@@ -367,7 +360,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5h-rG-hUf" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1759.5" y="1351.5"/>
+            <point key="canvasLocation" x="1457" y="1759"/>
         </scene>
         <!--Create Playlist View-->
         <scene sceneID="Qmt-7N-77i">
@@ -475,7 +468,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VxX-P7-FaX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1580.5" y="671.5"/>
+            <point key="canvasLocation" x="1004" y="979"/>
         </scene>
         <!--Spotify Playlists Table View Controller-->
         <scene sceneID="Qn7-8N-sRh">
@@ -511,7 +504,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NJi-dA-6ro" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1211.5" y="1961.5"/>
+            <point key="canvasLocation" x="-1959" y="1964"/>
         </scene>
         <!--Spotify Playlist View-->
         <scene sceneID="RuT-m1-zkj">
@@ -522,12 +515,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ii8-1b-hue">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" textLabel="eZw-HH-kvR" detailTextLabel="jEf-8N-HJE" rowHeight="90" style="IBUITableViewCellStyleSubtitle" id="Ii8-1b-hue">
+                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ii8-1b-hue" id="2nR-KX-yrb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eZw-HH-kvR">
+                                            <rect key="frame" x="16" y="25" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jEf-8N-HJE">
+                                            <rect key="frame" x="16" y="48.5" width="33" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -537,10 +546,51 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="zH4-aS-a5g"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="push" identifier="searchForVideo" id="l8R-OA-dvg"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ETx-2m-I8o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-702" y="1964"/>
+            <point key="canvasLocation" x="-813" y="1556"/>
+        </scene>
+        <!--Google Login View-->
+        <scene sceneID="KZx-TX-ALS">
+            <objects>
+                <viewController id="Rv0-xB-JyI" customClass="GoogleLoginView" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6jJ-XC-ADo"/>
+                        <viewControllerLayoutGuide type="bottom" id="krh-JW-9rF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="k0p-ca-Ndm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="329"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ca8-lF-ocz" customClass="GIDSignInButton">
+                                <rect key="frame" x="67" y="134.5" width="240" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="4dJ-w4-gqT"/>
+                                    <constraint firstAttribute="height" constant="60" id="clf-oQ-EeB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ca8-lF-ocz" firstAttribute="centerY" secondItem="k0p-ca-Ndm" secondAttribute="centerY" id="Lr1-Tu-3PN"/>
+                            <constraint firstItem="ca8-lF-ocz" firstAttribute="centerX" secondItem="k0p-ca-Ndm" secondAttribute="centerX" id="dG9-hT-4b9"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Lch-5r-rMZ"/>
+                    <connections>
+                        <outlet property="signInButton" destination="ca8-lF-ocz" id="9Fn-f8-TL8"/>
+                        <segue destination="XcW-hZ-Xcq" kind="unwind" identifier="GoBackToSearchResult" unwindAction="unwindToVC1WithSegue:" id="OyV-G2-0J8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VLs-F7-XCK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="XcW-hZ-Xcq" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="456" y="1557"/>
         </scene>
         <!--Youtube Playlists-->
         <scene sceneID="1d1-4g-OcP">
@@ -555,12 +605,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="HD3-Uc-sWb" kind="relationship" relationship="rootViewController" id="3VO-fs-P74"/>
+                        <segue destination="HD3-Uc-sWb" kind="relationship" relationship="rootViewController" id="e6C-gr-Akj"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lnf-Ja-sMa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="65.5" y="1351.5"/>
+            <point key="canvasLocation" x="-139" y="1759"/>
         </scene>
         <!--Spotify Playlists-->
         <scene sceneID="OL6-9p-DhL">
@@ -571,21 +621,23 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jEn-OG-zhQ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.5568627451" green="0.88235294119999996" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="XrC-iZ-X2V" kind="relationship" relationship="rootViewController" id="gaC-dp-Kar"/>
+                        <segue destination="XrC-iZ-X2V" kind="relationship" relationship="rootViewController" id="0Cn-v9-qvB"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOj-rq-YBL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1797.5" y="1034.5"/>
+            <point key="canvasLocation" x="-1590" y="1093"/>
         </scene>
     </scenes>
     <resources>
         <image name="spotifyIcon" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="N1S-te-qr6"/>
+        <segue reference="hrF-Nd-Maz"/>
+        <segue reference="l8R-OA-dvg"/>
     </inferredMetricsTieBreakers>
 </document>

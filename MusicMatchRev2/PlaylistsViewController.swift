@@ -35,6 +35,8 @@ class PlaylistsViewController: CoreDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.setHidesBackButton(true, animated:true)
+        
         let defaults = UserDefaults.standard
         self.accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
         
