@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class SpotifyPlaylistsTableViewController: UITableViewController {
     
     var spotifyPlaylistStore = SpotifyPlaylist.sharedInstance()
@@ -16,6 +17,7 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         self.navigationItem.setHidesBackButton(true, animated:true);
         

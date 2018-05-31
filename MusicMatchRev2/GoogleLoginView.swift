@@ -12,16 +12,18 @@ import GoogleSignIn
 import GoogleAPIClientForREST
 
 
+
 class GoogleLoginView: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate{
     
     @IBOutlet weak var signInButton: GIDSignInButton!
     
     private let scopes = [kGTLRAuthScopeYouTubeReadonly, kGTLRAuthScopeYouTube, kGTLRAuthScopeYouTubeForceSsl, kGTLRAuthScopeYouTubeYoutubepartner, kGTLRAuthScopeYouTubeUpload, kGTLRAuthScopeYouTubeYoutubepartnerChannelAudit]
     
+    var accessToken: String!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
         
         
         GIDSignIn.sharedInstance().delegate = self
@@ -44,20 +46,30 @@ class GoogleLoginView: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate{
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if (error == nil) {
-            let accessToken = signIn.currentUser.authentication.accessToken
+            
+            signInButton.isEnabled = false
+            
+            accessToken = signIn.currentUser.authentication.accessToken
             let defaults = UserDefaults.standard
             defaults.set(accessToken, forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
             
-           goBackToOneButtonTapped(self)
+            performSegue(withIdentifier: "LoggedInToGoogle", sender: self)
             
         } else {
+            signInButton.isEnabled = true
+            
             print("\(error.localizedDescription)")
         }
     }
     
-    @IBAction func goBackToOneButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "GoBackToSearchResult", sender: self)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "LoggedInToGoogle" {
+            let destinationViewController = segue.destination as! PlaylistsViewController
+            destinationViewController.accessToken = self.accessToken
+            
+        }
     }
+    
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!,
               withError error: Error!) {

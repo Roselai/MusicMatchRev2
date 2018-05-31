@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 
+
 class PlaylistView: CoreDataTableViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -33,7 +34,7 @@ class PlaylistView: CoreDataTableViewController {
     
     //MARK: TableView DataSource Methods
     
-
+   
     
     func loadFetchedResultsController (playlist: Playlist!, context: NSManagedObjectContext) {
        

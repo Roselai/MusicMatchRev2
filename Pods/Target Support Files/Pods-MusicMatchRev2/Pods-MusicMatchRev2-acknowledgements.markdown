@@ -1050,10 +1050,6 @@ Copyright 2018 Google
    limitations under the License.
 
 
-## google-cast-sdk
-
-https://developers.google.com/terms/
-
 ## youtube-ios-player-helper
 
 Copyright 2014 Google Inc. All rights reserved.

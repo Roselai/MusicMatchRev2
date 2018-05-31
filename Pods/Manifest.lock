@@ -7,9 +7,6 @@ PODS:
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
   - FirebaseInstanceID (1.0.10):
     - FirebaseCore (~> 3.6)
-  - google-cast-sdk (4.2.0):
-    - google-cast-sdk/Core (= 4.2.0)
-  - google-cast-sdk/Core (4.2.0)
   - Google/Core (3.1.0):
     - FirebaseAnalytics (~> 3.2)
   - Google/SignIn (3.1.0):
@@ -46,7 +43,6 @@ PODS:
   - youtube-ios-player-helper (0.1.6)
 
 DEPENDENCIES:
-  - google-cast-sdk
   - Google/SignIn
   - GoogleAPIClientForREST/YouTube
   - SpotifyLogin (~> 0.1)
@@ -58,7 +54,6 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseInstanceID
     - Google
-    - google-cast-sdk
     - GoogleAPIClientForREST
     - GoogleSignIn
     - GoogleToolboxForMac
@@ -81,7 +76,6 @@ SPEC CHECKSUMS:
   FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
   Google: 98da4b1a60ed0beb80a290387a28333406a1eb90
-  google-cast-sdk: 3d846f9436c8de8418150d8446b2da58f7f87388
   GoogleAPIClientForREST: f7951c455df271bc6259b3ddb4073d0026475ccf
   GoogleSignIn: d9ef55b10f0aa401a5de2747f59b725e4b9732ac
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
@@ -90,6 +84,6 @@ SPEC CHECKSUMS:
   SpotifyLogin: 9cdf82ff13e5f37e5ddc7fd07cf9793a9ebd1124
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 30ccb06e10e433b17e87d742c8b08afd6cef411e
+PODFILE CHECKSUM: faaf1029358d8d294fc7c83076c23dde582b5424
 
 COCOAPODS: 1.5.0

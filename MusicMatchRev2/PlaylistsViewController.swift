@@ -11,12 +11,13 @@ import UIKit
 import CoreData
 
 
-class PlaylistsViewController: CoreDataTableViewController {
+
+class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentationControllerDelegate{
     
 
     //var playlistID: String!
     var videoID: String!
-    var accessToken: String!
+    var accessToken: String! = nil
     let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores { (description, error) in
@@ -34,25 +35,31 @@ class PlaylistsViewController: CoreDataTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+  
         
         self.navigationItem.setHidesBackButton(true, animated:true)
         
         let defaults = UserDefaults.standard
         self.accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
         
+        if accessToken != nil {
+            
+            managedContext = persistentContainer.viewContext
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Playlist")
+            
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
+            fetchedPlaylists = fetchedResultsController?.fetchedObjects as! [Playlist]
+            
+            fetchPlaylists()
+          
+        }
         
-        managedContext = persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Playlist")
         
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
-        fetchedPlaylists = fetchedResultsController?.fetchedObjects as! [Playlist]
-        
-        fetchPlaylists()
-        
-      
     }
 
+ 
+    
 
     //MARK: TableView DataSource Methods
     

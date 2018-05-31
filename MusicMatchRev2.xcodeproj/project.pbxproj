@@ -56,6 +56,20 @@
 		6ACBBD2F20937C5400008433 /* SpotifyTrackInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBBD2E20937C5400008433 /* SpotifyTrackInformation.swift */; };
 		6ACBBD3120937F4700008433 /* SpotifyTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBBD3020937F4700008433 /* SpotifyTrack.swift */; };
 		6AD54C5A20978BE80009DD0D /* GoogleLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD54C5920978BE80009DD0D /* GoogleLoginView.swift */; };
+		6AE9F3B6209A470500C5855C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0A72B81F9513C000A6EBA5 /* Accelerate.framework */; };
+		6AE9F3B7209A471800C5855C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0A72B61F9513B900A6EBA5 /* AudioToolbox.framework */; };
+		6AE9F3B8209A472300C5855C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0A72B41F9513AF00A6EBA5 /* AVFoundation.framework */; };
+		6AE9F3B9209A473200C5855C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0A72B21F9513A800A6EBA5 /* CoreBluetooth.framework */; };
+		6AE9F3BA209A474000C5855C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0A72A61F95136A00A6EBA5 /* CoreGraphics.framework */; };
+		6AE9F3BB209A474800C5855C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0A72B01F95139E00A6EBA5 /* CoreText.framework */; };
+		6AE9F3BC209A475600C5855C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0A72A21F95135000A6EBA5 /* Foundation.framework */; };
+		6AE9F3BF209A478200C5855C /* MediaAccessibility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0A72AA1F95137F00A6EBA5 /* MediaAccessibility.framework */; };
+		6AE9F3C0209A478800C5855C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0A72AC1F95138600A6EBA5 /* MediaPlayer.framework */; };
+		6AE9F3C1209A479500C5855C /* MediaToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0A72AE1F95139400A6EBA5 /* MediaToolbox.framework */; };
+		6AE9F3C2209A47A100C5855C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0A72A01F95134400A6EBA5 /* QuartzCore.framework */; };
+		6AE9F3C3209A47AD00C5855C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0A72A81F95137400A6EBA5 /* SystemConfiguration.framework */; };
+		6AE9F3C4209A47B800C5855C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0A72A41F95135E00A6EBA5 /* UIKit.framework */; };
+		6AE9F3C5209A47CB00C5855C /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0A729E1F95132B00A6EBA5 /* libc++.tbd */; };
 		6AEC041B1F97BF0600C319DD /* Playlist+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEC04171F97BF0500C319DD /* Playlist+CoreDataClass.swift */; };
 		6AEC041C1F97BF0600C319DD /* Playlist+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEC04171F97BF0500C319DD /* Playlist+CoreDataClass.swift */; };
 		6AEC041D1F97BF0600C319DD /* Playlist+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEC04171F97BF0500C319DD /* Playlist+CoreDataClass.swift */; };
@@ -153,6 +167,7 @@
 		6ACBBD2E20937C5400008433 /* SpotifyTrackInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyTrackInformation.swift; sourceTree = "<group>"; };
 		6ACBBD3020937F4700008433 /* SpotifyTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyTrack.swift; sourceTree = "<group>"; };
 		6AD54C5920978BE80009DD0D /* GoogleLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoogleLoginView.swift; path = MusicMatchRev2/GoogleLoginView.swift; sourceTree = "<group>"; };
+		6AE9F3BD209A477400C5855C /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleCast.framework; path = "Pods/google-cast-sdk/GoogleCastSDK-ios-4.2.0/GoogleCast.framework"; sourceTree = "<group>"; };
 		6AEC04171F97BF0500C319DD /* Playlist+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Playlist+CoreDataClass.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Playlist+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		6AEC04281F97C03000C319DD /* Video+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Video+CoreDataClass.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Video+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		6AEC04331F97E1AD00C319DD /* YouTubePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = YouTubePlayerViewController.swift; path = MusicMatchRev2/YouTubePlayerViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +187,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AE9F3C5209A47CB00C5855C /* libc++.tbd in Frameworks */,
+				6AE9F3C4209A47B800C5855C /* UIKit.framework in Frameworks */,
+				6AE9F3C3209A47AD00C5855C /* SystemConfiguration.framework in Frameworks */,
+				6AE9F3C2209A47A100C5855C /* QuartzCore.framework in Frameworks */,
+				6AE9F3C1209A479500C5855C /* MediaToolbox.framework in Frameworks */,
+				6AE9F3C0209A478800C5855C /* MediaPlayer.framework in Frameworks */,
+				6AE9F3BF209A478200C5855C /* MediaAccessibility.framework in Frameworks */,
+				6AE9F3BC209A475600C5855C /* Foundation.framework in Frameworks */,
+				6AE9F3BB209A474800C5855C /* CoreText.framework in Frameworks */,
+				6AE9F3BA209A474000C5855C /* CoreGraphics.framework in Frameworks */,
+				6AE9F3B9209A473200C5855C /* CoreBluetooth.framework in Frameworks */,
+				6AE9F3B8209A472300C5855C /* AVFoundation.framework in Frameworks */,
+				6AE9F3B7209A471800C5855C /* AudioToolbox.framework in Frameworks */,
+				6AE9F3B6209A470500C5855C /* Accelerate.framework in Frameworks */,
 				6A644DD2206427CB00855BB7 /* SpotifyMetadata.framework in Frameworks */,
 				6A644DD4206427CB00855BB7 /* SpotifyAudioPlayback.framework in Frameworks */,
 				6A644DD3206427CB00855BB7 /* SpotifyAuthentication.framework in Frameworks */,
@@ -199,6 +228,7 @@
 		3FAD0027F0E16309CA912232 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6AE9F3BD209A477400C5855C /* GoogleCast.framework */,
 				6A644DD1206427CB00855BB7 /* SpotifyAudioPlayback.framework */,
 				6A644DD0206427CA00855BB7 /* SpotifyAuthentication.framework */,
 				6A644DCF206427CA00855BB7 /* SpotifyMetadata.framework */,
@@ -527,7 +557,6 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/SpotifyLogin/SpotifyLogin.framework",
-				"${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-ios-4.2.0/GoogleCast.framework",
 				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -537,7 +566,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SpotifyLogin.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleCast.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -714,10 +742,13 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = "";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "MusicMatchRev2/MusicMatchRev2-Bridging-Header.h";
@@ -770,9 +801,12 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = "";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "MusicMatchRev2/MusicMatchRev2-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -793,6 +827,7 @@
 					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-Public-3.5.6-Release",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-ios-4.0.2",
+					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-ios-4.2.0",
 				);
 				INFOPLIST_FILE = MusicMatchRev2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
@@ -893,6 +928,7 @@
 					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-Public-3.5.6-Release",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-ios-4.0.2",
+					"$(PROJECT_DIR)/Pods/google-cast-sdk/GoogleCastSDK-ios-4.2.0",
 				);
 				INFOPLIST_FILE = MusicMatchRev2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;

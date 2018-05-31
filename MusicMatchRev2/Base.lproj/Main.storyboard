@@ -76,23 +76,23 @@
                         <viewControllerLayoutGuide type="bottom" id="3oN-IA-jod"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mEQ-1j-7M9">
-                                <rect key="frame" x="0.0" y="289" width="375" height="329"/>
+                                <rect key="frame" x="0.0" y="225" width="375" height="329"/>
                                 <connections>
                                     <segue destination="zCE-T3-c0J" kind="embed" id="8Cj-UD-rYW"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="19F-1Q-zoT">
-                                <rect key="frame" x="0.0" y="64" width="375" height="226"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
                                 <connections>
                                     <segue destination="sXk-8v-Kif" kind="embed" id="hrF-Nd-Maz"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMw-gN-ynp">
-                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                                <rect key="frame" x="0.0" y="554" width="375" height="49"/>
                                 <color key="backgroundColor" red="0.51664949174459818" green="0.51664949174459818" blue="0.51664949174459818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -153,7 +153,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdR-fc-L1D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="605" y="2570"/>
+            <point key="canvasLocation" x="456" y="2736"/>
         </scene>
         <!--Playlist View-->
         <scene sceneID="wzj-kZ-A95">
@@ -557,17 +557,17 @@
         <!--Google Login View-->
         <scene sceneID="KZx-TX-ALS">
             <objects>
-                <viewController id="Rv0-xB-JyI" customClass="GoogleLoginView" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LogInToGoogle" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Rv0-xB-JyI" customClass="GoogleLoginView" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6jJ-XC-ADo"/>
                         <viewControllerLayoutGuide type="bottom" id="krh-JW-9rF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="k0p-ca-Ndm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="329"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ca8-lF-ocz" customClass="GIDSignInButton">
-                                <rect key="frame" x="67" y="134.5" width="240" height="60"/>
+                                <rect key="frame" x="67" y="271.5" width="240" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="4dJ-w4-gqT"/>
@@ -585,12 +585,13 @@
                     <connections>
                         <outlet property="signInButton" destination="ca8-lF-ocz" id="9Fn-f8-TL8"/>
                         <segue destination="XcW-hZ-Xcq" kind="unwind" identifier="GoBackToSearchResult" unwindAction="unwindToVC1WithSegue:" id="OyV-G2-0J8"/>
+                        <segue destination="HD3-Uc-sWb" kind="push" identifier="LoggedInToGoogle" id="v1e-hb-Lng"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VLs-F7-XCK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="XcW-hZ-Xcq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="456" y="1557"/>
+            <point key="canvasLocation" x="456" y="1759"/>
         </scene>
         <!--Youtube Playlists-->
         <scene sceneID="1d1-4g-OcP">
@@ -605,7 +606,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="HD3-Uc-sWb" kind="relationship" relationship="rootViewController" id="e6C-gr-Akj"/>
+                        <segue destination="Rv0-xB-JyI" kind="relationship" relationship="rootViewController" id="O9c-AM-thK"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lnf-Ja-sMa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -637,7 +638,8 @@
         <image name="spotifyIcon" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="O9c-AM-thK"/>
         <segue reference="hrF-Nd-Maz"/>
-        <segue reference="l8R-OA-dvg"/>
+        <segue reference="xjp-ol-Hki"/>
     </inferredMetricsTieBreakers>
 </document>

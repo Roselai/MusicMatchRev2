@@ -31,6 +31,7 @@ class CreatePlaylistView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         nameTextField.delegate = self
         
         popUpView.layer.cornerRadius = 10

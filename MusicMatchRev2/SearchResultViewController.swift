@@ -11,6 +11,7 @@ import UIKit
 import CoreData
 
 
+
 class SearchResultViewController: UITableViewController, CreatePlaylistViewDelegate, UIGestureRecognizerDelegate {
   
     var videoID: String!
@@ -32,6 +33,8 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       
         
         let doubleTapRecognizer = UITapGestureRecognizer(target: self,
                                                          action: #selector(SearchResultViewController.doubleTap(_:)))

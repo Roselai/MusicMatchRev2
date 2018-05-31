@@ -14,39 +14,35 @@ import SpotifyLogin
 class LoginViewController: UIViewController {
     
     var accessToken: String!
-
     
-
+    
+    
     @IBOutlet weak var spotifyLoginButton: UIButton!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(animated)
         
         SpotifyLogin.shared.getAccessToken { (accessToken, error) in
             if error != nil {
                 // User is not logged in, show log in flow.
-                
+                self.spotifyLoginButton.isEnabled = true
                 self.spotifyLoginButton = SpotifyLoginButton(viewController: self, scopes: [.streaming, .userLibraryRead, .playlistReadPrivate])
             } else {
-            self.spotifyLoginButton.isHidden = true
-            self.accessToken = accessToken
+                self.spotifyLoginButton.isEnabled = false
+                self.accessToken = accessToken
                 
-               
+                
                 self.performSegue(withIdentifier: "LoggedIntoSpotify", sender: self)
                 
-               
-        
                 
             }
+            
         }
     }
+    
+    
     
     @IBAction func spotifyLoginButtonPressed(_ sender: UIButton) {
         

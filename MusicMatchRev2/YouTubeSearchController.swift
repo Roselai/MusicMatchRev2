@@ -10,20 +10,22 @@ import Foundation
 import UIKit
 import CoreGraphics
 
+
 class YouTubeSearchController: UIViewController {
+    
     
     fileprivate var searchResultsViewController: SearchResultViewController!
     fileprivate var YTPlayerViewController: YouTubePlayerViewController!
     var videoID: String!
     var queryString: String!
+   
  
   
     @IBOutlet weak var notificationLabel: UILabel!
   
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-
+        
         
         notificationLabel.isHidden = true
         notificationLabel.text = ""
@@ -89,6 +91,8 @@ class YouTubeSearchController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
+    
     
     
 }

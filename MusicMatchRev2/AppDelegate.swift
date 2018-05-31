@@ -12,12 +12,11 @@ import SpotifyLogin
 
 
 
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+class AppDelegate: UIResponder, UIApplicationDelegate{
     
 
-    fileprivate var enableSDKLogging = false
     var window: UIWindow?
     let stack = CoreDataStack()
     
@@ -37,8 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             clientSecret: Constants.Spotify.ClientSecret,
             redirectURL: URL(string: Constants.Spotify.RedirectURLString)!)
         
-        
-       
         
         return true
     }
@@ -97,6 +94,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
     }
+    
+    
 
     
     /*

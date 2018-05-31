@@ -11,6 +11,7 @@ import UIKit
 import youtube_ios_player_helper
 
 
+
 class YouTubePlayerViewController: UIViewController{
     
     
@@ -23,6 +24,7 @@ class YouTubePlayerViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+      
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideo), name: Notification.Name("Cell Selected"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideo), name: Notification.Name("Initial Video ID"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideoFromPlaylist), name: Notification.Name("Playlist Item Selected"), object: nil)

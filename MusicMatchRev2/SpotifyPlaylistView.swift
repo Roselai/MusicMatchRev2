@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class SpotifyPlaylistView: UITableViewController {
     
     var spotifyTrackStore = SpotifyTrack.sharedInstance()
@@ -18,6 +19,7 @@ class SpotifyPlaylistView: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         
         self.spotifyTrackStore.tracks.removeAll()
         

@@ -19,8 +19,6 @@ class PlaylistContainerView: UIViewController {
     
     fileprivate var playlistView: PlaylistView!
     fileprivate var YTPlayerViewController: YouTubePlayerViewController!
-    //var videoID: String!
-    //var playlistID: String!
     var accessToken: String!
     var playlist: Playlist!
     
@@ -30,6 +28,7 @@ class PlaylistContainerView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         guard let playlistController = childViewControllers.first as? PlaylistView else  {
             fatalError("Check storyboard for missing SearchResultViewController")

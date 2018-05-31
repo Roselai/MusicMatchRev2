@@ -12,10 +12,9 @@ import MediaPlayer
 
 
 
+
 class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelegate {
-    
-    
-    
+        
     
     //var accessToken: String!
     private var mediapicker1: MPMediaPickerController!
