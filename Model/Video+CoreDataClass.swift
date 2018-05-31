@@ -2,7 +2,7 @@
 //  Video+CoreDataClass.swift
 //  
 //
-//  Created by Shukti Shaikh on 10/18/17.
+//  Created by Shukti Shaikh on 5/31/18.
 //
 //
 
@@ -11,5 +11,5 @@ import CoreData
 
 @objc(Video)
 public class Video: NSManagedObject {
-    
+
 }
