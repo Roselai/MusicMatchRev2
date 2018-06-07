@@ -12,7 +12,9 @@ import CoreData
 
 
 
-class LikedVideosView : CoreDataTableViewController{
+class LikedVideosView : CoreDataTableViewController {
+    
+    
     
     var videoID: String!
     var accessToken: String! = nil
@@ -34,10 +36,10 @@ class LikedVideosView : CoreDataTableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
 
         let defaults = UserDefaults.standard
         self.accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
-        
         
         
         
@@ -56,7 +58,10 @@ class LikedVideosView : CoreDataTableViewController{
             fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
             fetchedVideos = fetchedResultsController?.fetchedObjects as! [Video]
             
-            
+            let initialVideo = fetchedVideos[0]
+            let initialVideoID = initialVideo.videoID
+            //send first result videoID to player for load
+            NotificationCenter.default.post(name: NSNotification.Name("Initial Video ID"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : initialVideoID!])
             
         }
     }
@@ -77,7 +82,8 @@ class LikedVideosView : CoreDataTableViewController{
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.video = (fetchedResultsController?.fetchedObjects![indexPath.row]) as! Video
-      //  performSegue(withIdentifier: "showPlaylistForID", sender: self)
+        
+      NotificationCenter.default.post(name: NSNotification.Name("Cell Selected"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : self.video.videoID!])
     }
     
     func configure(_ cell: UITableViewCell, for indexPath: IndexPath) {
@@ -152,8 +158,9 @@ class LikedVideosView : CoreDataTableViewController{
         }
     }
     
-
-
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
 }
 
