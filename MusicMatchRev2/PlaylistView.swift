@@ -95,7 +95,7 @@ class PlaylistView: CoreDataTableViewController {
             
             if let imagePath = video.thumbnailURL {
                 let url = URL(string: imagePath)
-                _ = YoutubeAPI.sharedInstance().downloadimageData(photoURL: url!, completionHandlerForDownloadImageData: { (imageData, error) in
+                _ = APIClient.sharedInstance().downloadimageData(photoURL: url!, completionHandlerForDownloadImageData: { (imageData, error) in
                     
                     // GUARD - check for error
                     guard error == nil else {
@@ -153,7 +153,7 @@ class PlaylistView: CoreDataTableViewController {
             
             let video = (self.fetchedResultsController?.fetchedObjects![indexPath.row]) as! Video
             
-            YoutubeAPI.sharedInstance().deleteVideoFromYTPlaylist(playlistItemID: video.playlistItemID!, accessToken: self.accessToken, completion: { (success) in
+            APIClient.sharedInstance().deleteVideoFromYTPlaylist(playlistItemID: video.playlistItemID!, accessToken: self.accessToken, completion: { (success) in
             
                 if success == true {
                    
@@ -187,7 +187,7 @@ class PlaylistView: CoreDataTableViewController {
     
     func getVideosFromPlaylist(accessToken: String, playlist: Playlist, context: NSManagedObjectContext){
         
-        YoutubeAPI.sharedInstance().getVideosFromPlaylist(accessToken: accessToken, playlist: playlist) { (videos, error) in
+        APIClient.sharedInstance().getVideosFromPlaylist(accessToken: accessToken, playlist: playlist) { (videos, error) in
     
             
             guard error == nil else {

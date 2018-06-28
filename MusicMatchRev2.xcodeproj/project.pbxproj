@@ -11,21 +11,16 @@
 		6A2EC9121F8BE4B100E96D2C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9101F8BE4B100E96D2C /* CoreDataStack.swift */; };
 		6A2EC9131F8BE4B100E96D2C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9101F8BE4B100E96D2C /* CoreDataStack.swift */; };
 		6A2EC9151F8BE64700E96D2C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9141F8BE64700E96D2C /* Constants.swift */; };
-		6A2EC9161F8BE64700E96D2C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9141F8BE64700E96D2C /* Constants.swift */; };
-		6A2EC9171F8BE64700E96D2C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9141F8BE64700E96D2C /* Constants.swift */; };
-		6A2EC9191F8BE65800E96D2C /* YoutubeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9181F8BE65800E96D2C /* YoutubeAPI.swift */; };
-		6A2EC91A1F8BE65800E96D2C /* YoutubeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9181F8BE65800E96D2C /* YoutubeAPI.swift */; };
-		6A2EC91B1F8BE65800E96D2C /* YoutubeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9181F8BE65800E96D2C /* YoutubeAPI.swift */; };
 		6A2EC9241F8C431500E96D2C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9231F8C431500E96D2C /* CustomButton.swift */; };
 		6A2EC9251F8C431500E96D2C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9231F8C431500E96D2C /* CustomButton.swift */; };
 		6A2EC9261F8C431500E96D2C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9231F8C431500E96D2C /* CustomButton.swift */; };
 		6A2EC9341F8D8EB500E96D2C /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */; };
 		6A543BC720C1AE7A007E3249 /* LikedVideosContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A543BC620C1AE7A007E3249 /* LikedVideosContainerView.swift */; };
+		6A543BC920CAB1E3007E3249 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A543BC820CAB1E3007E3249 /* APIClient.swift */; };
 		6A5AB7E81F9CE48400F491C7 /* SearchListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5AB7E71F9CE48400F491C7 /* SearchListResponse.swift */; };
 		6A644DD2206427CB00855BB7 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A644DCF206427CA00855BB7 /* SpotifyMetadata.framework */; };
 		6A644DD3206427CB00855BB7 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A644DD0206427CA00855BB7 /* SpotifyAuthentication.framework */; };
 		6A644DD4206427CB00855BB7 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A644DD1206427CB00855BB7 /* SpotifyAudioPlayback.framework */; };
-		6A644DD6206BFC6900855BB7 /* SpotifyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A644DD5206BFC6900855BB7 /* SpotifyClient.swift */; };
 		6A644DDE2090D77600855BB7 /* SpotifyPlaylistsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A644DDD2090D77600855BB7 /* SpotifyPlaylistsTableViewController.swift */; };
 		6A644DE02090D9E100855BB7 /* SpotifyPlaylistInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A644DDF2090D9E100855BB7 /* SpotifyPlaylistInformation.swift */; };
 		6A6BF87520C0363D00C0A05A /* Video+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6BF87420C0363D00C0A05A /* Video+CoreDataClass.swift */; };
@@ -82,7 +77,6 @@
 		6AEC04921F990C1C00C319DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEC04901F990C1B00C319DD /* Main.storyboard */; };
 		6AEC04931F990C5800C319DD /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEC045E1F990A1600C319DD /* CustomTableViewCell.swift */; };
 		6AEC04941F990C6100C319DD /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEC045D1F9909E400C319DD /* PlaylistView.swift */; };
-		6AEC04951F990C7300C319DD /* volume-up-4-xxl.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AEC04641F990A4700C319DD /* volume-up-4-xxl.png */; };
 		6AEC04991F99307400C319DD /* YouTubeConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEC04981F99307400C319DD /* YouTubeConvenience.swift */; };
 		6AF9D8941F8BCE4400A4F1B0 /* YouTubeSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9D8931F8BCE4400A4F1B0 /* YouTubeSearchController.swift */; };
 		6AF9D8951F8BCE4400A4F1B0 /* YouTubeSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9D8931F8BCE4400A4F1B0 /* YouTubeSearchController.swift */; };
@@ -131,16 +125,15 @@
 		6A0A72B81F9513C000A6EBA5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		6A2EC9101F8BE4B100E96D2C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		6A2EC9141F8BE64700E96D2C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		6A2EC9181F8BE65800E96D2C /* YoutubeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeAPI.swift; sourceTree = "<group>"; };
 		6A2EC91E1F8BE9D700E96D2C /* MusicMatchRev2-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "MusicMatchRev2-Bridging-Header.h"; path = "MusicMatchRev2/MusicMatchRev2-Bridging-Header.h"; sourceTree = "<group>"; };
 		6A2EC9231F8C431500E96D2C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsViewController.swift; sourceTree = "<group>"; };
-		6A543BC620C1AE7A007E3249 /* LikedVideosContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LikedVideosContainerView.swift; path = MusicMatchRev2/LikedVideosContainerView.swift; sourceTree = "<group>"; };
+		6A543BC620C1AE7A007E3249 /* LikedVideosContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedVideosContainerView.swift; sourceTree = "<group>"; };
+		6A543BC820CAB1E3007E3249 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		6A5AB7E71F9CE48400F491C7 /* SearchListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchListResponse.swift; path = MusicMatchRev2/SearchListResponse.swift; sourceTree = "<group>"; };
 		6A644DCF206427CA00855BB7 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyMetadata.framework; path = "../ios-sdk-beta-25/SpotifyMetadata.framework"; sourceTree = "<group>"; };
 		6A644DD0206427CA00855BB7 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyAuthentication.framework; path = "../ios-sdk-beta-25/SpotifyAuthentication.framework"; sourceTree = "<group>"; };
 		6A644DD1206427CB00855BB7 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
-		6A644DD5206BFC6900855BB7 /* SpotifyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyClient.swift; sourceTree = "<group>"; };
 		6A644DDD2090D77600855BB7 /* SpotifyPlaylistsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyPlaylistsTableViewController.swift; sourceTree = "<group>"; };
 		6A644DDF2090D9E100855BB7 /* SpotifyPlaylistInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyPlaylistInformation.swift; sourceTree = "<group>"; };
 		6A6BF87420C0363D00C0A05A /* Video+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Video+CoreDataClass.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Video+CoreDataClass.swift"; sourceTree = "<absolute>"; };
@@ -177,7 +170,6 @@
 		6AEC04331F97E1AD00C319DD /* YouTubePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = YouTubePlayerViewController.swift; path = MusicMatchRev2/YouTubePlayerViewController.swift; sourceTree = "<group>"; };
 		6AEC045D1F9909E400C319DD /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
 		6AEC045E1F990A1600C319DD /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		6AEC04641F990A4700C319DD /* volume-up-4-xxl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "volume-up-4-xxl.png"; sourceTree = "<group>"; };
 		6AEC04911F990C1B00C319DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MusicMatchRev2/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6AEC04981F99307400C319DD /* YouTubeConvenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeConvenience.swift; sourceTree = "<group>"; };
 		6AF9D8931F8BCE4400A4F1B0 /* YouTubeSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = YouTubeSearchController.swift; path = MusicMatchRev2/YouTubeSearchController.swift; sourceTree = "<group>"; };
@@ -258,7 +250,6 @@
 		6A2EC91C1F8BE67300E96D2C /* YouTubeAPI */ = {
 			isa = PBXGroup;
 			children = (
-				6A2EC9181F8BE65800E96D2C /* YoutubeAPI.swift */,
 				6AEC04981F99307400C319DD /* YouTubeConvenience.swift */,
 			);
 			path = YouTubeAPI;
@@ -277,13 +268,21 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		6A543BCA20CAC176007E3249 /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+				6A2EC9141F8BE64700E96D2C /* Constants.swift */,
+				6A543BC820CAB1E3007E3249 /* APIClient.swift */,
+				6A2EC91C1F8BE67300E96D2C /* YouTubeAPI */,
+				6ACBBD2920923EAE00008433 /* SpotifyAPI */,
+			);
+			path = APIClient;
+			sourceTree = "<group>";
+		};
 		6AB7BA5B1F8BC58C0075113D = {
 			isa = PBXGroup;
 			children = (
-				6A543BC620C1AE7A007E3249 /* LikedVideosContainerView.swift */,
-				6A2EC9141F8BE64700E96D2C /* Constants.swift */,
-				6ACBBD2920923EAE00008433 /* SpotifyAPI */,
-				6A2EC91C1F8BE67300E96D2C /* YouTubeAPI */,
+				6A543BCA20CAC176007E3249 /* APIClient */,
 				6A846A01200590F70010535D /* LoginViewController.swift */,
 				6A644DDD2090D77600855BB7 /* SpotifyPlaylistsTableViewController.swift */,
 				6ACBBD2A20925D1C00008433 /* SpotifyPlaylistView.swift */,
@@ -323,10 +322,10 @@
 			isa = PBXGroup;
 			children = (
 				6AC8D1B61FBBA3C4003B3EF3 /* Assets.xcassets */,
-				6AEC04641F990A4700C319DD /* volume-up-4-xxl.png */,
 				6AB7BA671F8BC58C0075113D /* AppDelegate.swift */,
 				6AB7BA691F8BC58C0075113D /* MediaPickerViewController.swift */,
 				6AEC045D1F9909E400C319DD /* PlaylistView.swift */,
+				6A543BC620C1AE7A007E3249 /* LikedVideosContainerView.swift */,
 				6A6BF87C20C03E8000C0A05A /* LikedVideosView.swift */,
 				6AEC045E1F990A1600C319DD /* CustomTableViewCell.swift */,
 				6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */,
@@ -359,7 +358,6 @@
 		6ACBBD2920923EAE00008433 /* SpotifyAPI */ = {
 			isa = PBXGroup;
 			children = (
-				6A644DD5206BFC6900855BB7 /* SpotifyClient.swift */,
 				6ACBBD2C20936DBB00008433 /* SpotifyConvenience.swift */,
 				6ACBBD272091FBCD00008433 /* SpotifyPlaylist.swift */,
 				6ACBBD3020937F4700008433 /* SpotifyTrack.swift */,
@@ -489,7 +487,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AB7BA721F8BC58C0075113D /* LaunchScreen.storyboard in Resources */,
-				6AEC04951F990C7300C319DD /* volume-up-4-xxl.png in Resources */,
 				6A83704A1F8BCB45004D5B26 /* GoogleService-Info.plist in Resources */,
 				6AEC04921F990C1C00C319DD /* Main.storyboard in Resources */,
 				6AC8D1B71FBBA3C5003B3EF3 /* Assets.xcassets in Resources */,
@@ -587,7 +584,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A2EC9251F8C431500E96D2C /* CustomButton.swift in Sources */,
-				6A2EC9191F8BE65800E96D2C /* YoutubeAPI.swift in Sources */,
 				6A9D2F951FA3866A002D60F2 /* CoreDataTableViewController.swift in Sources */,
 				6AF9D8941F8BCE4400A4F1B0 /* YouTubeSearchController.swift in Sources */,
 				6A6BF87D20C03E8000C0A05A /* LikedVideosView.swift in Sources */,
@@ -606,7 +602,6 @@
 				6A846A02200590F70010535D /* LoginViewController.swift in Sources */,
 				6A6BF87B20C0364100C0A05A /* Video+CoreDataProperties.swift in Sources */,
 				6ACBBD3120937F4700008433 /* SpotifyTrack.swift in Sources */,
-				6A644DD6206BFC6900855BB7 /* SpotifyClient.swift in Sources */,
 				6A644DE02090D9E100855BB7 /* SpotifyPlaylistInformation.swift in Sources */,
 				6ACBBD2B20925D1C00008433 /* SpotifyPlaylistView.swift in Sources */,
 				6ACBBD2D20936DBB00008433 /* SpotifyConvenience.swift in Sources */,
@@ -621,6 +616,7 @@
 				6AC8D1991FB60BB4003B3EF3 /* Playlist+CoreDataProperties.swift in Sources */,
 				6AEC04931F990C5800C319DD /* CustomTableViewCell.swift in Sources */,
 				6A9D2F911FA2590B002D60F2 /* CreatePlaylistView.swift in Sources */,
+				6A543BC920CAB1E3007E3249 /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,11 +628,9 @@
 				6AF9D8951F8BCE4400A4F1B0 /* YouTubeSearchController.swift in Sources */,
 				6AF9D89C1F8BDB4F00A4F1B0 /* SearchResultViewController.swift in Sources */,
 				6AC8D19A1FB60BB4003B3EF3 /* Playlist+CoreDataProperties.swift in Sources */,
-				6A2EC9171F8BE64700E96D2C /* Constants.swift in Sources */,
 				6AF9D8A51F8BDE2800A4F1B0 /* Model.xcdatamodeld in Sources */,
 				6AB7BA7D1F8BC58C0075113D /* MusicMatchRev2Tests.swift in Sources */,
 				6A6BF87620C0363D00C0A05A /* Video+CoreDataClass.swift in Sources */,
-				6A2EC91B1F8BE65800E96D2C /* YoutubeAPI.swift in Sources */,
 				6A2EC9121F8BE4B100E96D2C /* CoreDataStack.swift in Sources */,
 				6AEC041B1F97BF0600C319DD /* Playlist+CoreDataClass.swift in Sources */,
 				6A6BF87A20C0364100C0A05A /* Video+CoreDataProperties.swift in Sources */,
@@ -652,11 +646,9 @@
 				6AF9D8961F8BCE4400A4F1B0 /* YouTubeSearchController.swift in Sources */,
 				6AF9D89D1F8BDB4F00A4F1B0 /* SearchResultViewController.swift in Sources */,
 				6AC8D19B1FB60BB5003B3EF3 /* Playlist+CoreDataProperties.swift in Sources */,
-				6A2EC9161F8BE64700E96D2C /* Constants.swift in Sources */,
 				6AF9D8A61F8BDE2800A4F1B0 /* Model.xcdatamodeld in Sources */,
 				6AB7BA881F8BC58C0075113D /* MusicMatchRev2UITests.swift in Sources */,
 				6A6BF87520C0363D00C0A05A /* Video+CoreDataClass.swift in Sources */,
-				6A2EC91A1F8BE65800E96D2C /* YoutubeAPI.swift in Sources */,
 				6A2EC9131F8BE4B100E96D2C /* CoreDataStack.swift in Sources */,
 				6AEC041D1F97BF0600C319DD /* Playlist+CoreDataClass.swift in Sources */,
 				6A6BF87920C0364100C0A05A /* Video+CoreDataProperties.swift in Sources */,

@@ -44,7 +44,7 @@ class LikedVideosContainerView: UIViewController {
         
         
         
-       // NotificationCenter.default.addObserver(self, selector: #selector(displayMessage), name: Notification.Name("Video Added"), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(displayMessage), name: Notification.Name("Video Added"), object: nil)
     }
     
     /*
@@ -78,10 +78,11 @@ class LikedVideosContainerView: UIViewController {
             
         }
     }
+ */
     
-    deinit {
+   /* deinit {
         NotificationCenter.default.removeObserver(self)
-    }
-    */
+    }*/
+    
     
 }

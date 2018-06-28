@@ -96,7 +96,7 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
             
             if let imagePath = playlist.thumbnailURL {
                 let url = URL(string: imagePath)
-                _ = YoutubeAPI.sharedInstance().downloadimageData(photoURL: url!, completionHandlerForDownloadImageData: { (imageData, error) in
+                _ = APIClient.sharedInstance().downloadimageData(photoURL: url!, completionHandlerForDownloadImageData: { (imageData, error) in
                     
                     // GUARD - check for error
                     guard error == nil else {
@@ -155,7 +155,7 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
     func fetchPlaylists() {
  
 
-        YoutubeAPI.sharedInstance().fetchUserPlaylists(accessToken: self.accessToken!) { (playlists, error) in
+        APIClient.sharedInstance().fetchUserPlaylists(accessToken: self.accessToken!) { (playlists, error) in
             guard error == nil else {
                 print("Error fetching playlists")
                 return

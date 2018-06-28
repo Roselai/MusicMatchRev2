@@ -76,7 +76,7 @@ class CreatePlaylistView: UIViewController {
                 
                 
             
-            YoutubeAPI.sharedInstance().createPlaylist(accessToken: accessToken ,title: self.playlistTitle, privacyOption: self.privacyOption, completion: { (result, error) in
+            APIClient.sharedInstance().createPlaylist(accessToken: accessToken ,title: self.playlistTitle, privacyOption: self.privacyOption, completion: { (result, error) in
                 
                 guard error == nil else {
                     print(error?.localizedDescription)

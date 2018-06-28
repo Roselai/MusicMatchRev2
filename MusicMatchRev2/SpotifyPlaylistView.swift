@@ -23,11 +23,11 @@ class SpotifyPlaylistView: UITableViewController {
         
         self.spotifyTrackStore.tracks.removeAll()
         
-        SpotifyClient.sharedInstance().getCurrentUserID(accessToken: self.spotifyAccessToken) { (userID, error) in
+        APIClient.sharedInstance().getCurrentUserID(accessToken: self.spotifyAccessToken) { (userID, error) in
             if error == nil {
                 
                     //Get List of Playlist Tracks
-                    SpotifyClient.sharedInstance().getPlaylistTracks(accessToken: self.spotifyAccessToken, userID: userID!, playlistID: self.playlistID, completionHandlerForGetPlaylistTracks: { (result, error) in
+                    APIClient.sharedInstance().getPlaylistTracks(accessToken: self.spotifyAccessToken, userID: userID!, playlistID: self.playlistID, completionHandlerForGetPlaylistTracks: { (result, error) in
                         if error == nil {
                             DispatchQueue.main.async() {
                                 self.tableView.reloadData()

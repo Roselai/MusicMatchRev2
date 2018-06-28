@@ -14,9 +14,7 @@ import MediaPlayer
 
 
 class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelegate {
-        
     
-    //var accessToken: String!
     private var mediapicker1: MPMediaPickerController!
     
     
@@ -41,24 +39,13 @@ class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelega
         MPMediaLibrary.requestAuthorization { (status) in
             if status == .authorized {
                 self.presentMediaPickerController()
-                //self.runMediaLibraryQuery()
             } else {
                 self.displayMediaLibraryError()
             }
         }
     }
     
-    
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    
+
     
     func presentMediaPickerController() {
         let mediaPicker: MPMediaPickerController = MPMediaPickerController.self(mediaTypes:MPMediaType.music)

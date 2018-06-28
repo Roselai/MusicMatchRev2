@@ -17,7 +17,7 @@ class LikedVideosView : CoreDataTableViewController {
     
     
     var videoID: String!
-    var accessToken: String! = nil
+    //var accessToken: String! = nil
     let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores { (description, error) in
@@ -38,9 +38,9 @@ class LikedVideosView : CoreDataTableViewController {
         
         
 
-        let defaults = UserDefaults.standard
-        self.accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
-        
+        //let defaults = UserDefaults.standard
+        //self.accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
+       
         
         
     }
@@ -48,7 +48,6 @@ class LikedVideosView : CoreDataTableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if accessToken != nil {
             
             managedContext = persistentContainer.viewContext
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Video")
@@ -57,13 +56,16 @@ class LikedVideosView : CoreDataTableViewController {
             fetchRequest.predicate = NSPredicate(format: "liked = YES")
             fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
             fetchedVideos = fetchedResultsController?.fetchedObjects as! [Video]
+        
+        if fetchedVideos.count > 0 {
             
             let initialVideo = fetchedVideos[0]
             let initialVideoID = initialVideo.videoID
             //send first result videoID to player for load
             NotificationCenter.default.post(name: NSNotification.Name("Initial Video ID"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : initialVideoID!])
-            
         }
+            
+        
     }
     
     
@@ -105,7 +107,7 @@ class LikedVideosView : CoreDataTableViewController {
             
             if let imagePath = video.thumbnailURL {
                 let url = URL(string: imagePath)
-                _ = YoutubeAPI.sharedInstance().downloadimageData(photoURL: url!, completionHandlerForDownloadImageData: { (imageData, error) in
+                _ = APIClient.sharedInstance().downloadimageData(photoURL: url!, completionHandlerForDownloadImageData: { (imageData, error) in
                     
                     // GUARD - check for error
                     guard error == nil else {
@@ -144,10 +146,6 @@ class LikedVideosView : CoreDataTableViewController {
         
     }
    
-    
-    
-    
-    
     
     
     func saveContext (context: NSManagedObjectContext){

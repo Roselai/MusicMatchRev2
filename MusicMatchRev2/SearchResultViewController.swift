@@ -75,7 +75,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     
     
     func performSearch(searchQueryString: String) {
-        YoutubeAPI.sharedInstance().searchForVideo(searchQuery: searchQueryString) { (videos, error) in
+        APIClient.sharedInstance().searchForVideo(searchQuery: searchQueryString) { (videos, error) in
             guard error == nil else {
                 print("Error fetching videos")
                 self.searchDataSource.items.removeAll()
@@ -96,8 +96,6 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     
     func configure(_ cell: UITableViewCell, for indexPath: IndexPath) {
         
-        
-        
         let video = searchDataSource.items[indexPath.row]
         let videoID = video[Constants.YouTubeResponseKeys.VideoID]
         
@@ -105,13 +103,15 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         
         if (someEntityExists(id: videoID!, addPredicate: likedPredicate)) == true {
             cell.textLabel?.textColor = UIColor(displayP3Red: 114/255, green: 208/255, blue: 245/255, alpha: 1.0)
+            
         }
+        
         
         
         
         let imageURL = URL(string: video[Constants.YouTubeResponseKeys.ThumbnailURL]!)
         
-        _ = YoutubeAPI.sharedInstance().downloadimageData(photoURL: imageURL!) { (data, error) in
+        _ = APIClient.sharedInstance().downloadimageData(photoURL: imageURL!) { (data, error) in
             
             
             
@@ -337,11 +337,10 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
             
             
         }
-        print("Playlist Object Received")
     }
     
     func addVideo(accessToken: String, playlist: Playlist, videoID: String, completion: @escaping (_ video: Video?, _ error: Error?) -> Void) {
-        YoutubeAPI.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlist.id, videoID: videoID, completion: { (videoDetails, error) in
+        APIClient.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlist.id, videoID: videoID, completion: { (videoDetails, error) in
             
             guard error == nil else {
                 print(error?.localizedDescription)
@@ -410,6 +409,9 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                         
                         //Video added to liked Videos notification
                         NotificationCenter.default.post(name: NSNotification.Name("Video Added"), object: nil, userInfo: ["message": "Video added to liked videos"])
+                        
+                        
+                        self.configure(tappedCell, for: tapIndexPath)
                         
                     } else {
                         

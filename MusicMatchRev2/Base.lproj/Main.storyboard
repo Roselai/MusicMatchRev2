@@ -19,7 +19,7 @@
                         <viewControllerLayoutGuide type="bottom" id="qda-jq-x3t"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NHI-qi-r3T">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
@@ -76,7 +76,7 @@
                         <viewControllerLayoutGuide type="bottom" id="3oN-IA-jod"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mEQ-1j-7M9">
@@ -91,9 +91,10 @@
                                     <segue destination="sXk-8v-Kif" kind="embed" id="hrF-Nd-Maz"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMw-gN-ynp">
-                                <rect key="frame" x="0.0" y="554" width="375" height="49"/>
-                                <color key="backgroundColor" red="0.51664949174459818" green="0.51664949174459818" blue="0.51664949174459818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11d-NM-GmM">
+                                <rect key="frame" x="0.0" y="507" width="375" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="0.80433968321917804" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -101,12 +102,8 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="OMw-gN-ynp" secondAttribute="bottom" id="1ry-Cy-JKN"/>
-                            <constraint firstAttribute="trailing" secondItem="OMw-gN-ynp" secondAttribute="trailing" id="8Ee-SP-Mz1"/>
                             <constraint firstItem="3oN-IA-jod" firstAttribute="top" secondItem="mEQ-1j-7M9" secondAttribute="bottom" id="ECF-te-ck8"/>
                             <constraint firstAttribute="trailing" secondItem="19F-1Q-zoT" secondAttribute="trailing" id="MsH-FY-NEp"/>
-                            <constraint firstItem="OMw-gN-ynp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Q6R-HY-JUw"/>
-                            <constraint firstItem="OMw-gN-ynp" firstAttribute="top" secondItem="mEQ-1j-7M9" secondAttribute="bottom" id="Wzh-lu-Nlr"/>
                             <constraint firstItem="19F-1Q-zoT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="XP1-ma-Gzr"/>
                             <constraint firstItem="mEQ-1j-7M9" firstAttribute="top" secondItem="5Lk-jN-r0K" secondAttribute="bottom" constant="225" id="XX2-G9-n6c"/>
                             <constraint firstItem="19F-1Q-zoT" firstAttribute="top" secondItem="5Lk-jN-r0K" secondAttribute="bottom" id="fMT-Ds-cBw"/>
@@ -117,19 +114,19 @@
                     </view>
                     <navigationItem key="navigationItem" id="Bla-Xh-VqK"/>
                     <connections>
-                        <outlet property="notificationLabel" destination="OMw-gN-ynp" id="ZAw-ek-TT4"/>
+                        <outlet property="notificationLabel" destination="11d-NM-GmM" id="u0U-Mp-dBw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="486" y="187"/>
+            <point key="canvasLocation" x="485.5" y="186.5"/>
         </scene>
         <!--Playlists View Controller-->
         <scene sceneID="ZFn-hf-lr4">
             <objects>
                 <tableViewController id="HD3-Uc-sWb" customClass="PlaylistsViewController" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="100" sectionHeaderHeight="30" sectionFooterHeight="1" contentViewInsetsToSafeArea="NO" id="Xfv-yv-mc6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="329"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -193,11 +190,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wdg-7n-ERC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="x1C-55-diS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6G-8P-8JV">
-                                <rect key="frame" x="50" y="304" width="275" height="60"/>
+                                <rect key="frame" x="50" y="279" width="275" height="60"/>
                                 <color key="backgroundColor" red="0.11372549019607843" green="0.72549019607843135" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="15" maxY="0.0"/>
@@ -232,11 +229,12 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="0hq-H3-BEj" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="e0K-Ta-lNd"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ggJ-cb-9gW">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="ggJ-cb-9gW">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.14117647059999999" green="0.2901960784" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.44705882352941173" green="0.81568627450980391" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="9Yx-AC-rmD" kind="relationship" relationship="viewControllers" id="ijr-BY-B1h"/>
@@ -253,7 +251,7 @@
         <scene sceneID="0Xb-RI-1SO">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e6Y-y3-hkq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My Music Library" id="Lqz-Nh-B7j"/>
+                    <tabBarItem key="tabBarItem" title="My Music Library" image="Icon-MusicPlaylist-29x29" id="Lqz-Nh-B7j"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="SXh-oT-8ZK">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -281,11 +279,11 @@
                         <viewControllerLayoutGuide type="bottom" id="ndT-iZ-roT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iFg-wU-GHI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="228"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="177"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q4B-5u-HXO" customClass="YTPlayerView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="228"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="177"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -314,28 +312,21 @@
                         <viewControllerLayoutGuide type="bottom" id="cmg-ph-jUW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Owr-Bw-JOK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SMK-8c-REh">
-                                <rect key="frame" x="0.0" y="290" width="375" height="377"/>
+                                <rect key="frame" x="0.0" y="177" width="375" height="377"/>
                                 <connections>
                                     <segue destination="Klr-7h-Awd" kind="embed" id="apa-pJ-WwU"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ho-t7-KCd">
-                                <rect key="frame" x="0.0" y="20" width="375" height="270"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="177"/>
                                 <connections>
                                     <segue destination="sXk-8v-Kif" kind="embed" id="N1S-te-qr6"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kS8-bM-IC6">
-                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
-                                <color key="backgroundColor" red="0.51664949169999996" green="0.51664949169999996" blue="0.51664949169999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -344,24 +335,17 @@
                             <constraint firstAttribute="bottom" secondItem="3ho-t7-KCd" secondAttribute="bottom" constant="377" id="6fo-gC-ILb"/>
                             <constraint firstItem="SMK-8c-REh" firstAttribute="leading" secondItem="3ho-t7-KCd" secondAttribute="leading" id="ERq-A3-HiC"/>
                             <constraint firstItem="SMK-8c-REh" firstAttribute="trailing" secondItem="3ho-t7-KCd" secondAttribute="trailing" id="KEm-ji-sUR"/>
-                            <constraint firstAttribute="trailing" secondItem="kS8-bM-IC6" secondAttribute="trailing" id="Rr5-Ot-ixE"/>
                             <constraint firstItem="SMK-8c-REh" firstAttribute="leading" secondItem="Owr-Bw-JOK" secondAttribute="leading" id="TrW-2G-wps"/>
-                            <constraint firstItem="kS8-bM-IC6" firstAttribute="top" secondItem="SMK-8c-REh" secondAttribute="bottom" id="Zew-Du-VZj"/>
-                            <constraint firstAttribute="bottom" secondItem="kS8-bM-IC6" secondAttribute="bottom" id="cEF-Rc-IY8"/>
                             <constraint firstItem="SMK-8c-REh" firstAttribute="bottom" secondItem="cmg-ph-jUW" secondAttribute="top" id="kuo-S5-252"/>
-                            <constraint firstItem="kS8-bM-IC6" firstAttribute="leading" secondItem="Owr-Bw-JOK" secondAttribute="leading" id="qv3-FW-B3E"/>
                             <constraint firstAttribute="trailing" secondItem="SMK-8c-REh" secondAttribute="trailing" id="wG7-Up-heA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qOW-br-2ZB"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <connections>
-                        <outlet property="notificationLabel" destination="kS8-bM-IC6" id="T8X-hs-Jlq"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5h-rG-hUf" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1457" y="1759"/>
+            <point key="canvasLocation" x="1456.5" y="1758.5"/>
         </scene>
         <!--Create Playlist View-->
         <scene sceneID="Qmt-7N-77i">
@@ -476,7 +460,7 @@
             <objects>
                 <tableViewController id="vl2-FS-NKX" customClass="SpotifyPlaylistsTableViewController" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rSL-bS-Op6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -512,7 +496,7 @@
             <objects>
                 <tableViewController id="AS8-bl-aqT" customClass="SpotifyPlaylistView" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vL9-cG-3Fm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -598,11 +582,11 @@
                         <viewControllerLayoutGuide type="bottom" id="krh-JW-9rF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="k0p-ca-Ndm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="329"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ca8-lF-ocz" customClass="GIDSignInButton">
-                                <rect key="frame" x="67" y="134.5" width="240" height="60"/>
+                                <rect key="frame" x="67" y="247" width="240" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="4dJ-w4-gqT"/>
@@ -632,7 +616,7 @@
         <scene sceneID="1d1-4g-OcP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DyV-It-194" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Youtube Playlists" id="laW-bw-m31"/>
+                    <tabBarItem key="tabBarItem" title="Youtube Playlists" image="Icon-YouTube-29x29" id="laW-bw-m31"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="pC8-V8-8jp">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -652,7 +636,7 @@
         <scene sceneID="OL6-9p-DhL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="h87-du-yUI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Spotify Playlists" id="ylg-Lf-wn7"/>
+                    <tabBarItem key="tabBarItem" title="Spotify Playlists" image="Icon-Spotify-29x29" id="ylg-Lf-wn7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jEn-OG-zhQ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -677,7 +661,7 @@
                         <viewControllerLayoutGuide type="bottom" id="T5U-QP-LPE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VEH-w7-hrL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPT-ne-L5z">
@@ -687,7 +671,7 @@
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7lg-Jn-J3O">
-                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                                <rect key="frame" x="0.0" y="618" width="375" height="0.0"/>
                                 <color key="backgroundColor" red="0.51664949169999996" green="0.51664949169999996" blue="0.51664949169999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -716,7 +700,7 @@
                             <constraint firstAttribute="trailing" secondItem="7lg-Jn-J3O" secondAttribute="trailing" id="wFy-j8-gfa"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Liked Videos" id="BAs-Rx-dMd"/>
+                    <tabBarItem key="tabBarItem" title="Liked Videos" image="Icon-LikedVideos-29x29" id="BAs-Rx-dMd"/>
                     <navigationItem key="navigationItem" id="aVR-y9-ZhJ"/>
                     <connections>
                         <outlet property="notificationLabel" destination="7lg-Jn-J3O" id="fhv-WI-pFw"/>
@@ -728,11 +712,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Icon-LikedVideos-29x29" width="29" height="29"/>
+        <image name="Icon-MusicPlaylist-29x29" width="29" height="29"/>
+        <image name="Icon-Spotify-29x29" width="29" height="29"/>
+        <image name="Icon-YouTube-29x29" width="29" height="29"/>
         <image name="spotifyIcon" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dxr-BI-VWf"/>
-        <segue reference="RcB-rq-OKQ"/>
+        <segue reference="O9c-AM-thK"/>
+        <segue reference="N1S-te-qr6"/>
         <segue reference="xjp-ol-Hki"/>
     </inferredMetricsTieBreakers>
 </document>

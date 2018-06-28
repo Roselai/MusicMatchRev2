@@ -16,7 +16,6 @@ class LoginViewController: UIViewController {
     var accessToken: String!
     
     
-    
     @IBOutlet weak var spotifyLoginButton: UIButton!
     
     
