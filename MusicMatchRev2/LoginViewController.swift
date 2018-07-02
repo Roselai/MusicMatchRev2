@@ -13,46 +13,69 @@ import SpotifyLogin
 
 class LoginViewController: UIViewController {
     
-    var accessToken: String!
+    var accessToken: String! = nil
+
     
-    
-    @IBOutlet weak var spotifyLoginButton: UIButton!
-    
+    @IBOutlet weak var button: SpotifyLoginButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(userLoggedIn), name: Notification.Name("LoggedIntoSpotify"), object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         SpotifyLogin.shared.getAccessToken { (accessToken, error) in
-            if error != nil {
-                // User is not logged in, show log in flow.
-                self.spotifyLoginButton.isEnabled = true
-                self.spotifyLoginButton = SpotifyLoginButton(viewController: self, scopes: [.streaming, .userLibraryRead, .playlistReadPrivate])
-            } else {
-                self.spotifyLoginButton.isEnabled = false
+            if error == nil {
+                print("successfully logged in")
+                self.button.isEnabled = false
                 self.accessToken = accessToken
-                
-                
                 self.performSegue(withIdentifier: "LoggedIntoSpotify", sender: self)
-                
-                
+            } else {
+                self.button.isEnabled = true
             }
-            
         }
     }
     
     
     
-    @IBAction func spotifyLoginButtonPressed(_ sender: UIButton) {
-        
-        SpotifyLoginPresenter.login(from: self, scopes: [.streaming, .userLibraryRead])
+    @objc func userLoggedIn(notification: NSNotification) {
+        SpotifyLogin.shared.getAccessToken { (accessToken, error) in
+            if error == nil {
+                print("successfully logged in")
+                self.button.isEnabled = false
+                self.accessToken = accessToken
+                self.performSegue(withIdentifier: "LoggedIntoSpotify", sender: self)
+            } else {
+                self.button.isEnabled = true
+            }
+        }
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? SpotifyPlaylistsTableViewController {
-            destination.spotifyAccessToken = self.accessToken
+        if segue.identifier == "LoggedIntoSpotify" {
+            let destinationViewController = segue.destination as? SpotifyPlaylistsTableViewController
+            destinationViewController?.spotifyAccessToken = self.accessToken
+            
         }
+        
+        
     }
     
+    
+    @IBAction func loginButtonPressed(_ sender: SpotifyLoginButton) {
+         self.dismiss(animated: true, completion: nil)
+        SpotifyLoginPresenter.login(from: self, scopes: [.streaming, .userLibraryRead, .playlistReadPrivate])
+       
+      
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
 }

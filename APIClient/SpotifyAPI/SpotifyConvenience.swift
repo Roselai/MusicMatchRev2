@@ -61,7 +61,7 @@ extension APIClient {
             
             
         })    }
-    
+    /*
     //MARK: Get current user’s username
     
     func getCurrentUserID(accessToken: String, completionHandlerForGetCurrentUserID: @escaping (_ currentUserID: String?, _ error: NSError?) -> Void) {
@@ -87,11 +87,12 @@ extension APIClient {
             
             
         })    }
-    
+    */
     
     //MARK: Get full details of the tracks of a playlist owned by a Spotify user.
     
     func getPlaylistTracks(accessToken: String, userID: String, playlistID:String, completionHandlerForGetPlaylistTracks: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) {
+        
         
         let pathParameters = [Constants.SpotifyParameterKeys.PlayListID : playlistID,
                               Constants.SpotifyParameterKeys.UserID: userID]

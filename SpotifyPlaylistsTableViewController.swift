@@ -22,6 +22,7 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
         self.navigationItem.setHidesBackButton(true, animated:true);
         
         self.spotifyPlaylistStore.playlists.removeAll()
+        
         APIClient.sharedInstance().fetchPlaylists(accessToken: spotifyAccessToken) { (playlists, error) in
             
             if error == nil {

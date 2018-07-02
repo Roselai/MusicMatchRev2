@@ -73,13 +73,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         if(url.scheme?.isEqual("musicmatchrev2"))! {
         
             
-            
             return SpotifyLogin.shared.applicationOpenURL(url, completion: { (error) in
                 
                 if error == nil {
-                   print ("successfully logged in")
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "spotifyLoginSuccessful"), object: nil)
-                    
+                   
+                    let nc = NotificationCenter.default
+                    nc.post(name: Notification.Name("LoggedIntoSpotify"), object: nil)
 
                 }
                 else {
@@ -94,7 +93,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         }
         
     }
-    
     
 
     
@@ -111,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     
     
    
-   
+    
     
 
 }

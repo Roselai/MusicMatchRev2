@@ -312,12 +312,14 @@ extension APIClient {
                           Constants.YouTubeParameterKeys.APIKey: Constants.YoutubeParameterValues.APIKey,
                           Constants.YouTubeParameterKeys.PlaylistItemID: playlistItemID]
         
+       
         let url = APIClient.YoutubeURLFromParameters(method: method, parameters: parameters as [String : AnyObject])
         
         _ = APIClient.sharedInstance().taskForDELETEMethod(url: url, parameters: nil) { (success, error) in
             if error == nil {
                 completion(true)
             } else {
+                print("we have a problem")
                 completion(false)
             }
             

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SpotifyLogin
 
 
 class SpotifyPlaylistView: UITableViewController {
@@ -23,6 +24,22 @@ class SpotifyPlaylistView: UITableViewController {
         
         self.spotifyTrackStore.tracks.removeAll()
         
+        let userID = SpotifyLogin.shared.username
+        
+        //Get List of Playlist Tracks
+        APIClient.sharedInstance().getPlaylistTracks(accessToken: self.spotifyAccessToken, userID: userID!, playlistID: self.playlistID, completionHandlerForGetPlaylistTracks: { (result, error) in
+            if error == nil {
+                DispatchQueue.main.async() {
+                    self.tableView.reloadData()
+                    
+                }
+                
+            } else {
+                print (error)
+            }
+        })
+        
+        /*
         APIClient.sharedInstance().getCurrentUserID(accessToken: self.spotifyAccessToken) { (userID, error) in
             if error == nil {
                 
@@ -43,7 +60,7 @@ class SpotifyPlaylistView: UITableViewController {
                 print(error)
             }
         }
-        
+        */
         
     }
    

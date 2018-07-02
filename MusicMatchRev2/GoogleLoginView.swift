@@ -33,16 +33,20 @@ class GoogleLoginView: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate{
         
         GIDSignIn.sharedInstance().scopes = scopes
         
-    
-        GIDSignIn.sharedInstance().signInSilently()
-            
-        
         
         signInButton.colorScheme = .dark
         signInButton.style = .wide
         
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        GIDSignIn.sharedInstance().signInSilently()
+    }
+    
+    
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if (error == nil) {

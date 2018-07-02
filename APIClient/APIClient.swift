@@ -135,7 +135,6 @@ class APIClient{
         
         
         /* 2/3. Build the URL, Configure the request */
-       // let url = YoutubeAPI.YoutubeURLFromParameters(method: method, parameters: parameters)
         var request = URLRequest(url: url)
         
         

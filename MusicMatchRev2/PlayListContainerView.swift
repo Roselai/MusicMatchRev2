@@ -40,7 +40,7 @@ class PlaylistContainerView: UIViewController {
         }
         
        if accessToken != nil && self.playlist != nil {
-        
+        playlistController.accessToken = accessToken
         playlistController.loadFetchedResultsController(playlist: playlist, context: self.managedContext)
             playlistController.getVideosFromPlaylist(accessToken: accessToken, playlist: self.playlist, context: self.managedContext)
         }
