@@ -14,41 +14,38 @@ import SpotifyLogin
 class LoginViewController: UIViewController {
     
     var accessToken: String! = nil
-
+    
     
     @IBOutlet weak var button: SpotifyLoginButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Check if user is Logged Into Spotify
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(userLoggedIn), name: Notification.Name("LoggedIntoSpotify"), object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        SpotifyLogin.shared.getAccessToken { (accessToken, error) in
-            if error == nil {
-                print("successfully logged in")
-                self.button.isEnabled = false
-                self.accessToken = accessToken
-                self.performSegue(withIdentifier: "LoggedIntoSpotify", sender: self)
-            } else {
-                self.button.isEnabled = true
-            }
-        }
+        loggedInSetup()
     }
     
     
     
     @objc func userLoggedIn(notification: NSNotification) {
+       loggedInSetup()
+    }
+    
+    func loggedInSetup(){
         SpotifyLogin.shared.getAccessToken { (accessToken, error) in
             if error == nil {
-                print("successfully logged in")
+                //If user is logged in go to spotify Playlists View
                 self.button.isEnabled = false
                 self.accessToken = accessToken
-                self.performSegue(withIdentifier: "LoggedIntoSpotify", sender: self)
+                self.performSegue(withIdentifier: "showSpotifyPlaylists", sender: self)
             } else {
                 self.button.isEnabled = true
             }
@@ -57,7 +54,7 @@ class LoginViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "LoggedIntoSpotify" {
+        if segue.identifier == "showSpotifyPlaylists" {
             let destinationViewController = segue.destination as? SpotifyPlaylistsTableViewController
             destinationViewController?.spotifyAccessToken = self.accessToken
             
@@ -68,10 +65,10 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func loginButtonPressed(_ sender: SpotifyLoginButton) {
-         self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         SpotifyLoginPresenter.login(from: self, scopes: [.streaming, .userLibraryRead, .playlistReadPrivate])
-       
-      
+        
+        
     }
     
     deinit {

@@ -17,7 +17,6 @@ class LikedVideosView : CoreDataTableViewController {
     
     
     var videoID: String!
-    //var accessToken: String! = nil
     let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores { (description, error) in
@@ -32,6 +31,13 @@ class LikedVideosView : CoreDataTableViewController {
     var video: Video!
     var deleteVideoIndexPath: IndexPath? = nil
     
+    var likedVideosExist: Bool{
+        if (fetchedVideos.count > 0){
+            return (true)
+        } else {
+            return (false)
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -45,13 +51,13 @@ class LikedVideosView : CoreDataTableViewController {
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedVideos = fetchedResultsController?.fetchedObjects as! [Video]
         
-        if fetchedVideos.count > 0 {
+        if likedVideosExist == true {
             
             let initialVideo = fetchedVideos[0]
             let initialVideoID = initialVideo.videoID
             //send first result videoID to player for load
             NotificationCenter.default.post(name: NSNotification.Name("Initial Video ID"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : initialVideoID!])
-        }
+        } 
         
         
     }
@@ -172,6 +178,8 @@ class LikedVideosView : CoreDataTableViewController {
             
             
         }
+    
+    
         
         
         
@@ -183,9 +191,6 @@ class LikedVideosView : CoreDataTableViewController {
             }
         }
         
-        deinit {
-            NotificationCenter.default.removeObserver(self)
-        }
         
 }
 

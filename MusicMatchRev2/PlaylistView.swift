@@ -29,6 +29,7 @@ class PlaylistView: CoreDataTableViewController {
     }()
     var managedContext: NSManagedObjectContext!
     var video: Video!
+     var deleteVideoIndexPath: IndexPath? = nil
     
     
     //MARK: TableView DataSource Methods
@@ -51,7 +52,7 @@ class PlaylistView: CoreDataTableViewController {
         //send first result videoID to player for load
         
        
-        NotificationCenter.default.post(name: NSNotification.Name("Initial Video ID From Playlist"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : self.videoID!])
+       // NotificationCenter.default.post(name: NSNotification.Name("Initial Video ID From Playlist"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : self.videoID!])
         
     }
     
@@ -139,17 +140,34 @@ class PlaylistView: CoreDataTableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         guard editingStyle == .delete else { return }
+        deleteVideoIndexPath = indexPath
         
-         let video = (self.fetchedResultsController?.fetchedObjects![indexPath.row]) as! Video
+        let alert = UIAlertController(title: "Delete Video", message: "Are you sure you want to permanently delete this video?", preferredStyle: .actionSheet)
         
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: self.handleDeleteVideo)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: self.cancelDeleteVideo)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        
+        self.present(alert, animated: true, completion: nil)
+        
+
+    }
     
+    func handleDeleteVideo(alertAction: UIAlertAction!) -> Void {
+        
+        // Fetch Video
+        let video = fetchedResultsController?.object(at: deleteVideoIndexPath!) as! Video
+        
         //Delete Video from YouTube Playlist
         APIClient.sharedInstance().deleteVideoFromYTPlaylist(playlistItemID: video.playlistItemID! , accessToken: self.accessToken!, completion: { (success) in
             
             if success == true {
                 
                 
-               DispatchQueue.main.async {
+                DispatchQueue.main.async {
                     
                     //delete same video from Core Data
                     self.fetchedResultsController?.managedObjectContext.delete(video)
@@ -162,6 +180,10 @@ class PlaylistView: CoreDataTableViewController {
             
         })
         
+    }
+    
+    func cancelDeleteVideo(alertAction: UIAlertAction!) {
+        deleteVideoIndexPath = nil
     }
     
     

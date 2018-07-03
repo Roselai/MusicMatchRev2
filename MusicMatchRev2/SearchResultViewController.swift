@@ -14,7 +14,7 @@ import CoreData
 
 class SearchResultViewController: UITableViewController, CreatePlaylistViewDelegate, UIGestureRecognizerDelegate {
     
-    var videoID: String!
+    var videoId: String!
     var accessToken: String! = nil
     let searchDataSource = YTTableViewDataSource()
     
@@ -67,9 +67,9 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        videoID =  (searchDataSource.items[indexPath.row])[Constants.YouTubeResponseKeys.VideoID]
+        videoId =  (searchDataSource.items[indexPath.row])[Constants.YouTubeResponseKeys.VideoID]
         
-        NotificationCenter.default.post(name: NSNotification.Name("Cell Selected"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : videoID])
+        NotificationCenter.default.post(name: NSNotification.Name("Cell Selected"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : videoId])
         
     }
     
@@ -82,31 +82,50 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                 return
             }
             if videos != nil {
-                print("Successfully retrieved \(String(describing: videos?.count)) videos")
+               // print("Successfully retrieved \(String(describing: videos?.count)) videos")
                 self.searchDataSource.items = videos!
                 
-                self.videoID = (videos![0])[Constants.YouTubeResponseKeys.VideoID]
+                
                 //send first result videoID to player for load
-                NotificationCenter.default.post(name: NSNotification.Name("Initial Video ID"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : self.videoID])
+                self.videoId = (videos![0])[Constants.YouTubeResponseKeys.VideoID]
+                NotificationCenter.default.post(name: NSNotification.Name("Initial Video ID"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : self.videoId])
                 
             }
             self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
     }
     
+    func checkIfLikedVideo (videoID: String) -> Bool {
+        
+    
+       let likedPredicate = NSPredicate(format: "liked = YES")
+       
+        if (someEntityExists(id: videoID, addPredicate: likedPredicate)) {
+            return true
+            } else {
+            return false
+        }
+        
+        
+    }
+    
+    
+    
     func configure(_ cell: UITableViewCell, for indexPath: IndexPath) {
         
         let video = searchDataSource.items[indexPath.row]
         let videoID = video[Constants.YouTubeResponseKeys.VideoID]
         
-        let likedPredicate = NSPredicate(format: "liked == YES")
+        if (checkIfLikedVideo(videoID: videoID!)) {
         
-        if (someEntityExists(id: videoID!, addPredicate: likedPredicate)) == true {
-            cell.textLabel?.textColor = UIColor(displayP3Red: 114/255, green: 208/255, blue: 245/255, alpha: 1.0)
+            cell.backgroundColor = UIColor(displayP3Red: 114/255, green: 208/255, blue: 245/255, alpha: 1.0)
             
+        } else {
+            cell.backgroundColor = UIColor.white
         }
+    
         
-        
+    
         
         
         let imageURL = URL(string: video[Constants.YouTubeResponseKeys.ThumbnailURL]!)
@@ -175,7 +194,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     func contextualSegueAction(forRowAtIndexPath indexPath: IndexPath) -> UIContextualAction {
         
         let video = searchDataSource.items[indexPath.row]
-        videoID = video[Constants.YouTubeResponseKeys.VideoID]
+        videoId = video[Constants.YouTubeResponseKeys.VideoID]
         
         let action = UIContextualAction(style: .normal, title: "Add") { (contextAction, sourceView, completionHandler) in
             
@@ -229,10 +248,10 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         let sortByTitle = NSSortDescriptor(key: #keyPath(Playlist.title),
                                            ascending: true)
         fetchRequest.sortDescriptors = [sortByTitle]
-        let viewContext = persistentContainer.viewContext
-        viewContext.perform {
+        
+        managedContext.perform {
             do {
-                let allPlaylists = try viewContext.fetch(fetchRequest)
+                let allPlaylists = try self.managedContext.fetch(fetchRequest)
                 completion(allPlaylists)
             } catch {
                 completion(nil)
@@ -248,10 +267,10 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                                         
                                         let playlistPredicate = NSPredicate(format: "playlist = %@", playlist)
                                         
-                                        if self.someEntityExists(id: self.videoID, addPredicate: playlistPredicate ) == false {
+                                        if self.someEntityExists(id: self.videoId, addPredicate: playlistPredicate ) == false {
                                             
                                             
-                                            self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoID, completion: { (video, error) in
+                                            self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoId, completion: { (video, error) in
                                             })
                                         }
                                             
@@ -265,7 +284,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                                             
                                             let addVideoAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                                                 
-                                                self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoID, completion: { (video, error) in
+                                                self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoId, completion: { (video, error) in
                                                 })
                                                 
                                             })
@@ -293,13 +312,18 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         }
     }
     
-    func someEntityExists(id: String, addPredicate: NSPredicate) -> Bool {
+    
+    func someEntityExists(id: String, addPredicate: NSPredicate? = nil) -> Bool {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Video")
         let videoIdPredicate = NSPredicate(format: "videoID = %@", id)
-        let andPredicate = NSCompoundPredicate(type: .and, subpredicates: [videoIdPredicate, addPredicate])
-        fetchRequest.predicate = andPredicate
-        fetchRequest.includesSubentities = false
-        
+        if addPredicate != nil {
+            let andPredicate = NSCompoundPredicate(type: .and, subpredicates: [videoIdPredicate, addPredicate!])
+            fetchRequest.predicate = andPredicate
+            
+        } else {
+            fetchRequest.predicate = videoIdPredicate
+        }
+       
         var entitiesCount = 0
         
         do {
@@ -316,7 +340,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? CreatePlaylistView {
-            destination.videoID = self.videoID
+            destination.videoID = self.videoId
             destination.persistentContainer = self.persistentContainer
             destination.managedContext = self.managedContext
             destination.delegate = self
@@ -389,13 +413,13 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
             let tapLocation = gestureRecognizer.location(in: self.tableView)
             if let tapIndexPath = self.tableView.indexPathForRow(at: tapLocation) {
                 if let tappedCell = self.tableView.cellForRow(at: tapIndexPath) as? CustomTableViewCell {
-                    print("Recognized a double tap")
+                    //print("Recognized a double tap")
+                    
                     
                     let video = searchDataSource.items[tapIndexPath.row]
                     let videoID = video[Constants.YouTubeResponseKeys.VideoID]
-                    let likedPredicate = NSPredicate(format: "liked == YES")
-                    
-                    if (someEntityExists(id: videoID!, addPredicate: likedPredicate)) == false {
+                  
+                    if (checkIfLikedVideo(videoID: videoID!) == false) {
                         
                         let saveVideo = Video(context: self.managedContext)
                         saveVideo.title = video[Constants.YouTubeResponseKeys.Title]
@@ -406,12 +430,11 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                         
                         self.saveContext(context: self.managedContext)
                         
+                        configure(tappedCell, for: tapIndexPath)
                         
                         //Video added to liked Videos notification
                         NotificationCenter.default.post(name: NSNotification.Name("Video Added"), object: nil, userInfo: ["message": "Video added to liked videos"])
                         
-                        
-                        self.configure(tappedCell, for: tapIndexPath)
                         
                     } else {
                         
