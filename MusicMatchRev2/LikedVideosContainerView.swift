@@ -38,6 +38,9 @@ class LikedVideosContainerView: UIViewController {
         
        managedContext = persistentContainer.viewContext
         
+        logoImageView.layer.cornerRadius = 8.0
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

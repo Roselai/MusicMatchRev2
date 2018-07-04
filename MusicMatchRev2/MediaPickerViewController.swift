@@ -98,6 +98,7 @@ class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelega
     
     func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
         mediaPicker.dismiss(animated: true, completion: nil)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

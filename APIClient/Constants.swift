@@ -123,4 +123,7 @@ struct Constants {
         static let SpotifyAccessToken = "SpotifyAccessToken"
     }
     
+    struct ThemeColors {
+        
+    }
 }

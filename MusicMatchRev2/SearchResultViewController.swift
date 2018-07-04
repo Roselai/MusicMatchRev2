@@ -95,19 +95,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         }
     }
     
-    func checkIfLikedVideo (videoID: String) -> Bool {
-        
     
-       let likedPredicate = NSPredicate(format: "liked = YES")
-       
-        if (someEntityExists(id: videoID, addPredicate: likedPredicate)) {
-            return true
-            } else {
-            return false
-        }
-        
-        
-    }
     
     
     
@@ -336,6 +324,19 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         return entitiesCount > 0
     }
     
+    func checkIfLikedVideo (videoID: String) -> Bool {
+        
+        
+        let likedPredicate = NSPredicate(format: "liked = YES")
+        
+        if (someEntityExists(id: videoID, addPredicate: likedPredicate)) {
+            return true
+        } else {
+            return false
+        }
+        
+        
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

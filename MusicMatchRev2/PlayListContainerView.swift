@@ -22,7 +22,6 @@ class PlaylistContainerView: UIViewController {
     var accessToken: String!
     var playlist: Playlist!
     
-    //var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     var managedContext: NSManagedObjectContext!
     
     
