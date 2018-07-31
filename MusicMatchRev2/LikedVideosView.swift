@@ -26,17 +26,24 @@ class LikedVideosView : CoreDataTableViewController {
         }
         return container
     }()
+    
     var managedContext: NSManagedObjectContext!
     var fetchedVideos: [Video]!
     var video: Video!
     var deleteVideoIndexPath: IndexPath? = nil
-    
     var likedVideosExist: Bool{
         if (fetchedVideos.count > 0){
             return (true)
         } else {
             return (false)
         }
+    }
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -190,6 +197,8 @@ class LikedVideosView : CoreDataTableViewController {
                 print("Could not save context \(error), \(error.userInfo)")
             }
         }
+    
+   
         
         
 }

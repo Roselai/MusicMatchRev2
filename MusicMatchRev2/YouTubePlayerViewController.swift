@@ -19,11 +19,12 @@ class YouTubePlayerViewController: UIViewController{
     
    
     var videoID: String!
-
+    var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+
       
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideo), name: Notification.Name("Cell Selected"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideo), name: Notification.Name("Initial Video ID"), object: nil)
@@ -38,6 +39,8 @@ class YouTubePlayerViewController: UIViewController{
         
         let playerVars: [AnyHashable: Any] = ["playsinline" : 1 ]
         self.playerView.load(withVideoId: self.videoID, playerVars: playerVars)
+        
+        
     }
     
     @objc func loadVideoFromPlaylist(_ notification: Notification) {
@@ -46,6 +49,10 @@ class YouTubePlayerViewController: UIViewController{
         let playerVars: [AnyHashable: Any] = ["playsinline" : 1 ]
       self.playerView.load(withVideoId: self.videoID, playerVars: playerVars)
     }
+    
+    
+    
+
     
     deinit {
         NotificationCenter.default.removeObserver(self)

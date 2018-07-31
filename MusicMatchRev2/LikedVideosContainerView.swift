@@ -15,6 +15,7 @@ class LikedVideosContainerView: UIViewController {
     @IBOutlet weak var topContainerView: UIView!
     @IBOutlet weak var bottomContainerView: UIView!
     @IBOutlet weak var logoImageView: UIImageView!
+  
     
     let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
@@ -25,17 +26,24 @@ class LikedVideosContainerView: UIViewController {
         }
         return container
     }()
+   
+    
     fileprivate var LikedVideos: LikedVideosView!
     fileprivate var YTPlayerViewController: YouTubePlayerViewController!
     var videoID: String!
     var queryString: String!
     var managedContext: NSManagedObjectContext!
+   
     
     @IBOutlet weak var statusLabel: UILabel!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+  
        managedContext = persistentContainer.viewContext
         
         logoImageView.layer.cornerRadius = 8.0
@@ -53,7 +61,7 @@ class LikedVideosContainerView: UIViewController {
         
         
         
-        if (likedVideosExist() == true)
+        if likedVideosExist()
         {
             topContainerView.isHidden = false
             bottomContainerView.isHidden = false
@@ -71,6 +79,8 @@ class LikedVideosContainerView: UIViewController {
             }
             YTPlayerViewController = playerController
             LikedVideos = likedVideos
+            
+            
         } else {
             topContainerView.isHidden = true
             bottomContainerView.isHidden = true
@@ -100,4 +110,10 @@ class LikedVideosContainerView: UIViewController {
         }
     }
     
+   
+
+    
 }
+
+
+

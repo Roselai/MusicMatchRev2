@@ -15,7 +15,7 @@ import MediaPlayer
 
 class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelegate {
     
-    private var mediapicker1: MPMediaPickerController!
+   // private var mediapicker1: MPMediaPickerController!
     
     
     var songTitle: String?
@@ -50,14 +50,12 @@ class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelega
     func presentMediaPickerController() {
         let mediaPicker: MPMediaPickerController = MPMediaPickerController.self(mediaTypes:MPMediaType.music)
         mediaPicker.allowsPickingMultipleItems = false
-        mediaPicker.view.frame =  self.view.frame
+        //mediaPicker.view.frame =  self.view.frame
         mediaPicker.delegate = self
-        mediapicker1 = mediaPicker
-        mediapicker1.showsCloudItems = true
-        
-        
-        self.present(mediapicker1, animated: true, completion: nil)
-        
+        mediaPicker.prompt = "Please Pick a Song"
+       // mediapicker1 = mediaPicker
+        mediaPicker.showsCloudItems = true
+        self.present(mediaPicker, animated: true, completion: nil)
         
     }
     

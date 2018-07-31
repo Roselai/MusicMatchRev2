@@ -54,6 +54,14 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         self.accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
     }
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let identifier = "UITableViewCell"
+        let cell =
+            tableView.dequeueReusableCell(withIdentifier: identifier,
+                                               for: indexPath) as! CustomTableViewCell
+        return cell
+    }
+    
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
@@ -111,8 +119,6 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         } else {
             cell.backgroundColor = UIColor.white
         }
-    
-        
     
         
         

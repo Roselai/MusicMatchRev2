@@ -14,12 +14,12 @@ class CustomTableViewCell: UITableViewCell {
         
         if let imageToDisplay = image {
             
-            
+          
             self.imageView?.image = imageToDisplay
             self.textLabel?.text = title
             
         } else {
-            
+           
             self.imageView?.image = nil
            self.textLabel?.text = ""
         }
@@ -30,6 +30,7 @@ class CustomTableViewCell: UITableViewCell {
         self.textLabel?.numberOfLines = 3
         self.textLabel?.lineBreakMode = .byWordWrapping
         self.update(with: nil, title: nil)
+       
         
     }
     
