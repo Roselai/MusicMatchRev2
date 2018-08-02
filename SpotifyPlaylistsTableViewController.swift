@@ -32,7 +32,7 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
                 }
                 
             } else {
-                print(error)
+                print(error?.localizedDescription)
             }
         }
         

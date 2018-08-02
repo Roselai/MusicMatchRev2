@@ -94,7 +94,7 @@ class CreatePlaylistView: UIViewController {
                     let playlist = Playlist(context: self.managedContext)
                     playlist.title = result[Constants.YouTubeResponseKeys.Title]
                     playlist.id = result[Constants.YouTubeResponseKeys.PlaylistID]
-                    //playlist.thumbnailURL = result[Constants.YouTubeResponseKeys.ThumbnailURL]
+                   
                     
                     self.saveContext(context: self.managedContext)
                 

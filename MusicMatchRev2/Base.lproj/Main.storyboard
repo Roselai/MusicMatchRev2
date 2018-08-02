@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="0hq-H3-BEj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="0hq-H3-BEj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -91,7 +91,7 @@
                                     <segue destination="sXk-8v-Kif" kind="embed" id="hrF-Nd-Maz"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11d-NM-GmM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11d-NM-GmM">
                                 <rect key="frame" x="0.0" y="554" width="375" height="48"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="0.80433968321917804" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -669,11 +669,12 @@
                             </containerView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qkn-pC-cgw">
                                 <rect key="frame" x="0.0" y="64" width="375" height="227"/>
+                                <color key="backgroundColor" red="0.44705882349999998" green="0.81568627449999997" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <segue destination="sXk-8v-Kif" kind="embed" id="RcB-rq-OKQ"/>
                                 </connections>
                             </containerView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MMLogo" translatesAutoresizingMaskIntoConstraints="NO" id="xaR-LT-EQB">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MusicMatchLogo_white" translatesAutoresizingMaskIntoConstraints="NO" id="xaR-LT-EQB">
                                 <rect key="frame" x="62" y="185" width="251" height="249"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzI-EL-aBj">
@@ -683,7 +684,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.29803921570000003" green="0.82352941180000006" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="qkn-pC-cgw" firstAttribute="top" secondItem="oha-if-nfh" secondAttribute="bottom" id="6qa-UR-YJr"/>
                             <constraint firstAttribute="trailing" secondItem="qkn-pC-cgw" secondAttribute="trailing" id="FX9-dq-WbO"/>
@@ -739,7 +740,7 @@
         <image name="Icon-MusicPlaylist-29x29" width="29" height="29"/>
         <image name="Icon-Spotify-29x29" width="29" height="29"/>
         <image name="Icon-YouTube-29x29" width="29" height="29"/>
-        <image name="MMLogo" width="512" height="512"/>
+        <image name="MusicMatchLogo_white" width="202" height="202"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="O9c-AM-thK"/>

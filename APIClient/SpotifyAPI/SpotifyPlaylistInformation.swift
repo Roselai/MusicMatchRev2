@@ -21,7 +21,7 @@ struct SpotifyPlaylistInformation {
         name = json["name"] as! String
         
         let images = json["images"] as! [[String: AnyObject]]
-        let firstImage = images.first as! [String: AnyObject]
+        let firstImage = images.first!
         thumbnailURLString = firstImage["url"] as! String
         
         uri = json["uri"] as! String

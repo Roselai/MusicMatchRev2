@@ -26,41 +26,27 @@ class SpotifyPlaylistView: UITableViewController {
         
         let userID = SpotifyLogin.shared.username
         
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        view.addSubview(activityIndicator)
+        activityIndicator.frame = view.bounds
+        activityIndicator.startAnimating()
+        
         //Get List of Playlist Tracks
         APIClient.sharedInstance().getPlaylistTracks(accessToken: self.spotifyAccessToken, userID: userID!, playlistID: self.playlistID, completionHandlerForGetPlaylistTracks: { (result, error) in
             if error == nil {
                 DispatchQueue.main.async() {
                     self.tableView.reloadData()
                     
+                    activityIndicator.stopAnimating()
+                    activityIndicator.removeFromSuperview()
                 }
                 
             } else {
-                print (error)
+                print (error.debugDescription)
             }
         })
         
-        /*
-        APIClient.sharedInstance().getCurrentUserID(accessToken: self.spotifyAccessToken) { (userID, error) in
-            if error == nil {
-                
-                    //Get List of Playlist Tracks
-                    APIClient.sharedInstance().getPlaylistTracks(accessToken: self.spotifyAccessToken, userID: userID!, playlistID: self.playlistID, completionHandlerForGetPlaylistTracks: { (result, error) in
-                        if error == nil {
-                            DispatchQueue.main.async() {
-                                self.tableView.reloadData()
-                                
-                            }
-                            
-                        } else {
-                            print (error)
-                        }
-                    })
-                
-            } else {
-                print(error)
-            }
-        }
-        */
+        
         
     }
    

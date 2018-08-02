@@ -73,7 +73,6 @@ extension APIClient {
         _ = APIClient.sharedInstance().taskForPOSTMethod(url: url, bodyParameters: nil, jsonBody: jsonData, completionHandlerForPOST: { (result, error) in
             
             if error == nil {
-                print("video posted")
                 
                 if let result = result {
                     

@@ -165,7 +165,6 @@
 		6ACBBD2E20937C5400008433 /* SpotifyTrackInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyTrackInformation.swift; sourceTree = "<group>"; };
 		6ACBBD3020937F4700008433 /* SpotifyTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyTrack.swift; sourceTree = "<group>"; };
 		6AD54C5920978BE80009DD0D /* GoogleLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoogleLoginView.swift; path = MusicMatchRev2/GoogleLoginView.swift; sourceTree = "<group>"; };
-		6AE9F3BD209A477400C5855C /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleCast.framework; path = "Pods/google-cast-sdk/GoogleCastSDK-ios-4.2.0/GoogleCast.framework"; sourceTree = "<group>"; };
 		6AEC04171F97BF0500C319DD /* Playlist+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Playlist+CoreDataClass.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Playlist+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		6AEC04331F97E1AD00C319DD /* YouTubePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = YouTubePlayerViewController.swift; path = MusicMatchRev2/YouTubePlayerViewController.swift; sourceTree = "<group>"; };
 		6AEC045D1F9909E400C319DD /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
@@ -224,7 +223,6 @@
 		3FAD0027F0E16309CA912232 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6AE9F3BD209A477400C5855C /* GoogleCast.framework */,
 				6A644DD1206427CB00855BB7 /* SpotifyAudioPlayback.framework */,
 				6A644DD0206427CA00855BB7 /* SpotifyAuthentication.framework */,
 				6A644DCF206427CA00855BB7 /* SpotifyMetadata.framework */,

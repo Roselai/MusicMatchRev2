@@ -109,6 +109,12 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     
     func configure(_ cell: UITableViewCell, for indexPath: IndexPath) {
         
+        // Create the Activity Indicator
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        view.addSubview(activityIndicator)
+        activityIndicator.frame = view.bounds
+        activityIndicator.startAnimating()
+        
         let video = searchDataSource.items[indexPath.row]
         let videoID = video[Constants.YouTubeResponseKeys.VideoID]
         
@@ -141,6 +147,9 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                             as? CustomTableViewCell {
                             
                             cell.update(with: image, title: title)
+                            
+                            activityIndicator.stopAnimating()
+                            activityIndicator.removeFromSuperview()
                         }
                     }
                 } else {

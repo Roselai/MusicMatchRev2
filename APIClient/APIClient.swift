@@ -40,7 +40,6 @@ class APIClient{
             /* GUARD: Was there an error? */
             let errorString = error?.localizedDescription
             guard (error == nil) else {
-                //sendError("There was an error with your request")
                 sendError(error: "Your request could not be completed: \(errorString!)")
                 return
             }
@@ -59,7 +58,6 @@ class APIClient{
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             self.convertDataWithCompletionHandler(jsonData: data, completionHandlerForConvertData: completionHandlerForGET )
-            //completionHandlerForGET(data, nil)
             
         }
         
@@ -120,7 +118,7 @@ class APIClient{
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             
             self.convertDataWithCompletionHandler(jsonData: data, completionHandlerForConvertData: completionHandlerForPOST )
-            // completionHandlerForPOST(data, nil)
+           
         }
         
         /* 7. Start the request */
@@ -179,9 +177,6 @@ class APIClient{
     // given raw JSON, return a usable Foundation object
     private func convertDataWithCompletionHandler(jsonData: Data, completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
         
-        /*let decoder = JSONDecoder()
-         let playlists = try? decoder.decode(CurrentUserPlaylists.self, from: jsonData)
-         */
         var parsedResult: AnyObject!
         do {
             parsedResult = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as AnyObject
@@ -222,7 +217,6 @@ class APIClient{
             /* GUARD: Was there an error? */
             let errorString = error?.localizedDescription
             guard (error == nil) else {
-                //sendError("There was an error with your request")
                 sendError(error: "Your request could not be completed: \(errorString!)")
                 return
             }
