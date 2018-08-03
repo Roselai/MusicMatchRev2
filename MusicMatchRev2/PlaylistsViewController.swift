@@ -14,7 +14,7 @@ import CoreData
 
 class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentationControllerDelegate{
     
-
+    
     //var playlistID: String!
     var videoID: String!
     var accessToken: String! = nil
@@ -31,11 +31,13 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
     var playlist: Playlist!
     var fetchedPlaylists: [Playlist]!
     var playlistIDArray: [String] = []
+    var alertTitle: String!
+    var alertMessage: String!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-  
+        
         
         self.navigationItem.setHidesBackButton(true, animated:true)
         
@@ -52,15 +54,15 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
             fetchedPlaylists = fetchedResultsController?.fetchedObjects as! [Playlist]
             
             fetchPlaylists()
-          
+            
         }
         
         
     }
-
- 
     
-
+    
+    
+    
     //MARK: TableView DataSource Methods
     
     
@@ -100,13 +102,21 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
                     
                     // GUARD - check for error
                     guard error == nil else {
-                        print("Error fetching photo data: \(String(describing: error))")
+                        DispatchQueue.main.async() {
+                            self.alertTitle = "Could not download image."
+                            self.alertMessage = "\(String(describing: error?.localizedDescription))"
+                            self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                        }
                         return
                     }
                     
                     // GUARD - check for valid data
                     guard let imageData = imageData else {
-                        print("No data returned for photo")
+                        DispatchQueue.main.async() {
+                            self.alertTitle = "Oops!"
+                            self.alertMessage = "There is a problem getting image information."
+                            self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                        }
                         return
                     }
                     
@@ -142,31 +152,49 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
             
             guard playlist != nil else {return}
             
-            //destinationViewController.playlistID = self.playlistID
             destinationViewController.accessToken = self.accessToken
             destinationViewController.playlist = self.playlist
             destinationViewController.managedContext = self.managedContext
- 
+            
         }
     }
     
     
-
+    
     func fetchPlaylists() {
- 
-
+        
+        
         APIClient.sharedInstance().fetchUserPlaylists(accessToken: self.accessToken!) { (playlists, error) in
             guard error == nil else {
-                print("Error fetching playlists")
+                DispatchQueue.main.async() {
+                    self.alertTitle = "There is a problem with your request"
+                    self.alertMessage = "\(String(describing: error?.localizedDescription))"
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                }
                 return
             }
-            if playlists != nil {
-                print("Successfully retrieved \(String(describing: playlists?.count)) playlists")
+            
+            guard (playlists?.count)! > 0 else {
+                DispatchQueue.main.async() {
+                    self.alertTitle = "You don't have any playlists"
+                    self.alertMessage = "\(String(describing: error?.localizedDescription))"
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                }
+                return
             }
-           // self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+            
+            guard playlists != nil else {
+                DispatchQueue.main.async() {
+                    self.alertTitle = "There is a problem retreiving playlists"
+                    self.alertMessage = "\(String(describing: error?.localizedDescription))"
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                }
+                return
+            }
             
             
-            DispatchQueue.main.async {
+            
+           // DispatchQueue.main.async {
                 
                 if let playlistsArray = playlists {
                     
@@ -176,7 +204,7 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
                         let id = playlistDictionary[Constants.YouTubeResponseKeys.PlaylistID]
                         let url = playlistDictionary[Constants.YouTubeResponseKeys.ThumbnailURL]
                         
-                       
+                        
                         self.playlistIDArray.append(id!)
                         
                         if self.someEntityExists(id: id!) == false {
@@ -189,18 +217,13 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
                             self.saveContext(context: self.managedContext)
                         }
                         
-                       
+                        
                     }
                     
                 }
-               self.deletePlaylists()
-            }
-            
-            
-            
+                self.deletePlaylists()
+            //}
         }
-      
-        
     }
     
     func saveContext (context: NSManagedObjectContext){
@@ -222,8 +245,8 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
             entitiesCount = try! managedContext.count(for: fetchRequest)
         }
         /*catch {
-            print("error executing fetch request: \(error)")
-        }*/
+         print("error executing fetch request: \(error)")
+         }*/
         
         return entitiesCount > 0
     }
@@ -241,6 +264,12 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
                 
             }
         }
+    }
+    
+    func alertUser (title: String, message: String!) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
     
 }

@@ -16,11 +16,12 @@ class SpotifyPlaylistView: UITableViewController {
     var spotifyAccessToken: String!
     var playlistID: String!
     var searchQueryString: String!
+    var alertMessage: String!
+    var alertTitle: String!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
         
         self.spotifyTrackStore.tracks.removeAll()
         
@@ -34,71 +35,86 @@ class SpotifyPlaylistView: UITableViewController {
         //Get List of Playlist Tracks
         APIClient.sharedInstance().getPlaylistTracks(accessToken: self.spotifyAccessToken, userID: userID!, playlistID: self.playlistID, completionHandlerForGetPlaylistTracks: { (result, error) in
             if error == nil {
-                DispatchQueue.main.async() {
-                    self.tableView.reloadData()
+                
+                if result != nil {
                     
-                    activityIndicator.stopAnimating()
-                    activityIndicator.removeFromSuperview()
+                    DispatchQueue.main.async() {
+                        self.tableView.reloadData()
+                        
+                        activityIndicator.stopAnimating()
+                        activityIndicator.removeFromSuperview()
+                    }}
+                else {
+                    DispatchQueue.main.async() {
+                        self.alertTitle = "Oops!"
+                        self.alertMessage = "This playlist looks lonely, please add some songs. "
+                        self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                    }
                 }
                 
             } else {
-                print (error.debugDescription)
-            }
-        })
-        
-        
-        
-    }
-   
-    override func tableView(_ tableView: UITableView,
-                            numberOfRowsInSection section: Int) -> Int {
-        
-        return spotifyTrackStore.tracks.count
-    }
-    
-    override func tableView(_ tableView: UITableView,
-                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-        cell.textLabel?.numberOfLines = 0
-        
-        let track = spotifyTrackStore.tracks[indexPath.row]
-        let artists = track.artists
-        
-        var artistString = ""
-        for index in 0 ... artists.count - 1 {
-            let artist = artists[index] as? [String:AnyObject]
-            let name = artist!["name"] as! String
-            
-            if (index == (artists.count - 1)){
-            artistString += "\(name)"
-            } else {
-                artistString += "\(name), "
-            }
+                DispatchQueue.main.async() {
+                    self.alertTitle = "There was a problem getting track information."
+                    self.alertMessage = "\(String(describing: error!.localizedDescription))"
+                    self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                }
+            }})
         }
-         
-        
-        cell.textLabel?.text = "\(track.name) - \(track.albumName)"
-        cell.detailTextLabel?.text = artistString
-        return cell
-    }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let track = spotifyTrackStore.tracks[indexPath.row]
-        searchQueryString = track.name
-        performSegue(withIdentifier: "searchForVideo", sender: self)
+        override func tableView(_ tableView: UITableView,
+                                numberOfRowsInSection section: Int) -> Int {
+            
+            return spotifyTrackStore.tracks.count
+        }
         
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "searchForVideo" {
-            let destinationViewController = segue.destination as! YouTubeSearchController
-            destinationViewController.queryString = self.searchQueryString
+        override func tableView(_ tableView: UITableView,
+                                cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+            cell.textLabel?.numberOfLines = 0
+            
+            let track = spotifyTrackStore.tracks[indexPath.row]
+            let artists = track.artists
+            
+            var artistString = ""
+            for index in 0 ... artists.count - 1 {
+                let artist = artists[index] as? [String:AnyObject]
+                let name = artist!["name"] as! String
+                
+                if (index == (artists.count - 1)){
+                    artistString += "\(name)"
+                } else {
+                    artistString += "\(name), "
+                }
+            }
+            
+            
+            cell.textLabel?.text = "\(track.name) - \(track.albumName)"
+            cell.detailTextLabel?.text = artistString
+            return cell
+        }
+        
+        override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let track = spotifyTrackStore.tracks[indexPath.row]
+            searchQueryString = track.name
+            performSegue(withIdentifier: "searchForVideo", sender: self)
             
         }
-    }
-    
-    
+        
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "searchForVideo" {
+                let destinationViewController = segue.destination as! YouTubeSearchController
+                destinationViewController.queryString = self.searchQueryString
+                
+            }
+        }
+        
+    func errorAlert (title: String!, message: String!) {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        }
+        
 }
 
 

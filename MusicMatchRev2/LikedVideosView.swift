@@ -38,7 +38,9 @@ class LikedVideosView : CoreDataTableViewController {
             return (false)
         }
     }
-
+    var alertMessage: String!
+    var alertTitle: String!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,15 +151,21 @@ class LikedVideosView : CoreDataTableViewController {
                     let url = URL(string: imagePath)
                     _ = APIClient.sharedInstance().downloadimageData(photoURL: url!, completionHandlerForDownloadImageData: { (imageData, error) in
                         
-                        // GUARD - check for error
                         guard error == nil else {
-                            print("Error fetching photo data: \(String(describing: error))")
+                            DispatchQueue.main.async {
+                                self.alertTitle = "Could not download image."
+                                self.alertMessage = "\(String(describing: error!.localizedDescription))"
+                                self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                            }
                             return
                         }
                         
-                        // GUARD - check for valid data
-                        guard let imageData = imageData else {
-                            print("No data returned for photo")
+                        guard imageData != nil else {
+                            DispatchQueue.main.async {
+                                self.alertTitle = "Oops!"
+                                self.alertMessage = "There is a problem getting image data."
+                                self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                            }
                             return
                         }
                         
@@ -198,7 +206,11 @@ class LikedVideosView : CoreDataTableViewController {
             }
         }
     
-   
+    func errorAlert (title: String!, message: String!) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+    }
         
         
 }

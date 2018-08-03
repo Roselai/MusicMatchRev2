@@ -24,8 +24,6 @@ class YouTubePlayerViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
-      
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideo), name: Notification.Name("Cell Selected"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideo), name: Notification.Name("Initial Video ID"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideoFromPlaylist), name: Notification.Name("Playlist Item Selected"), object: nil)
@@ -50,16 +48,9 @@ class YouTubePlayerViewController: UIViewController{
       self.playerView.load(withVideoId: self.videoID, playerVars: playerVars)
     }
     
-    
-    
 
-    
     deinit {
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    
-    override func viewWillDisappear(_ animated: Bool) {
     }
     
     

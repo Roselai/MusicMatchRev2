@@ -30,6 +30,8 @@ class PlaylistView: CoreDataTableViewController {
     var managedContext: NSManagedObjectContext!
     var video: Video!
      var deleteVideoIndexPath: IndexPath? = nil
+    var alertMessage: String!
+    var alertTitle: String!
     
     
     //MARK: TableView DataSource Methods
@@ -97,19 +99,26 @@ class PlaylistView: CoreDataTableViewController {
                 let url = URL(string: imagePath)
                 _ = APIClient.sharedInstance().downloadimageData(photoURL: url!, completionHandlerForDownloadImageData: { (imageData, error) in
                     
-                    // GUARD - check for error
                     guard error == nil else {
-                        print("Error fetching photo data: \(String(describing: error))")
+                        DispatchQueue.main.async {
+                            self.alertTitle = "Could not download image."
+                            self.alertMessage = "\(String(describing: error!.localizedDescription))"
+                            self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                        }
                         return
                     }
                     
-                    // GUARD - check for valid data
-                    guard let imageData = imageData else {
-                        print("No data returned for photo")
+                    guard imageData != nil else {
+                        DispatchQueue.main.async {
+                            self.alertTitle = "Oops!"
+                            self.alertMessage = "There is a problem getting image data."
+                            self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                        }
                         return
                     }
                     
-                    
+        
+            
                     self.persistentContainer.performBackgroundTask() { (context) in
                         video.thumbnail = imageData as NSData?
                         self.saveContext(context: context)
@@ -176,6 +185,15 @@ class PlaylistView: CoreDataTableViewController {
                     
                 }
                 
+            } else {
+                
+             
+                    DispatchQueue.main.async {
+                        self.alertTitle = "Oops!"
+                        self.alertMessage = "Could not delete the video from playlist."
+                        self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                    }
+        
             }
             
         })
@@ -195,12 +213,23 @@ class PlaylistView: CoreDataTableViewController {
     
             
             guard error == nil else {
-                print("Error fetching playlists")
+                DispatchQueue.main.async {
+                    self.alertTitle = "Could not retreive videos"
+                    self.alertMessage = "\(String(describing: error!.localizedDescription))"
+                    self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                }
                 return
             }
-            if videos != nil {
-                print("Successfully retrieved \(String(describing: videos?.count)) videos")
+            
+            guard (videos?.count)! > 0  else {
+                DispatchQueue.main.async {
+                    self.alertTitle = "Oops!"
+                    self.alertMessage = "There are no videos in this playlist"
+                    self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                }
+                return
             }
+            
             
             
             DispatchQueue.main.async {
@@ -258,6 +287,12 @@ class PlaylistView: CoreDataTableViewController {
             entitiesCount = try! context.count(for: fetchRequest)
         }
         return entitiesCount > 0
+    }
+    
+    func errorAlert (title: String!, message: String!) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
     }
     
     

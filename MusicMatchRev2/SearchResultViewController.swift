@@ -29,6 +29,9 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     }()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var managedContext: NSManagedObjectContext!
+    var alertTitle: String!
+    var alertMessage: String!
+    
     
     
     override func viewDidLoad() {
@@ -58,7 +61,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         let identifier = "UITableViewCell"
         let cell =
             tableView.dequeueReusableCell(withIdentifier: identifier,
-                                               for: indexPath) as! CustomTableViewCell
+                                          for: indexPath) as! CustomTableViewCell
         return cell
     }
     
@@ -85,20 +88,33 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     func performSearch(searchQueryString: String) {
         APIClient.sharedInstance().searchForVideo(searchQuery: searchQueryString) { (videos, error) in
             guard error == nil else {
-                print("Error fetching videos")
+                
+                DispatchQueue.main.async {
+                    self.alertTitle = "Error searching for videos"
+                    self.alertMessage = "\(String(describing: error!.localizedDescription))"
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                }
+                
                 self.searchDataSource.items.removeAll()
                 return
             }
-            if videos != nil {
-               // print("Successfully retrieved \(String(describing: videos?.count)) videos")
-                self.searchDataSource.items = videos!
-                
-                
-                //send first result videoID to player for load
-                self.videoId = (videos![0])[Constants.YouTubeResponseKeys.VideoID]
-                NotificationCenter.default.post(name: NSNotification.Name("Initial Video ID"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : self.videoId])
-                
+            
+            guard videos != nil else {
+                DispatchQueue.main.async {
+                    self.alertTitle = "Oops!"
+                    self.alertMessage = "No videos were returned from your search"
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                }
+                return
             }
+            
+            self.searchDataSource.items = videos!
+            
+            //send first result videoID to player for load
+            self.videoId = (videos![0])[Constants.YouTubeResponseKeys.VideoID]
+            NotificationCenter.default.post(name: NSNotification.Name("Initial Video ID"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : self.videoId])
+            
+            
             self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
         }
     }
@@ -119,25 +135,37 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         let videoID = video[Constants.YouTubeResponseKeys.VideoID]
         
         if (checkIfLikedVideo(videoID: videoID!)) {
-        
+            
             cell.backgroundColor = UIColor(displayP3Red: 114/255, green: 208/255, blue: 245/255, alpha: 1.0)
             
         } else {
             cell.backgroundColor = UIColor.white
         }
-    
+        
         
         
         let imageURL = URL(string: video[Constants.YouTubeResponseKeys.ThumbnailURL]!)
         
         _ = APIClient.sharedInstance().downloadimageData(photoURL: imageURL!) { (data, error) in
             
+            guard error == nil else {
+                DispatchQueue.main.async {
+                    self.alertTitle = "Could not download image."
+                    self.alertMessage = "\(String(describing: error?.localizedDescription))"
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                }
+                return
+            }
             
-            
-            if let error = error {
-                print("Error downloading picture: \(error)")
-            } else {
-                // No errors found.
+            guard data != nil else {
+                DispatchQueue.main.async {
+                    self.alertTitle = "Oops!"
+                    self.alertMessage = "There is a problem getting image information."
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                }
+                return
+            }
+           
                 if let imageData = data {
                     DispatchQueue.main.async {
                         let image = UIImage(data: imageData)
@@ -152,10 +180,8 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                             activityIndicator.removeFromSuperview()
                         }
                     }
-                } else {
-                    print("Couldn't get image: Image is nil")
                 }
-            }
+            
         }
     }
     
@@ -273,7 +299,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                                         if self.someEntityExists(id: self.videoId, addPredicate: playlistPredicate ) == false {
                                             
                                             
-                                            self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoId, completion: { (video, error) in
+                                            self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoId, completion: { (video) in
                                             })
                                         }
                                             
@@ -287,7 +313,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                                             
                                             let addVideoAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                                                 
-                                                self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoId, completion: { (video, error) in
+                                                self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoId, completion: { (video) in
                                                 })
                                                 
                                             })
@@ -298,7 +324,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                                             duplicateAlert.addAction(cancelAddVideoAction)
                                             duplicateAlert.addAction(addVideoAction)
                                             self.present(duplicateAlert, animated: true, completion: nil)
-                                            print("this video already exists in playlist")
+                        
                                             
                                         }
                                         
@@ -326,7 +352,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         } else {
             fetchRequest.predicate = videoIdPredicate
         }
-       
+        
         var entitiesCount = 0
         
         do {
@@ -365,11 +391,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     
     func finishPassing(playlist: Playlist, videoID: String) {
         
-        addVideo(accessToken: accessToken, playlist: playlist, videoID: videoID) { (video, error) in
-            guard error == nil else {
-                print(error?.localizedDescription)
-                return
-            }
+        addVideo(accessToken: accessToken, playlist: playlist, videoID: videoID) { (video) in
             
             playlist.thumbnail = video?.thumbnail
             playlist.thumbnailURL = video?.thumbnailURL
@@ -379,17 +401,25 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         }
     }
     
-    func addVideo(accessToken: String, playlist: Playlist, videoID: String, completion: @escaping (_ video: Video?, _ error: Error?) -> Void) {
+    func addVideo(accessToken: String, playlist: Playlist, videoID: String, completion: @escaping (_ video: Video?) -> Void) {
         APIClient.sharedInstance().addVideoToPlaylist(accessToken: accessToken, playlistID: playlist.id, videoID: videoID, completion: { (videoDetails, error) in
             
             guard error == nil else {
-                print(error?.localizedDescription)
-                completion(nil, error)
+                completion(nil)
+                DispatchQueue.main.async {
+                    self.alertTitle = "There was a problem with your request"
+                    self.alertMessage = "\(String(describing: error!.localizedDescription))"
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                }
                 return
             }
             
             guard videoDetails != nil else {
-                print("Could not retreive any video details.")
+                DispatchQueue.main.async {
+                    self.alertTitle = "Oops!"
+                    self.alertMessage = "There is a problem getting video information."
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                }
                 return
             }
             //Save the context
@@ -407,7 +437,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
             
             NotificationCenter.default.post(name: NSNotification.Name("Video Added"), object: nil, userInfo: ["message": "Video added to \(playlist.title!) playlist"])
             
-            completion(video, nil)
+            completion(video)
             
         })
     }
@@ -434,7 +464,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                     
                     let video = searchDataSource.items[tapIndexPath.row]
                     let videoID = video[Constants.YouTubeResponseKeys.VideoID]
-                  
+                    
                     if (checkIfLikedVideo(videoID: videoID!) == false) {
                         
                         let saveVideo = Video(context: self.managedContext)
@@ -468,6 +498,12 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                 }
             }
         }
+    }
+    
+    func alertUser (title: String, message: String!) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
     
     

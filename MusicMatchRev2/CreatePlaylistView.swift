@@ -27,6 +27,8 @@ class CreatePlaylistView: UIViewController {
     let playlistPrivacyOptions = ["Public", "Unlisted", "Private"]
     var persistentContainer: NSPersistentContainer!
     var managedContext: NSManagedObjectContext!
+    var alertMessage: String!
+    var alertTitle: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,20 +54,18 @@ class CreatePlaylistView: UIViewController {
     
     @IBAction func addPlaylist(_ sender: UIBarButtonItem) {
         if playlistTitle == nil {
-            let alert = UIAlertController(title: "No Playlist Name", message: "Please enter a name for the playlist", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
+            
+            alertTitle = "No Playlist Name"
+            alertMessage = "Please enter a name for the playlist"
+            alertUser(title: alertTitle, message: alertMessage)
             
         } else {
             
             if  self.someEntityExists(title: playlistTitle) == true {
                 
-                
-                let alert = UIAlertController(title: "A Playlist with that name already exists",
-                                                       message: "Please pick another name",
-                                                       preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                alertTitle = "A Playlist with that name already exists"
+                alertMessage = "Please pick another name"
+                alertUser(title: alertTitle, message: alertMessage)
                 
             } else {
             
@@ -79,11 +79,23 @@ class CreatePlaylistView: UIViewController {
             APIClient.sharedInstance().createPlaylist(accessToken: accessToken ,title: self.playlistTitle, privacyOption: self.privacyOption, completion: { (result, error) in
                 
                 guard error == nil else {
-                    print(error?.localizedDescription)
+                    
+                    DispatchQueue.main.async() {
+                        self.alertMessage = "\(String(describing: error!.localizedDescription))"
+                        self.alertTitle = "Playlist could not be created"
+                        self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                    }
+                    
                     return
                 }
                 guard result != nil else {
-                    print("No playlist returned")
+                    
+                    DispatchQueue.main.async() {
+                        self.alertMessage = "No playlist was returned"
+                        self.alertTitle = "Oops!"
+                        self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                    }
+                   
                     return
                 }
                 
@@ -216,6 +228,12 @@ extension CreatePlaylistView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         textField.text = ""
+    }
+    
+    func alertUser (title: String, message: String!) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
     
 }

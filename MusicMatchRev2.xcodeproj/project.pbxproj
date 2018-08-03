@@ -136,8 +136,8 @@
 		6A644DD1206427CB00855BB7 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
 		6A644DDD2090D77600855BB7 /* SpotifyPlaylistsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyPlaylistsTableViewController.swift; sourceTree = "<group>"; };
 		6A644DDF2090D9E100855BB7 /* SpotifyPlaylistInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyPlaylistInformation.swift; sourceTree = "<group>"; };
-		6A6BF87420C0363D00C0A05A /* Video+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Video+CoreDataClass.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Video+CoreDataClass.swift"; sourceTree = "<absolute>"; };
-		6A6BF87820C0364100C0A05A /* Video+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Video+CoreDataProperties.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Video+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		6A6BF87420C0363D00C0A05A /* Video+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Video+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6A6BF87820C0364100C0A05A /* Video+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Video+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6A6BF87C20C03E8000C0A05A /* LikedVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedVideosView.swift; sourceTree = "<group>"; };
 		6A8370491F8BCB44004D5B26 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A846A01200590F70010535D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = MusicMatchRev2/LoginViewController.swift; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 		6ABACB2A1F9A589C004E4CE5 /* PlayListContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayListContainerView.swift; path = MusicMatchRev2/PlayListContainerView.swift; sourceTree = "<group>"; };
 		6ABF1F282031FEFA0010DDBD /* GoogleCastResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleCastResources.bundle; sourceTree = "<group>"; };
 		6AC8D1951FB5F1F9003B3EF3 /* YTTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YTTableViewDataSource.swift; path = MusicMatchRev2/YTTableViewDataSource.swift; sourceTree = "<group>"; };
-		6AC8D1971FB60BB4003B3EF3 /* Playlist+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Playlist+CoreDataProperties.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Playlist+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		6AC8D1971FB60BB4003B3EF3 /* Playlist+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Playlist+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6AC8D1B61FBBA3C4003B3EF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6ACBBD272091FBCD00008433 /* SpotifyPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyPlaylist.swift; sourceTree = "<group>"; };
 		6ACBBD2A20925D1C00008433 /* SpotifyPlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SpotifyPlaylistView.swift; path = MusicMatchRev2/SpotifyPlaylistView.swift; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 		6ACBBD2E20937C5400008433 /* SpotifyTrackInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyTrackInformation.swift; sourceTree = "<group>"; };
 		6ACBBD3020937F4700008433 /* SpotifyTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyTrack.swift; sourceTree = "<group>"; };
 		6AD54C5920978BE80009DD0D /* GoogleLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoogleLoginView.swift; path = MusicMatchRev2/GoogleLoginView.swift; sourceTree = "<group>"; };
-		6AEC04171F97BF0500C319DD /* Playlist+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Playlist+CoreDataClass.swift"; path = "/Users/Shooktee/Desktop/udacity Apps/MusicMatchRev2/Model/Playlist+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		6AEC04171F97BF0500C319DD /* Playlist+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Playlist+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6AEC04331F97E1AD00C319DD /* YouTubePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = YouTubePlayerViewController.swift; path = MusicMatchRev2/YouTubePlayerViewController.swift; sourceTree = "<group>"; };
 		6AEC045D1F9909E400C319DD /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
 		6AEC045E1F990A1600C319DD /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
