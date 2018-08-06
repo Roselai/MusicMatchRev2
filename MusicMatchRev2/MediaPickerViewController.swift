@@ -14,24 +14,29 @@ import MediaPlayer
 
 
 class MediaPickerViewController: UIViewController, MPMediaPickerControllerDelegate {
-    
-   // private var mediapicker1: MPMediaPickerController!
-    
+
+    @IBOutlet weak var pickSongButton: CustomButton!
     
     var songTitle: String?
     var songArtist: String?
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+  
+    @IBAction func chooseSongButtonPressed(_ sender: UIButton) {
         
-            checkMediaAuthorization()
-            
-        
+        checkMediaAuthorization()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupButtonAttributes(button: pickSongButton)
+    }
     
-    
+    func setupButtonAttributes(button: CustomButton){
+        pickSongButton.layer.borderWidth = 2
+        pickSongButton.layer.borderColor = UIColor.darkGray.cgColor
+    }
     
     
     func checkMediaAuthorization() {
