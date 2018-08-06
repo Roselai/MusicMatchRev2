@@ -14,8 +14,6 @@ import CoreData
 
 class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentationControllerDelegate{
     
-    
-    //var playlistID: String!
     var videoID: String!
     var accessToken: String! = nil
     let persistentContainer: NSPersistentContainer = {

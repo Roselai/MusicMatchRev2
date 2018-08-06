@@ -258,7 +258,7 @@ extension APIClient {
                         {
                         let videoDetailsDict = self.video(fromJSON: videoDict, accessToken: accessToken!)
                         
-                            let title = videoDetailsDict![Constants.YouTubeResponseKeys.Title]
+                            _ = videoDetailsDict![Constants.YouTubeResponseKeys.Title]
                         videos.append(videoDetailsDict!)
                             
                         }
