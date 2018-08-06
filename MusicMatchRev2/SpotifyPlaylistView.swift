@@ -27,10 +27,7 @@ class SpotifyPlaylistView: UITableViewController {
         
         let userID = SpotifyLogin.shared.username
         
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        view.addSubview(activityIndicator)
-        activityIndicator.frame = view.bounds
-        activityIndicator.startAnimating()
+        let spinner = setupSpinner()
         
         //Get List of Playlist Tracks
         APIClient.sharedInstance().getPlaylistTracks(accessToken: self.spotifyAccessToken, userID: userID!, playlistID: self.playlistID, completionHandlerForGetPlaylistTracks: { (result, error) in
@@ -40,15 +37,12 @@ class SpotifyPlaylistView: UITableViewController {
                     
                     DispatchQueue.main.async() {
                         self.tableView.reloadData()
-                        
-                        activityIndicator.stopAnimating()
-                        activityIndicator.removeFromSuperview()
                     }}
                 else {
                     DispatchQueue.main.async() {
                         self.alertTitle = "Oops!"
                         self.alertMessage = "This playlist looks lonely, please add some songs. "
-                        self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                        self.alertUser(title: self.alertTitle, message: self.alertMessage)
                     }
                 }
                 
@@ -56,9 +50,13 @@ class SpotifyPlaylistView: UITableViewController {
                 DispatchQueue.main.async() {
                     self.alertTitle = "There was a problem getting track information."
                     self.alertMessage = "\(String(describing: error!.localizedDescription))"
-                    self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
                 }
-            }})
+            }
+            
+            spinner.stopAnimating()
+        }
+        )
         }
     
         override func tableView(_ tableView: UITableView,
@@ -109,11 +107,7 @@ class SpotifyPlaylistView: UITableViewController {
             }
         }
         
-    func errorAlert (title: String!, message: String!) {
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            self.present(alert, animated: true)
-        }
+    
         
 }
 

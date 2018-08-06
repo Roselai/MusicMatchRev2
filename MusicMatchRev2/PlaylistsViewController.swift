@@ -79,6 +79,8 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
     
     func configure(_ cell: UITableViewCell, for indexPath: IndexPath) {
         
+        let spinner = setupSpinner()
+        
         guard let cell = cell as? CustomTableViewCell else { return }
         
         let playlist = fetchedResultsController!.object(at: indexPath) as! Playlist
@@ -131,6 +133,7 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
                             let title = playlist.title
                             cell.update(with: image, title: title)
                         }
+                        spinner.stopAnimating()
                         
                     }
                 })
@@ -160,6 +163,8 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
     
     
     func fetchPlaylists() {
+        
+        let spinner = setupSpinner()
         
         
         APIClient.sharedInstance().fetchUserPlaylists(accessToken: self.accessToken!) { (playlists, error) in
@@ -213,6 +218,7 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
                             playlist.id = id
                             
                             self.saveContext(context: self.managedContext)
+                            spinner.stopAnimating()
                         }
                         
                         
@@ -264,10 +270,5 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
         }
     }
     
-    func alertUser (title: String, message: String!) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true)
-    }
     
 }

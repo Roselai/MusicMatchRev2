@@ -74,9 +74,11 @@ class CreatePlaylistView: UIViewController {
             let defaults = UserDefaults.standard
             let accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
                 
-                
+           let spinner = setupSpinner()
             
             APIClient.sharedInstance().createPlaylist(accessToken: accessToken ,title: self.playlistTitle, privacyOption: self.privacyOption, completion: { (result, error) in
+                
+                
                 
                 guard error == nil else {
                     
@@ -113,6 +115,7 @@ class CreatePlaylistView: UIViewController {
 
                
                     self.delegate?.finishPassing(playlist: playlist, videoID: self.videoID)
+                    spinner.stopAnimating()
                 
                 DispatchQueue.main.async {
                     
@@ -230,11 +233,6 @@ extension CreatePlaylistView: UITextFieldDelegate {
         textField.text = ""
     }
     
-    func alertUser (title: String, message: String!) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true)
-    }
     
 }
 

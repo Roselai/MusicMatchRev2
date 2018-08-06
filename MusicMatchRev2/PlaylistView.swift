@@ -80,6 +80,8 @@ class PlaylistView: CoreDataTableViewController {
     
     func configure(_ cell: UITableViewCell, for indexPath: IndexPath) {
         
+        let spinner = setupSpinner()
+        
         guard let cell = cell as? CustomTableViewCell else { return }
         
         let video = fetchedResultsController!.object(at: indexPath) as! Video
@@ -103,7 +105,7 @@ class PlaylistView: CoreDataTableViewController {
                         DispatchQueue.main.async {
                             self.alertTitle = "Could not download image."
                             self.alertMessage = "\(String(describing: error!.localizedDescription))"
-                            self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                            self.alertUser(title: self.alertTitle, message: self.alertMessage)
                         }
                         return
                     }
@@ -112,7 +114,7 @@ class PlaylistView: CoreDataTableViewController {
                         DispatchQueue.main.async {
                             self.alertTitle = "Oops!"
                             self.alertMessage = "There is a problem getting image data."
-                            self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                            self.alertUser(title: self.alertTitle, message: self.alertMessage)
                         }
                         return
                     }
@@ -130,6 +132,7 @@ class PlaylistView: CoreDataTableViewController {
                             image = UIImage(data: video.thumbnail! as Data)!
                             let title = video.title
                             cell.update(with: image, title: title)
+                            spinner.stopAnimating()
                         }
                         
                     }
@@ -170,6 +173,8 @@ class PlaylistView: CoreDataTableViewController {
         // Fetch Video
         let video = fetchedResultsController?.object(at: deleteVideoIndexPath!) as! Video
         
+        let spinner = setupSpinner()
+        
         //Delete Video from YouTube Playlist
         APIClient.sharedInstance().deleteVideoFromYTPlaylist(playlistItemID: video.playlistItemID! , accessToken: self.accessToken!, completion: { (success) in
             
@@ -181,8 +186,7 @@ class PlaylistView: CoreDataTableViewController {
                     //delete same video from Core Data
                     self.fetchedResultsController?.managedObjectContext.delete(video)
                     self.saveContext(context: self.managedContext)
-                    
-                    
+                    spinner.stopAnimating()
                 }
                 
             } else {
@@ -191,7 +195,7 @@ class PlaylistView: CoreDataTableViewController {
                     DispatchQueue.main.async {
                         self.alertTitle = "Oops!"
                         self.alertMessage = "Could not delete the video from playlist."
-                        self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                        self.alertUser(title: self.alertTitle, message: self.alertMessage)
                     }
         
             }
@@ -209,6 +213,8 @@ class PlaylistView: CoreDataTableViewController {
     
     func getVideosFromPlaylist(accessToken: String, playlist: Playlist, context: NSManagedObjectContext){
         
+        let spinner = setupSpinner()
+        
         APIClient.sharedInstance().getVideosFromPlaylist(accessToken: accessToken, playlist: playlist) { (videos, error) in
     
             
@@ -216,7 +222,7 @@ class PlaylistView: CoreDataTableViewController {
                 DispatchQueue.main.async {
                     self.alertTitle = "Could not retreive videos"
                     self.alertMessage = "\(String(describing: error!.localizedDescription))"
-                    self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
                 }
                 return
             }
@@ -225,7 +231,7 @@ class PlaylistView: CoreDataTableViewController {
                 DispatchQueue.main.async {
                     self.alertTitle = "Oops!"
                     self.alertMessage = "There are no videos in this playlist"
-                    self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
                 }
                 return
             }
@@ -255,6 +261,8 @@ class PlaylistView: CoreDataTableViewController {
                             video.playlist = playlist
                             
                             self.saveContext(context: context)
+                            
+                            spinner.stopAnimating()
                         }
                     }
                     
@@ -287,12 +295,6 @@ class PlaylistView: CoreDataTableViewController {
             entitiesCount = try! context.count(for: fetchRequest)
         }
         return entitiesCount > 0
-    }
-    
-    func errorAlert (title: String!, message: String!) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        self.present(alert, animated: true)
     }
     
     

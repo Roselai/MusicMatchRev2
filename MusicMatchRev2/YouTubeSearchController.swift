@@ -43,9 +43,19 @@ class YouTubeSearchController: UIViewController {
         
         if queryString != nil {
             searchResultsViewController = searchController
-            searchResultsViewController.performSearch(searchQueryString: queryString)
             
+            let spinner = setupSpinner()
             
+            searchResultsViewController.performSearch(searchQueryString: queryString, completion: { (success) in
+                
+                if success == true
+                {
+                    spinner.stopAnimating()
+                }
+            }
+            )
+            
+           
         }
         
         

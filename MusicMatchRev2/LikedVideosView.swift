@@ -132,6 +132,8 @@ class LikedVideosView : CoreDataTableViewController {
         
         func configure(_ cell: UITableViewCell, for indexPath: IndexPath) {
             
+            let spinner = setupSpinner()
+            
             guard let cell = cell as? CustomTableViewCell else { return }
             
             let video = fetchedResultsController!.object(at: indexPath) as! Video
@@ -155,7 +157,7 @@ class LikedVideosView : CoreDataTableViewController {
                             DispatchQueue.main.async {
                                 self.alertTitle = "Could not download image."
                                 self.alertMessage = "\(String(describing: error!.localizedDescription))"
-                                self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                                self.alertUser(title: self.alertTitle, message: self.alertMessage)
                             }
                             return
                         }
@@ -164,7 +166,7 @@ class LikedVideosView : CoreDataTableViewController {
                             DispatchQueue.main.async {
                                 self.alertTitle = "Oops!"
                                 self.alertMessage = "There is a problem getting image data."
-                                self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                                self.alertUser(title: self.alertTitle, message: self.alertMessage)
                             }
                             return
                         }
@@ -181,6 +183,7 @@ class LikedVideosView : CoreDataTableViewController {
                                 image = UIImage(data: video.thumbnail! as Data)!
                                 let title = video.title
                                 cell.update(with: image, title: title)
+                                spinner.stopAnimating()
                             }
                             
                         }
@@ -205,12 +208,6 @@ class LikedVideosView : CoreDataTableViewController {
                 print("Could not save context \(error), \(error.userInfo)")
             }
         }
-    
-    func errorAlert (title: String!, message: String!) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        self.present(alert, animated: true)
-    }
         
         
 }

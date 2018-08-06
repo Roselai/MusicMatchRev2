@@ -25,8 +25,11 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
         
         self.spotifyPlaylistStore.playlists.removeAll()
         
+       let spinner = setupSpinner()
         
         APIClient.sharedInstance().fetchPlaylists(accessToken: spotifyAccessToken) { (playlists, error) in
+            
+            spinner.stopAnimating()
             
             if error == nil {
                 
@@ -42,7 +45,7 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
                     self.alertUser(title: self.alertTitle, message: self.alertMessage)
                     }
                 }
-                
+               
                 
             } else {
                 DispatchQueue.main.async() {
@@ -68,9 +71,12 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath) as! CustomTableViewCell
         let playlist = spotifyPlaylistStore.playlists[indexPath.row]
         
-        
+        let spinner = setupSpinner()
         
         _ = APIClient.sharedInstance().downloadimageData(photoURL: URL(string: playlist.thumbnailURLString)! ) { (imageData, error) in
+            
+            spinner.stopAnimating()
+            
             if error == nil {
                 
                 if imageData != nil {
@@ -87,6 +93,9 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
                     self.alertUser(title: self.alertTitle, message: self.alertMessage)
                     }
                 }
+                
+                
+                
             } else {
                 DispatchQueue.main.async() {
                 self.alertTitle = "Could not download image."

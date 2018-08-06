@@ -68,8 +68,6 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        
-        
         configure(cell, for: indexPath)
         
     }
@@ -85,7 +83,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     }
     
     
-    func performSearch(searchQueryString: String) {
+    func performSearch(searchQueryString: String, completion: @escaping (_ success: Bool) -> Void){
         APIClient.sharedInstance().searchForVideo(searchQuery: searchQueryString) { (videos, error) in
             guard error == nil else {
                 
@@ -96,6 +94,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                 }
                 
                 self.searchDataSource.items.removeAll()
+                completion(false)
                 return
             }
             
@@ -105,10 +104,14 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                     self.alertMessage = "No videos were returned from your search"
                     self.alertUser(title: self.alertTitle, message: self.alertMessage)
                 }
+                completion(false)
                 return
             }
             
+            
             self.searchDataSource.items = videos!
+            
+            
             
             //send first result videoID to player for load
             self.videoId = (videos![0])[Constants.YouTubeResponseKeys.VideoID]
@@ -116,6 +119,8 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
             
             
             self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+            completion(true)
+        
         }
     }
     
@@ -125,11 +130,8 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     
     func configure(_ cell: UITableViewCell, for indexPath: IndexPath) {
         
-        // Create the Activity Indicator
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        view.addSubview(activityIndicator)
-        activityIndicator.frame = view.bounds
-        activityIndicator.startAnimating()
+        let spinner = setupSpinner()
+        
         
         let video = searchDataSource.items[indexPath.row]
         let videoID = video[Constants.YouTubeResponseKeys.VideoID]
@@ -176,8 +178,8 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                             
                             cell.update(with: image, title: title)
                             
-                            activityIndicator.stopAnimating()
-                            activityIndicator.removeFromSuperview()
+                            spinner.stopAnimating()
+                          
                         }
                     }
                 }
@@ -298,8 +300,14 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                                         
                                         if self.someEntityExists(id: self.videoId, addPredicate: playlistPredicate ) == false {
                                             
+                                            //setup activityindicator
+                                        let spinner = self.setupSpinner()
+                                            
                                             
                                             self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoId, completion: { (video) in
+                                              
+                                                spinner.stopAnimating()
+                                                
                                             })
                                         }
                                             
@@ -313,7 +321,12 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                                             
                                             let addVideoAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                                                 
+                                                //setup activityindicator
+                                                let spinner = self.setupSpinner()
+                                                
                                                 self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoId, completion: { (video) in
+                                                    
+                                                    spinner.stopAnimating()
                                                 })
                                                 
                                             })
@@ -390,13 +403,16 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     }
     
     func finishPassing(playlist: Playlist, videoID: String) {
+     
+        //setup activityindicator
+        let spinner = self.setupSpinner()
         
         addVideo(accessToken: accessToken, playlist: playlist, videoID: videoID) { (video) in
             
             playlist.thumbnail = video?.thumbnail
             playlist.thumbnailURL = video?.thumbnailURL
             self.saveContext(context: self.managedContext)
-            
+            spinner.stopAnimating()
             
         }
     }
@@ -422,6 +438,8 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                 }
                 return
             }
+            
+            
             //Save the context
             
             let video = Video(context: self.managedContext)
@@ -438,6 +456,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
             NotificationCenter.default.post(name: NSNotification.Name("Video Added"), object: nil, userInfo: ["message": "Video added to \(playlist.title!) playlist"])
             
             completion(video)
+           
             
         })
     }
@@ -509,6 +528,18 @@ extension UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
+    }
+    
+    func setupSpinner () -> UIActivityIndicatorView {
+        // Create the Activity Indicator
+        
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        view.addSubview(activityIndicator)
+        activityIndicator.frame = view.bounds
+        
+        
+        activityIndicator.startAnimating()
+        return activityIndicator
     }
 }
 
