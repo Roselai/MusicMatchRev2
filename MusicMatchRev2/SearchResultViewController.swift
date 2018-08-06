@@ -54,7 +54,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let defaults = UserDefaults.standard
-        self.accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
+        accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -500,13 +500,16 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
         }
     }
     
+    
+}
+
+extension UIViewController {
+    
     func alertUser (title: String, message: String!) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
-    
-    
 }
 
 

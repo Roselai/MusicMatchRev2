@@ -186,6 +186,7 @@ extension APIClient {
                     var videosArray = result[Constants.YouTubeResponseKeys.Items] as! [[String:Any]]
                     var videos : [[String:String]] = []
                     
+                    if videosArray.count > 0 {
                     
                     for index in 0 ... videosArray.count-1 {
                         let videoDict = videosArray[index]  as [String: Any]
@@ -202,12 +203,14 @@ extension APIClient {
                         
                         
                         videos.append(videoDetailsDict)
-                    }
+                        }
+                
+                    
                     
                     OperationQueue.main.addOperation {
                         
                         completion(videos, nil)
-                    }
+                        }}
                 }
             }
             else {

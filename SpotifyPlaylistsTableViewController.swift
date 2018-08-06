@@ -39,7 +39,7 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
                     DispatchQueue.main.async() {
                     self.alertTitle = "Oops!"
                     self.alertMessage = "You don't have any playlists"
-                    self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
                     }
                 }
                 
@@ -49,7 +49,7 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
                     
                 self.alertTitle = "Could not retreive playlists from Spotify"
                 self.alertMessage = "\(String(describing: error!.localizedDescription))"
-                self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                self.alertUser(title: self.alertTitle, message: self.alertMessage)
                 }
             }
         }
@@ -84,14 +84,14 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
                     DispatchQueue.main.async() {
                         self.alertTitle = "Oops!"
                     self.alertMessage = "There is a problem getting image information."
-                    self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
                     }
                 }
             } else {
                 DispatchQueue.main.async() {
                 self.alertTitle = "Could not download image."
                     self.alertMessage = "\(String(describing: error!.localizedDescription))"
-                    self.errorAlert(title: self.alertTitle, message: self.alertMessage)
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
                 }
             }
         }
@@ -118,10 +118,6 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
         }
     }
     
-    func errorAlert (title: String!, message: String!) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        self.present(alert, animated: true)
-    }
+ 
 }
 
