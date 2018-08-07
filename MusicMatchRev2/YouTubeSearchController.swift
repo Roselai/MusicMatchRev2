@@ -18,11 +18,11 @@ class YouTubeSearchController: UIViewController {
     fileprivate var YTPlayerViewController: YouTubePlayerViewController!
     var videoID: String!
     var queryString: String!
-   
- 
-  
+    
+    
+    
     @IBOutlet weak var notificationLabel: UILabel!
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,7 +55,7 @@ class YouTubeSearchController: UIViewController {
             }
             )
             
-           
+            
         }
         
         
@@ -78,7 +78,7 @@ class YouTubeSearchController: UIViewController {
             
             
             UIView.animate(withDuration: 0.5, delay: 2, options: .curveEaseOut, animations: {
-               
+                
                 var labelFrame = self.notificationLabel.frame
                 labelFrame.origin.y += (labelFrame.size.height)
                 self.notificationLabel.frame = labelFrame
@@ -92,7 +92,7 @@ class YouTubeSearchController: UIViewController {
                 }
             })
             
-        
+            
             
             
         }

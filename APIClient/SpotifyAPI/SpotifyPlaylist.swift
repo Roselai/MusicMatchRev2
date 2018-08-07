@@ -9,7 +9,7 @@
 import UIKit
 
 class SpotifyPlaylist: NSObject {
-   
+    
     
     
     var playlists = [SpotifyPlaylistInformation]()

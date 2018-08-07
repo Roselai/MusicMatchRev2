@@ -122,8 +122,5 @@ struct Constants {
         static let YouTubeAccessToken = "YTAccessToken"
         static let SpotifyAccessToken = "SpotifyAccessToken"
     }
-    
-    struct ThemeColors {
-        
-    }
+
 }

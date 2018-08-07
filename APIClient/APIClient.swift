@@ -24,7 +24,7 @@ class APIClient{
         var request = URLRequest(url: url)
         
         if accessToken != nil {
-        request.setValue(("Bearer \(accessToken!)"), forHTTPHeaderField: "Authorization")
+            request.setValue(("Bearer \(accessToken!)"), forHTTPHeaderField: "Authorization")
         }
         
         /* 4. Make the request */
@@ -118,7 +118,7 @@ class APIClient{
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             
             self.convertDataWithCompletionHandler(jsonData: data, completionHandlerForConvertData: completionHandlerForPOST )
-           
+            
         }
         
         /* 7. Start the request */
@@ -189,7 +189,7 @@ class APIClient{
         completionHandlerForConvertData(parsedResult as AnyObject, nil)
     }
     
-  
+    
     
     func subtituteKeyInMethod(method: String, key: String, value: String) -> String? {
         if method.range(of: "{\(key)}") != nil {

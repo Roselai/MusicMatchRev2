@@ -21,7 +21,7 @@ class LikedVideosView : CoreDataTableViewController {
         let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores { (description, error) in
             if let error = error {
-                print("Error setting up Core Data (\(error)).")
+                debugPrint("Error setting up Core Data (\(error)).")
             }
         }
         return container
@@ -45,7 +45,7 @@ class LikedVideosView : CoreDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,8 +70,8 @@ class LikedVideosView : CoreDataTableViewController {
         
         
     }
-
-
+    
+    
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
@@ -79,136 +79,130 @@ class LikedVideosView : CoreDataTableViewController {
         guard editingStyle == .delete else { return }
         
         
-            
-            let alert = UIAlertController(title: "Delete Video", message: "Are you sure you want to permanently delete this video?", preferredStyle: .actionSheet)
-            
-            let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: self.handleDeleteVideo)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: self.cancelDeleteVideo)
-            
-            alert.addAction(deleteAction)
-            alert.addAction(cancelAction)
-            
-            
-            self.present(alert, animated: true, completion: nil)
-            
-            
+        let alert = UIAlertController(title: "Delete Video", message: "Are you sure you want to permanently delete this video?", preferredStyle: .actionSheet)
         
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: self.handleDeleteVideo)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: self.cancelDeleteVideo)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        
+        self.present(alert, animated: true, completion: nil)
         
     }
+    
+    func handleDeleteVideo(alertAction: UIAlertAction!) -> Void {
         
-        func handleDeleteVideo(alertAction: UIAlertAction!) -> Void {
-           
-            // Fetch Video
-            let video = fetchedResultsController?.object(at: deleteVideoIndexPath!)
-            
-            // Delete Video
-            fetchedResultsController?.managedObjectContext.delete(video as! NSManagedObject)
-            saveContext(context: managedContext)
+        // Fetch Video
+        let video = fetchedResultsController?.object(at: deleteVideoIndexPath!)
         
-        }
+        // Delete Video
+        fetchedResultsController?.managedObjectContext.delete(video as! NSManagedObject)
+        saveContext(context: managedContext)
         
-        func cancelDeleteVideo(alertAction: UIAlertAction!) {
-            deleteVideoIndexPath = nil
-        }
-        
-        
-        
-        //MARK: TableView DataSource Methods
-        
-        
+    }
+    
+    func cancelDeleteVideo(alertAction: UIAlertAction!) {
+        deleteVideoIndexPath = nil
+    }
+    
+    
+    
+    //MARK: TableView DataSource Methods
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath) as! CustomTableViewCell
-            
-            configure(cell, for: indexPath)
-            
-            return cell
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath) as! CustomTableViewCell
         
+        configure(cell, for: indexPath)
+        
+        return cell
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            self.video = (fetchedResultsController?.fetchedObjects![indexPath.row]) as! Video
-            
-            NotificationCenter.default.post(name: NSNotification.Name("Cell Selected"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : self.video.videoID!])
-        }
+        self.video = (fetchedResultsController?.fetchedObjects![indexPath.row]) as! Video
         
-        func configure(_ cell: UITableViewCell, for indexPath: IndexPath) {
+        NotificationCenter.default.post(name: NSNotification.Name("Cell Selected"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : self.video.videoID!])
+    }
+    
+    func configure(_ cell: UITableViewCell, for indexPath: IndexPath) {
+        
+        
+        
+        guard let cell = cell as? CustomTableViewCell else { return }
+        
+        let video = fetchedResultsController!.object(at: indexPath) as! Video
+        
+        //TODO: Change placeHolder Image
+        var image = #imageLiteral(resourceName: "addIcon")
+        var title: String!
+        title = video.title
+        if video.thumbnail != nil{
             
-            let spinner = setupSpinner()
+            image = UIImage(data: video.thumbnail! as Data)!
             
-            guard let cell = cell as? CustomTableViewCell else { return }
             
-            let video = fetchedResultsController!.object(at: indexPath) as! Video
+        } else {
             
-            //TODO: Change placeHolder Image
-            var image = #imageLiteral(resourceName: "addIcon")
-            var title: String!
-            title = video.title
-            if video.thumbnail != nil{
+            if let imagePath = video.thumbnailURL {
                 
-                image = UIImage(data: video.thumbnail! as Data)!
+                let spinner = setupSpinner()
                 
-                
-            } else {
-                
-                if let imagePath = video.thumbnailURL {
-                    let url = URL(string: imagePath)
-                    _ = APIClient.sharedInstance().downloadimageData(photoURL: url!, completionHandlerForDownloadImageData: { (imageData, error) in
-                        
-                        guard error == nil else {
-                            DispatchQueue.main.async {
-                                self.alertTitle = "Could not download image."
-                                self.alertMessage = "\(String(describing: error!.localizedDescription))"
-                                self.alertUser(title: self.alertTitle, message: self.alertMessage)
-                            }
-                            return
-                        }
-                        
-                        guard imageData != nil else {
-                            DispatchQueue.main.async {
-                                self.alertTitle = "Oops!"
-                                self.alertMessage = "There is a problem getting image data."
-                                self.alertUser(title: self.alertTitle, message: self.alertMessage)
-                            }
-                            return
-                        }
-                        
-                        
-                        self.persistentContainer.performBackgroundTask() { (context) in
-                            video.thumbnail = imageData as NSData?
-                            self.saveContext(context: context)
-                        }
-                        
-                        
+                let url = URL(string: imagePath)
+                _ = APIClient.sharedInstance().downloadimageData(photoURL: url!, completionHandlerForDownloadImageData: { (imageData, error) in
+                    
+                    guard error == nil else {
                         DispatchQueue.main.async {
-                            if video.thumbnail != nil{
-                                image = UIImage(data: video.thumbnail! as Data)!
-                                let title = video.title
-                                cell.update(with: image, title: title)
-                                spinner.stopAnimating()
-                            }
+                            self.alertTitle = "Could not download image."
+                            self.alertMessage = "\(String(describing: error!.localizedDescription))"
+                            self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                        }
+                        return
+                    }
+                    
+                    guard imageData != nil else {
+                        DispatchQueue.main.async {
+                            self.alertTitle = "Oops!"
+                            self.alertMessage = "There is a problem getting image data."
+                            self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                        }
+                        return
+                    }
+                    
+                    
+                    self.persistentContainer.performBackgroundTask() { (context) in
+                        video.thumbnail = imageData as NSData?
+                        self.saveContext(context: context)
+                    }
+                    
+                    
+                    DispatchQueue.main.async {
+                        if video.thumbnail != nil{
+                            image = UIImage(data: video.thumbnail! as Data)!
+                            let title = video.title
+                            cell.update(with: image, title: title)
                             
                         }
-                    })
-                }
-            }
-            
-            
-            cell.update(with: image, title: title)
-            
-            
-        }
-    
-    
-        
-        
-        
-        func saveContext (context: NSManagedObjectContext){
-            do {
-                try context.save()
-            } catch let error as NSError {
-                print("Could not save context \(error), \(error.userInfo)")
+                        spinner.stopAnimating()
+                        spinner.removeFromSuperview()
+                    }
+                })
             }
         }
         
-        
+        cell.update(with: image, title: title)
+    }
+    
+    
+    func saveContext (context: NSManagedObjectContext){
+        do {
+            try context.save()
+        } catch let error as NSError {
+            debugPrint("Could not save context \(error), \(error.userInfo)")
+        }
+    }
+    
+    
 }
 

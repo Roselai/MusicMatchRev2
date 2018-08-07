@@ -120,7 +120,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
             
             self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
             completion(true)
-        
+            
         }
     }
     
@@ -167,22 +167,22 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                 }
                 return
             }
-           
-                if let imageData = data {
-                    DispatchQueue.main.async {
-                        let image = UIImage(data: imageData)
-                        let title = video[Constants.YouTubeResponseKeys.Title]
+            
+            if let imageData = data {
+                DispatchQueue.main.async {
+                    let image = UIImage(data: imageData)
+                    let title = video[Constants.YouTubeResponseKeys.Title]
+                    
+                    if let cell = self.tableView.cellForRow(at: indexPath)
+                        as? CustomTableViewCell {
                         
-                        if let cell = self.tableView.cellForRow(at: indexPath)
-                            as? CustomTableViewCell {
-                            
-                            cell.update(with: image, title: title)
-                            
-                            spinner.stopAnimating()
-                          
-                        }
+                        cell.update(with: image, title: title)
+                        
+                        spinner.stopAnimating()
+                        
                     }
                 }
+            }
             
         }
     }
@@ -301,11 +301,11 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                                         if self.someEntityExists(id: self.videoId, addPredicate: playlistPredicate ) == false {
                                             
                                             //setup activityindicator
-                                        let spinner = self.setupSpinner()
+                                            let spinner = self.setupSpinner()
                                             
                                             
                                             self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoId, completion: { (video) in
-                                              
+                                                
                                                 spinner.stopAnimating()
                                                 
                                             })
@@ -337,7 +337,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                                             duplicateAlert.addAction(cancelAddVideoAction)
                                             duplicateAlert.addAction(addVideoAction)
                                             self.present(duplicateAlert, animated: true, completion: nil)
-                        
+                                            
                                             
                                         }
                                         
@@ -403,7 +403,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
     }
     
     func finishPassing(playlist: Playlist, videoID: String) {
-     
+        
         //setup activityindicator
         let spinner = self.setupSpinner()
         
@@ -456,7 +456,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
             NotificationCenter.default.post(name: NSNotification.Name("Video Added"), object: nil, userInfo: ["message": "Video added to \(playlist.title!) playlist"])
             
             completion(video)
-           
+            
             
         })
     }

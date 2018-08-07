@@ -57,58 +57,58 @@ class SpotifyPlaylistView: UITableViewController {
             spinner.stopAnimating()
         }
         )
-        }
+    }
     
-        override func tableView(_ tableView: UITableView,
-                                numberOfRowsInSection section: Int) -> Int {
-            
-            return spotifyTrackStore.tracks.count
-        }
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         
-        override func tableView(_ tableView: UITableView,
-                                cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-            cell.textLabel?.numberOfLines = 0
-            
-            let track = spotifyTrackStore.tracks[indexPath.row]
-            let artists = track.artists
-            
-            var artistString = ""
-            for index in 0 ... artists.count - 1 {
-                let artist = artists[index] as? [String:AnyObject]
-                let name = artist!["name"] as! String
-                
-                if (index == (artists.count - 1)){
-                    artistString += "\(name)"
-                } else {
-                    artistString += "\(name), "
-                }
-            }
-            
-            
-            cell.textLabel?.text = "\(track.name) - \(track.albumName)"
-            cell.detailTextLabel?.text = artistString
-            return cell
-        }
+        return spotifyTrackStore.tracks.count
+    }
+    
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let track = spotifyTrackStore.tracks[indexPath.row]
-            searchQueryString = track.name
-            performSegue(withIdentifier: "searchForVideo", sender: self)
-            
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        cell.textLabel?.numberOfLines = 0
         
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "searchForVideo" {
-                let destinationViewController = segue.destination as! YouTubeSearchController
-                destinationViewController.queryString = self.searchQueryString
-                
+        let track = spotifyTrackStore.tracks[indexPath.row]
+        let artists = track.artists
+        
+        var artistString = ""
+        for index in 0 ... artists.count - 1 {
+            let artist = artists[index] as? [String:AnyObject]
+            let name = artist!["name"] as! String
+            
+            if (index == (artists.count - 1)){
+                artistString += "\(name)"
+            } else {
+                artistString += "\(name), "
             }
         }
         
-    
         
+        cell.textLabel?.text = "\(track.name) - \(track.albumName)"
+        cell.detailTextLabel?.text = artistString
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let track = spotifyTrackStore.tracks[indexPath.row]
+        searchQueryString = track.name
+        performSegue(withIdentifier: "searchForVideo", sender: self)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "searchForVideo" {
+            let destinationViewController = segue.destination as! YouTubeSearchController
+            destinationViewController.queryString = self.searchQueryString
+            
+        }
+    }
+    
+    
+    
 }
 
 

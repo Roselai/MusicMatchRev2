@@ -91,7 +91,7 @@ extension APIClient {
                                             Constants.YouTubeResponseKeys.Title: videoTitle,
                                             Constants.YouTubeResponseKeys.ThumbnailURL: videoThumbnailURL] as? [String : String]
                     
-        
+                    
                     
                     completion(videoDetailsDict, nil)
                     
@@ -187,29 +187,29 @@ extension APIClient {
                     var videos : [[String:String]] = []
                     
                     if videosArray.count > 0 {
-                    
-                    for index in 0 ... videosArray.count-1 {
-                        let videoDict = videosArray[index]  as [String: Any]
-                        let snippetDict = videoDict[Constants.YouTubeResponseKeys.Snippet] as? [String:Any]
-                        let videoID = (videoDict["id"] as! [String:Any])[Constants.YouTubeResponseKeys.VideoID] as? String
-                        let videoTitle = snippetDict![Constants.YouTubeResponseKeys.Title] as? String
-                        let videoThumbnailURL = ((snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
                         
-                        
-                        
-                        let videoDetailsDict = [Constants.YouTubeResponseKeys.VideoID : videoID!,
-                                                Constants.YouTubeResponseKeys.Title: videoTitle!,
-                                                Constants.YouTubeResponseKeys.ThumbnailURL: videoThumbnailURL!]
-                        
-                        
-                        videos.append(videoDetailsDict)
+                        for index in 0 ... videosArray.count-1 {
+                            let videoDict = videosArray[index]  as [String: Any]
+                            let snippetDict = videoDict[Constants.YouTubeResponseKeys.Snippet] as? [String:Any]
+                            let videoID = (videoDict["id"] as! [String:Any])[Constants.YouTubeResponseKeys.VideoID] as? String
+                            let videoTitle = snippetDict![Constants.YouTubeResponseKeys.Title] as? String
+                            let videoThumbnailURL = ((snippetDict![Constants.YouTubeResponseKeys.Thumbnails] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailKeys.Default] as! [String: Any])[Constants.YouTubeResponseKeys.ThumbnailURL] as? String
+                            
+                            
+                            
+                            let videoDetailsDict = [Constants.YouTubeResponseKeys.VideoID : videoID!,
+                                                    Constants.YouTubeResponseKeys.Title: videoTitle!,
+                                                    Constants.YouTubeResponseKeys.ThumbnailURL: videoThumbnailURL!]
+                            
+                            
+                            videos.append(videoDetailsDict)
                         }
-                
-                    
-                    
-                    OperationQueue.main.addOperation {
                         
-                        completion(videos, nil)
+                        
+                        
+                        OperationQueue.main.addOperation {
+                            
+                            completion(videos, nil)
                         }}
                 }
             }
@@ -241,56 +241,56 @@ extension APIClient {
         
         var videos : [[String:String]] = []
         
-         let url = APIClient.YoutubeURLFromParameters(method: method, parameters: parameters as [String : AnyObject])
+        let url = APIClient.YoutubeURLFromParameters(method: method, parameters: parameters as [String : AnyObject])
         
         _ = APIClient.sharedInstance().taskForGETMethod(url: url, parameters: nil) { (result, error) in
             
             if error == nil {
                 if let result = result {
                     
-                
+                    
                     var videosArray = result[Constants.YouTubeResponseKeys.Items] as! [[String:Any]]
                     
                     if videosArray.count > 0 {
-                    
-                    for index in 0 ... videosArray.count-1 {
                         
-                        let videoDict = videosArray[index] as [String: Any]
-                        
-                        if (videoDict[Constants.YouTubeResponseKeys.ContentDetails] as! [String: Any]).keys.contains("videoPublishedAt")
-                        {
-                        let videoDetailsDict = self.video(fromJSON: videoDict, accessToken: accessToken!)
-                        
-                            _ = videoDetailsDict![Constants.YouTubeResponseKeys.Title]
-                        videos.append(videoDetailsDict!)
+                        for index in 0 ... videosArray.count-1 {
+                            
+                            let videoDict = videosArray[index] as [String: Any]
+                            
+                            if (videoDict[Constants.YouTubeResponseKeys.ContentDetails] as! [String: Any]).keys.contains("videoPublishedAt")
+                            {
+                                let videoDetailsDict = self.video(fromJSON: videoDict, accessToken: accessToken!)
+                                
+                                _ = videoDetailsDict![Constants.YouTubeResponseKeys.Title]
+                                videos.append(videoDetailsDict!)
+                                
+                            }
+                            else {
+                                self.deleteVideoFromYTPlaylist(playlistItemID: videoDict[Constants.YouTubeResponseKeys.PlaylistItemID] as! String, accessToken: accessToken!, completion: { (success) in
+                                    if success == true {
+                                        debugPrint("Video has been deleted from YouTube")
+                                    } else {
+                                        debugPrint("video could not be deleted")
+                                    }
+                                })
+                            }
                             
                         }
-                        else {
-                            self.deleteVideoFromYTPlaylist(playlistItemID: videoDict[Constants.YouTubeResponseKeys.PlaylistItemID] as! String, accessToken: accessToken!, completion: { (success) in
-                                if success == true {
-                                    print("Video has been deleted from YouTube")
-                                } else {
-                                    print("video could not be deleted")
-                                }
-                            })
-                        }
-                        
-                    }
                     }
                     
                     completion(videos, nil)
                     
                     if let nextPageToken = result[Constants.YouTubeResponseKeys.NextPageToken] as? String {
                         print(nextPageToken)
-                    self.getVideosFromPlaylist(accessToken: accessToken, playlist: playlist, pageToken: nextPageToken , completion: { (nextPageVideos, error) in
-                        
-                        if error == nil {
-                        completion(nextPageVideos, nil)
-                        } else {
-                            completion(nil,error)
-                        }
-                        
-                    })
+                        self.getVideosFromPlaylist(accessToken: accessToken, playlist: playlist, pageToken: nextPageToken , completion: { (nextPageVideos, error) in
+                            
+                            if error == nil {
+                                completion(nextPageVideos, nil)
+                            } else {
+                                completion(nil,error)
+                            }
+                            
+                        })
                     }
                 }
             } else {
@@ -313,14 +313,14 @@ extension APIClient {
                           Constants.YouTubeParameterKeys.APIKey: Constants.YoutubeParameterValues.APIKey,
                           Constants.YouTubeParameterKeys.PlaylistItemID: playlistItemID]
         
-       
+        
         let url = APIClient.YoutubeURLFromParameters(method: method, parameters: parameters as [String : AnyObject])
         
         _ = APIClient.sharedInstance().taskForDELETEMethod(url: url, parameters: nil) { (success, error) in
             if error == nil {
                 completion(true)
             } else {
-                print("we have a problem")
+                debugPrint("we have a problem")
                 completion(false)
             }
             
@@ -364,7 +364,7 @@ extension APIClient {
             let jsonData = try? jsonEncoder.encode(jsonBody)
             
             let url = APIClient.YoutubeURLFromParameters(method: method, parameters: parameters as [String : AnyObject])
-
+            
             
             _ = APIClient.sharedInstance().taskForPOSTMethod(url: url, bodyParameters: nil, jsonBody: jsonData!, completionHandlerForPOST: { (result, error) in
                 
@@ -374,12 +374,12 @@ extension APIClient {
                 }
                 
                 guard result != nil else {
-                    print("No playlist in result")
+                    debugPrint("No playlist in result")
                     return
                 }
                 
                 if let result = result {
-                   
+                    
                     let playlistSnippetDict = result[Constants.YouTubeResponseKeys.Snippet] as? [String:Any]
                     let playlistID = result[Constants.YouTubeResponseKeys.PlaylistID] as? String
                     let playlistTitle = playlistSnippetDict![Constants.YouTubeResponseKeys.Title] as? String
@@ -405,7 +405,7 @@ extension APIClient {
         let snippetDict = videoDict[Constants.YouTubeResponseKeys.Snippet] as? [String:Any]
         let playlistItemID = videoDict[Constants.YouTubeResponseKeys.PlaylistItemID] as? String
         
-   
+        
         
         let videoID = (snippetDict![Constants.YouTubeResponseKeys.ResourceID] as! [String:Any])[Constants.YouTubeResponseKeys.VideoID] as? String
         let videoTitle = snippetDict![Constants.YouTubeResponseKeys.Title] as? String

@@ -25,7 +25,4 @@ class YTTableViewDataSource: NSObject, UITableViewDataSource {
         
     }
     
-    
-    
-    
 }

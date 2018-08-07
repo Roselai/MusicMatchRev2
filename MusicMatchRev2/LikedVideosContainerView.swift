@@ -40,9 +40,6 @@ class LikedVideosContainerView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
   
        managedContext = persistentContainer.viewContext
         
@@ -53,7 +50,6 @@ class LikedVideosContainerView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         
         statusLabel.text = ""
         statusLabel.isHidden = true
@@ -68,8 +64,6 @@ class LikedVideosContainerView: UIViewController {
             
             guard let likedVideos = childViewControllers.first as? LikedVideosView  else  {
                 fatalError("Check storyboard for missing LikedVideosView")
-                
-                
                 
             }
             
@@ -104,7 +98,7 @@ class LikedVideosContainerView: UIViewController {
             return (false)
             }
         } catch {
-            print("Failed")
+            debugPrint("Failed")
             return(false)
             
         }

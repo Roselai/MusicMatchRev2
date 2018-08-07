@@ -25,36 +25,38 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
         
         self.spotifyPlaylistStore.playlists.removeAll()
         
-       let spinner = setupSpinner()
+        let spinner = setupSpinner()
         
         APIClient.sharedInstance().fetchPlaylists(accessToken: spotifyAccessToken) { (playlists, error) in
             
-            spinner.stopAnimating()
             
             if error == nil {
                 
-                if (playlists?.count)! > 0  {
-                    DispatchQueue.main.async() {
+                DispatchQueue.main.async() {
+                    if (playlists?.count)! > 0  {
+                        
                         self.tableView.reloadData()
                     }
-                }
-                else {
-                    DispatchQueue.main.async() {
-                    self.alertTitle = "Oops!"
-                    self.alertMessage = "You don't have any playlists"
-                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                    else {
+                        
+                        self.alertTitle = "Oops!"
+                        self.alertMessage = "You don't have any playlists"
+                        self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                        
                     }
+                    spinner.stopAnimating()
                 }
-               
+                
                 
             } else {
                 DispatchQueue.main.async() {
                     
-                self.alertTitle = "Could not retreive playlists from Spotify"
-                self.alertMessage = "\(String(describing: error!.localizedDescription))"
-                self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                    self.alertTitle = "Could not retreive playlists from Spotify"
+                    self.alertMessage = "\(String(describing: error!.localizedDescription))"
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
                 }
             }
+            
         }
         
     }
@@ -75,7 +77,7 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
         
         _ = APIClient.sharedInstance().downloadimageData(photoURL: URL(string: playlist.thumbnailURLString)! ) { (imageData, error) in
             
-            spinner.stopAnimating()
+            
             
             if error == nil {
                 
@@ -89,8 +91,8 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
                 } else {
                     DispatchQueue.main.async() {
                         self.alertTitle = "Oops!"
-                    self.alertMessage = "There is a problem getting image information."
-                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                        self.alertMessage = "There is a problem getting image information."
+                        self.alertUser(title: self.alertTitle, message: self.alertMessage)
                     }
                 }
                 
@@ -98,11 +100,12 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
                 
             } else {
                 DispatchQueue.main.async() {
-                self.alertTitle = "Could not download image."
+                    self.alertTitle = "Could not download image."
                     self.alertMessage = "\(String(describing: error!.localizedDescription))"
                     self.alertUser(title: self.alertTitle, message: self.alertMessage)
                 }
             }
+            spinner.stopAnimating()
         }
         
         
@@ -127,6 +130,6 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
         }
     }
     
- 
+    
 }
 

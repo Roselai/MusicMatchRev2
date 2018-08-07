@@ -16,7 +16,6 @@ class PlaylistContainerView: UIViewController {
     
     @IBOutlet var notificationLabel: UILabel!
     
-    
     fileprivate var playlistView: PlaylistView!
     fileprivate var YTPlayerViewController: YouTubePlayerViewController!
     var accessToken: String!
@@ -38,9 +37,9 @@ class PlaylistContainerView: UIViewController {
             fatalError("Check storyboard for missing YouTubePlayerViewController")
         }
         
-       if accessToken != nil && self.playlist != nil {
-        playlistController.accessToken = accessToken
-        playlistController.loadFetchedResultsController(playlist: playlist, context: self.managedContext)
+        if accessToken != nil && self.playlist != nil {
+            playlistController.accessToken = accessToken
+            playlistController.loadFetchedResultsController(playlist: playlist, context: self.managedContext)
             playlistController.getVideosFromPlaylist(accessToken: accessToken, playlist: self.playlist, context: self.managedContext)
         }
         
@@ -77,16 +76,13 @@ class PlaylistContainerView: UIViewController {
                 }
             })
             
-            
-            
-            
         }
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-        
-        
+    
+    
 }
 

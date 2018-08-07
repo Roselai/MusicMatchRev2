@@ -54,8 +54,6 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
             fetchPlaylists()
             
         }
-        
-        
     }
     
     
@@ -79,7 +77,7 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
     
     func configure(_ cell: UITableViewCell, for indexPath: IndexPath) {
         
-        let spinner = setupSpinner()
+        
         
         guard let cell = cell as? CustomTableViewCell else { return }
         
@@ -97,6 +95,7 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
         } else {
             
             if let imagePath = playlist.thumbnailURL {
+                let spinner = setupSpinner()
                 let url = URL(string: imagePath)
                 _ = APIClient.sharedInstance().downloadimageData(photoURL: url!, completionHandlerForDownloadImageData: { (imageData, error) in
                     
@@ -218,13 +217,14 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
                             playlist.id = id
                             
                             self.saveContext(context: self.managedContext)
-                            spinner.stopAnimating()
+                            
                         }
                         
                         
                     }
                     
                 }
+            spinner.stopAnimating()
                 self.deletePlaylists()
             //}
         }

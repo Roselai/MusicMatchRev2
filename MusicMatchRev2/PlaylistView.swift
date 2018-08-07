@@ -17,7 +17,7 @@ class PlaylistView: CoreDataTableViewController {
     var videoID: String!
     var playlistID: String!
     var accessToken: String!
-   
+    
     let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores { (description, error) in
@@ -29,18 +29,18 @@ class PlaylistView: CoreDataTableViewController {
     }()
     var managedContext: NSManagedObjectContext!
     var video: Video!
-     var deleteVideoIndexPath: IndexPath? = nil
+    var deleteVideoIndexPath: IndexPath? = nil
     var alertMessage: String!
     var alertTitle: String!
     
     
     //MARK: TableView DataSource Methods
     
-   
+    
     
     func loadFetchedResultsController (playlist: Playlist!, context: NSManagedObjectContext) {
-       
-       let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Video")
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Video")
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         fetchRequest.predicate = NSPredicate(format: "playlist = %@", playlist)
@@ -53,8 +53,8 @@ class PlaylistView: CoreDataTableViewController {
         videoID = fetchedVideos.first?.videoID
         //send first result videoID to player for load
         
-       
-       // NotificationCenter.default.post(name: NSNotification.Name("Initial Video ID From Playlist"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : self.videoID!])
+        
+        // NotificationCenter.default.post(name: NSNotification.Name("Initial Video ID From Playlist"), object: nil, userInfo: [Constants.YouTubeResponseKeys.VideoID : self.videoID!])
         
     }
     
@@ -80,7 +80,7 @@ class PlaylistView: CoreDataTableViewController {
     
     func configure(_ cell: UITableViewCell, for indexPath: IndexPath) {
         
-        let spinner = setupSpinner()
+        
         
         guard let cell = cell as? CustomTableViewCell else { return }
         
@@ -98,6 +98,9 @@ class PlaylistView: CoreDataTableViewController {
         } else {
             
             if let imagePath = video.thumbnailURL {
+                
+                let spinner = setupSpinner()
+                
                 let url = URL(string: imagePath)
                 _ = APIClient.sharedInstance().downloadimageData(photoURL: url!, completionHandlerForDownloadImageData: { (imageData, error) in
                     
@@ -119,8 +122,7 @@ class PlaylistView: CoreDataTableViewController {
                         return
                     }
                     
-        
-            
+                    
                     self.persistentContainer.performBackgroundTask() { (context) in
                         video.thumbnail = imageData as NSData?
                         self.saveContext(context: context)
@@ -134,20 +136,15 @@ class PlaylistView: CoreDataTableViewController {
                             cell.update(with: image, title: title)
                             spinner.stopAnimating()
                         }
-                        
                     }
                 })
             }
         }
-        
-        
         cell.update(with: image, title: title)
-        
-        
     }
     
     
-
+    
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
@@ -165,7 +162,7 @@ class PlaylistView: CoreDataTableViewController {
         
         self.present(alert, animated: true, completion: nil)
         
-
+        
     }
     
     func handleDeleteVideo(alertAction: UIAlertAction!) -> Void {
@@ -186,19 +183,19 @@ class PlaylistView: CoreDataTableViewController {
                     //delete same video from Core Data
                     self.fetchedResultsController?.managedObjectContext.delete(video)
                     self.saveContext(context: self.managedContext)
-                    spinner.stopAnimating()
+                    
                 }
                 
             } else {
                 
-             
-                    DispatchQueue.main.async {
-                        self.alertTitle = "Oops!"
-                        self.alertMessage = "Could not delete the video from playlist."
-                        self.alertUser(title: self.alertTitle, message: self.alertMessage)
-                    }
-        
+                
+                DispatchQueue.main.async {
+                    self.alertTitle = "Oops!"
+                    self.alertMessage = "Could not delete the video from playlist."
+                    self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                }
             }
+            spinner.stopAnimating()
             
         })
         
@@ -209,14 +206,14 @@ class PlaylistView: CoreDataTableViewController {
     }
     
     
-   
+    
     
     func getVideosFromPlaylist(accessToken: String, playlist: Playlist, context: NSManagedObjectContext){
         
         let spinner = setupSpinner()
         
         APIClient.sharedInstance().getVideosFromPlaylist(accessToken: accessToken, playlist: playlist) { (videos, error) in
-    
+            
             
             guard error == nil else {
                 DispatchQueue.main.async {
@@ -262,17 +259,12 @@ class PlaylistView: CoreDataTableViewController {
                             
                             self.saveContext(context: context)
                             
-                            spinner.stopAnimating()
                         }
                     }
-                    
                 }
-                
+                spinner.stopAnimating()
             }
-            
-            
         }
-        
     }
     
     func saveContext (context: NSManagedObjectContext){

@@ -38,7 +38,7 @@ class CreatePlaylistView: UIViewController {
         
         popUpView.layer.cornerRadius = 10
         popUpView.layer.masksToBounds = true
-    
+        
         playlistPrivacyOptionTableView.delegate = self
         playlistPrivacyOptionTableView.dataSource = self
         
@@ -46,7 +46,7 @@ class CreatePlaylistView: UIViewController {
         
     }
     
-   
+    
     
     @IBAction func closeView(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
@@ -68,62 +68,62 @@ class CreatePlaylistView: UIViewController {
                 alertUser(title: alertTitle, message: alertMessage)
                 
             } else {
-            
-            
-            //create a playlist with name
-            let defaults = UserDefaults.standard
-            let accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
-                
-           let spinner = setupSpinner()
-            
-            APIClient.sharedInstance().createPlaylist(accessToken: accessToken ,title: self.playlistTitle, privacyOption: self.privacyOption, completion: { (result, error) in
                 
                 
+                //create a playlist with name
+                let defaults = UserDefaults.standard
+                let accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
                 
-                guard error == nil else {
+                let spinner = setupSpinner()
+                
+                APIClient.sharedInstance().createPlaylist(accessToken: accessToken ,title: self.playlistTitle, privacyOption: self.privacyOption, completion: { (result, error) in
                     
-                    DispatchQueue.main.async() {
-                        self.alertMessage = "\(String(describing: error!.localizedDescription))"
-                        self.alertTitle = "Playlist could not be created"
-                        self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                    
+                    
+                    guard error == nil else {
+                        
+                        DispatchQueue.main.async() {
+                            self.alertMessage = "\(String(describing: error!.localizedDescription))"
+                            self.alertTitle = "Playlist could not be created"
+                            self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                        }
+                        
+                        return
+                    }
+                    guard result != nil else {
+                        
+                        DispatchQueue.main.async() {
+                            self.alertMessage = "No playlist was returned"
+                            self.alertTitle = "Oops!"
+                            self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                        }
+                        
+                        return
                     }
                     
-                    return
-                }
-                guard result != nil else {
-                    
-                    DispatchQueue.main.async() {
-                        self.alertMessage = "No playlist was returned"
-                        self.alertTitle = "Oops!"
-                        self.alertUser(title: self.alertTitle, message: self.alertMessage)
+                    if let result = result as? [String:String] {
+                        
+                        //Save the context
+                        
+                        let playlist = Playlist(context: self.managedContext)
+                        playlist.title = result[Constants.YouTubeResponseKeys.Title]
+                        playlist.id = result[Constants.YouTubeResponseKeys.PlaylistID]
+                        
+                        
+                        self.saveContext(context: self.managedContext)
+                        
+                        
+                        
+                        self.delegate?.finishPassing(playlist: playlist, videoID: self.videoID)
+                        spinner.stopAnimating()
+                        
+                        DispatchQueue.main.async {
+                            
+                            self.dismiss(animated: false, completion: nil)
+                        }
                     }
-                   
-                    return
-                }
-                
-                if let result = result as? [String:String] {
-                
-                    //Save the context
                     
-                    let playlist = Playlist(context: self.managedContext)
-                    playlist.title = result[Constants.YouTubeResponseKeys.Title]
-                    playlist.id = result[Constants.YouTubeResponseKeys.PlaylistID]
-                   
-                    
-                    self.saveContext(context: self.managedContext)
-                
-
-               
-                    self.delegate?.finishPassing(playlist: playlist, videoID: self.videoID)
-                    spinner.stopAnimating()
-                
-                DispatchQueue.main.async {
-                    
-                self.dismiss(animated: false, completion: nil)
-                    }
-                }
-                
-            })
+                })
             }
         }
         
@@ -150,7 +150,7 @@ class CreatePlaylistView: UIViewController {
         do {
             try context.save()
         } catch let error as NSError {
-            print("Could not save context \(error), \(error.userInfo)")
+            debugPrint("Could not save context \(error), \(error.userInfo)")
         }
     }
     
@@ -160,7 +160,7 @@ class CreatePlaylistView: UIViewController {
 
 
 extension CreatePlaylistView: UITableViewDelegate {
-   
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return playlistPrivacyOptions.count
@@ -175,10 +175,10 @@ extension CreatePlaylistView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
-         cell.accessoryType = .checkmark
+            cell.accessoryType = .checkmark
             self.privacyOption = cell.textLabel?.text
-         
-         }
+            
+        }
     }
 }
 
@@ -191,7 +191,7 @@ extension CreatePlaylistView: UITableViewDataSource {
         
         let text = playlistPrivacyOptions[indexPath.row]
         cell.textLabel?.text = text
-         cell.textLabel?.textColor = UIColor.black
+        cell.textLabel?.textColor = UIColor.black
         
         if cell.textLabel?.text == "Public"  {
             
