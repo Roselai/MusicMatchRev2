@@ -178,12 +178,14 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                         
                         cell.update(with: image, title: title)
                         
-                        spinner.stopAnimating()
+                        
                         
                     }
                 }
             }
-            
+            DispatchQueue.main.async {
+                spinner.stopAnimating()
+            }
         }
     }
     
@@ -286,7 +288,7 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                 completion(allPlaylists)
             } catch {
                 completion(nil)
-                print("Could not retreive Playlists")
+                debugPrint("Could not retreive Playlists")
             }
         }
         
@@ -306,7 +308,9 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                                             
                                             self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoId, completion: { (video) in
                                                 
-                                                spinner.stopAnimating()
+                                                DispatchQueue.main.async {
+                                                    spinner.stopAnimating()
+                                                }
                                                 
                                             })
                                         }
@@ -326,7 +330,9 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                                                 
                                                 self.addVideo(accessToken: self.accessToken!, playlist: playlist, videoID: self.videoId, completion: { (video) in
                                                     
-                                                    spinner.stopAnimating()
+                                                    DispatchQueue.main.async {
+                                                        spinner.stopAnimating()
+                                                    }
                                                 })
                                                 
                                             })
@@ -412,7 +418,10 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
             playlist.thumbnail = video?.thumbnail
             playlist.thumbnailURL = video?.thumbnailURL
             self.saveContext(context: self.managedContext)
-            spinner.stopAnimating()
+            
+            DispatchQueue.main.async {
+                spinner.stopAnimating()
+            }
             
         }
     }
@@ -513,7 +522,6 @@ class SearchResultViewController: UITableViewController, CreatePlaylistViewDeleg
                         duplicateAlert.addAction(okAction)
                         self.present(duplicateAlert, animated: true, completion: nil)
                     }
-                    
                 }
             }
         }

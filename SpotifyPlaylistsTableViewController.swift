@@ -32,19 +32,20 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
             
             if error == nil {
                 
-                DispatchQueue.main.async() {
-                    if (playlists?.count)! > 0  {
-                        
+                
+                if (playlists?.count)! > 0  {
+                    
+                    DispatchQueue.main.async() {
                         self.tableView.reloadData()
                     }
-                    else {
-                        
+                } else {
+                    
+                    DispatchQueue.main.async() {
                         self.alertTitle = "Oops!"
                         self.alertMessage = "You don't have any playlists"
                         self.alertUser(title: self.alertTitle, message: self.alertMessage)
                         
                     }
-                    spinner.stopAnimating()
                 }
                 
                 
@@ -57,6 +58,9 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
                 }
             }
             
+            DispatchQueue.main.async() {
+                spinner.stopAnimating()
+            }
         }
         
     }
@@ -83,12 +87,13 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
                 
                 if imageData != nil {
                     
+                    
                     DispatchQueue.main.async() {
-                        
                         cell.update(with: UIImage(data: imageData!) , title: playlist.name)
-                        
                     }
+                    
                 } else {
+                    
                     DispatchQueue.main.async() {
                         self.alertTitle = "Oops!"
                         self.alertMessage = "There is a problem getting image information."
@@ -105,7 +110,11 @@ class SpotifyPlaylistsTableViewController: UITableViewController {
                     self.alertUser(title: self.alertTitle, message: self.alertMessage)
                 }
             }
-            spinner.stopAnimating()
+            
+            DispatchQueue.main.async() {
+                spinner.stopAnimating()
+            }
+            
         }
         
         

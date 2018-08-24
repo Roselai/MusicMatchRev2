@@ -53,8 +53,9 @@ class SpotifyPlaylistView: UITableViewController {
                     self.alertUser(title: self.alertTitle, message: self.alertMessage)
                 }
             }
-            
+            DispatchQueue.main.async() {
             spinner.stopAnimating()
+            }
         }
         )
     }

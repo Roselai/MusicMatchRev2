@@ -15,8 +15,9 @@ class LikedVideosContainerView: UIViewController {
     @IBOutlet weak var topContainerView: UIView!
     @IBOutlet weak var bottomContainerView: UIView!
     @IBOutlet weak var logoImageView: UIImageView!
-  
     
+  
+
     let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores { (description, error) in
@@ -41,6 +42,7 @@ class LikedVideosContainerView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
   
+ 
        managedContext = persistentContainer.viewContext
         
         logoImageView.layer.cornerRadius = 8.0
@@ -104,7 +106,7 @@ class LikedVideosContainerView: UIViewController {
         }
     }
     
-   
+    
 
     
 }

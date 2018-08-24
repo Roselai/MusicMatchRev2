@@ -17,14 +17,24 @@ struct SpotifyPlaylistInformation {
     
     init(json:[String: AnyObject]) {
         
-        id = json["id"] as! String
-        name = json["name"] as! String
+        guard
+            let id = json["id"] as? String,
+            let name = json["name"] as? String,
+            let images = json["images"] as? [[String: AnyObject]],
+            let firstImage = images.first,
+            let thumbnailURLString = firstImage["url"] as? String,
+            let uri = json["uri"] as? String else {
+                self.id = ""
+                self.name = ""
+                self.thumbnailURLString = ""
+                self.uri = ""
+                return
+        }
         
-        let images = json["images"] as! [[String: AnyObject]]
-        let firstImage = images.first!
-        thumbnailURLString = firstImage["url"] as! String
-        
-        uri = json["uri"] as! String
+        self.id = id
+        self.name = name
+        self.thumbnailURLString = thumbnailURLString
+        self.uri = uri
     }
     
     

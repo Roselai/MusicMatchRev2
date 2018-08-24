@@ -134,8 +134,10 @@ class PlaylistView: CoreDataTableViewController {
                             image = UIImage(data: video.thumbnail! as Data)!
                             let title = video.title
                             cell.update(with: image, title: title)
-                            spinner.stopAnimating()
                         }
+                    }
+                    DispatchQueue.main.async {
+                    spinner.stopAnimating()
                     }
                 })
             }
@@ -195,8 +197,10 @@ class PlaylistView: CoreDataTableViewController {
                     self.alertUser(title: self.alertTitle, message: self.alertMessage)
                 }
             }
-            spinner.stopAnimating()
             
+            DispatchQueue.main.async {
+            spinner.stopAnimating()
+            }
         })
         
     }
@@ -233,8 +237,6 @@ class PlaylistView: CoreDataTableViewController {
                 return
             }
             
-            
-            
             DispatchQueue.main.async {
                 
                 if let videosArray = videos {
@@ -262,7 +264,10 @@ class PlaylistView: CoreDataTableViewController {
                         }
                     }
                 }
+                
+                DispatchQueue.main.async {
                 spinner.stopAnimating()
+                }
             }
         }
     }

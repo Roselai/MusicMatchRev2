@@ -40,7 +40,13 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
         self.navigationItem.setHidesBackButton(true, animated:true)
         
         let defaults = UserDefaults.standard
-        self.accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
+        accessToken = defaults.string(forKey: Constants.UserDefaultKeys.YouTubeAccessToken)
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         if accessToken != nil {
             
@@ -55,6 +61,8 @@ class PlaylistsViewController: CoreDataTableViewController, UIPopoverPresentatio
             
         }
     }
+    
+    
     
     
     

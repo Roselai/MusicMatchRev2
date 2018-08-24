@@ -9,17 +9,32 @@
 import Foundation
 
 struct SpotifyTrackInformation {
-  
+    
     var name: String
     var artists: [AnyObject]
     var albumName: String
     
     init(json:[String: AnyObject]) {
         
-        name = json["name"] as! String
-        artists = json["artists"] as! [AnyObject]
-        let album = json["album"] as! [String:AnyObject]
-        albumName = album["name"] as! String
+        
+        guard
+            let name = json["name"] as? String,
+            let artists = json["artists"] as? [AnyObject],
+            let album = json["album"] as? [String:AnyObject],
+            let albumName = album["name"] as? String else {
+                self.name = ""
+                self.artists = []
+                self.albumName = ""
+                return
+        }
+        
+        
+        self.name = name
+        self.artists = artists
+        self.albumName = albumName
+        
+        
+        
         
     }
     
