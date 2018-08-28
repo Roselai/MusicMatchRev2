@@ -12,7 +12,7 @@ import youtube_ios_player_helper
 
 
 
-class YouTubePlayerViewController: UIViewController{
+class YouTubePlayerViewController: UIViewController, YTPlayerViewDelegate{
     
     
     @IBOutlet weak var playerView: YTPlayerView!
@@ -23,6 +23,9 @@ class YouTubePlayerViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        self.playerView.delegate = self
 
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideo), name: Notification.Name("Cell Selected"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadVideo), name: Notification.Name("Initial Video ID"), object: nil)
@@ -35,19 +38,27 @@ class YouTubePlayerViewController: UIViewController{
     @objc func loadVideo(_ notification: Notification) {
         videoID = notification.userInfo?[Constants.YouTubeResponseKeys.VideoID] as! String
         
-        let playerVars: [AnyHashable: Any] = ["playsinline" : 1 ]
-        self.playerView.load(withVideoId: self.videoID, playerVars: playerVars)
-       
+        if videoID != nil {
+        
+            let playerVars: [AnyHashable: Any] = ["playsinline" : 1,
+                                                  "enablejsapi" : 1]
+       self.playerView.load(withVideoId: videoID, playerVars: playerVars)
+        }
         
     }
     
     @objc func loadVideoFromPlaylist(_ notification: Notification) {
         videoID = notification.userInfo?[Constants.YouTubeResponseKeys.VideoID] as! String
         
-        let playerVars: [AnyHashable: Any] = ["playsinline" : 1 ]
+        let playerVars: [AnyHashable: Any] = ["playsinline" : 1,
+                                              "enablejsapi" : 1]
       self.playerView.load(withVideoId: self.videoID, playerVars: playerVars)
+        
+      
+        
     }
     
+
 
     deinit {
         NotificationCenter.default.removeObserver(self)

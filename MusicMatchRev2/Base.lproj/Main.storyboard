@@ -56,15 +56,15 @@
         <scene sceneID="Paq-mP-iuP">
             <objects>
                 <tableViewController id="zCE-T3-c0J" customClass="SearchResultViewController" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BvN-ou-GwF">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="BvN-ou-GwF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="363"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" rowHeight="90" id="qvU-6w-Lwl" customClass="CustomTableViewCell" customModule="MusicMatchRev2" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qvU-6w-Lwl" id="rVE-aL-SSC">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
@@ -162,15 +162,15 @@
         <scene sceneID="ZFn-hf-lr4">
             <objects>
                 <tableViewController id="HD3-Uc-sWb" customClass="PlaylistsViewController" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="100" sectionHeaderHeight="30" sectionFooterHeight="1" contentViewInsetsToSafeArea="NO" id="Xfv-yv-mc6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="100" sectionHeaderHeight="18" sectionFooterHeight="18" contentViewInsetsToSafeArea="NO" id="Xfv-yv-mc6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="363"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" indentationWidth="10" reuseIdentifier="UITableViewCell" rowHeight="90" id="HGC-mp-7hB" customClass="CustomTableViewCell" customModule="MusicMatchRev2" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="30" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HGC-mp-7hB" id="kvW-c3-Ian">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
@@ -193,13 +193,13 @@
         <scene sceneID="wzj-kZ-A95">
             <objects>
                 <tableViewController id="Klr-7h-Awd" customClass="PlaylistView" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" id="9dP-je-Q73">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="364"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="100" sectionHeaderHeight="18" sectionFooterHeight="18" contentViewInsetsToSafeArea="NO" id="9dP-je-Q73">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="408"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" rowHeight="90" id="K65-J7-66L" customClass="CustomTableViewCell" customModule="MusicMatchRev2" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K65-J7-66L" id="h1W-Ye-xCk">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
@@ -289,12 +289,15 @@
                             <constraint firstItem="Euq-K5-bsw" firstAttribute="top" secondItem="AEi-GD-uR8" secondAttribute="top" id="BuR-eP-jas"/>
                             <constraint firstItem="Euq-K5-bsw" firstAttribute="leading" secondItem="N2Q-Bk-X60" secondAttribute="trailing" id="F9m-Bb-DPC"/>
                             <constraint firstItem="G0k-7p-QYb" firstAttribute="top" secondItem="N2Q-Bk-X60" secondAttribute="bottom" id="FUK-ue-Akv"/>
-                            <constraint firstAttribute="trailing" secondItem="Euq-K5-bsw" secondAttribute="trailing" id="GNm-g3-sDF"/>
                             <constraint firstItem="N2Q-Bk-X60" firstAttribute="top" secondItem="AEi-GD-uR8" secondAttribute="top" id="LHL-ha-h93"/>
+                            <constraint firstItem="Euq-K5-bsw" firstAttribute="width" secondItem="AEi-GD-uR8" secondAttribute="width" id="VeC-s0-3T0"/>
                             <constraint firstItem="N2Q-Bk-X60" firstAttribute="leading" secondItem="AEi-GD-uR8" secondAttribute="leading" constant="-240" id="awn-ac-TVc"/>
                             <constraint firstItem="G0k-7p-QYb" firstAttribute="top" secondItem="Euq-K5-bsw" secondAttribute="bottom" id="kmo-L9-GPd"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="sideMenuConstraint" destination="awn-ac-TVc" id="kJB-TP-nUN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ng5-7H-JB4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -304,15 +307,15 @@
         <scene sceneID="MeO-c2-2Fg">
             <objects>
                 <tableViewController id="V0f-kA-HtR" customClass="SideMenuViewController" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nZo-u7-d8I">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="nZo-u7-d8I">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection id="cu7-of-vEg">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="GGl-dC-fqR">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
+                                        <rect key="frame" x="0.0" y="35" width="240" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GGl-dC-fqR" id="Df7-og-CzM">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
@@ -329,7 +332,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="vCL-RN-QzS">
-                                        <rect key="frame" x="0.0" y="44" width="240" height="44"/>
+                                        <rect key="frame" x="0.0" y="79" width="240" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vCL-RN-QzS" id="Sht-fv-ar1">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
@@ -346,7 +349,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="qur-9N-X8U">
-                                        <rect key="frame" x="0.0" y="88" width="240" height="44"/>
+                                        <rect key="frame" x="0.0" y="123" width="240" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qur-9N-X8U" id="SCR-v4-rPH">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
@@ -392,12 +395,48 @@
             </objects>
             <point key="canvasLocation" x="-2796" y="-1262"/>
         </scene>
+        <!--Help-->
+        <scene sceneID="TLN-5f-g10">
+            <objects>
+                <viewController title="Help" id="84h-h4-ZJf" customClass="HelpMenuViewController" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BmD-vs-6rb"/>
+                        <viewControllerLayoutGuide type="bottom" id="Joz-Y4-oIl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="alX-0u-37l">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QvM-8V-kcK">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Joz-Y4-oIl" firstAttribute="top" secondItem="QvM-8V-kcK" secondAttribute="bottom" id="7OR-YV-z4a"/>
+                            <constraint firstItem="QvM-8V-kcK" firstAttribute="top" secondItem="BmD-vs-6rb" secondAttribute="bottom" id="Ivh-kR-ah6"/>
+                            <constraint firstAttribute="trailing" secondItem="QvM-8V-kcK" secondAttribute="trailing" id="W7J-9G-nDd"/>
+                            <constraint firstItem="QvM-8V-kcK" firstAttribute="leading" secondItem="alX-0u-37l" secondAttribute="leading" id="s4c-ST-wAe"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Help" id="4IU-DT-h2N"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QbL-XI-m9i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1575.5" y="-1959.5"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gzV-b3-buf">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="0hq-H3-BEj" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="0hq-H3-BEj" customClass="TabBarController" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="e0K-Ta-lNd"/>
+                    <navigationItem key="navigationItem" id="e0K-Ta-lNd">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="XkK-zZ-0ra">
+                            <connections>
+                                <action selector="sideMenuButtonTapped:" destination="0hq-H3-BEj" id="3W7-zJ-4lh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="ggJ-cb-9gW">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -410,6 +449,7 @@
                         <segue destination="daD-7l-n7p" kind="relationship" relationship="viewControllers" id="ukO-gH-Aqq"/>
                         <segue destination="Rv0-xB-JyI" kind="relationship" relationship="viewControllers" id="edj-8W-vWl"/>
                         <segue destination="XrC-iZ-X2V" kind="relationship" relationship="viewControllers" id="lnZ-4L-gqN"/>
+                        <segue destination="84h-h4-ZJf" kind="push" identifier="ShowHelp" id="yfh-3D-est"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Adh-g3-mk2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -462,13 +502,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SMK-8c-REh">
-                                <rect key="frame" x="0.0" y="303" width="375" height="364"/>
+                                <rect key="frame" x="0.0" y="259" width="375" height="408"/>
                                 <connections>
                                     <segue destination="Klr-7h-Awd" kind="embed" id="apa-pJ-WwU"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ho-t7-KCd">
-                                <rect key="frame" x="0.0" y="64" width="375" height="240"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="xri-Mx-65y"/>
                                 </constraints>
@@ -691,13 +731,13 @@
         <scene sceneID="lvO-6a-bLd">
             <objects>
                 <tableViewController title="Liked Videos" id="uHX-hB-31z" customClass="LikedVideosView" customModule="MusicMatchRev2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="QJx-eq-6ft">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="QJx-eq-6ft">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="329"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UITableViewCell" rowHeight="90" id="DPF-tg-962" customClass="CustomTableViewCell" customModule="MusicMatchRev2" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DPF-tg-962" id="2JY-6h-LNA">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
@@ -730,11 +770,11 @@
                         <viewControllerLayoutGuide type="bottom" id="krh-JW-9rF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="k0p-ca-Ndm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="363"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ca8-lF-ocz" customClass="GIDSignInButton">
-                                <rect key="frame" x="67.5" y="279" width="240" height="60"/>
+                                <rect key="frame" x="67.5" y="151.5" width="240" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="4dJ-w4-gqT"/>
@@ -838,8 +878,8 @@
         <image name="MusicMatchLogo_white" width="202" height="202"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="edj-8W-vWl"/>
-        <segue reference="hrF-Nd-Maz"/>
+        <segue reference="dxr-BI-VWf"/>
+        <segue reference="N1S-te-qr6"/>
         <segue reference="xjp-ol-Hki"/>
     </inferredMetricsTieBreakers>
 </document>

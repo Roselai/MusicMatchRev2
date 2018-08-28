@@ -36,6 +36,8 @@
 		6A846A02200590F70010535D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A846A01200590F70010535D /* LoginViewController.swift */; };
 		6A8FB45521302FDE00D44022 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8FB45421302FDE00D44022 /* SideMenuViewController.swift */; };
 		6A8FB4572130304200D44022 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8FB4562130304200D44022 /* ContainerViewController.swift */; };
+		6A8FB45921304E9B00D44022 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8FB45821304E9B00D44022 /* TabBarController.swift */; };
+		6A8FB45B21309D0C00D44022 /* HelpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8FB45A21309D0C00D44022 /* HelpMenuViewController.swift */; };
 		6A9D2F911FA2590B002D60F2 /* CreatePlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2F901FA2590B002D60F2 /* CreatePlaylistView.swift */; };
 		6A9D2F951FA3866A002D60F2 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D2F941FA3866A002D60F2 /* CoreDataTableViewController.swift */; };
 		6AA19E461F96A1A500C560D8 /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EC9331F8D8EB500E96D2C /* PlaylistsViewController.swift */; };
@@ -145,6 +147,8 @@
 		6A846A01200590F70010535D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = MusicMatchRev2/LoginViewController.swift; sourceTree = "<group>"; };
 		6A8FB45421302FDE00D44022 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		6A8FB4562130304200D44022 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		6A8FB45821304E9B00D44022 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = MusicMatchRev2/TabBarController.swift; sourceTree = "<group>"; };
+		6A8FB45A21309D0C00D44022 /* HelpMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpMenuViewController.swift; sourceTree = "<group>"; };
 		6A9D2F901FA2590B002D60F2 /* CreatePlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreatePlaylistView.swift; path = MusicMatchRev2/CreatePlaylistView.swift; sourceTree = "<group>"; };
 		6A9D2F941FA3866A002D60F2 /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
 		6AB7BA641F8BC58C0075113D /* MusicMatchRev2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicMatchRev2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,6 +295,8 @@
 				6AC8D1951FB5F1F9003B3EF3 /* YTTableViewDataSource.swift */,
 				6ABACB2A1F9A589C004E4CE5 /* PlayListContainerView.swift */,
 				6AEC04901F990C1B00C319DD /* Main.storyboard */,
+				6A8FB45A21309D0C00D44022 /* HelpMenuViewController.swift */,
+				6A8FB45821304E9B00D44022 /* TabBarController.swift */,
 				6AD54C5920978BE80009DD0D /* GoogleLoginView.swift */,
 				6A9D2F901FA2590B002D60F2 /* CreatePlaylistView.swift */,
 				6A2EC9231F8C431500E96D2C /* CustomButton.swift */,
@@ -601,6 +607,7 @@
 				6AEC041C1F97BF0600C319DD /* Playlist+CoreDataClass.swift in Sources */,
 				6A2EC9111F8BE4B100E96D2C /* CoreDataStack.swift in Sources */,
 				6A2EC9151F8BE64700E96D2C /* Constants.swift in Sources */,
+				6A8FB45B21309D0C00D44022 /* HelpMenuViewController.swift in Sources */,
 				6AC8D1961FB5F1F9003B3EF3 /* YTTableViewDataSource.swift in Sources */,
 				6A6BF87720C0363D00C0A05A /* Video+CoreDataClass.swift in Sources */,
 				6A846A02200590F70010535D /* LoginViewController.swift in Sources */,
@@ -619,6 +626,7 @@
 				6AEC04341F97E1AD00C319DD /* YouTubePlayerViewController.swift in Sources */,
 				6AEC04941F990C6100C319DD /* PlaylistView.swift in Sources */,
 				6AC8D1991FB60BB4003B3EF3 /* Playlist+CoreDataProperties.swift in Sources */,
+				6A8FB45921304E9B00D44022 /* TabBarController.swift in Sources */,
 				6AEC04931F990C5800C319DD /* CustomTableViewCell.swift in Sources */,
 				6A9D2F911FA2590B002D60F2 /* CreatePlaylistView.swift in Sources */,
 				6A8FB4572130304200D44022 /* ContainerViewController.swift in Sources */,
