@@ -17,8 +17,8 @@ The development of this application started as a need to easily search for and a
 
 CocoaPods using pod install to implement frameworks
 
-'''
-platform :ios, æ11.0'
+```
+platform :ios, '11.0'
 use_frameworks!
 workspace 'MusicMatchRev2'
 target 'MusicMatchRev2' do
@@ -27,7 +27,7 @@ pod 'Google/SignIn'
 pod 'youtube-ios-player-helper', :git=>'https://github.com/youtube/youtube-ios-player-helper', :commit=>'head'
 pod 'SpotifyLogin', '~> 0.1'
 end
-'''
+```
 
 # Building/Running
 
